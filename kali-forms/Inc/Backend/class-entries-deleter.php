@@ -70,6 +70,9 @@ class Entries_Deleter
 
 	public function _delete_entries()
 	{
+		// Add initial log entry
+		error_log('[KaliForms] Starting scheduled entries cleanup: ' . current_time('mysql'));
+
 		$formWithEntries = [];
 
 		foreach ($this->forms as $form) {
@@ -102,6 +105,8 @@ class Entries_Deleter
 		}
 
 		foreach ($formWithEntries as $form) {
+			error_log("[KaliForms] Processing form ID: {$form['id']} with interval: {$form['interval']} days");
+
 			$args = [
 				'post_type'      => $this->slug . '_submitted',
 				'meta_key'       => 'formId',
@@ -117,14 +122,32 @@ class Entries_Deleter
 
 			$query = new \WP_Query($args);
 			if ($query->have_posts()) {
+				error_log("[KaliForms] Found {$query->post_count} entries to process for form {$form['id']}");
+
 				foreach ($query->posts as $post) {
-					$diff = time() - strtotime($post->post_date);
+					// Get timestamps in site's timezone
+					$current_time = current_time('timestamp', true);
+					$post_time = get_date_from_gmt($post->post_date, 'U');
+					$diff = $current_time - $post_time;
+					$days_diff = round($diff / DAY_IN_SECONDS, 2);
+
+					error_log(sprintf(
+						'[KaliForms] Entry ID: %d, Post Date: %s, Age: %.2f days, Threshold: %d days',
+						$post->ID,
+						$post->post_date,
+						$days_diff,
+						$form['interval']
+					));
+
 					if ($diff > $form['interval'] * DAY_IN_SECONDS) {
+						error_log("[KaliForms] Deleting entry ID: {$post->ID} (exceeded {$form['interval']} days)");
 						wp_delete_post($post->ID, true);
 					}
 				}
 			}
 			wp_reset_postdata();
 		}
+
+		error_log('[KaliForms] Finished scheduled entries cleanup: ' . current_time('mysql'));
 	}
 }

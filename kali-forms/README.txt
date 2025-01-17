@@ -2,9 +2,9 @@
 Contributors: kaliforms, andreic86
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, custom contact form, form manager, forms builder, forms creator, signup form, payment form, stripe, stripe form, paypal, paypal form, email form
 Requires at least: 7.4
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 2.3.51
+Stable tag: 2.3.52
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -182,6 +182,9 @@ The easiest and recommended way to install is to click on 'Plugins' then 'Add Ne
 7. Options presets
 
 == Changelog ==
+2.3.52
+- Improved entries deletion
+
 2.3.51
 - Bugfix
 
