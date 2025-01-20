@@ -99,7 +99,7 @@ class Entries_Deleter
 			if ($counter > 0) {
 				$formWithEntries[] = [
 					'id' => $form,
-					'interval' => absint(get_post_meta($form, $this->slug . '_delete_entries_after', 0)),
+					'interval' => absint(get_post_meta($form, $this->slug . '_delete_entries_after', true)),
 				];
 			}
 		}
