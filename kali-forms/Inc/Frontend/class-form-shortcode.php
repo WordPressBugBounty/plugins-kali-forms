@@ -70,6 +70,12 @@ class Form_Shortcode
 	 */
 	public $load_grecaptcha = false;
 	/**
+	 * Load turnstile ?
+	 *
+	 * @var boolean
+	 */
+	public $load_turnstile = false;
+	/**
 	 * Load bootstrap css
 	 *
 	 * @var bool
@@ -121,6 +127,10 @@ class Form_Shortcode
 			'providers' => [],
 		];
 
+		if ($this->get('turnstile_enabled', '0') === '1') {
+			$this->load_turnstile = true;
+		}
+
 		foreach ($fields as $field) {
 			if ($field->id === 'grecaptcha') {
 				$this->load_grecaptcha = true;
@@ -156,7 +166,7 @@ class Form_Shortcode
 		$this->load_scripts_and_styles();
 		$this->load_bootstrap_grid_if_needed();
 		$this->load_grecaptcha_if_needed();
-
+		$this->load_turnstile_if_needed();
 		apply_filters($this->slug . '_form_shortcode_init', $this);
 		$form       = new Form($args['id'], $this->rows, $this->get_form_info());
 		$this->html = $form->render_fields();
@@ -188,6 +198,8 @@ class Form_Shortcode
 			'form_action'                     => $this->get('form_action', ''),
 			'form_method'                     => $this->get('form_method', ''),
 			'payment_method'                  => $this->payment_method,
+			'turnstile_enabled'               => $this->load_turnstile,
+			'turnstile_site_key'              => $this->get('turnstile_site_key', ''),
 		]);
 	}
 
@@ -217,6 +229,14 @@ class Form_Shortcode
 		wp_register_script(
 			'kali-grecaptcha',
 			'//www.google.com/recaptcha/api.js',
+			false,
+			false,
+			false
+		);
+		$args = array('onload' => 'onloadTurnstileCallback');
+		wp_register_script(
+			'kali-turnstile',
+			add_query_arg($args, 'https://challenges.cloudflare.com/turnstile/v0/api.js'),
 			false,
 			false,
 			false
@@ -320,6 +340,17 @@ class Form_Shortcode
 		}
 	}
 
+	/**
+	 * Loads turnstile if needed
+	 *
+	 * @return void
+	 */
+	public function load_turnstile_if_needed()
+	{
+		if ($this->load_turnstile) {
+			wp_enqueue_script('kali-turnstile');
+		}
+	}
 	/**
 	 * Displays an error in the frontend
 	 *

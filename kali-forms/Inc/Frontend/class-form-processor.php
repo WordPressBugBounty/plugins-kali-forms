@@ -93,6 +93,9 @@ class Form_Processor
 		add_action('wp_ajax_kaliforms_form_verify_recaptcha', [$this, 'verify_recaptcha']);
 		add_action('wp_ajax_nopriv_kaliforms_form_verify_recaptcha', [$this, 'verify_recaptcha']);
 
+		add_action('wp_ajax_kaliforms_form_verify_turnstile', [$this, 'verify_turnstile']);
+		add_action('wp_ajax_nopriv_kaliforms_form_verify_turnstile', [$this, 'verify_turnstile']);
+
 		add_action('wp_ajax_kaliforms_form_upload_file', [$this, 'upload_file']);
 		add_action('wp_ajax_nopriv_kaliforms_form_upload_file', [$this, 'upload_file']);
 
@@ -222,21 +225,26 @@ class Form_Processor
 			$this->placeholdered_data = array_merge($this->placeholdered_data, $this->data['kf_hooks']);
 		}
 
+		$response = [
+			'status'              => 'ok',
+			'thank_you_message'   => $this->get('show_thank_you_message', '0') ? $this->get_thank_you_message() : '',
+			'scroll_to_thank_you' => $this->get('scroll_to_thank_you', '0'),
+			'redirect_url'        => esc_url($this->get('redirect_url', '')),
+			'redirect_timeout'    => absint($this->get('redirect_timeout', 5)),
+			'reset'               => $this->get('reset_form_after_submit', '0'),
+			'form_data'           => $this->data,
+		];
+
+		if (isset($this->data['admin_stop_execution']) && $this->data['admin_stop_execution']) {
+			$response['terminated'] = true;
+			$response['terminated_reason'] = isset($this->data['admin_stop_reason']) ? $this->data['admin_stop_reason'] : '';
+			$response['error_bag'] = isset($this->data['error_bag']) ? $this->data['error_bag'] : [];
+		}
 		/**
 		 * Return a response to the frontend
 		 */
 		wp_die(
-			wp_json_encode(
-				[
-					'status'              => 'ok',
-					'thank_you_message'   => $this->get('show_thank_you_message', '0') ? $this->get_thank_you_message() : '',
-					'scroll_to_thank_you' => $this->get('scroll_to_thank_you', '0'),
-					'redirect_url'        => esc_url($this->get('redirect_url', '')),
-					'redirect_timeout'    => absint($this->get('redirect_timeout', 5)),
-					'reset'               => $this->get('reset_form_after_submit', '0'),
-					'form_data'           => $this->data,
-				]
-			)
+			wp_json_encode($response)
 		);
 	}
 
@@ -901,6 +909,52 @@ class Form_Processor
 		$response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
 			'body' => [
 				'secret'   => $recaptcha_secret_key,
+				'response' => wp_unslash($_POST['data']['token']),
+			],
+		]);
+
+		if (is_wp_error($response)) {
+			return $this->display_error(esc_html__('Something went wrong', 'kaliforms'));
+		}
+
+		wp_die(wp_json_encode([
+			'response' => json_decode($response['body']),
+		]));
+	}
+
+	/**
+	 * Verify turnstile function
+	 */
+	public function verify_turnstile()
+	{
+		if (empty($_POST['data'])) {
+			return $this->display_error(esc_html__('There is no post data', 'kaliforms'));
+		}
+		if (!isset($_POST['data']['nonce'])) {
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+		}
+		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['data']['nonce'])), 'kaliforms_nonce')) {
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+		}
+
+		if (empty($_POST['data']['formId'])) {
+			return $this->display_error(esc_html__('Form didn`t send a form id, are we sure it is correct?', 'kaliforms'));
+		}
+
+		$this->post = get_post(absint(wp_unslash($_POST['data']['formId'])));
+
+		if ($this->post === null) {
+			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+		}
+
+		$turnstile_secret_key = $this->get('turnstile_secret_key', '');
+		if (empty($turnstile_secret_key)) {
+			return $this->display_error(esc_html__('There is no turnstile key', 'kaliforms'));
+		}
+
+		$response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+			'body' => [
+				'secret'   => $turnstile_secret_key,
 				'response' => wp_unslash($_POST['data']['token']),
 			],
 		]);

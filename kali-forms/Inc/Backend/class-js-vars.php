@@ -209,6 +209,12 @@ class JS_Vars
 		$this->content['conversionCustomValue']          = esc_attr($this->get('conversion_custom_value', ''));
 
 		/**
+		 * Turnstile
+		 */
+		$this->content['turnstileEnabled'] = esc_attr($this->get('turnstile_enabled', '0'));
+		$this->content['turnstileSiteKey'] = esc_attr($this->get('turnstile_site_key', ''));
+		$this->content['turnstileSecretKey'] = esc_attr($this->get('turnstile_secret_key', ''));
+		/**
 		 * Applies a filter, maybe someone wants to edit something
 		 */
 		$this->content = apply_filters($this->slug . '_jsvars_object', $this->content);

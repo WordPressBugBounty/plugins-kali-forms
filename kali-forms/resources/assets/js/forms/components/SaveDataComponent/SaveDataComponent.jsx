@@ -394,6 +394,21 @@ export const SaveDataComponent = observer((props) => {
 				name="kaliforms[conversion_custom_value]"
 				value={store._FORM_INFO_.conversionCustomValue || ""}
 			/>
+			<input
+				type="hidden"
+				name="kaliforms[turnstile_enabled]"
+				value={store._FORM_INFO_.turnstileEnabled || "0"}
+			/>
+			<input
+				type="hidden"
+				name="kaliforms[turnstile_site_key]"
+				value={store._FORM_INFO_.turnstileSiteKey || ""}
+			/>
+			<input
+				type="hidden"
+				name="kaliforms[turnstile_secret_key]"
+				value={store._FORM_INFO_.turnstileSecretKey || ""}
+			/>
 		</React.Fragment>
 	);
 });

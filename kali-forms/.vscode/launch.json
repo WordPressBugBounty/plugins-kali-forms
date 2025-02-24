@@ -4,7 +4,7 @@
 	"request": "launch",
 	"port": 9003,
 	"pathMappings": {
-		"/var/www/html/wp-content/plugins/kali-forms": "${workspaceFolder}"
+		"/Users/cosmin/Local Sites/dev/app/public/wp-content/plugins/kali-forms": "${workspaceFolder}"
 	},
 	"configurations": [
 		{
@@ -13,7 +13,7 @@
 			"request": "launch",
 			"port": 9003,
 			"pathMappings": {
-				"/var/www/html/wp-content/plugins/kali-forms": "${workspaceFolder}"
+				"/Users/cosmin/Local Sites/dev/app/public/wp-content/plugins/kali-forms": "${workspaceFolder}"
 			}
 		}
 	]

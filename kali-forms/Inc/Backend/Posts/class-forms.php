@@ -618,7 +618,19 @@ class Forms
 			[
 				'id'       => 'disable_bootstrap_grid',
 				'sanitize' => 'KaliForms\Inc\Backend\Sanitizers::sanitize_boolean',
-			]
+			],
+			[
+				'id'       => 'turnstile_enabled',
+				'sanitize' => 'KaliForms\Inc\Backend\Sanitizers::sanitize_boolean',
+			],
+			[
+				'id'       => 'turnstile_site_key',
+				'sanitize' => 'sanitize_text_field',
+			],
+			[
+				'id'       => 'turnstile_secret_key',
+				'sanitize' => 'sanitize_text_field',
+			],
 		);
 
 		/**

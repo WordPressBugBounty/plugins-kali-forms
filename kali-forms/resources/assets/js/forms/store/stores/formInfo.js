@@ -90,7 +90,15 @@ export default class FormInfo {
 	conversionBridgeInstalled = typeof KaliFormsObject.conversionBridgeInstalled !== 'undefined'
 		? KaliFormsObject.conversionBridgeInstalled
 		: "0";
-
+	turnstileEnabled = typeof KaliFormsObject.turnstileEnabled !== 'undefined'
+		? KaliFormsObject.turnstileEnabled
+		: "0";
+	turnstileSiteKey = typeof KaliFormsObject.turnstileSiteKey !== 'undefined'
+		? KaliFormsObject.turnstileSiteKey
+		: '';
+	turnstileSecretKey = typeof KaliFormsObject.turnstileSecretKey !== 'undefined'
+		? KaliFormsObject.turnstileSecretKey
+		: '';
 	constructor() {
 		makeObservable(this, {
 			multipleEntriesError: observable,
@@ -161,6 +169,9 @@ export default class FormInfo {
 			enableConversionTracking: observable,
 			conversionCustomValue: observable,
 			conversionLabel: observable,
+			turnstileEnabled: observable,
+			turnstileSiteKey: observable,
+			turnstileSecretKey: observable,
 		});
 	}
 	setFormInfo(data) {

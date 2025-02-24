@@ -81,6 +81,51 @@ const FormSpam = observer((props) => {
 						</FormGroup>
 					</Grid>
 				</Grid>
+				<SectionTitle title="Turnstile" />
+				<Grid container direction="row" spacing={3}>
+					<Grid item xs={12}>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={store._FORM_INFO_.turnstileEnabled === '1'}
+									onChange={e => store._FORM_INFO_.turnstileEnabled = e.target.checked ? '1' : '0'}
+									/>
+								}
+								label={__('Enable Turnstile anti spam', 'kaliforms')}
+						/>
+						<FormHelperText>
+							{__('Turnstile is a free anti-spam service that protects your form from spam. It is a simple and effective way to prevent spam. It is a free service that is easy to use and setup.', 'kaliforms')}
+						</FormHelperText>
+					</Grid>
+					<If condition={store._FORM_INFO_.turnstileEnabled === '1'}>
+						<Grid item xs={6}>
+							<FormControl>
+								<InputLabel shrink>
+									{__('Turnstile site key', 'kaliforms')}
+								</InputLabel>
+								<BootstrapInput
+									value={store._FORM_INFO_.turnstileSiteKey}
+									onChange={e => store._FORM_INFO_.turnstileSiteKey = e.target.value}
+									variant="filled"
+									fullWidth={true}
+								/>
+							</FormControl>
+						</Grid>
+						<Grid item xs={6}>
+							<FormControl>
+								<InputLabel shrink>
+									{__('Turnstile secret key', 'kaliforms')}
+								</InputLabel>
+								<BootstrapInput
+									value={store._FORM_INFO_.turnstileSecretKey}
+									onChange={e => store._FORM_INFO_.turnstileSecretKey = e.target.value}
+									variant="filled"
+									fullWidth={true}
+									/>
+								</FormControl>
+							</Grid>
+						</If>
+				</Grid>
 				<SectionTitle title="Google" />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={6}>

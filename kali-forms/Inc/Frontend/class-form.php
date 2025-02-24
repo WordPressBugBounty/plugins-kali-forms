@@ -43,6 +43,15 @@ class Form
 		$this->form_id   = $form_id;
 		$this->rows      = $rows;
 		$this->form_info = $form_info;
+
+		if ($this->form_info['turnstile_enabled']) {
+			add_filter(
+				$this->slug . '_' . $this->form_id . '_before_submit_button',
+				[$this, 'render_turnstile_field'],
+				10,
+				2
+			);
+		}
 	}
 
 	/**
@@ -61,6 +70,7 @@ class Form
 		foreach ($this->rows as $row) {
 			$div .= $this->render_row($row);
 		}
+
 		if ($this->form_info['honeypot'] === '1') {
 			$div .= $this->render_honeypot();
 		}
@@ -105,6 +115,14 @@ class Form
 	{
 		$div = '<div class="row kali-form-field-row">';
 		foreach ($items as $item) {
+			if ('submitButton' === $item['type']) {
+				$div = apply_filters(
+					$this->slug . '_' . $this->form_id . '_before_submit_button',
+					$div,
+					$item
+				);
+			}
+
 			$div .= $this->render_field($item);
 		}
 		$div .= '</div>';
@@ -286,5 +304,11 @@ class Form
 		}
 
 		return $ipaddress;
+	}
+
+	public function render_turnstile_field($div, $item)
+	{
+		$div .= '<div class="col-12 col-md-12"><div data-field-type="turnstile" data-sitekey="' . $this->form_info['turnstile_site_key'] . '"></div></div>';
+		return $div;
 	}
 }

@@ -70,6 +70,16 @@ export default class FormProcessor {
 	 */
 	get valid() {
 		let checks = { formValidation: true };
+		if (this.turnstile) {
+			checks = { ...checks, turnstile: this.turnstileValidation };
+			if (!checks.turnstile) {
+				this.errorMessage = __(
+					"Turnstile challenge failed",
+					"kaliforms"
+				);
+			}
+		}
+
 		if (this.grecaptcha) {
 			checks = { ...checks, recaptcha: this.grecaptchaValidation };
 			if (!checks.recaptcha) {
@@ -288,8 +298,8 @@ export default class FormProcessor {
 			})
 		}
 
-		return this.grecaptcha
-			? checks.formValidation && checks.recaptcha
+		return this.grecaptcha || this.turnstile
+			? checks.formValidation && (checks.recaptcha || checks.turnstile)
 			: checks.formValidation;
 	}
 
@@ -356,6 +366,7 @@ export default class FormProcessor {
 		this.handleInputMasks();
 		this.handleFileUploads();
 		this.handleRecaptcha();
+		this.handleTurnstile();
 		this.handleSubmit();
 
 		// In case its a payment form, start the process
@@ -861,6 +872,38 @@ export default class FormProcessor {
 		});
 	}
 
+
+	/**
+	 * Handles turnstile
+	 */
+	handleTurnstile() {
+		this.turnstile = false;
+
+		const turnstiles = [...this.form.querySelectorAll('[data-field-type="turnstile"]')];
+
+		if (!turnstiles.length) {
+			return;
+		}
+
+		this.turnstile = true;
+
+		const turnstileDiv = turnstiles[0];
+		const self = this;
+		window?.turnstile?.ready(function () {
+			window?.turnstile?.render(turnstileDiv, {
+				sitekey: turnstileDiv.getAttribute("data-sitekey"),
+				callback: function (token) {
+					self.turnstileToken = token;
+					self.turnstileInstance = this;
+				},
+				expiredCallback: function () {
+					self.throwError();
+				},
+				refreshExpired: 'auto',
+			});
+		});
+	}
+
 	/**
 	 * Verifies if the recaptcha is valid
 	 * @param {String} res
@@ -891,6 +934,34 @@ export default class FormProcessor {
 			.catch((e) => {
 				console.log(e);
 			});
+	}
+
+	async verifyTurnstile() {
+		const data = {
+			action: "kaliforms_form_verify_turnstile",
+			data: { formId: this.formId, nonce: this.nonce, token: this.turnstileToken },
+		};
+		try {
+			const response = await this.axios
+				.post(KaliFormsObject.ajaxurl, this.Qs.stringify(data));
+
+			if (response?.data?.response?.success) {
+				this.turnstileValidation = true;
+				let evnt = new Event("change");
+				this.form.dispatchEvent(evnt);
+
+				if (this.submitButton !== null) {
+					this.submitButton.removeAttribute("disabled");
+				}
+			}
+
+			if (!response?.data?.response?.success) {
+				this.throwError();
+			}
+
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	/**
@@ -969,6 +1040,11 @@ export default class FormProcessor {
 					}
 				}
 
+				if (this.turnstile && this.turnstileInstance) {
+					await this.verifyTurnstile();
+				}
+
+				console.log(this.valid);
 				if (this.paymentForm) {
 					continueProcess = await this.handleSubmitPayment(formData);
 				}
