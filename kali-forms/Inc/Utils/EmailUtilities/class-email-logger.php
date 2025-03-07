@@ -40,7 +40,8 @@ class Email_Logger
         $enabled =	get_option($this->slug . '_email_log', "");
         $this->enabled = !empty($enabled);
         $this->path     = get_temp_dir();
-        $this->filename = $this->slug . '-mail.log';
+
+        $this->filename = $this->slug . '-' . sanitize_file_name(get_home_url()) . '-mail.log';
         $this->mailer   = get_option($this->slug . '_smtp_provider', '');
 
         add_action('kali_mail_failed', [$this, 'error'], 10, 1);

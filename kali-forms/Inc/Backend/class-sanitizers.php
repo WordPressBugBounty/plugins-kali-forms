@@ -118,7 +118,7 @@ class Sanitizers
 	 */
 	public static function sanitize_regular_checkbox($input)
 	{
-		return $input === 'on';
+		return ($input === 'on' || $input === '1' || $input === 1) ? 1 : 0;
 	}
 	/**
 	 * Sanitize secure options for MAIL

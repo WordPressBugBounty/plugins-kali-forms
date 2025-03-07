@@ -4,7 +4,7 @@ Tags: contact form, contact form plugin, forms, form builder, custom form, conta
 Requires at least: 7.4
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 2.4.0
+Stable tag: 2.4.01
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -182,6 +182,9 @@ The easiest and recommended way to install is to click on 'Plugins' then 'Add Ne
 7. Options presets
 
 == Changelog ==
+2.4.1
+- Fixed a bug with the email log
+
 2.4.0
 - Added turnstile captcha
 
