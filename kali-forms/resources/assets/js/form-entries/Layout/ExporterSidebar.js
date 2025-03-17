@@ -43,8 +43,23 @@ export default function ExporterSidebar() {
 
 			switch (exportOptions.currentStep) {
 				case 1:
-					let currentForm = AppProps.allForms.filter(el => el.id === exportOptions.form);
-					newState[0].args = `${currentForm[0].name} (#${currentForm[0].id})`
+					if (exportOptions.multiple) {
+						if (!exportOptions.forms || !exportOptions.forms.length) {
+							newState[0].args = __('No forms selected', 'kaliforms');
+						} else {
+							const selectedForms = AppProps.allForms
+								.filter(form => exportOptions.forms.includes(form.id))
+								.map(form => `${form.name} (#${form.id})`);
+							newState[0].args = selectedForms.join(', ');
+						}
+					} else {
+						const currentForm = AppProps.allForms.find(el => el.id === exportOptions.form);
+						if (currentForm) {
+							newState[0].args = `${currentForm.name} (#${currentForm.id})`;
+						} else {
+							newState[0].args = __('No form selected', 'kaliforms');
+						}
+					}
 					break;
 				case 2:
 					let translated = {

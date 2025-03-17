@@ -52,9 +52,14 @@ export default function Exporter() {
 	const validateStep = () => {
 		switch (exportOptions.currentStep) {
 			case 0:
-				return !(exportOptions.form !== null && Number.isInteger(exportOptions.form))
+				if (exportOptions.multiple) {
+					return !(exportOptions.forms && exportOptions.forms.length > 0);
+				}
+				return !(exportOptions.form !== null && Number.isInteger(exportOptions.form));
 			case 1:
-				return exportOptions.fields.length === 0
+				return exportOptions.fields.length === 0;
+			default:
+				return false;
 		}
 	}
 

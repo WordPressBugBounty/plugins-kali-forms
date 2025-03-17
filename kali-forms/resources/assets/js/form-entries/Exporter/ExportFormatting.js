@@ -50,7 +50,6 @@ export default function ExportFormatting() {
 	);
 
 	const DraggableBodyRow = ({ className, style, ...restProps }) => {
-		// function findIndex base on Table rowKey props and should always be a right array index
 		const index = dataSource.findIndex(x => x.index === restProps['data-row-key']);
 		return <SortableItem index={index} {...restProps} />;
 	};
@@ -60,7 +59,7 @@ export default function ExportFormatting() {
 		exportOptions.formattedFields.map((el, idx) => {
 			data.push({
 				key: idx,
-				field: el.key,
+				field: `${el.key} (#${el.formId})`,
 				newName: el.newName,
 				index: idx,
 			})
@@ -68,20 +67,6 @@ export default function ExportFormatting() {
 		setDataSource(data);
 		return () => setDataSource([])
 	}, [])
-
-	useEffect(() => {
-		let data = [];
-		exportOptions.formattedFields.map((el, idx) => {
-			data.push({
-				key: idx,
-				field: el.key,
-				newName: el.newName,
-				index: idx,
-			})
-		})
-		setDataSource(data);
-		return () => setDataSource([])
-	}, [exportOptions])
 
 	return (
 		<Table

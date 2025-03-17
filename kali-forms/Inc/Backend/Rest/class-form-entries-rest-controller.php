@@ -94,6 +94,12 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 			'args' => $this->get_collection_params(),
 		]);
 
+		register_rest_route($this->namespace, '/' . $this->resource_name . '/parsed/multiple', [
+			'methods' => 'POST',
+			'callback' => [$this, 'get_items_for_display_multiple'],
+			'permission_callback' => [$this, 'get_items_permissions_check'],
+		]);
+
 		register_rest_route($this->namespace, '/' . $this->resource_name . '/aggregate/', [
 			'methods' => 'GET',
 			'callback' => [$this, 'get_items_aggregate'],
@@ -250,8 +256,28 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 		}
 
 		$params = $request->get_json_params();
+		$multiple = isset($params['multiple']) ? $params['multiple'] : false;
 
-		$this->_get_available_meta((int) $params['form']);
+		if ($multiple) {
+			if (!isset($params['forms']) || !is_array($params['forms'])) {
+				return rest_ensure_response(['status' => false, 'message' => __('No forms selected', 'kaliforms')]);
+			}
+
+			$forms = $params['forms'];
+			$this->display_fields = [];
+			$this->meta_fields = [];
+
+			// Get fields from all forms
+			foreach ($forms as $formId) {
+				$this->_get_available_meta((int) $formId);
+			}
+		} else {
+			if (!isset($params['form'])) {
+				return rest_ensure_response(['status' => false, 'message' => __('No form selected', 'kaliforms')]);
+			}
+
+			$this->_get_available_meta((int) $params['form']);
+		}
 
 		$export = new \KaliForms\Inc\Utils\Export();
 		$export->set_stuff($this->display_fields, $this->meta_fields, $this->separator);
@@ -1021,18 +1047,19 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 				continue;
 			}
 
-			$fields[]                          = $field->properties->name;
+			$fields[] = $field->properties->name;
 			$display[$field->properties->name] = [
 				'type' => $field->id,
 				'caption' => $this->_get_caption($field),
 				'properties' => (array) $field->properties,
+				'formId' => $id
 			];
 		}
 
-		$this->meta_fields    = $fields;
-		$this->display_fields = $display;
-		$this->ip_address     = $builder->formOptions['saveIpAddress'] === '1';
-		$this->separator      = $builder->formOptions['multipleSelectionsSeparator'];
+		$this->meta_fields = array_unique(array_merge($this->meta_fields, $fields));
+		$this->display_fields = array_merge($this->display_fields, $display);
+		$this->ip_address = $builder->formOptions['saveIpAddress'] === '1';
+		$this->separator = $builder->formOptions['multipleSelectionsSeparator'];
 	}
 
 	/**
@@ -1098,5 +1125,65 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 		}
 
 		return $status;
+	}
+
+	/**
+	 * Get fields for multiple forms
+	 */
+	public function get_items_for_display_multiple($request)
+	{
+		$params = $request->get_json_params();
+		if (!isset($params['forms']) || !is_array($params['forms'])) {
+			return new \WP_Error('rest_invalid_param', esc_html__('Missing forms parameter or invalid format', 'kaliforms'), ['status' => 400]);
+		}
+
+		$response = [];
+		foreach ($params['forms'] as $formId) {
+			// Reset fields for each form
+			$this->meta_fields = [];
+			$this->display_fields = [];
+
+			// Get fields for this specific form
+			$this->_get_available_meta((int)$formId);
+			$fields = [];
+
+			// Only process fields for the current form
+			foreach ($this->meta_fields as $field) {
+				if (!isset($this->display_fields[$field])) {
+					continue;
+				}
+
+				$fields[] = [
+					'id' => $field,
+					'caption' => $this->display_fields[$field]['caption'],
+					'type' => $this->display_fields[$field]['type'],
+					'props' => $this->display_fields[$field]['properties'],
+					'value' => ''  // Empty value since this is just field definition
+				];
+			}
+
+			// Add system fields
+			$fields[] = [
+				'id' => 'ip_address',
+				'caption' => __('Ip address', 'kaliforms'),
+				'type' => 'text',
+				'value' => ''
+			];
+			$fields[] = [
+				'id' => 'date_published',
+				'caption' => __('Publish date', 'kaliforms'),
+				'type' => 'date',
+				'value' => ''
+			];
+
+			$response[$formId] = [
+				'id' => $formId,
+				'formId' => $formId,
+				'separator' => $this->separator,
+				'fields' => $fields
+			];
+		}
+
+		return rest_ensure_response($response);
 	}
 }

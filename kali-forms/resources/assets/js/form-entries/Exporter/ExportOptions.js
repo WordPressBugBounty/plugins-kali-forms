@@ -7,82 +7,121 @@ import DataFormatter from './../utils/DataFormatter';
 import GSheetTree from './GSheetStuff/GSheetTree';
 
 import { __ } from '@wordpress/i18n';
+
 export default function ExportOptions() {
 	const [exportOptions, setExportOptions] = useContext(ExportContext);
 	const appProps = useContext(AppPropsContext);
-
 	const [columns, setColumns] = useState([]);
-	const [columnTitleMap, setColumnTitleMap] = useState({})
 
 	useEffect(() => {
-		Api.getFormEntries(exportOptions.form, 1, 1, false).then(res => {
-			if (res.data.length) {
-				const { columns } = DataFormatter(res.data)
-				const map = {};
-				columns.map(el => {
-					map[el.key] = el.title
-				})
-				setColumns(columns.slice(0, -1));
-				setColumnTitleMap(map);
-			}
+		if (exportOptions.multiple) {
+			if (!exportOptions.forms || !exportOptions.forms.length) return;
 
-			return () => setColumns([]);
-		})
-	}, [])
+			Api.getFormEntriesMultiple(exportOptions.forms)
+				.then(res => {
+					if (res.data) {
+						const allColumns = [];
+						const processedFields = new Set();
+
+						// Process each form's data through DataFormatter
+						Object.entries(res.data).forEach(([formId, formData]) => {
+							const { columns } = DataFormatter([formData]);
+							columns.slice(0, -1).forEach(column => {
+								// Create a unique key combining field name and form ID
+								const uniqueKey = `${column.key}_${formId}`;
+
+								// Only add if not already present
+								if (!processedFields.has(uniqueKey)) {
+									allColumns.push({
+										...column,
+										originalKey: column.key, // Store original key for data mapping
+										key: uniqueKey, // Use unique key
+										formId: formId
+									});
+									processedFields.add(uniqueKey);
+								}
+							});
+						});
+
+						setColumns(allColumns);
+						setExportOptions(prev => ({
+							...prev,
+							availableFields: allColumns
+						}));
+					}
+				});
+		} else {
+			if (!exportOptions.form) return;
+
+			Api.getFormEntries(exportOptions.form, 1, 1, false)
+				.then(res => {
+					if (res.data.length) {
+						const { columns } = DataFormatter(res.data);
+						const columnsWithFormId = columns.slice(0, -1).map(column => ({
+							...column,
+							originalKey: column.key,
+							key: `${column.key}_${exportOptions.form}`,
+							formId: exportOptions.form
+						}));
+						setColumns(columnsWithFormId);
+						setExportOptions(prev => ({
+							...prev,
+							availableFields: columnsWithFormId
+						}));
+					}
+				});
+		}
+
+		return () => {
+			setColumns([]);
+		};
+	}, [exportOptions.form, exportOptions.forms, exportOptions.multiple]);
 
 	const handleChange = fields => {
 		let formattedFields = [];
-		fields.map(el => formattedFields.push({ key: el, newName: columnTitleMap[el] }))
-		setExportOptions(prevOptions => { return { ...prevOptions, fields, formattedFields } })
-	}
+		fields.map(el => {
+			const column = columns.find(col => col.key === el);
+			formattedFields.push({
+				key: column ? column.originalKey : el, // Use original key for data mapping
+				uniqueKey: el, // Store the unique key
+				newName: column ? column.title : el,
+				formId: column ? column.formId : exportOptions.form
+			});
+		});
+		setExportOptions(prevOptions => ({
+			...prevOptions,
+			fields,
+			formattedFields
+		}));
+	};
 
-	const gSheetChanged = (value, label, extra) => {
-		setExportOptions(prevState => {
-			return { ...prevState, googleSheet: value }
-		})
-	}
+	const gSheetChanged = (value) => {
+		setExportOptions(prevState => ({ ...prevState, googleSheet: value }));
+	};
 
 	const valuesChanged = (key, value) => {
 		switch (key) {
 			case 'fileFormat':
-				setExportOptions(prevState => {
-					return { ...prevState, fileFormat: value }
-				});
+				setExportOptions(prevState => ({ ...prevState, fileFormat: value }));
 				break;
 			case 'dateFilter':
 				if (!value) {
-					return setExportOptions(prevState => {
-						return {
-							...prevState,
-							filters: []
-						}
-					})
+					return setExportOptions(prevState => ({ ...prevState, filters: [] }));
 				}
 
 				let from = value[0].format('D-M-YYYY');
 				let to = value.length > 1 ? value[1].format('D-M-YYYY') : null;
 				let filter = to !== null
-					? {
-						after: from,
-						before: to
-					}
-					: {
-						after: from
-					}
+					? { after: from, before: to }
+					: { after: from };
 
-				return setExportOptions(prevState => {
-					return {
-						...prevState,
-						filters: [
-							{
-								date: filter
-							}
-						]
-					}
-				});
+				return setExportOptions(prevState => ({
+					...prevState,
+					filters: [{ date: filter }]
+				}));
 				break;
 		}
-	}
+	};
 
 	return (
 		<div>
@@ -97,7 +136,7 @@ export default function ExportOptions() {
 				listStyle={{
 					width: 350
 				}}
-				render={item => item.title}
+				render={item => `${item.title} (#${item.formId})`}
 			/>
 			<Form autoComplete={'false'}
 				name="exporter-options"
@@ -127,10 +166,9 @@ export default function ExportOptions() {
 					<Typography.Title level={4} style={{ textAlign: 'center', marginTop: 24, marginBottom: 24 }}>
 						{__('Google sheets export options', 'kaliforms')}
 					</Typography.Title>
-
 					<GSheetTree onChange={gSheetChanged} />
 				</If>
 			</Form>
 		</div>
-	)
+	);
 }

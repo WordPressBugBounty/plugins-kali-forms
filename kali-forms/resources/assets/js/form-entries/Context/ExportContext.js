@@ -6,6 +6,8 @@ export const ExportProvider = props => {
 		loading: false,
 		status: 'idle',
 		form: null,
+		forms: [],
+		multiple: false,
 		fields: [],
 		formattedFields: [],
 		filters: [],

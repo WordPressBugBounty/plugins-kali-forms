@@ -114,6 +114,7 @@ const DataFormatter = (data) => {
 		})
 		return rows;
 	}
+
 	const { columns, filters } = createColumns(data);
 	const rows = createRows(data);
 

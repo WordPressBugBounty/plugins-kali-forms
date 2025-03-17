@@ -171,4 +171,3 @@ window.KaliComponents = window.hasOwnProperty('KaliComponents')
 	? mergeComponents()
 	: getComponents();
 
-console.log(window.KaliComponents);

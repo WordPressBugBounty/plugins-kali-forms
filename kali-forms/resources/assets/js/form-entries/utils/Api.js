@@ -62,6 +62,11 @@ const Api = {
 		return this.request('GET', url);
 	},
 
+	getFormEntriesMultiple(forms) {
+		let url = `entries/parsed/multiple`;
+		return this.request('POST', url, { forms });
+	},
+
 	/**
 	 * Get all submission info
 	 * @param {*} id
