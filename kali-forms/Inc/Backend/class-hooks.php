@@ -38,7 +38,7 @@ class Hooks
 		);
 
 		add_action(
-			'plugins_loaded',
+			'init',
 			[$this, 'load_text_domain']
 		);
 
@@ -63,14 +63,12 @@ class Hooks
 			'wp_ajax_nopriv_kaliforms_reload_api_extensions',
 			[$this, 'denied']
 		);
+
 		add_action(
-			'wp_ajax_kaliforms_set_form_theme',
-			[Form_Styles::get_instance(), 'set_form_theme']
+			'init',
+			[$this, 'setup_form_styles']
 		);
-		add_action(
-			'wp_ajax_nopriv_kaliforms_set_form_theme',
-			[$this, 'denied']
-		);
+
 		add_action(
 			'wp_ajax_kaliforms_update_option_ajax',
 			[$this, 'update_option']
@@ -91,12 +89,28 @@ class Hooks
 		add_action('wp_ajax_nopriv_kaliforms_update_option_ajax', [$this, 'denied']);
 		add_action('wp_ajax_nopriv_kaliforms_get_grid', [$this, 'denied']);
 	}
+
+	/**
+	 * Setup form styles after init hook
+	 */
+	public function setup_form_styles()
+	{
+		add_action(
+			'wp_ajax_kaliforms_set_form_theme',
+			[Form_Styles::get_instance(), 'set_form_theme']
+		);
+		add_action(
+			'wp_ajax_nopriv_kaliforms_set_form_theme',
+			[$this, 'denied']
+		);
+	}
+
 	/**
 	 * If the user is not authorized, deny action
 	 */
 	public function denied()
 	{
-		wp_die(esc_html__('Denied', 'kaliforms'));
+		wp_die(esc_html('Denied', 'kaliforms'));
 	}
 
 	/**

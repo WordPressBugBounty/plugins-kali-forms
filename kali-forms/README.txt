@@ -1,9 +1,9 @@
 === Contact Form builder with drag & drop for WordPress - Kali Forms  ===
 Contributors: kaliforms, andreic86
 Tags: contact form, forms, form builder, payment form, stripe payment
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,9 @@ The easiest and recommended way to install is to click on 'Plugins' then 'Add Ne
 7. Options presets
 
 == Changelog ==
+2.4.3
+- Fixed sanitization for dropdown options
+
 2.4.2
 - Added support for multiple form export concatenation in a single file
 

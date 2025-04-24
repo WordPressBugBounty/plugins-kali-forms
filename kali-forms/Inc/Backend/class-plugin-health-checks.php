@@ -38,7 +38,6 @@ class Plugin_Health_Checks
 	 */
 	public function __construct()
 	{
-		$this->set_tests();
 		$this->selected_provider = get_option($this->slug . '_smtp_provider', 'php');
 
 		$this->providers = [
@@ -56,6 +55,13 @@ class Plugin_Health_Checks
 		add_filter('site_status_tests', [$this, 'add_tests_to_page']);
 		add_filter($this->slug . '_hook_external_notifications', [$this, 'add_smtp_notification']);
 		add_filter($this->slug . '_hook_external_notifications', [$this, 'add_email_notification']);
+
+		add_action('init', [$this, 'add_ajax_test']);
+	}
+	public function add_ajax_test()
+	{
+		$this->set_tests();
+
 		add_action(
 			'wp_ajax_kaliforms_test_email',
 			[$this, 'test_email']

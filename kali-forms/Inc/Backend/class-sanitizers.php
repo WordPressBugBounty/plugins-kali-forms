@@ -36,7 +36,11 @@ class Sanitizers
 		$json = json_decode(stripslashes($props));
 
 		foreach ($json as $k => $v) {
-			$obj->{sanitize_text_field($k)} = sanitize_text_field($v);
+			// Use esc_attr for keys to ensure they're safe for HTML attributes
+			$safe_key = esc_attr(sanitize_text_field($k));
+			$safe_value = esc_js(sanitize_text_field($v));
+
+			$obj->{$safe_key} = $safe_value;
 		}
 
 		return json_encode($obj);
@@ -341,7 +345,10 @@ class Sanitizers
 			$obj = new \stdClass();
 
 			foreach ($item as $k => $v) {
-				$obj->{sanitize_text_field($k)} = sanitize_text_field($v);
+				$safe_key = esc_attr(sanitize_text_field($k));
+				$safe_value = esc_js(sanitize_text_field($v));
+
+				$obj->{$safe_key} = $safe_value;
 			}
 
 			$sanitized[] = $obj;
@@ -362,8 +369,11 @@ class Sanitizers
 		}
 
 		$obj = new \stdClass();
-		foreach ($value as $k => $v) {
-			$obj->{$k} = sanitize_text_field($v);
+		foreach ((array) $value as $k => $v) {
+			$safe_key = esc_attr(sanitize_text_field($k));
+			$safe_value = esc_js(sanitize_text_field($v));
+
+			$obj->{$safe_key} = $safe_value;
 		}
 
 		return $obj;
