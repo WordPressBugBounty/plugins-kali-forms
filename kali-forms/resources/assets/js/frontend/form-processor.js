@@ -1053,7 +1053,7 @@ export default class FormProcessor {
 					? this.makeRequest(this._getFormData())
 					: this.throwError();
 			},
-			true
+			{ once: true }
 		);
 	}
 
