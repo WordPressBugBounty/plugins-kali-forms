@@ -3,7 +3,7 @@ Contributors: kaliforms, andreic86, wpchill
 Tags: contact form, forms, form builder, payment form, stripe payment
 Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,9 @@ The easiest and recommended way to install is to click on 'Plugins' then 'Add Ne
 7. Options presets
 
 == Changelog ==
+2.4.5
+- Form validation bug fixes
+
 2.4.4
 - Made a fix to initiate the form only once
 

@@ -100,6 +100,7 @@ export default class FormProcessor {
 		}
 
 		if (this.uploadFields) {
+			let allFieldsValid = true;
 			this.uploadFields.forEach((e) => {
 				let required = e.getAttribute("data-was-required");
 				if (required === "true" && e.value === "") {
@@ -126,7 +127,7 @@ export default class FormProcessor {
 					if (typeof this.conditions === 'undefined' || !conditionExists) {
 						const currentInstance = this.uploadFieldsPond[internalId];
 						if (currentInstance.getFiles().length === 0) {
-							checks.formValidation = false;
+							allFieldsValid = false;
 							this.errorMessage = __(
 								"Some files were not uploaded",
 								"kaliforms"
@@ -157,7 +158,7 @@ export default class FormProcessor {
 						const shouldBeValidated = conditionMet && currentCondition.isShow;
 						if (shouldBeValidated) {
 							if (pondInstance.getFiles().length === 0) {
-								checks.formValidation = false;
+								allFieldsValid = false;
 								this.errorMessage = __(
 									"Some files were not uploaded",
 									"kaliforms"
@@ -168,6 +169,9 @@ export default class FormProcessor {
 					}
 				}
 			});
+			if (!allFieldsValid) {
+				checks.formValidation = false;
+			}
 		}
 
 		if (
@@ -1021,40 +1025,48 @@ export default class FormProcessor {
 	 * @memberof FormProcessor
 	 */
 	handleSubmit() {
-		this.form.addEventListener(
-			"submit",
-			async (evt) => {
-				evt.preventDefault();
-				document.getElementById(
-					`kaliforms-global-error-message-${this.formId}`
-				).style.display = "none";
-				this.errorMessage = this.globalErrorMessage;
-				this.removeAllErrors();
-				this.loading = true;
-				const formData = this._getFormData();
-				let continueProcess = true;
-				if (this.preFlightNeeded && !this.hasOwnProperty("akismet")) {
-					const result = await this.preFlightRequest();
-					for (let key in result.data) {
-						this[key] = result.data[key];
-					}
-				}
+		// Check if event listener is already attached to prevent duplicates
+		if (this._submitHandlerAttached) {
+			return;
+		}
 
-				if (this.turnstile && this.turnstileInstance) {
-					await this.verifyTurnstile();
+		const submitHandler = async (evt) => {
+			evt.preventDefault();
+			document.getElementById(
+				`kaliforms-global-error-message-${this.formId}`
+			).style.display = "none";
+			this.errorMessage = this.globalErrorMessage;
+			this.removeAllErrors();
+			this.loading = true;
+			const formData = this._getFormData();
+			let continueProcess = true;
+			if (this.preFlightNeeded && !this.hasOwnProperty("akismet")) {
+				const result = await this.preFlightRequest();
+				for (let key in result.data) {
+					this[key] = result.data[key];
 				}
+			}
 
-				console.log(this.valid);
-				if (this.paymentForm) {
-					continueProcess = await this.handleSubmitPayment(formData);
-				}
+			if (this.turnstile && this.turnstileInstance) {
+				await this.verifyTurnstile();
+			}
 
-				this.valid && continueProcess
-					? this.makeRequest(this._getFormData())
-					: this.throwError();
-			},
-			{ once: true }
-		);
+			if (this.paymentForm) {
+				continueProcess = await this.handleSubmitPayment(formData);
+			}
+
+			if (this.valid && continueProcess) {
+				// Remove the event listener only on successful validation
+				this.form.removeEventListener("submit", submitHandler);
+				this._submitHandlerAttached = false;
+				this.makeRequest(this._getFormData());
+			} else {
+				this.throwError();
+			}
+		};
+
+		this.form.addEventListener("submit", submitHandler);
+		this._submitHandlerAttached = true;
 	}
 
 	/**
