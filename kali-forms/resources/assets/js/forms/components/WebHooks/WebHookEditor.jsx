@@ -21,7 +21,7 @@ const WebHookEditor = observer(props => {
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Webhook name', 'kaliforms')}
+							{__('Webhook name', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={currentHook.name || ''}
@@ -35,7 +35,7 @@ const WebHookEditor = observer(props => {
 				<Grid item xs={5}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Payload URL', 'kaliforms')}
+							{__('Payload URL', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={currentHook.url || ''}
@@ -47,7 +47,7 @@ const WebHookEditor = observer(props => {
 				<Grid item xs={2}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Method', 'kaliforms')}
+							{__('Method', 'kali-forms')}
 						</InputLabel>
 						<Select
 							value={currentHook.method || 'POST'}
@@ -56,19 +56,19 @@ const WebHookEditor = observer(props => {
 							input={<BootstrapInput />}
 						>
 							<MenuItem value={'GET'}>
-								{__('GET', 'kaliforms')}
+								{__('GET', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value={'POST'}>
-								{__('POST', 'kaliforms')}
+								{__('POST', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value={'PUT'}>
-								{__('PUT', 'kaliforms')}
+								{__('PUT', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value={'PATCH'}>
-								{__('PATCH', 'kaliforms')}
+								{__('PATCH', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value={'DELETE'}>
-								{__('DELETE', 'kaliforms')}
+								{__('DELETE', 'kali-forms')}
 							</MenuItem>
 						</Select>
 					</FormControl>
@@ -76,7 +76,7 @@ const WebHookEditor = observer(props => {
 				<Grid item xs={2}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Format', 'kaliforms')}
+							{__('Format', 'kali-forms')}
 						</InputLabel>
 						<Select
 							value={currentHook.format || 'json'}
@@ -85,10 +85,10 @@ const WebHookEditor = observer(props => {
 							input={<BootstrapInput />}
 						>
 							<MenuItem value={'json'}>
-								{__('JSON', 'kaliforms')}
+								{__('JSON', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value={'form'}>
-								{__('FORM', 'kaliforms')}
+								{__('FORM', 'kali-forms')}
 							</MenuItem>
 						</Select>
 					</FormControl>
@@ -96,7 +96,7 @@ const WebHookEditor = observer(props => {
 				<Grid item xs={3}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Trigger event', 'kaliforms')}
+							{__('Trigger event', 'kali-forms')}
 						</InputLabel>
 						<Select
 							value={currentHook.event || 'afterFormProcess'}
@@ -105,10 +105,10 @@ const WebHookEditor = observer(props => {
 							input={<BootstrapInput />}
 						>
 							<MenuItem value={'beforeFormProcess'}>
-								{__('Before form process', 'kaliforms')}
+								{__('Before form process', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value={'afterFormProcess'}>
-								{__('After form process', 'kaliforms')}
+								{__('After form process', 'kali-forms')}
 							</MenuItem>
 						</Select>
 					</FormControl>
@@ -118,7 +118,7 @@ const WebHookEditor = observer(props => {
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Authentication secret', 'kaliforms')}
+							{__('Authentication secret', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={currentHook.authentication || ''}
@@ -133,19 +133,19 @@ const WebHookEditor = observer(props => {
 					<WebHookEntityCreator onChange={
 						data => store._WEBHOOKS_.editHook(store._WEBHOOKS_.currentEditedHook, 'body', data)
 					}
-						entity={{ label: __('Request Body', 'kaliforms'), id: 'body' }} map={true} />
+						entity={{ label: __('Request Body', 'kali-forms'), id: 'body' }} map={true} />
 				</Grid>
 				<Grid item xs={6}>
 					<WebHookEntityCreator onChange={
 						data => store._WEBHOOKS_.editHook(store._WEBHOOKS_.currentEditedHook, 'headers', data)
 					}
-						entity={{ label: __('Request Headers', 'kaliforms'), id: 'headers' }} />
+						entity={{ label: __('Request Headers', 'kali-forms'), id: 'headers' }} />
 				</Grid>
 			</Grid>
 			<Grid container direction="row" spacing={3}>
 				<Grid item xs={12}>
 					<ConditionalEntity
-						label={__('Should send webhook', 'kaliforms')}
+						label={__('Should send webhook', 'kali-forms')}
 						onChange={data => store._WEBHOOKS_.editHook(store._WEBHOOKS_.currentEditedHook, 'conditions', data)}
 						changer={store._WEBHOOKS_.currentEditedHook}
 						conditions={currentHook.conditions || []}
@@ -159,7 +159,7 @@ const WebHookEditor = observer(props => {
 						store._WEBHOOKS_.setEditedHook(false)
 					}} style={{ paddingLeft: 16, paddingRight: 16 }}>
 						<Icon className={'icon-back'} style={{ fontSize: 14, marginRight: 8 }} />
-						{__('Back', 'kaliforms')}
+						{__('Back', 'kali-forms')}
 					</Button>
 				</Grid>
 			</Grid>

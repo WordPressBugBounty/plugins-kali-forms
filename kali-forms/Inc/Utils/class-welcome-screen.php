@@ -50,8 +50,8 @@ class Welcome_Screen
 	public function register_menu()
 	{
 		add_dashboard_page(
-			esc_html__('Welcome to Kali Forms', 'kaliforms'),
-			esc_html__('Welcome to Kali Forms', 'kaliforms'),
+			esc_html__('Welcome to Kali Forms', 'kali-forms'),
+			esc_html__('Welcome to Kali Forms', 'kali-forms'),
 			'manage_options',
 			$this->slug . '-after-install',
 			new After_Install_Page()

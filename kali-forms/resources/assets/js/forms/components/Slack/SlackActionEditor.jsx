@@ -34,7 +34,7 @@ const SlackActionEditor = observer(props => {
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Action name', 'kaliforms')}
+							{__('Action name', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={editedAction.name || ''}
@@ -51,7 +51,7 @@ const SlackActionEditor = observer(props => {
 				<Grid item xs={6}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Message type (text, block)', 'kaliforms')}
+							{__('Message type (text, block)', 'kali-forms')}
 						</InputLabel>
 						<Select
 							value={editedAction.type || 'text'}
@@ -60,10 +60,10 @@ const SlackActionEditor = observer(props => {
 							input={<BootstrapInput />}
 						>
 							<MenuItem value={'text'}>
-								{__('Text', 'kaliforms')}
+								{__('Text', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value={'block'}>
-								{__('Block', 'kaliforms')}
+								{__('Block', 'kali-forms')}
 							</MenuItem>
 						</Select>
 					</FormControl>
@@ -71,7 +71,7 @@ const SlackActionEditor = observer(props => {
 				<Grid item xs={6}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Where', 'kaliforms')}
+							{__('Where', 'kali-forms')}
 						</InputLabel>
 						<Select
 							value={editedAction.where || 'text'}
@@ -80,7 +80,7 @@ const SlackActionEditor = observer(props => {
 							input={<BootstrapInput />}
 							className={classes.selectImg}
 						>
-							<MenuItem value={'empty'}>{__('-- Please select --', 'kaliforms')}</MenuItem>
+							<MenuItem value={'empty'}>{__('-- Please select --', 'kali-forms')}</MenuItem>
 							{
 								data.channels.map(channel => (<MenuItem key={channel.id} value={channel.id}>#{channel.name}</MenuItem>))
 							}
@@ -97,7 +97,7 @@ const SlackActionEditor = observer(props => {
 					<If condition={editedAction.type === 'block'}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Select fields to send through the block message', 'kaliforms')}
+								{__('Select fields to send through the block message', 'kali-forms')}
 							</InputLabel>
 						</FormControl>
 						{
@@ -123,7 +123,7 @@ const SlackActionEditor = observer(props => {
 					<If condition={editedAction.type === 'text'}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Message', 'kaliforms')}
+								{__('Message', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={editedAction.message || ''}
@@ -140,7 +140,7 @@ const SlackActionEditor = observer(props => {
 			<Grid container direction="row" spacing={3}>
 				<Grid item xs={12}>
 					<ConditionalEntity
-						label={__('Should send notification', 'kaliforms')}
+						label={__('Should send notification', 'kali-forms')}
 						onChange={conditionalChanged}
 						changer={props.actionIdx}
 						conditions={editedAction.conditions} />
@@ -150,7 +150,7 @@ const SlackActionEditor = observer(props => {
 				<Grid item xs={12}>
 					<Button onClick={() => props.setEditingAction(false)} style={{ paddingLeft: 16, paddingRight: 16 }}>
 						<Icon className={'icon-back'} style={{ fontSize: 14, marginRight: 8 }} />
-						{__('Back', 'kaliforms')}
+						{__('Back', 'kali-forms')}
 					</Button>
 				</Grid>
 			</Grid>

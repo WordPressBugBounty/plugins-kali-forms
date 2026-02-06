@@ -26,7 +26,7 @@ const PortStatus = props => {
 			<Card variant="outlined">
 				<CardContent>
 					<Typography>
-						{__('Ports used for email sending', 'kaliforms')}
+						{__('Ports used for email sending', 'kali-forms')}
 					</Typography>
 					<List dense={true} style={{ paddingLeft: 0 }}>
 						{
@@ -34,9 +34,9 @@ const PortStatus = props => {
 								return (
 									<ListItem key={key} dense={true} style={{ paddingLeft: 0 }}>
 										<Typography color={'textPrimary'} gutterBottom={false} variant={'body2'}>
-											<strong style={{ minWidth: 60, display: 'inline-block', marginRight: 16 }}>{__('Port ', 'kaliforms')}{key}:</strong>
+											<strong style={{ minWidth: 60, display: 'inline-block', marginRight: 16 }}>{__('Port ', 'kali-forms')}{key}:</strong>
 											<StyledBadge color={ports[key] ? 'primary' : 'error'} variant="dot">
-												<span>{ports[key] ? __('Open', 'kaliforms') : __('Closed', 'kaliforms')}</span>
+												<span>{ports[key] ? __('Open', 'kali-forms') : __('Closed', 'kali-forms')}</span>
 											</StyledBadge>
 										</Typography>
 									</ListItem>

@@ -48,10 +48,10 @@ class SMTP extends Sender
         $this->options['secure'] = $this->options['secure'] === 'none' ? '' : strtolower($this->options['secure']);
 
         if (empty($this->options['host'])) {
-            $this->errors[] = __('No host configured in settings', 'kaliforms');
+            $this->errors[] = __('No host configured in settings', 'kali-forms');
         }
         if (empty($this->options['port'])) {
-            $this->errors[] = __('No port configured in settings', 'kaliforms');
+            $this->errors[] = __('No port configured in settings', 'kali-forms');
         }
     }
 
@@ -65,8 +65,8 @@ class SMTP extends Sender
         parent::_prep_mailer();
         $this->mailer->isSMTP();
         $this->mailer->SMTPDebug = 0;
-		$this->mailer->Host      = $this->options['host'];
-		
+        $this->mailer->Host      = $this->options['host'];
+
         if ($this->options['auth'] === 1) {
             $this->mailer->SMTPAuth = true;
             $this->mailer->Username = $this->options['username'];

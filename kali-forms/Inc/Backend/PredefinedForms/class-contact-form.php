@@ -22,8 +22,8 @@ class Contact_Form extends Predefined_Form
     {
         parent::__construct();
         $this->id          = 'contact';
-        $this->name        = esc_html__('Contact form', 'kaliforms');
-        $this->description = esc_html__('A simple form meant to help you comunicate with your site users.', 'kaliforms');
+        $this->name        = esc_html__('Contact form', 'kali-forms');
+        $this->description = esc_html__('A simple form meant to help you comunicate with your site users.', 'kali-forms');
         $this->emails      = [
             [
                 "fromName"                 => "{sitetitle}",

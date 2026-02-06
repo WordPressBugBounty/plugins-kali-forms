@@ -31,6 +31,6 @@ class File_Upload extends Form_Field
     {
         parent::__construct($args);
         $this->icon  = 'icon-upload-1';
-        $this->label = esc_html__('File upload', 'kaliforms');
+        $this->label = esc_html__('File upload', 'kali-forms');
     }
 }

@@ -65,7 +65,7 @@ class Forms_Processor_Rest_Controller extends \WP_REST_Controller
 		// if (!current_user_can('edit_posts')) {
 		//     return new \WP_Error(
 		//         'rest_forbidden',
-		//         esc_html__('You cannot view the post resource.', 'kaliforms'),
+		//         esc_html__('You cannot view the post resource.', 'kali-forms'),
 		//         ['status' => $this->authorization_status_code()]
 		//     );
 		// }
@@ -101,7 +101,7 @@ class Forms_Processor_Rest_Controller extends \WP_REST_Controller
 			'type'       => 'object',
 			'properties' => [
 				'id' => [
-					'description' => esc_html__('Unique identifier for the object.', 'kaliforms'),
+					'description' => esc_html__('Unique identifier for the object.', 'kali-forms'),
 					'type'        => 'integer',
 					'context'     => ['view', 'edit', 'embed'],
 					'readonly'    => true,

@@ -22,20 +22,20 @@ const smsEmailsContainerStyles = makeStyles(theme => {
 const SmsEditorContainer = observer(props => {
 	const classes = smsEmailsContainerStyles();
 	const newSms = () => {
-		return { name: __('Sms notification', 'kaliforms'), provider: 'empty', to: '', from: '', message: '', conditions: { conditions: [{ conditionalIndex: 0, formField: '', formFieldType: '', condition: 'is', value: '' }], conditionalLogic: 'always' } }
+		return { name: __('Sms notification', 'kali-forms'), provider: 'empty', to: '', from: '', message: '', conditions: { conditions: [{ conditionalIndex: 0, formField: '', formFieldType: '', condition: 'is', value: '' }], conditionalLogic: 'always' } }
 	}
 	return (
 		<React.Fragment>
 			<Choose>
 				<When condition={!store._SMS_.notifications.length}>
 					<Paper className={classes.formEmailsPlaceholder}>
-						<Typography variant="subtitle1">{__('You currently do not have any SMS configured.', 'kaliforms')}</Typography>
-						<StyledButton onClick={event => store._SMS_.addSms(newSms())}>{__('Add your first SMS!', 'kaliforms')}</StyledButton>
+						<Typography variant="subtitle1">{__('You currently do not have any SMS configured.', 'kali-forms')}</Typography>
+						<StyledButton onClick={event => store._SMS_.addSms(newSms())}>{__('Add your first SMS!', 'kali-forms')}</StyledButton>
 					</Paper>
 				</When>
 				<When condition={store._SMS_.notifications.length && store._UI_.activeSMSInSidebar === false}>
 					<Paper className={classes.formEmailsPlaceholder}>
-						<Typography variant="subtitle1">{__('Please select a SMS from the list', 'kaliforms')}</Typography>
+						<Typography variant="subtitle1">{__('Please select a SMS from the list', 'kali-forms')}</Typography>
 					</Paper>
 				</When>
 				<Otherwise>

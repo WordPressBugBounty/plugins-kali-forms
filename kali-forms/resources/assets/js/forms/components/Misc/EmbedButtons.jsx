@@ -30,7 +30,7 @@ const EmbedButtons = () => {
 		e.preventDefault()
 		copy(`[kaliform id="${KaliFormsObject.formId}"]`);
 		enqueueSnackbar(
-			`Shortcode ${__('copied to clipboard', 'kaliforms')}`,
+			`Shortcode ${__('copied to clipboard', 'kali-forms')}`,
 			{
 				preventDuplicate: true,
 				variant: 'success',
@@ -47,11 +47,11 @@ const EmbedButtons = () => {
 		<React.Fragment>
 			<If condition={KaliFormsObject.hasOwnProperty('submissionViewPage')}>
 				<a href="#" onClick={e => goToEntries(e)} className={classes.root}>
-					{__('Entries', 'kaliforms')} ({count})
+					{__('Entries', 'kali-forms')} ({count})
 				</a>
 			</If>
 			<a href="#" onClick={e => copyShortcode(e)} className={classes.root}>
-				{__('Embed', 'kaliforms')}
+				{__('Embed', 'kali-forms')}
 			</a>
 		</React.Fragment>
 	)

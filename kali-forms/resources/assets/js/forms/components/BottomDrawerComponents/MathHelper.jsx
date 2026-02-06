@@ -298,9 +298,9 @@ const MathHelper = props => {
 		<React.Fragment>
 			<Grid container>
 				<Grid item xs={3}>
-					<Typography variant={'h3'}>{__('Math helper', 'kaliforms')}</Typography>
+					<Typography variant={'h3'}>{__('Math helper', 'kali-forms')}</Typography>
 					<p>
-						{__('We will try to help you in creating your first form calculation!', 'kaliforms')}
+						{__('We will try to help you in creating your first form calculation!', 'kali-forms')}
 					</p>
 				</Grid>
 				<Grid item xs={3}>
@@ -318,7 +318,7 @@ const MathHelper = props => {
 					<If condition={selectedHelper !== ''}>
 						<ul className={classes.selectableList + ' ' + classes.smallerList}>
 							<li className={classes.smallMargin} style={{ marginLeft: -8 }}>
-								{__('Select total field', 'kaliforms')}
+								{__('Select total field', 'kali-forms')}
 							</li>
 							{availableFields.map(field => (
 								<li key={field.id} className={classes.smallMargin}>
@@ -368,15 +368,15 @@ const MathHelper = props => {
 													</Select>
 													<If condition={activeStep > 0}>
 														<Button className={classes.nextButton} onClick={e => goToPrevStep()}>
-															{__('Back', 'kaliforms')}
+															{__('Back', 'kali-forms')}
 														</Button>
 													</If>
 													<Button className={classes.nextButton} onClick={e => goToNextStep()}>
 														<If condition={activeStep + 1 === argsHelper().length}>
-															{__('Finish', 'kaliforms')}
+															{__('Finish', 'kali-forms')}
 														</If>
 														<If condition={activeStep + 1 < argsHelper().length}>
-															{__('Next', 'kaliforms')}
+															{__('Next', 'kali-forms')}
 														</If>
 													</Button>
 												</StepContent>
@@ -388,7 +388,7 @@ const MathHelper = props => {
 							<Otherwise>
 								<ul className={classes.selectableList + ' ' + classes.smallerList}>
 									<li className={classes.smallMargin} style={{ marginLeft: -8 }}>
-										{__('Fields to calculate', 'kaliforms')}
+										{__('Fields to calculate', 'kali-forms')}
 									</li>
 									<li className={classes.smallMargin}>
 										<FormControlLabel
@@ -400,7 +400,7 @@ const MathHelper = props => {
 													onChange={e => selectAll(e)}
 												/>
 											}
-											label={__('Select all', 'kaliforms')}
+											label={__('Select all', 'kali-forms')}
 										/>
 									</li>
 									{availableFields.map(field => {
@@ -426,7 +426,7 @@ const MathHelper = props => {
 									})}
 								</ul>
 
-								<Button onClick={e => updateField()} className={classes.importButton}>{__('Create Calculation', 'kaliforms')}</Button>
+								<Button onClick={e => updateField()} className={classes.importButton}>{__('Create Calculation', 'kali-forms')}</Button>
 							</Otherwise>
 						</Choose>
 					</If>

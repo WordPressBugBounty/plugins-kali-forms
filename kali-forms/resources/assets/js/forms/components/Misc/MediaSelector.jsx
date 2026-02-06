@@ -193,8 +193,8 @@ const MediaSelector = observer((props) => {
 						>
 							<Box className={classes.container}>
 								<MediaManager
-									title={__("Select image", "kaliforms")}
-									buttonLabel={__("Use selected image", "kaliforms")}
+									title={__("Select image", "kali-forms")}
+									buttonLabel={__("Use selected image", "kali-forms")}
 									mediaValue={choice}
 									currentIndex={idx}
 									noMarginTop={true}
@@ -212,7 +212,7 @@ const MediaSelector = observer((props) => {
 					onClick={() => createAndOpenMedia()}
 				>
 					<Icon className={"icon-add-new"} />
-					{__("Add media", "kaliforms")}
+					{__("Add media", "kali-forms")}
 				</Button>
 			</Box>
 		</React.Fragment>

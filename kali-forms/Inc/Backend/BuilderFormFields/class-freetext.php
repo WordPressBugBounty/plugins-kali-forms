@@ -30,7 +30,7 @@ class FreeText extends Form_Field
     {
         parent::__construct($args);
         $this->icon  = 'icon-free-text';
-        $this->label = esc_html__('Free Text', 'kaliforms');
+        $this->label = esc_html__('Free Text', 'kali-forms');
     }
     /**
      * Sets common props
@@ -39,12 +39,12 @@ class FreeText extends Form_Field
     {
         $this->properties = [
             'id'   => [
-                'label' => esc_html__('Free text id', 'kaliforms'),
+                'label' => esc_html__('Free text id', 'kali-forms'),
                 'type'  => 'textbox',
                 'value' => $this->id,
             ],
             'name' => [
-                'label' => esc_html__('Field name', 'kaliforms'),
+                'label' => esc_html__('Field name', 'kali-forms'),
                 'type'  => 'textbox',
                 'value' => $this->id,
             ],

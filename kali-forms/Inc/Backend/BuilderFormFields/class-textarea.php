@@ -30,6 +30,6 @@ class TextArea extends Form_Field
     {
         parent::__construct($args);
         $this->icon  = 'icon-text-area';
-        $this->label = esc_html__('Textarea', 'kaliforms');
+        $this->label = esc_html__('Textarea', 'kali-forms');
     }
 }

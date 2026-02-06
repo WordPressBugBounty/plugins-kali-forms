@@ -16,9 +16,9 @@ const Postmark = props => {
 
 	const form = [
 		{
-			id: 'api_key', label: __('API server key', 'kaliforms'), name: 'kaliforms_postmark_server_api', type: 'text',
+			id: 'api_key', label: __('API server key', 'kali-forms'), name: 'kaliforms_postmark_server_api', type: 'text',
 			help: sprintf(
-				__('The API key used for the connection to this service. You can retrieve this from your %sPostmark account%s', 'kaliforms'),
+				__('The API key used for the connection to this service. You can retrieve this from your %sPostmark account%s', 'kali-forms'),
 				'<a target="_blank" href="https://account.postmarkapp.com/servers/">',
 				'</a>'),
 		},
@@ -55,7 +55,7 @@ const Postmark = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('Postmark settings', 'kaliforms')}
+				{__('Postmark settings', 'kali-forms')}
 			</Typography>
 			<hr />
 			<Grid container direction="row">

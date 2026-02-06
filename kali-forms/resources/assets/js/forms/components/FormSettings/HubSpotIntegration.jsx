@@ -17,8 +17,8 @@ const { __ } = wp.i18n;
  */
 const defaultObj = (index) => {
 	return {
-		'hubSpotAction': `${index + 1} - ${__('action', 'kaliforms')}`,
-		'hubSpotFormName': `${index + 1} - ${__('form', 'kaliforms')}`,
+		'hubSpotAction': `${index + 1} - ${__('action', 'kali-forms')}`,
+		'hubSpotFormName': `${index + 1} - ${__('form', 'kali-forms')}`,
 		'leadStatus': '',
 		'lifecycleStage': '',
 		'contactOwnerOption': '',
@@ -121,10 +121,10 @@ const HubSpotIntegration = (props) => {
 							<MaterialTable
 								components={{ Container: props => <div>{props.children}</div> }}
 								columns={[
-									{ title: __('Action name', 'kaliforms'), field: 'name' },
-									{ title: __('Form name', 'kaliforms'), field: 'form' },
-									{ title: __('Lead status', 'kaliforms'), field: 'leadStatus' },
-									{ title: __('Life cycle', 'kaliforms'), field: 'lifecycleStage' }
+									{ title: __('Action name', 'kali-forms'), field: 'name' },
+									{ title: __('Form name', 'kali-forms'), field: 'form' },
+									{ title: __('Lead status', 'kali-forms'), field: 'leadStatus' },
+									{ title: __('Life cycle', 'kali-forms'), field: 'lifecycleStage' }
 
 								]}
 								options={{
@@ -135,23 +135,23 @@ const HubSpotIntegration = (props) => {
 								actions={[
 									{
 										icon: () => <Edit />,
-										tooltip: __('Edit action', 'kaliforms'),
+										tooltip: __('Edit action', 'kali-forms'),
 										onClick: (event, rowData) => setSelectedIdx(rowData.idx)
 									},
 									{
 										icon: () => <DeleteOutline />,
-										tooltip: __('Delete action', 'kaliforms'),
+										tooltip: __('Delete action', 'kali-forms'),
 										onClick: (event, rowData) => removeAction(rowData)
 									},
 									{
 										icon: () => <AddBox />,
-										tooltip: __('Add action', 'kaliforms'),
+										tooltip: __('Add action', 'kali-forms'),
 										isFreeAction: true,
 										onClick: (event) => addNewAction()
 									}
 								]}
 								data={hubSpotActions()}
-								title={__('HubSpot Actions', 'kaliforms')}
+								title={__('HubSpot Actions', 'kali-forms')}
 							/>
 						</If>
 						<If condition={KaliFormsHubSpot.error !== '1' && hubspotData.length && selectedIdx !== null} >

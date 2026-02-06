@@ -58,7 +58,7 @@ const ConditionalThankYouMessage = observer(() => {
 								onChange={e => store._FORM_INFO_.setFormInfo({showThankYouMessage: e.target.checked ? '1' : '0'})}
 							/>
 						}
-						label={__('Show thank you message', 'kaliforms')}
+						label={__('Show thank you message', 'kali-forms')}
 					/>
 
 					<FormGroup>
@@ -69,7 +69,7 @@ const ConditionalThankYouMessage = observer(() => {
 									onChange={e => store._FORM_INFO_.setFormInfo({scrollToThankYou: e.target.checked ? '1' : '0'})}
 								/>
 							}
-							label={__('Scroll to thank you message', 'kaliforms')}
+							label={__('Scroll to thank you message', 'kali-forms')}
 						/>
 					</FormGroup>
 
@@ -81,7 +81,7 @@ const ConditionalThankYouMessage = observer(() => {
 									onChange={e => store._FORM_INFO_.setFormInfo({conditionalThankYou: e.target.checked ? '1' : '0'})}
 								/>
 							}
-							label={__('Conditional thank you message', 'kaliforms')}
+							label={__('Conditional thank you message', 'kali-forms')}
 						/>
 					</If>
 				</FormGroup>
@@ -91,11 +91,11 @@ const ConditionalThankYouMessage = observer(() => {
 					<Grid item xs={12}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Thank you message', 'kaliforms')}
+								{__('Thank you message', 'kali-forms')}
 							</InputLabel>
 
 							<MUIRichTextEditor
-								label={__('Start typing...', 'kaliforms')}
+								label={__('Start typing...', 'kali-forms')}
 								value={thankYouMessage}
 								customControls={[
 									{

@@ -29,7 +29,7 @@ class Submit_Button extends Button
     public function __construct($args)
     {
         parent::__construct($args);
-        $this->label = esc_html__('Submit Button', 'kaliforms');
+        $this->label = esc_html__('Submit Button', 'kali-forms');
         $this->icon  = 'icon-button';
         $this->remove_props(['clickAction']);
     }

@@ -22,12 +22,12 @@ const FormPayments = observer((props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Payments', 'kaliforms')} />
+				<SectionTitle title={__('Payments', 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={4}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Currency', 'kaliforms')}
+								{__('Currency', 'kali-forms')}
 							</InputLabel>
 							<Select
 								value={store._FORM_INFO_.currency}
@@ -72,7 +72,7 @@ const FormPayments = observer((props) => {
 										onChange={e => store._FORM_INFO_.paymentsLive = e.target.checked ? '1' : '0'}
 									/>
 								}
-								label={__('Live transactions', 'kaliforms')}
+								label={__('Live transactions', 'kali-forms')}
 							/>
 						</FormGroup>
 					</Grid>
@@ -82,7 +82,7 @@ const FormPayments = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('PayPal client id', 'kaliforms')}
+								{__('PayPal client id', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.payPalClientId}
@@ -95,7 +95,7 @@ const FormPayments = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('PayPal sandbox client id', 'kaliforms')}
+								{__('PayPal sandbox client id', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.payPalClientIdSandBox}

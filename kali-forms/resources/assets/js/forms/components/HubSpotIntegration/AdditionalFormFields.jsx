@@ -44,28 +44,28 @@ const AdditionalFormFields = (props) => {
 		<Grid container direction="row" spacing={4}>
 			<Grid item xs={4}>
 				<HubSpotProperties
-					label={__('HubSpot Property', 'kaliforms')}
+					label={__('HubSpot Property', 'kali-forms')}
 					field={props.additionalFieldIndex}
 					selectedValue={props.hubSpotProperty}
 					onChange={hubSpotPropertyChange} />
 			</Grid>
 			<Grid item xs={4}>
 				<FieldComponentSelect
-					label={__('Form field', 'kaliforms')}
+					label={__('Form field', 'kali-forms')}
 					field={props.additionalFieldIndex}
 					selectedValue={props.assignedFormField}
 					onChange={selectChange} />
 			</Grid>
 			<Grid item xs={4} style={{ paddingTop: 42 }}>
 				<Button
-					aria-label={__('Add form field', 'kaliforms')}
+					aria-label={__('Add form field', 'kali-forms')}
 					variant="text"
 					onClick={() => addAdditionalFormField()}
 				>
 					<Icon className="icon-add" />
 				</Button>
 				<Button
-					aria-label={__('Remove form field', 'kaliforms')}
+					aria-label={__('Remove form field', 'kali-forms')}
 					variant="text"
 					onClick={() => props.additionalFormFields.length === 1 ? setDefaultFormField() : removeAdditionalFormField(props.additionalFieldIndex)}
 				>

@@ -11,7 +11,7 @@ const SidebarFormFieldEditorContainer = observer((props) => {
 	return (
 		<React.Fragment>
 			<If condition={store._FIELD_COMPONENTS_.fieldComponents.length === 0}>
-				<Box className={classes.contentBox}>{__('Add your first form field!', 'kaliforms')}</Box>
+				<Box className={classes.contentBox}>{__('Add your first form field!', 'kali-forms')}</Box>
 			</If>
 			<If condition={store._FIELD_COMPONENTS_.fieldComponents.length > 0}>
 				<Box>

@@ -8,19 +8,19 @@ import { __ } from '@wordpress/i18n';
 
 const initialConfig = [
 	{
-		label: __('Form selection', 'kaliforms'),
+		label: __('Form selection', 'kali-forms'),
 		complete: false,
 		args: '',
 		id: 'formSelection',
 	},
 	{
-		label: __('Field selection', 'kaliforms'),
+		label: __('Field selection', 'kali-forms'),
 		complete: false,
 		args: '',
 		id: 'fieldSelection',
 	},
 	{
-		label: __('Reorder & Formatting', 'kaliforms'),
+		label: __('Reorder & Formatting', 'kali-forms'),
 		complete: false,
 		args: '',
 		id: 'reorderFormatting',
@@ -45,7 +45,7 @@ export default function ExporterSidebar() {
 				case 1:
 					if (exportOptions.multiple) {
 						if (!exportOptions.forms || !exportOptions.forms.length) {
-							newState[0].args = __('No forms selected', 'kaliforms');
+							newState[0].args = __('No forms selected', 'kali-forms');
 						} else {
 							const selectedForms = AppProps.allForms
 								.filter(form => exportOptions.forms.includes(form.id))
@@ -57,20 +57,20 @@ export default function ExporterSidebar() {
 						if (currentForm) {
 							newState[0].args = `${currentForm.name} (#${currentForm.id})`;
 						} else {
-							newState[0].args = __('No form selected', 'kaliforms');
+							newState[0].args = __('No form selected', 'kali-forms');
 						}
 					}
 					break;
 				case 2:
 					let translated = {
-						csv: __('CSV', 'kaliforms'),
-						xls: __('Microsoft Excel™', 'kaliforms'),
-						xlsx: __('Microsoft Excel™ 2007', 'kaliforms'),
-						gsheet: __('Google sheet', 'kaliforms'),
+						csv: __('CSV', 'kali-forms'),
+						xls: __('Microsoft Excel™', 'kali-forms'),
+						xlsx: __('Microsoft Excel™ 2007', 'kali-forms'),
+						gsheet: __('Google sheet', 'kali-forms'),
 					}
 					newState[1].args = <React.Fragment>
-						{__('Fields: ', 'kaliforms')} {exportOptions.fields.length} <br />
-						{__('Format: ', 'kaliforms')} {translated[exportOptions.fileFormat]}
+						{__('Fields: ', 'kali-forms')} {exportOptions.fields.length} <br />
+						{__('Format: ', 'kali-forms')} {translated[exportOptions.fileFormat]}
 					</React.Fragment>;
 					break;
 			}

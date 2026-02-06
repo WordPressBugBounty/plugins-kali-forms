@@ -27,7 +27,7 @@ const ConversionBridgeIntegration = observer((props) => {
 								<Typography>
 									{__(
 										"Please install and activate Conversion Bridge WP to use this integration",
-										"kaliforms"
+										"kali-forms"
 									)}
 								</Typography>
 							</When>
@@ -51,7 +51,7 @@ const ConversionBridgeIntegration = observer((props) => {
 											}
 											label={__(
 												"Enable Conversion Bridge integration",
-												"kaliforms"
+												"kali-forms"
 											)}
 										/>
 									</FormGroup>
@@ -64,7 +64,7 @@ const ConversionBridgeIntegration = observer((props) => {
 											<FormGroup row style={{ marginTop: 20 }}>
 												<FormControl>
 													<InputLabel shrink>
-														{__("Custom label", "kaliforms")}
+														{__("Custom label", "kali-forms")}
 													</InputLabel>
 													<BootstrapInput
 														value={store._FORM_INFO_.conversionLabel}
@@ -74,7 +74,7 @@ const ConversionBridgeIntegration = observer((props) => {
 															})
 														}
 														fullWidth={true}
-														placeholder={__("KF Submission Label", "kaliforms")}
+														placeholder={__("KF Submission Label", "kali-forms")}
 														variant="filled"
 													/>
 												</FormControl>
@@ -82,7 +82,7 @@ const ConversionBridgeIntegration = observer((props) => {
 											<FormGroup row style={{ marginTop: 20 }}>
 												<FormControl>
 													<InputLabel shrink>
-														{__("Custom value", "kaliforms")}
+														{__("Custom value", "kali-forms")}
 													</InputLabel>
 													<BootstrapInput
 														value={store._FORM_INFO_.conversionCustomValue}
@@ -92,7 +92,7 @@ const ConversionBridgeIntegration = observer((props) => {
 															})
 														}
 														fullWidth={true}
-														placeholder={__("XXXXX", "kaliforms")}
+														placeholder={__("XXXXX", "kali-forms")}
 														variant="filled"
 													/>
 												</FormControl>

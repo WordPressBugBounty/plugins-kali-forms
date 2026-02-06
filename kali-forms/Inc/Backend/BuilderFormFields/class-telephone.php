@@ -1,7 +1,8 @@
 <?php
+
 namespace KaliForms\Inc\Backend\BuilderFormFields;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
@@ -10,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Inc\Backend\BuilderFormFields
  */
-class Telephone extends Form_Field {
+class Telephone extends Form_Field
+{
 	/**
 	 * @var string
 	 */
@@ -25,9 +27,10 @@ class Telephone extends Form_Field {
 	 *
 	 * @param $args
 	 */
-	public function __construct( $args ) {
-		parent::__construct( $args );
+	public function __construct($args)
+	{
+		parent::__construct($args);
 		$this->icon = 'icon-phone';
-		$this->label = esc_html__( 'Phone', 'kaliforms' );
+		$this->label = esc_html__('Phone', 'kali-forms');
 	}
 }

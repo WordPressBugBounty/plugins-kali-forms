@@ -1,13 +1,13 @@
-=== Contact Form builder with drag & drop for WordPress - Kali Forms  ===
+=== Kali Forms — Contact Form & Drag-and-Drop Builder ===
 Contributors: kaliforms, andreic86, wpchill
 Tags: contact form, forms, form builder, payment form, stripe payment
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.6
-Stable tag: 2.4.5
+Stable tag: 2.4.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Build the ideal contact form for your WordPress website in minutes through the Drag & Drop builder and Guided Emails for entries notifications.
+Build contact forms for your WordPress website in minutes through the Drag & Drop builder and Guided Emails for entries notifications.
 
 == Description ==
 
@@ -88,9 +88,9 @@ Easily use and modify the Kali Forms employee information form template which yo
 
 ---
 
-= The Fastest WordPress Form Plugin Available =
+= Performance-Focused WordPress Form Plugin =
 
-We built the Kali Forms WordPress form plugin from the ground up overcome the performance issues caused by most (if not all) other form plugins. Say goodbye to legacy, outdated code. Kali Forms is built on [React](https://reactjs.org/).
+We built the Kali Forms WordPress form plugin from the ground up with performance in mind. Kali Forms is built on [React](https://reactjs.org/) using modern development practices.
 
 = All forms are 100% mobile-responsive. =
 
@@ -114,14 +114,175 @@ We know much of a problem form spam is which is why Kali Forms is designed to us
 
 ----
 
-= 3rd party or external service disclaimer =
-The plugin sends data (User action) to our website through an API Call (https://kaliforms.com/wp-json/kf/v1/uninstall-feedback) in order to send a uninstall feedback.
+== External Services ==
 
-The plugin connects to our website through an API call (https://kaliforms.com/wp-json/kf/v1/plugins) in order to request a list of available extensions.
+This plugin connects to several third-party services to provide its functionality. Below is a complete list of external services used, what data is sent, when it is sent, and links to their terms of service and privacy policies.
 
-**Kali Forms does not send any data without consent or user action to our website, nor do we collect sensitive information from the requests.**
+= Spam Protection Services =
 
-Our full privacy policy can be found [here](https://kaliforms.com/privacy-policy/).
+**Google reCAPTCHA**
+- **Service**: Google reCAPTCHA is used to verify that form submissions are made by humans and not automated bots.
+- **What data is sent**: When a form is submitted with reCAPTCHA enabled, the plugin sends the reCAPTCHA response token and your site's secret key to Google's verification service.
+- **When**: Data is sent only when a form submission includes reCAPTCHA verification.
+- **Terms of Service**: https://policies.google.com/terms
+- **Privacy Policy**: https://policies.google.com/privacy
+
+**Cloudflare Turnstile**
+- **Service**: Cloudflare Turnstile is an alternative spam protection service used to verify that form submissions are made by humans and not automated bots.
+- **What data is sent**: When a form is submitted with Turnstile enabled, the plugin sends the Turnstile response token and your site's secret key to Cloudflare's verification service.
+- **When**: Data is sent only when a form submission includes Turnstile verification.
+- **Terms of Service**: https://www.cloudflare.com/terms/
+- **Privacy Policy**: https://www.cloudflare.com/privacy/
+
+**Akismet**
+- **Service**: Akismet is used to check form submissions for spam content when enabled.
+- **What data is sent**: When Akismet is enabled and a form is submitted, the plugin sends the following data to Akismet: website URL, user IP address, user agent, referrer URL, form field values (name, email, message content), and comment type.
+- **When**: Data is sent only when Akismet is enabled and a form is submitted.
+- **Terms of Service**: https://akismet.com/tos/
+- **Privacy Policy**: https://automattic.com/privacy/
+
+= Email Delivery Services (Optional) =
+
+These services are only used if you configure them in the plugin's email settings. If you use the default WordPress email system, these services are not contacted.
+
+**Postmark**
+- **Service**: Postmark is an email delivery service used to send form notification emails when configured.
+- **What data is sent**: Email content including recipient addresses (To, Cc, Bcc), sender information, subject, HTML/text body, reply-to addresses, and email attachments (if any).
+- **When**: Data is sent only when Postmark is configured as the email provider and a form notification email is sent.
+- **Terms of Service**: https://postmarkapp.com/terms
+- **Privacy Policy**: https://postmarkapp.com/privacy
+
+**SMTP.com**
+- **Service**: SMTP.com is an email delivery service used to send form notification emails when configured.
+- **What data is sent**: Email content including recipient addresses (To, Cc, Bcc), sender information, subject, HTML/text body, reply-to addresses, and email attachments (if any).
+- **When**: Data is sent only when SMTP.com is configured as the email provider and a form notification email is sent.
+- **Terms of Service**: https://www.smtp.com/terms-of-service/
+- **Privacy Policy**: https://www.smtp.com/privacy-policy/
+
+**Sendinblue (Brevo)**
+- **Service**: Sendinblue (now Brevo) is an email delivery service used to send form notification emails when configured.
+- **What data is sent**: Email content including recipient addresses (To, Cc, Bcc), sender information, subject, HTML/text body, reply-to addresses, and email attachments (if any).
+- **When**: Data is sent only when Sendinblue is configured as the email provider and a form notification email is sent.
+- **Terms of Service**: https://www.brevo.com/legal/termsofuse/
+- **Privacy Policy**: https://www.brevo.com/legal/privacypolicy/
+
+**Mailgun**
+- **Service**: Mailgun is an email delivery service used to send form notification emails when configured.
+- **What data is sent**: Email content including recipient addresses (To, Cc, Bcc), sender information, subject, HTML/text body, reply-to addresses, and email attachments (if any).
+- **When**: Data is sent only when Mailgun is configured as the email provider and a form notification email is sent.
+- **Terms of Service**: https://www.mailgun.com/terms/
+- **Privacy Policy**: https://www.mailgun.com/privacy-policy/
+
+= Payment Processing (Optional) =
+
+**PayPal**
+- **Service**: PayPal SDK is loaded to enable payment processing in forms when PayPal payment fields are used.
+- **What data is sent**: The PayPal JavaScript SDK is loaded from PayPal's servers. Payment data is handled directly between the user's browser and PayPal - the plugin does not send payment information to PayPal servers.
+- **When**: The PayPal SDK script is loaded only when a form contains PayPal payment fields and is displayed on a page.
+- **Terms of Service**: https://www.paypal.com/us/webapps/mpp/ua/useragreement-full
+- **Privacy Policy**: https://www.paypal.com/us/webapps/mpp/ua/privacy-full
+
+= Plugin Services (Kali Forms) =
+
+**Kali Forms Extensions API**
+- **Service**: This service provides a list of available plugin extensions and add-ons.
+- **What data is sent**: No user data is sent. The plugin requests a list of available extensions.
+- **When**: Data is requested when you visit the Extensions page in the WordPress admin panel. Results are cached for 2 days.
+- **Terms of Service**: https://kaliforms.com/terms-of-service/
+- **Privacy Policy**: https://kaliforms.com/privacy-policy/
+
+**Kali Forms Uninstall Feedback API**
+- **Service**: This service collects feedback when you deactivate the plugin.
+- **What data is sent**: When you deactivate the plugin, you may optionally provide feedback including: deactivation reason, improvement suggestions, and optionally your email address (if you choose not to submit anonymously).
+- **When**: Data is sent only when you explicitly choose to submit feedback during plugin deactivation. You can choose to submit anonymously.
+- **Terms of Service**: https://kaliforms.com/terms-of-service/
+- **Privacy Policy**: https://kaliforms.com/privacy-policy/
+
+**Kali Forms Blog Posts API**
+- **Service**: This service provides blog posts to display in the WordPress dashboard widget.
+- **What data is sent**: No user data is sent. The plugin requests blog posts tagged for the dashboard widget.
+- **When**: Data is requested when the dashboard widget is displayed. Results are cached for 7 days.
+- **Terms of Service**: https://kaliforms.com/terms-of-service/
+- **Privacy Policy**: https://kaliforms.com/privacy-policy/
+
+= JavaScript Libraries (Bundled) =
+
+**html2canvas**
+- **Service**: html2canvas is a JavaScript library bundled within the plugin's vendor.js file. The reference to html2canvas found in the compiled code is a comment banner indicating the library's origin and version, not a remote service call.
+- **What data is sent**: No data is sent. html2canvas is included as a bundled dependency in the `public/assets/backend/js/vendor.js` file and operates entirely client-side without making external network requests.
+- **When**: The library is loaded when the form entries page is accessed in the WordPress admin panel. It is used for client-side image rendering functionality.
+- **Source**: The library is bundled from npm package `html2canvas` and included in the plugin's vendor bundle. No external calls are made.
+
+**jsPDF (PDFObject CDN Reference)**
+- **Service**: jsPDF is a JavaScript library bundled within the plugin's vendor.js file for PDF generation. The library includes an optional feature that can load PDFObject from a CDN, but this feature is only used if the "pdfobjectnewwindow" output type is explicitly called.
+- **What data is sent**: The jsPDF library includes a hardcoded fallback URL to Cloudflare's CDN (`https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js`) that is only used when the optional "pdfobjectnewwindow" output method is called. This is a feature of the jsPDF library itself, not a requirement of this plugin.
+- **When**: The CDN URL is only accessed if code explicitly uses jsPDF's `output("pdfobjectnewwindow")` method. The plugin does not use this output method by default, so the CDN is not accessed during normal plugin operation.
+- **Source**: The library is bundled from npm package `jspdf` and included in the plugin's vendor bundle. The CDN reference is part of the jsPDF library's optional functionality.
+- **Note**: To avoid any external CDN calls, do not use the `pdfobjectnewwindow` output type. The plugin uses other jsPDF output methods that do not require external resources.
+
+**Important Note**: Kali Forms does not send any data without user action or consent to external services, nor do we collect sensitive information from the requests. Email delivery services and payment processing are only used when explicitly configured by the site administrator. JavaScript libraries are bundled within the plugin and operate client-side. The only external CDN reference is an optional feature of the bundled jsPDF library that is not used by default.
+
+== Development ==
+
+= Source Code =
+
+The source code for Kali Forms is available in the plugin directory. The plugin includes a `package.json` file that documents all build dependencies and development tools used to compile the plugin's JavaScript and CSS assets.
+
+= Build Process =
+
+Kali Forms uses modern web development tools to build its frontend assets:
+
+- **Webpack**: Module bundler for JavaScript and CSS
+- **Babel**: JavaScript compiler for modern ES6+ syntax
+- **Sass/SCSS**: CSS preprocessor
+- **PostCSS**: CSS post-processing with autoprefixer
+
+The plugin's JavaScript source code is located in the `resources/assets/js/` directory and is compiled into the `public/assets/` directory. The build process does not use code obfuscation or minification that makes code unreadable - only standard webpack production optimizations are applied.
+
+= Vendor Files =
+
+The plugin includes bundled vendor libraries in `public/assets/backend/js/vendor.js` and `public/assets/frontend/js/vendor.js`. These files contain third-party JavaScript libraries that are compiled and bundled during the build process.
+
+A complete list of all vendor dependencies, including their versions and licenses, can be found in the `package.json` file included with the plugin. The dependencies are categorized as:
+- **dependencies**: Runtime libraries required for the plugin to function
+- **devDependencies**: Build tools and development dependencies used only during compilation
+
+All vendor libraries are bundled locally within the plugin and do not make external network requests during normal operation. The source code for these libraries is available through their respective npm packages, and the bundled versions are included in the plugin distribution.
+
+Any CDN references found in vendor files are either:
+1. Comment banners or attribution notices (like library name and version information)
+2. Optional features within bundled libraries that are not used by the plugin (such as optional output methods that require external resources)
+
+For specific examples of how bundled libraries are used and whether they make external calls, see the "JavaScript Libraries (Bundled)" section above.
+
+= Building from Source =
+
+To build the plugin from source:
+
+1. Ensure you have Node.js and npm installed
+2. Navigate to the plugin directory
+3. Run `npm install` to install dependencies
+4. Run `npm run prod` to build all assets for production, or use specific build commands:
+   - `npm run prod-frontend` - Build frontend form assets
+   - `npm run prod-components` - Build form builder components
+   - `npm run prod-general` - Build general admin assets
+   - `npm run prod-block` - Build Gutenberg block assets
+   - `npm run prod-form-entries` - Build form entries page assets
+   - `npm run prod-emails` - Build email settings assets
+
+For development with watch mode, use `npm run start` or the specific `start-*` commands.
+
+= Dependencies =
+
+All build dependencies and runtime dependencies are documented in the `package.json` file included with the plugin. Key dependencies include:
+
+- React 17.0.1 - UI framework for the form builder
+- Material-UI - Component library
+- MobX - State management
+- Webpack 4.44.1 - Build tool
+- Babel - JavaScript compiler
+
+A complete list of all dependencies (both development and production) can be found in the `package.json` file.
 
 == Installation ==
 = For automatic installation: =
@@ -149,11 +310,11 @@ The easiest and recommended way to install is to click on 'Plugins' then 'Add Ne
 
 = Who is Kali Forms for? =
 
-- Kali Forms is the perfect WordPress form plugin for businesses, web design agencies and basically anyone with a WordPress website. If you want to add a form to your WordPress website, Kali Forms is the must-use plugin.
+- Kali Forms is a WordPress form plugin suitable for businesses, web design agencies and anyone with a WordPress website. If you want to add a form to your WordPress website, Kali Forms provides a solid solution.
 
 = Do I need to be able to program to use Kali Forms? =
 
-- Kali Forms was built from the ground up to be the most user-friendly WordPress form plugin. You definetely do **not** need to know how to program to use it but if you are comfortable with custom CSS you can easily customize your form even further.
+- Kali Forms was built from the ground up to be user-friendly. You definetely do **not** need to know how to program to use it but if you are comfortable with custom CSS you can easily customize your form even further.
 
 = How can I access the full version of Kali Forms? =
 
@@ -171,6 +332,10 @@ The easiest and recommended way to install is to click on 'Plugins' then 'Add Ne
 
 - If you're a Kali Forms Pro user, [please reach out to us](https://kaliforms.com/contact-us/) - if you're using the free version of Kali Forms, feel free to use the [WordPress.org Support Forums here.](https://wordpress.org/support/plugin/kali-forms/)
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Contact Form builder with drag & drop - Kali Forms plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fb591-bcbc-4814-b57c-523ee0590c58). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 1. Form builder
 2. One Click Forms
@@ -181,6 +346,17 @@ The easiest and recommended way to install is to click on 'Plugins' then 'Add Ne
 7. Options presets
 
 == Changelog ==
+2.4.8
+- Form entries page was not working correctly
+
+2.4.7
+- Updated reaadme files
+- Changed text domain to match the slug
+- Removed certain features as requested by WordPress.org
+
+2.4.6
+- Added better handling for file upload fields in the form entries view and placeholders
+
 2.4.5
 - Form validation bug fixes
 

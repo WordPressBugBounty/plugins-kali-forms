@@ -17,7 +17,7 @@ jQuery(document).ready(() => {
 		document.execCommand('copy');
 		document.getSelection().removeAllRanges();
 		input.blur();
-		Snackbar.show({ text: __('Shortcode copied to clipboard', 'kaliforms') });
+		Snackbar.show({ text: __('Shortcode copied to clipboard', 'kali-forms') });
 	});
 
 	jQuery('.kaliforms-notice').on('click', '.notice-dismiss', e => {
@@ -48,7 +48,7 @@ jQuery(document).ready(() => {
 			dataType: 'json',
 			url: ajaxurl,
 			success: (data) => {
-				Snackbar.show({ text: __('Theme applied', 'kaliforms') });
+				Snackbar.show({ text: __('Theme applied', 'kali-forms') });
 			}
 		})
 	});

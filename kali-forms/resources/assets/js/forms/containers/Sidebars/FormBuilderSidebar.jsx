@@ -62,15 +62,15 @@ const FormBuilderSidebar = observer(props => {
 					textColor="primary"
 					onChange={toggle}
 				>
-					<Tab value="formFields" label={__('Form fields', 'kaliforms')} />
-					<Tab value="fieldProperties" label={__('Field properties', 'kaliforms')} />
+					<Tab value="formFields" label={__('Form fields', 'kali-forms')} />
+					<Tab value="fieldProperties" label={__('Field properties', 'kali-forms')} />
 				</SidebarTabs>
 			</React.Fragment>
 			<React.Fragment>
 				<If condition={store._UI_.dragDropHelper && store._UI_.activeTabInSidebar === 'formFields'}>
 					<Box m={2}>
 						<Typography variant={'body1'} style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-							<Icon className="icon-info" style={{ fontSize: 18, marginRight: 8 }} /> {__('Drag & Drop fields to the builder', 'kaliforms')}
+							<Icon className="icon-info" style={{ fontSize: 18, marginRight: 8 }} /> {__('Drag & Drop fields to the builder', 'kali-forms')}
 
 							<Icon className="icon-delete16" onClick={e => store._UI_.dragDropHelper = false} style={{ cursor: 'pointer', position: 'absolute', right: 5, top: 0 }} />
 						</Typography>

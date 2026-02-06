@@ -24,13 +24,13 @@ trait FileManager
 	public function run_checks()
 	{
 		if (empty($_FILES)) {
-			$this->display_error(esc_html__('There are no files', 'kaliforms'));
+			$this->display_error(esc_html__('There are no files', 'kali-forms'));
 		}
 		if (!isset($_POST['nonce'])) {
-			$this->display_error(esc_html__('Something went wrong!', 'kaliforms'));
+			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['nonce'])), 'kaliforms_nonce')) {
-			$this->display_error(esc_html__('Something went wrong!', 'kaliforms'));
+			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
 	}
 	/**
@@ -96,7 +96,7 @@ trait FileManager
 
 		if (!$obj['continue']) {
 			wp_die(
-				wp_json_encode(['errors' => esc_html__('Something went wrong', 'kaliforms')])
+				wp_json_encode(['errors' => esc_html__('Something went wrong', 'kali-forms')])
 			);
 		}
 
@@ -127,7 +127,7 @@ trait FileManager
 
 		if (!$obj['continue']) {
 			wp_die(
-				wp_json_encode(['errors' => esc_html__('Something went wrong', 'kaliforms')])
+				wp_json_encode(['errors' => esc_html__('Something went wrong', 'kali-forms')])
 			);
 		}
 	}
@@ -140,15 +140,15 @@ trait FileManager
 	public function delete_file()
 	{
 		if (!isset($_POST['nonce'])) {
-			$this->display_error(esc_html__('Something went wrong!', 'kaliforms'));
+			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['nonce'])), 'kaliforms_nonce')) {
-			$this->display_error(esc_html__('Something went wrong!', 'kaliforms'));
+			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
 
 		$_POST['id'] = absint(wp_unslash($_POST['id']));
 		if (get_post_type($_POST['id']) !== 'attachment') {
-			$this->display_error(esc_html__('Something went wrong!', 'kaliforms'));
+			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
 
 		$crons  = _get_cron_array();
@@ -172,13 +172,13 @@ trait FileManager
 			wp_update_post(
 				[
 					'ID'         => $_POST['id'],
-					'post_title' => esc_html__('Marked for deletion', 'kaliforms'),
+					'post_title' => esc_html__('Marked for deletion', 'kali-forms'),
 				]
 			);
 
 			wp_die($_POST['id']);
 		}
 
-		$this->display_error(esc_html__('Something went wrong!', 'kaliforms'));
+		$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 	}
 }

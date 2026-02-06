@@ -191,11 +191,11 @@ const Newsletter = observer(props => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Newsletter settings', 'kaliforms')} />
+				<SectionTitle title={__('Newsletter settings', 'kali-forms')} />
 				<If condition={!keysFound()}>
 					<Grid container direction="row" spacing={3}>
 						<Grid item xs={12}>
-							<Typography>{__('No api keys provided. Please check your settings.', 'kaliforms')}</Typography>
+							<Typography>{__('No api keys provided. Please check your settings.', 'kali-forms')}</Typography>
 						</Grid>
 					</Grid>
 				</If>
@@ -211,7 +211,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged(provider.id)}
 										/>
 									}
-									label={__('Enable ', 'kaliforms') + provider.label}
+									label={__('Enable ', 'kali-forms') + provider.label}
 								/>
 							</FormGroup>
 						</Grid>
@@ -232,10 +232,10 @@ const Newsletter = observer(props => {
 								<FormControl>
 									<InputLabel shrink>
 										<If condition={providerLists.type === 'list'}>
-											{__('List', 'kaliforms')}
+											{__('List', 'kali-forms')}
 										</If>
 										<If condition={providerLists.type === 'form'}>
-											{__('Form', 'kaliforms')}
+											{__('Form', 'kali-forms')}
 										</If>
 									</InputLabel>
 									<Select
@@ -255,7 +255,7 @@ const Newsletter = observer(props => {
 						</If>
 						<If condition={!providerLists.entities.length}>
 							<Grid item xs={12}>
-								<Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kaliforms')}</Typography>
+								<Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kali-forms')}</Typography>
 							</Grid>
 						</If>
 						<If condition={entitySelected() && providerFields.length}></If>
@@ -266,12 +266,12 @@ const Newsletter = observer(props => {
 					<Grid container direction="row" spacing={3}>
 						<Grid item xs={12}>
 							<Typography>
-								{__('Subscribe users to your newsletter only if a field has a certain value', 'kaliforms')}
+								{__('Subscribe users to your newsletter only if a field has a certain value', 'kali-forms')}
 							</Typography>
 						</Grid>
 						<Grid item xs={6}>
 							<FieldComponentSelect
-								label={__('User consent field', 'kaliforms')}
+								label={__('User consent field', 'kali-forms')}
 								selectedValue={store._NEWSLETTER_.fields.userConsent || ''}
 								field="userConsent"
 								onChange={fieldChanged}
@@ -280,7 +280,7 @@ const Newsletter = observer(props => {
 						<Grid item xs={6}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('User consent value', 'kaliforms')}
+									{__('User consent value', 'kali-forms')}
 								</InputLabel>
 								<If condition={typeof store._NEWSLETTER_.fields.userConsentFieldType !== 'undefined' && selectableTypes.includes(store._NEWSLETTER_.fields.userConsentFieldType)}>
 									<Select

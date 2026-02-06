@@ -58,16 +58,16 @@ const ActionConditionalLogic = (props) => {
 			<Grid container direction="row" spacing={4}>
 				<Grid item>
 					<Typography style={{ lineHeight: 2.1 }}>
-						{__('Process if', 'kaliforms')}
+						{__('Process if', 'kali-forms')}
 					</Typography>
 				</Grid>
 				<Grid item>
 					<TextField value={props.conditionalLogic} select onChange={e => changedCondition(e.target.value)}>
 						<MenuItem value="any">
-							{__('Any', 'kaliforms')}
+							{__('Any', 'kali-forms')}
 						</MenuItem>
 						<MenuItem value="all">
-							{__('All', 'kaliforms')}
+							{__('All', 'kali-forms')}
 						</MenuItem>
 					</TextField>
 				</Grid>
@@ -77,7 +77,7 @@ const ActionConditionalLogic = (props) => {
 					<Grid container direction="row" key={idx} spacing={4}>
 						<Grid item xs={3}>
 							<FieldComponentSelect
-								label={__('Form field', 'kaliforms')}
+								label={__('Form field', 'kali-forms')}
 								field={idx}
 								selectedValue={condition.formField}
 								onChange={selectChange} />
@@ -85,7 +85,7 @@ const ActionConditionalLogic = (props) => {
 						<Grid item xs={2}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('Field', 'kaliforms')}
+									{__('Field', 'kali-forms')}
 								</InputLabel>
 								<Select
 									multiple={false}
@@ -94,39 +94,39 @@ const ActionConditionalLogic = (props) => {
 									onChange={e => changeFieldCondition(idx, e.target.value)}
 									fullWidth={true}
 								>
-									<MenuItem value='is'>{__('Is', 'kaliforms')}</MenuItem>
-									<MenuItem value='not'>{__('Is not', 'kaliforms')}</MenuItem>
-									<MenuItem value='greater'>{__('Greater than', 'kaliforms')}</MenuItem>
-									<MenuItem value='less'>{__('Less than', 'kaliforms')}</MenuItem>
-									<MenuItem value='contains'>{__('Contains', 'kaliforms')}</MenuItem>
-									<MenuItem value='starts'>{__('Starts', 'kaliforms')}</MenuItem>
-									<MenuItem value='ends'>{__('Ends', 'kaliforms')}</MenuItem>
+									<MenuItem value='is'>{__('Is', 'kali-forms')}</MenuItem>
+									<MenuItem value='not'>{__('Is not', 'kali-forms')}</MenuItem>
+									<MenuItem value='greater'>{__('Greater than', 'kali-forms')}</MenuItem>
+									<MenuItem value='less'>{__('Less than', 'kali-forms')}</MenuItem>
+									<MenuItem value='contains'>{__('Contains', 'kali-forms')}</MenuItem>
+									<MenuItem value='starts'>{__('Starts', 'kali-forms')}</MenuItem>
+									<MenuItem value='ends'>{__('Ends', 'kali-forms')}</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
 						<Grid item xs={3}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('Value', 'kaliforms')}
+									{__('Value', 'kali-forms')}
 								</InputLabel>
 								<BootstrapInput
 									value={condition.value}
 									onChange={e => changedValue(idx, e.target.value)}
 									fullWidth={true}
 									variant="filled"
-									placeholder={__('HubSpot Action', 'kaliforms')}
+									placeholder={__('HubSpot Action', 'kali-forms')}
 								/>
 							</FormControl>
 						</Grid>
 						<Grid item xs={4} style={{ paddingTop: 42 }}>
 							<Button
-								aria-label={__('Add condition', 'kaliforms')}
+								aria-label={__('Add condition', 'kali-forms')}
 								variant="text"
 								onClick={() => addCondition()}
 							>
 								<Icon className="icon-add" />
 							</Button>
-							<Button aria-label={__('Remove condition', 'kaliforms')}
+							<Button aria-label={__('Remove condition', 'kali-forms')}
 								variant="text"
 								onClick={() => props.conditionalLogicConditions.length === 1 ? setDefaultCondition() : removeCondition(idx)}
 							>

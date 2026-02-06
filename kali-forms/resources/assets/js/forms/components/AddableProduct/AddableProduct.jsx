@@ -113,7 +113,7 @@ const AddableProduct = observer((props) => {
 			<Box flexDirection="row">
 				<Button className={classes.buttonFullWidth} style={{ marginTop: 10 }} onClick={() => createProduct()}>
 					<Icon className={'icon-add-new'} />
-					{__('Add product', 'kaliforms')}
+					{__('Add product', 'kali-forms')}
 				</Button>
 			</Box>
 		</React.Fragment>

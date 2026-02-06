@@ -7,7 +7,7 @@ export default function GSheetTree(props) {
 	const [loading, setLoading] = useState(false);
 	const [treeValue, setTreeValue] = useState('new');
 	const [treeData, setTreeData] = useState([
-		{ pId: 0, value: 'new', title: __('New file', 'kaliforms'), isLeaf: true },
+		{ pId: 0, value: 'new', title: __('New file', 'kali-forms'), isLeaf: true },
 	])
 
 	const treeChange = (value, label, extra) => {
@@ -54,7 +54,7 @@ export default function GSheetTree(props) {
 			setLoading(false)
 			setTreeValue('')
 			setTreeData([
-				{ id: 1, pId: 0, value: 'new', title: __('New file', 'kaliforms'), isLeaf: true },
+				{ id: 1, pId: 0, value: 'new', title: __('New file', 'kali-forms'), isLeaf: true },
 			])
 		}
 	}, [])
@@ -62,13 +62,13 @@ export default function GSheetTree(props) {
 	return (
 		<div>
 			<If condition={loading}>
-				<Typography.Paragraph>{__('... loading Google data', 'kaliforms')}</Typography.Paragraph>
+				<Typography.Paragraph>{__('... loading Google data', 'kali-forms')}</Typography.Paragraph>
 			</If>
 			<TreeSelect onChange={treeChange}
 				style={{ width: 350, textAlign: 'left' }}
 				value={treeValue}
 				dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-				placeholder={__('Please select', 'kaliforms')}
+				placeholder={__('Please select', 'kali-forms')}
 				treeData={treeData}
 			/>
 		</div>

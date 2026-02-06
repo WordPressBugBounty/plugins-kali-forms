@@ -48,7 +48,7 @@ const WebHooks = observer(props => {
 					<Grid item xs={12}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Add a name for your Webhook', 'kaliforms')}
+								{__('Add a name for your Webhook', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={newHookName}
@@ -57,7 +57,7 @@ const WebHooks = observer(props => {
 								endAdornment={(
 									<Box className={classes.createButton}
 										onClick={() => addWebHook()}>
-										{__('Create', 'kaliforms')}
+										{__('Create', 'kali-forms')}
 									</Box>
 								)}
 							/>

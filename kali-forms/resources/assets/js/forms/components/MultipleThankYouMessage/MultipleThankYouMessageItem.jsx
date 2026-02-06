@@ -60,7 +60,7 @@ const MultipleThankYouMessageItem = props => {
 			<Box className={classes.root}>
 				<Box className={classes.label}>
 					<If condition={props.default}>
-						{__('Default thank you message', 'kaliforms')}
+						{__('Default thank you message', 'kali-forms')}
 					</If>
 					<If condition={!props.default}>
 						{props.message.name}
@@ -69,12 +69,12 @@ const MultipleThankYouMessageItem = props => {
 				<Box className={classes.actionBox}>
 					<Box onClick={() => { openEditor() }}>
 						<Icon className={'icon-edit-2'} />
-						{__('Edit', 'kaliforms')}
+						{__('Edit', 'kali-forms')}
 					</Box>
 					<If condition={!props.default}>
 						<Box onClick={() => store._FORM_INFO_.removeThankYouMessage(props.messageIndex)}>
 							<Icon className={'icon-remove'} />
-							{__('Delete', 'kaliforms')}
+							{__('Delete', 'kali-forms')}
 						</Box>
 					</If>
 				</Box>

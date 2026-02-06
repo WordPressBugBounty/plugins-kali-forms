@@ -102,7 +102,7 @@ class License_Checker
 				"id" => "license_checker",
 				"type" => "notice notice-info",
 				"message" => sprintf(
-					__("You have not activated your Kali Forms Pro license. Please %sactivate it%s to receive updates and support.", 'kaliforms'),
+					__("You have not activated your Kali Forms Pro license. Please %sactivate it%s to receive updates and support.", 'kali-forms'),
 
 					'<a class="link" href="' . admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-store-auth') . '">',
 					'</a>'
@@ -116,7 +116,7 @@ class License_Checker
 				$notifications->add_notice([
 					"id" => "license_checker",
 					"type" => "notice notice-warning",
-					"message" => __('Kali Forms Pro addons have been deactivated.', 'kaliforms'),
+					"message" => __('Kali Forms Pro addons have been deactivated.', 'kali-forms'),
 					"dismissable" => true,
 				]);
 			}

@@ -49,11 +49,11 @@ const FormCalculator = observer((props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Calculator', 'kaliforms')} />
+				<SectionTitle title={__('Calculator', 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
 						<Typography variant="body2">
-							{__('Perform calculations through your form fields, you can use the field names and standard math operators in your equations. For example:', 'kaliforms')}
+							{__('Perform calculations through your form fields, you can use the field names and standard math operators in your equations. For example:', 'kali-forms')}
 						</Typography>
 						<Typography variant="body2">
 							<code>result = first_field + second_field</code>
@@ -61,7 +61,7 @@ const FormCalculator = observer((props) => {
 							<code>total = product * quantity</code>
 						</Typography>
 						<Typography variant="body2">
-							{__('You can access a list of math functions by pressing CTRL+SPACE, for example calculating the cube root or exponent of a number.', 'kaliforms')}
+							{__('You can access a list of math functions by pressing CTRL+SPACE, for example calculating the cube root or exponent of a number.', 'kali-forms')}
 						</Typography>
 						<br />
 						<Button onClick={() => {
@@ -70,7 +70,7 @@ const FormCalculator = observer((props) => {
 							store._UI_.setBottomDrawer(true)
 						}}>
 							<Icon className={'icon-add-new'} style={{ marginRight: 8 }} />
-							{__('Use our Math Helper', 'kaliforms')}
+							{__('Use our Math Helper', 'kali-forms')}
 						</Button>
 					</Grid>
 					<Grid item xs={12}>

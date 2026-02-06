@@ -62,7 +62,7 @@ const OwnerSelection = (props) => {
 			<Grid item xs={6}>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Contact owner', 'kaliforms')}
+						{__('Contact owner', 'kali-forms')}
 					</InputLabel>
 					<Select
 						multiple={false}
@@ -71,23 +71,23 @@ const OwnerSelection = (props) => {
 						onChange={e => props.setContactOwnerOption(e.target.value)}
 					>
 						<MenuItem key="none" value="none">
-							{__('None', 'kaliforms')}
+							{__('None', 'kali-forms')}
 						</MenuItem>
 						<MenuItem key="select" value="select">
-							{__('Select Owner', 'kaliforms')}
+							{__('Select Owner', 'kali-forms')}
 						</MenuItem>
 						<MenuItem key="conditional" value="conditional">
-							{__('Conditional', 'kaliforms')}
+							{__('Conditional', 'kali-forms')}
 						</MenuItem>
 					</Select>
-					<FormHelperText>{__('Sets the owner of the contact in your HubSpot contact list', 'kaliforms')}</FormHelperText>
+					<FormHelperText>{__('Sets the owner of the contact in your HubSpot contact list', 'kali-forms')}</FormHelperText>
 				</FormControl>
 			</Grid>
 			<If condition={props.contactOwnerOption === 'select'}>
 				<Grid item xs={6}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Contact owner', 'kaliforms')}
+							{__('Contact owner', 'kali-forms')}
 						</InputLabel>
 						<Select
 							multiple={false}
@@ -95,7 +95,7 @@ const OwnerSelection = (props) => {
 							value={props.contactOwner}
 							onChange={e => props.setContactOwner(e.target.value)}
 						>
-							<MenuItem value="">{__('Assign owner', 'kaliforms')}</MenuItem>
+							<MenuItem value="">{__('Assign owner', 'kali-forms')}</MenuItem>
 							{KaliFormsHubSpot.contactOwners.map(owner => <MenuItem key={owner.ownerId} value={owner.ownerId}>{owner.firstName} {owner.lastName}</MenuItem>)}
 						</Select>
 					</FormControl>

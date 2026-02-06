@@ -1,7 +1,7 @@
 import React from 'react';
 
 import RenderEmpty from './../Misc/RenderEmpty';
-import { Image, Carousel, Tag } from 'antd';
+import { Image, Carousel, Tag, Button } from 'antd';
 
 import { createLinkMap } from './GetFrontendLink';
 import { calculateColumnsWidth } from './DynamicColumnsHelper';
@@ -57,7 +57,7 @@ const DataFormatter = (data) => {
 			})
 		}
 		columns.push({
-			title: __('Actions', 'kaliforms'),
+			title: __('Actions', 'kali-forms'),
 			key: 'actions',
 			dataIndex: 'actions',
 			fixed: 'right',
@@ -69,6 +69,8 @@ const DataFormatter = (data) => {
 
 	const getValue = (type, value) => {
 		let saneValue = '';
+		const isImageUrl = url => typeof url === 'string' && /\.(png|jpe?g|gif|bmp|webp|svg)$/i.test(url);
+		const openUrl = url => window.open(url, '_blank');
 
 		switch (type) {
 			case 'imageRadio':
@@ -78,11 +80,36 @@ const DataFormatter = (data) => {
 				saneValue = value ? (<Image width={100} src={value} />) : ''
 				break;
 			case 'fileUpload':
-				saneValue = (
-					<Carousel>
-						{value.urls.map((url, idx) => <Image key={'key-' + idx} width={125} src={url} />)}
-					</Carousel>
-				)
+				{
+					const urls = value?.urls || [];
+					const combined = value?.combined || [];
+					const allImages = urls.length > 0 && urls.every(isImageUrl);
+					console.log(urls);
+					if (allImages) {
+						saneValue = (
+							<Carousel>
+								{urls.map((url, idx) => <Image key={'key-' + idx} width={125} src={url} />)}
+							</Carousel>
+						)
+					} else {
+						const listItems = (combined.length ? combined : urls).map((el, idx) => {
+							const url = typeof el === 'string' ? el : el.url;
+							const title = typeof el === 'string' ? __('Download file', 'kali-forms') : el.title;
+
+							return url !== ''
+								? <li key={'uploaded-' + (el.id || idx)}><Button onClick={() => openUrl(url)}>{title}</Button></li>
+								: <li key={'uploaded-' + idx}>{__('No file uploaded', 'kali-forms')}</li>
+						});
+
+						saneValue = (
+							<React.Fragment>
+								<ul>
+									{listItems}
+								</ul>
+							</React.Fragment>
+						)
+					}
+				}
 				break;
 			case 'colorPicker':
 				saneValue = (

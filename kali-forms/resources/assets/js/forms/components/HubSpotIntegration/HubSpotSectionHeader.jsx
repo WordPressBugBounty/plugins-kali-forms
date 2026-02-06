@@ -12,7 +12,7 @@ const HubSpotSectionHeader = (props) => {
 					<Typography variant="h5">
 						<If condition={props.backButton}>
 							<IconButton
-								aria-label={__('Go back', 'kaliforms')}
+								aria-label={__('Go back', 'kali-forms')}
 								onClick={props.backButtonAction}
 								variant="contained"
 								color="secondary"

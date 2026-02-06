@@ -38,7 +38,7 @@ const MultipleThankYouMessageConditioner = observer(props => {
 			<Grid item xs={12}>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Condition name', 'kaliforms')}
+						{__('Condition name', 'kali-forms')}
 					</InputLabel>
 					<BootstrapInput
 						value={store._FORM_INFO_.conditionalThankYouMessage[props.editedCondition].name}
@@ -48,7 +48,7 @@ const MultipleThankYouMessageConditioner = observer(props => {
 			<Grid item xs={3}>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Condition field', 'kaliforms')}
+						{__('Condition field', 'kali-forms')}
 					</InputLabel>
 					<Select
 						multiple={false}
@@ -87,7 +87,7 @@ const MultipleThankYouMessageConditioner = observer(props => {
 			<Grid item xs={3}>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Is', 'kaliforms')}
+						{__('Is', 'kali-forms')}
 					</InputLabel>
 					<Select
 						multiple={false}
@@ -97,16 +97,16 @@ const MultipleThankYouMessageConditioner = observer(props => {
 						fullWidth={true}
 					>
 						<MenuItem key="contains" value="contains">
-							{__('Contains', 'kaliforms')}
+							{__('Contains', 'kali-forms')}
 						</MenuItem>
 						<MenuItem key="equal" value="equal">
-							{__('Equal', 'kaliforms')}
+							{__('Equal', 'kali-forms')}
 						</MenuItem>
 						<MenuItem key="greater" value="greater">
-							{__('Greater', 'kaliforms')}
+							{__('Greater', 'kali-forms')}
 						</MenuItem>
 						<MenuItem key="less" value="less">
-							{__('Less', 'kaliforms')}
+							{__('Less', 'kali-forms')}
 						</MenuItem>
 					</Select>
 				</FormControl>
@@ -115,7 +115,7 @@ const MultipleThankYouMessageConditioner = observer(props => {
 				<Grid item xs={6}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Value', 'kaliforms')}
+							{__('Value', 'kali-forms')}
 						</InputLabel>
 						<Choose>
 							<When condition={choiceFields.includes(conditioner.type)}>

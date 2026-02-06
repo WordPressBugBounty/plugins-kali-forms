@@ -109,8 +109,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['gdpr-contact'] = [
-			'name'        => esc_html__('GDPR-Friendly contact form', 'kaliforms'),
-			'description' => esc_html__('A simple gdpr-friendly form meant to help you comunicate with your site users.', 'kaliforms'),
+			'name'        => esc_html__('GDPR-Friendly contact form', 'kali-forms'),
+			'description' => esc_html__('A simple gdpr-friendly form meant to help you comunicate with your site users.', 'kali-forms'),
 			'class'       => 'PredefinedForms\GDPR_Friendly_Contact_Form',
 			'pro'         => true,
 			'premium'     => true,
@@ -120,8 +120,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['appointment'] = [
-			'name'        => esc_html__('Appointment form', 'kaliforms'),
-			'description' => esc_html__('Use this as a starting point in building an appointment service on your site.', 'kaliforms'),
+			'name'        => esc_html__('Appointment form', 'kali-forms'),
+			'description' => esc_html__('Use this as a starting point in building an appointment service on your site.', 'kali-forms'),
 			'class'       => 'PredefinedForms\Appointment_Form',
 			'pro'         => true,
 			'premium'     => true,
@@ -131,8 +131,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['customerSatisfaction'] = [
-			'name'        => esc_html__('Customer feedback form', 'kaliforms'),
-			'description' => esc_html__('Collect feedback from customers and improve your services.', 'kaliforms'),
+			'name'        => esc_html__('Customer feedback form', 'kali-forms'),
+			'description' => esc_html__('Collect feedback from customers and improve your services.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Customer_Satisfaction_Form',
@@ -142,8 +142,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['artContest'] = [
-			'name'        => esc_html__('Art contest', 'kaliforms'),
-			'description' => esc_html__('This form will help you accept registrations for an art contest event.', 'kaliforms'),
+			'name'        => esc_html__('Art contest', 'kali-forms'),
+			'description' => esc_html__('This form will help you accept registrations for an art contest event.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Art_Contest_Form',
@@ -153,8 +153,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['jobApplication'] = [
-			'name'        => esc_html__('Job application', 'kaliforms'),
-			'description' => esc_html__('Collect resumes for the positions available in your company', 'kaliforms'),
+			'name'        => esc_html__('Job application', 'kali-forms'),
+			'description' => esc_html__('Collect resumes for the positions available in your company', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Job_Application_Form',
@@ -164,8 +164,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['gamingTournamentRegistration'] = [
-			'name'        => esc_html__('Gaming tournament registration', 'kaliforms'),
-			'description' => esc_html__('Allow ESL teams to join your tournament through this form.', 'kaliforms'),
+			'name'        => esc_html__('Gaming tournament registration', 'kali-forms'),
+			'description' => esc_html__('Allow ESL teams to join your tournament through this form.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Gaming_Tournament_Registration_Form',
@@ -175,8 +175,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['runningCalculators'] = [
-			'name'        => esc_html__('Running calculator form', 'kaliforms'),
-			'description' => esc_html__('Easily calculate pace/time/distance using our calculator.', 'kaliforms'),
+			'name'        => esc_html__('Running calculator form', 'kali-forms'),
+			'description' => esc_html__('Easily calculate pace/time/distance using our calculator.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Running_Calculators',
@@ -186,8 +186,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['donationForm'] = [
-			'name'        => esc_html__('Donation form', 'kaliforms'),
-			'description' => esc_html__('Create donation collect form.', 'kaliforms'),
+			'name'        => esc_html__('Donation form', 'kali-forms'),
+			'description' => esc_html__('Create donation collect form.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Donation_Form',
@@ -197,8 +197,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['requestAQuote'] = [
-			'name'        => esc_html__('Request quote form', 'kaliforms'),
-			'description' => esc_html__('A simple example of using the calculator to create a quote estimate and request.', 'kaliforms'),
+			'name'        => esc_html__('Request quote form', 'kali-forms'),
+			'description' => esc_html__('A simple example of using the calculator to create a quote estimate and request.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Request_A_Quote',
@@ -208,8 +208,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['reservationForm'] = [
-			'name'        => esc_html__('Reservation form', 'kaliforms'),
-			'description' => esc_html__('A form that can be used as to reserve rooms at your hotel.', 'kaliforms'),
+			'name'        => esc_html__('Reservation form', 'kali-forms'),
+			'description' => esc_html__('A form that can be used as to reserve rooms at your hotel.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Reservation_Form',
@@ -219,8 +219,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['gymMembershipApplication'] = [
-			'name'        => esc_html__('Gym membership form', 'kaliforms'),
-			'description' => esc_html__('A form that can collect information about your gym customers.', 'kaliforms'),
+			'name'        => esc_html__('Gym membership form', 'kali-forms'),
+			'description' => esc_html__('A form that can collect information about your gym customers.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Gym_Membership_Application',
@@ -230,8 +230,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['simpleBookingForm'] = [
-			'name'        => esc_html__('Simple booking form', 'kaliforms'),
-			'description' => esc_html__('Use our date picker to book certain dates in a calendar. Dates are disabled automatically based on previous submissions.', 'kaliforms'),
+			'name'        => esc_html__('Simple booking form', 'kali-forms'),
+			'description' => esc_html__('Use our date picker to book certain dates in a calendar. Dates are disabled automatically based on previous submissions.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Simple_Booking_Form',
@@ -241,8 +241,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['simpleBookingFormWithPayment'] = [
-			'name'        => esc_html__('Simple booking form with payment', 'kaliforms'),
-			'description' => esc_html__('Use our date picker to book certain dates in a calendar. Dates are disabled automatically based on previous submissions.', 'kaliforms'),
+			'name'        => esc_html__('Simple booking form with payment', 'kali-forms'),
+			'description' => esc_html__('Use our date picker to book certain dates in a calendar. Dates are disabled automatically based on previous submissions.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Simple_Booking_Form_With_Payment',
@@ -252,8 +252,8 @@ class Predefined_Forms
 		];
 
 		$this->forms['packageDeliveryRequestForm'] = [
-			'name'        => esc_html__('Package delivery request', 'kaliforms'),
-			'description' => esc_html__('A simple form to fill up some details to pick up a package from a certain location.', 'kaliforms'),
+			'name'        => esc_html__('Package delivery request', 'kali-forms'),
+			'description' => esc_html__('A simple form to fill up some details to pick up a package from a certain location.', 'kali-forms'),
 			'pro'         => true,
 			'premium'     => true,
 			'class'       => 'PredefinedForms\Package_Delivery_Request_Form',

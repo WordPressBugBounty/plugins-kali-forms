@@ -10,7 +10,7 @@ const FormCustomJs = observer((props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Custom JS', 'kaliforms')} />
+				<SectionTitle title={__('Custom JS', 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
 						<CodeEditor

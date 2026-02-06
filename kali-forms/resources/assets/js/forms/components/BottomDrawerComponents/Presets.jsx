@@ -137,9 +137,9 @@ const Presets = props => {
 		<React.Fragment>
 			<Grid container>
 				<Grid item xs={3}>
-					<Typography variant={'h3'}>{__('Presets', 'kaliforms')}</Typography>
+					<Typography variant={'h3'}>{__('Presets', 'kali-forms')}</Typography>
 					<p>
-						{__('Add an entire list of options to your field based on a pre-defined category.', 'kaliforms')}
+						{__('Add an entire list of options to your field based on a pre-defined category.', 'kali-forms')}
 					</p>
 				</Grid>
 				<Grid item xs={3}>
@@ -179,7 +179,7 @@ const Presets = props => {
 												onChange={e => selectAll(e, currentCategoryOptions)}
 											/>
 										}
-										label={__('Select all', 'kaliforms')}
+										label={__('Select all', 'kali-forms')}
 									/>
 								</li>
 							</If>
@@ -201,7 +201,7 @@ const Presets = props => {
 						</If>
 					</ul>
 					<If condition={!categoryHasSubcategory() && category !== ''}>
-						<Button onClick={e => updateField()} className={classes.importButton}>{__('Import Presets', 'kaliforms')}</Button>
+						<Button onClick={e => updateField()} className={classes.importButton}>{__('Import Presets', 'kali-forms')}</Button>
 					</If>
 				</Grid>
 				<If condition={categoryHasSubcategory()}>
@@ -218,7 +218,7 @@ const Presets = props => {
 												onChange={e => selectAll(e, currentDeepOptions)}
 											/>
 										}
-										label={__('Select all', 'kaliforms')}
+										label={__('Select all', 'kali-forms')}
 									/>
 								</li>
 							</If>
@@ -239,7 +239,7 @@ const Presets = props => {
 							))}
 						</ul>
 						<If condition={categoryHasSubcategory() && subCategory !== ''}>
-							<Button onClick={e => updateField()} className={classes.importButton}>{__('Import Presets', 'kaliforms')}</Button>
+							<Button onClick={e => updateField()} className={classes.importButton}>{__('Import Presets', 'kali-forms')}</Button>
 						</If>
 					</Grid>
 				</If>

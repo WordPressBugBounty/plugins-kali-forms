@@ -23,9 +23,7 @@ class After_Install_Page
 	/**
 	 * MainPage constructor.
 	 */
-	public function __construct()
-	{
-	}
+	public function __construct() {}
 	/**
 	 * Renders app
 	 */
@@ -57,10 +55,10 @@ class After_Install_Page
 	{
 		$str = '<div class="page-card header">';
 		$str .= '<img src="' . KALIFORMS_URL . 'assets/img/logo--dark.svg" />';
-		$str .= '<p>' . esc_html__('Meet Kali Forms. The powerful & user-friendly WordPress form plugin. Easily create powerful contact forms, payment forms, feedback forms and more for your website without the hassle.', 'kaliforms') . '</p>';
+		$str .= '<p>' . esc_html__('Meet Kali Forms. The powerful & user-friendly WordPress form plugin. Easily create powerful contact forms, payment forms, feedback forms and more for your website without the hassle.', 'kali-forms') . '</p>';
 		$str .= '<p><a href="' . admin_url() . 'post-new.php?post_type=kaliforms_forms
-" class="button button-primary">' . esc_html__('Create your first form', 'kaliforms') . '</a><a href="https://kaliforms.com/docs?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button
-" class="button" target="_blank">' . esc_html__('Read the docs', 'kaliforms') . '</a></p>';
+" class="button button-primary">' . esc_html__('Create your first form', 'kali-forms') . '</a><a href="https://kaliforms.com/docs?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button
+" class="button" target="_blank">' . esc_html__('Read the docs', 'kali-forms') . '</a></p>';
 		$str .= '</div>';
 
 		return $str;
@@ -69,10 +67,10 @@ class After_Install_Page
 	public function generate_footer()
 	{
 		$str = '<div class="page-card footer">';
-		$str .= '<p>' . vsprintf(esc_html__('If you have any questions about Kali Forms, what features are available or how to get started – feel free to get in touch with us using the form from our %1$sContact Page%2$s.', 'kaliforms'), ['<a href="https://www.kaliforms.com/contact-us?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button" target="_blank">', '</a>']) . '</p>';
+		$str .= '<p>' . vsprintf(esc_html__('If you have any questions about Kali Forms, what features are available or how to get started – feel free to get in touch with us using the form from our %1$sContact Page%2$s.', 'kali-forms'), ['<a href="https://www.kaliforms.com/contact-us?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button" target="_blank">', '</a>']) . '</p>';
 		$str .= '<p style="text-align:center"><a href="' . admin_url() . 'post-new.php?post_type=kaliforms_forms
-" class="button button-primary">' . esc_html__('Create your first form', 'kaliforms') . '</a><a href="https://kaliforms.com/docs?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button
-" target="_blank" class="button">' . esc_html__('Upgrade to PRO', 'kaliforms') . '</a></p>';
+" class="button button-primary">' . esc_html__('Create your first form', 'kali-forms') . '</a><a href="https://kaliforms.com/docs?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button
+" target="_blank" class="button">' . esc_html__('Upgrade to PRO', 'kali-forms') . '</a></p>';
 		$str .= '</div>';
 		return $str;
 	}
@@ -81,57 +79,57 @@ class After_Install_Page
 	{
 		$features = [
 			[
-				'title' => esc_html__('Field sets', 'kaliforms'),
-				'lite' => esc_html__('Basic', 'kaliforms'),
-				'pro' => esc_html__('Basic + Advanced', 'kaliforms'),
+				'title' => esc_html__('Field sets', 'kali-forms'),
+				'lite' => esc_html__('Basic', 'kali-forms'),
+				'pro' => esc_html__('Basic + Advanced', 'kali-forms'),
 			],
 			[
-				'title' => esc_html__('Multi-Page forms', 'kaliforms'),
-				'lite' => esc_html__('✗', 'kaliforms'),
-				'pro' => esc_html__('✓', 'kaliforms'),
+				'title' => esc_html__('Multi-Page forms', 'kali-forms'),
+				'lite' => esc_html__('✗', 'kali-forms'),
+				'pro' => esc_html__('✓', 'kali-forms'),
 			],
 			[
-				'title' => esc_html__('Number of fields', 'kaliforms'),
-				'lite' => esc_html__('Unlimited', 'kaliforms'),
-				'pro' => esc_html__('Unlimited', 'kaliforms'),
+				'title' => esc_html__('Number of fields', 'kali-forms'),
+				'lite' => esc_html__('Unlimited', 'kali-forms'),
+				'pro' => esc_html__('Unlimited', 'kali-forms'),
 			],
 			[
-				'title' => esc_html__('Supported sites', 'kaliforms'),
-				'lite' => esc_html__('1 Site', 'kaliforms'),
-				'pro' => esc_html__('Multiple Sites', 'kaliforms'),
+				'title' => esc_html__('Supported sites', 'kali-forms'),
+				'lite' => esc_html__('1 Site', 'kali-forms'),
+				'pro' => esc_html__('Multiple Sites', 'kali-forms'),
 			],
 			[
-				'title' => esc_html__('Anti spam', 'kaliforms'),
-				'lite' => esc_html__('✓', 'kaliforms'),
-				'pro' => esc_html__('✓', 'kaliforms'),
+				'title' => esc_html__('Anti spam', 'kali-forms'),
+				'lite' => esc_html__('✓', 'kali-forms'),
+				'pro' => esc_html__('✓', 'kali-forms'),
 			],
 			[
-				'title' => esc_html__('Submission handling', 'kaliforms'),
-				'lite' => esc_html__('✗', 'kaliforms'),
-				'pro' => esc_html__('✓', 'kaliforms'),
-				'tooltip' => esc_html__('Store submission data into your website database for future references.', 'kaliforms'),
+				'title' => esc_html__('Submission handling', 'kali-forms'),
+				'lite' => esc_html__('✗', 'kali-forms'),
+				'pro' => esc_html__('✓', 'kali-forms'),
+				'tooltip' => esc_html__('Store submission data into your website database for future references.', 'kali-forms'),
 			],
 			[
-				'title' => esc_html__('Conditional logic', 'kaliforms'),
-				'lite' => esc_html__('✗', 'kaliforms'),
-				'pro' => esc_html__('✓', 'kaliforms'),
-				'tooltip' => esc_html__('Setup conditional statements that will allow you to hide certain fields until the correct selections are made.', 'kaliforms'),
+				'title' => esc_html__('Conditional logic', 'kali-forms'),
+				'lite' => esc_html__('✗', 'kali-forms'),
+				'pro' => esc_html__('✓', 'kali-forms'),
+				'tooltip' => esc_html__('Setup conditional statements that will allow you to hide certain fields until the correct selections are made.', 'kali-forms'),
 			],
 			[
-				'title' => esc_html__('Custom scripting', 'kaliforms'),
-				'lite' => esc_html__('✗', 'kaliforms'),
-				'pro' => esc_html__('✓', 'kaliforms'),
-				'tooltip' => esc_html__('Gain more control over how your form looks and performs using the custom scripting areas', 'kaliforms'),
+				'title' => esc_html__('Custom scripting', 'kali-forms'),
+				'lite' => esc_html__('✗', 'kali-forms'),
+				'pro' => esc_html__('✓', 'kali-forms'),
+				'tooltip' => esc_html__('Gain more control over how your form looks and performs using the custom scripting areas', 'kali-forms'),
 			],
 		];
 
 		$str = '<div class="page-card pro-vs-lite">';
-		$str .= '<h2>' . esc_html__('Upgrade to PRO', 'kaliforms') . '</h2>';
+		$str .= '<h2>' . esc_html__('Upgrade to PRO', 'kali-forms') . '</h2>';
 		$str .= '<div class="pricing-table">';
 		$str .= '<div class="pricing-table__row">';
 		$str .= '<span class="pricing-table__cell"></span>';
-		$str .= '<span class="pricing-table__cell">' . esc_html__('Paid plans', 'kaliforms') . '</span>';
-		$str .= '<span class="pricing-table__cell">' . esc_html__('Free plans', 'kaliforms') . '</span>';
+		$str .= '<span class="pricing-table__cell">' . esc_html__('Paid plans', 'kali-forms') . '</span>';
+		$str .= '<span class="pricing-table__cell">' . esc_html__('Free plans', 'kali-forms') . '</span>';
 		$str .= '</div>';
 
 		foreach ($features as $feature) {
@@ -152,7 +150,7 @@ class After_Install_Page
 			$str .= '</div>';
 		}
 		$str .= '</div>';
-		$str .= '<div class="row justify-center"> <p> <a href="https://kaliforms.com/pricing?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button" class="button button-primary" target="_blank">' . esc_html__('Upgrade to PRO', 'kaliforms') . '</a></p></div>';
+		$str .= '<div class="row justify-center"> <p> <a href="https://kaliforms.com/pricing?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button" class="button button-primary" target="_blank">' . esc_html__('Upgrade to PRO', 'kali-forms') . '</a></p></div>';
 
 		$str .= '</div>';
 		return $str;
@@ -163,55 +161,55 @@ class After_Install_Page
 		$features = [
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/multi-page-forms-white.svg',
-				'title' => esc_html__('Multi-page Forms', 'kaliforms'),
-				'text' => esc_html__('Break long forms across multiple pages to encourage form completion.', 'kaliforms'),
+				'title' => esc_html__('Multi-page Forms', 'kali-forms'),
+				'text' => esc_html__('Break long forms across multiple pages to encourage form completion.', 'kali-forms'),
 				'pro' => true,
 			],
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/form-templates.svg',
-				'title' => esc_html__('Predesigned Templates', 'kaliforms'),
-				'text' => esc_html__('Save time by importing any available Kali Forms templates as a starting point.', 'kaliforms'),
+				'title' => esc_html__('Predesigned Templates', 'kali-forms'),
+				'text' => esc_html__('Save time by importing any available Kali Forms templates as a starting point.', 'kali-forms'),
 				'pro' => true,
 			],
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/no-coding-required.svg',
-				'title' => esc_html__('No Coding Required', 'kaliforms'),
-				'text' => esc_html__('Build the form you need with in minutes with our drag and drop builder.', 'kaliforms'),
+				'title' => esc_html__('No Coding Required', 'kali-forms'),
+				'text' => esc_html__('Build the form you need with in minutes with our drag and drop builder.', 'kali-forms'),
 				'pro' => false,
 			],
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/all-the-fields.svg',
-				'title' => esc_html__('All the fields you need', 'kaliforms'),
-				'text' => esc_html__('Kali Forms provides a large variety of form fields that can be used to built-up your forms.', 'kaliforms'),
+				'title' => esc_html__('All the fields you need', 'kali-forms'),
+				'text' => esc_html__('Kali Forms provides a large variety of form fields that can be used to built-up your forms.', 'kali-forms'),
 				'pro' => true,
 			],
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/email-notifications.svg',
-				'title' => esc_html__('Email notifications', 'kaliforms'),
-				'text' => esc_html__('Each form submission can trigger a notification via email for both submitting users and admins.', 'kaliforms'),
+				'title' => esc_html__('Email notifications', 'kali-forms'),
+				'text' => esc_html__('Each form submission can trigger a notification via email for both submitting users and admins.', 'kali-forms'),
 				'pro' => false,
 			],
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/no-coding-required.svg',
-				'title' => esc_html__('Conditional Logic', 'kaliforms'),
-				'text' => esc_html__('Easily create advanced WordPress forms using Kali Forms smart conditional logic.', 'kaliforms'),
+				'title' => esc_html__('Conditional Logic', 'kali-forms'),
+				'text' => esc_html__('Easily create advanced WordPress forms using Kali Forms smart conditional logic.', 'kali-forms'),
 				'pro' => true,
 			],
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/easy-file-uploads.svg',
-				'title' => esc_html__('Easy File Uploads', 'kaliforms'),
-				'text' => esc_html__('Want people to submit documents or photos? Easy. Just add file upload fields to forms.', 'kaliforms'),
+				'title' => esc_html__('Easy File Uploads', 'kali-forms'),
+				'text' => esc_html__('Want people to submit documents or photos? Easy. Just add file upload fields to forms.', 'kali-forms'),
 				'pro' => false,
 			],
 			[
 				'icon' => KALIFORMS_URL . 'assets/img/goodbye-spam.svg',
-				'title' => esc_html__('Say Goodbye to Form Span', 'kaliforms'),
-				'text' => esc_html__('Use our built-in reCAPTCHA integration to protect your forms from spam.', 'kaliforms'),
+				'title' => esc_html__('Say Goodbye to Form Span', 'kali-forms'),
+				'text' => esc_html__('Use our built-in reCAPTCHA integration to protect your forms from spam.', 'kali-forms'),
 				'pro' => false,
 			],
 		];
 		$str = '<div class="page-card features">';
-		$str .= '<h2>' . esc_html__('Kali Forms Features', 'kaliforms') . '</h2>';
+		$str .= '<h2>' . esc_html__('Kali Forms Features', 'kali-forms') . '</h2>';
 		$str .= '<div class="row">';
 		foreach ($features as $feature) {
 			$pro = $feature['pro'] ? '<span class="pro-badge">PRO</span>' : '';
@@ -226,7 +224,7 @@ class After_Install_Page
 			$str .= '</div>';
 		}
 		$str .= '</div>';
-		$str .= '<div class="row justify-center"> <p> <a href="https://kaliforms.com?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button"  target="_blank" class="button">' . esc_html__('Read More', 'kaliforms') . '</a></p></div>';
+		$str .= '<div class="row justify-center"> <p> <a href="https://kaliforms.com?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button"  target="_blank" class="button">' . esc_html__('Read More', 'kali-forms') . '</a></p></div>';
 		$str .= '</div>';
 		return $str;
 	}

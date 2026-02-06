@@ -11,19 +11,19 @@ export default function ExportFormatting() {
 	const [dataSource, setDataSource] = useState([]);
 	const columns = [
 		{
-			title: __('Sort', 'kaliforms'),
+			title: __('Sort', 'kali-forms'),
 			dataIndex: 'sort',
 			width: 30,
 			className: 'drag-visible',
 			render: () => <DragHandle />,
 		},
 		{
-			title: __('Field', 'kaliforms'),
+			title: __('Field', 'kali-forms'),
 			dataIndex: 'field',
 			className: 'drag-visible',
 		},
 		{
-			title: __('Column name (in the generated file)', 'kaliforms'),
+			title: __('Column name (in the generated file)', 'kali-forms'),
 			dataIndex: 'newName',
 			render: (text, record, index) => <EditableCell record={record} index={index} text={text} />
 		}

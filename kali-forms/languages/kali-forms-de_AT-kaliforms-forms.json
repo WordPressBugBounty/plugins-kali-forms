@@ -1,0 +1,183 @@
+{
+	"translation-revision-date": "YEAR-MO-DA HO:MI+ZONE",
+	"generator": "WP-CLI\/2.5.0-alpha",
+	"source": "resources\/assets\/js\/forms\/utils\/mathFormulas.js",
+	"domain": "messages",
+	"locale_data": {
+		"messages": {
+			"": {
+				"domain": "messages",
+				"lang": "en",
+				"plural-forms": "nplurals=2; plural=(n != 1);"
+			},
+			"Sum of selected fields": [
+				""
+			],
+			"Subtract two fields": [
+				""
+			],
+			"Divide two fields": [
+				""
+			],
+			"Multiply selected fields": [
+				""
+			],
+			"Arithmetic average of fields": [
+				""
+			],
+			"BMI Formula (imperial)": [
+				""
+			],
+			"Weight": [
+				""
+			],
+			"Height": [
+				""
+			],
+			"BMI Formula (metric)": [
+				""
+			],
+			"Minutes to seconds": [
+				""
+			],
+			"Seconds to minutes": [
+				""
+			],
+			"Seconds to hours": [
+				""
+			],
+			"Minutes to hours": [
+				""
+			],
+			"Hour:Minute:Seconds to seconds": [
+				""
+			],
+			"Hours": [
+				""
+			],
+			"Minutes": [
+				""
+			],
+			"Seconds": [
+				""
+			],
+			"Speed": [
+				""
+			],
+			"Distance": [
+				""
+			],
+			"Time": [
+				""
+			],
+			"Running pace": [
+				""
+			],
+			"Running time": [
+				""
+			],
+			"Running distance": [
+				""
+			],
+			"Day difference between dates": [
+				""
+			],
+			"Start date": [
+				""
+			],
+			"End date": [
+				""
+			],
+			"General": [
+				""
+			],
+			"Payments": [
+				""
+			],
+			"Conditional logic": [
+				""
+			],
+			"Calculator": [
+				""
+			],
+			"Custom CSS": [
+				""
+			],
+			"Custom JS": [
+				""
+			],
+			"Form styling": [
+				""
+			],
+			"User registration": [
+				""
+			],
+			"Spam protection": [
+				""
+			],
+			"Stripe settings": [
+				""
+			],
+			"Web Hooks": [
+				""
+			],
+			"Custom PHP": [
+				""
+			],
+			"Newsletter": [
+				""
+			],
+			"Slack": [
+				""
+			],
+			"HubSpot": [
+				""
+			],
+			"Google sheets": [
+				""
+			],
+			"Shortcode copied to clipboard": [
+				""
+			],
+			"Theme applied": [
+				""
+			],
+			"What was the dificult part ?": [
+				""
+			],
+			"What can we describe more ?": [
+				""
+			],
+			"How could we improve ?": [
+				""
+			],
+			"Can you mention it ?": [
+				""
+			],
+			"With what plugin or theme is incompatible ?": [
+				""
+			],
+			"Please specify": [
+				""
+			],
+			"Log will appear after page refresh if this is checked": [
+				""
+			],
+			"Kali Forms Block (BETA)": [
+				""
+			],
+			"Add a form to your page using this block": [
+				""
+			],
+			"Back": [
+				""
+			],
+			"Next": [
+				""
+			],
+			"Drag & drop": [
+				""
+			]
+		}
+	}
+}

@@ -69,19 +69,19 @@ const WebHookItem = observer(props => {
 								</Tooltip>
 							</If>
 						</If>
-						{__('Test', 'kaliforms')}
+						{__('Test', 'kali-forms')}
 					</Box>
 					<Box onClick={() => setEditingContainer()}>
 						<Icon className={'icon-edit-2'} />
-						{__('Edit', 'kaliforms')}
+						{__('Edit', 'kali-forms')}
 					</Box>
 					<Box onClick={duplicateHook}>
 						<Icon className={'icon-copy'} />
-						{__('Duplicate', 'kaliforms')}
+						{__('Duplicate', 'kali-forms')}
 					</Box>
 					<Box onClick={removeHook}>
 						<Icon className={'icon-remove'} />
-						{__('Delete', 'kaliforms')}
+						{__('Delete', 'kali-forms')}
 					</Box>
 				</Box>
 			</Box>

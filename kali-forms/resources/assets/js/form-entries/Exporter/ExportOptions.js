@@ -126,7 +126,7 @@ export default function ExportOptions() {
 	return (
 		<div>
 			<Typography.Title level={4} style={{ textAlign: 'center', marginBottom: 24 }}>
-				{__('Select which fields you want to export', 'kaliforms')}
+				{__('Select which fields you want to export', 'kali-forms')}
 			</Typography.Title>
 			<Transfer
 				style={{ justifyContent: 'center' }}
@@ -144,27 +144,27 @@ export default function ExportOptions() {
 				style={{ textAlign: 'center' }}
 			>
 				<Typography.Title level={4} style={{ textAlign: 'center', marginTop: 24, marginBottom: 24 }}>
-					{__('Do you wish to export from a certain range?', 'kaliforms')}
+					{__('Do you wish to export from a certain range?', 'kali-forms')}
 				</Typography.Title>
 				<DatePicker.RangePicker name="dateFilter" format={'DD-MM-YYYY'} style={{ width: 350 }} onChange={val => valuesChanged('dateFilter', val)} />
 				<Typography.Title level={4} style={{ textAlign: 'center', marginTop: 24, marginBottom: 24 }}>
-					{__('Exported file type', 'kaliforms')}
+					{__('Exported file type', 'kali-forms')}
 				</Typography.Title>
 				<Select name={'fileFormat'} defaultValue={exportOptions.fileFormat} style={{ width: 350, textAlign: 'left' }} onChange={val => valuesChanged('fileFormat', val)}>
-					<Select.Option value="csv">{__('CSV', 'kaliforms')}</Select.Option>
-					<Select.Option value="xls">{__('Microsoft Excel™', 'kaliforms')}</Select.Option>
-					<Select.Option value="xlsx">{__('Microsoft Excel™ 2007', 'kaliforms')}</Select.Option>
+					<Select.Option value="csv">{__('CSV', 'kali-forms')}</Select.Option>
+					<Select.Option value="xls">{__('Microsoft Excel™', 'kali-forms')}</Select.Option>
+					<Select.Option value="xlsx">{__('Microsoft Excel™ 2007', 'kali-forms')}</Select.Option>
 					<Select.Option disabled={appProps.plugins.googleSheets ? false : true} value="gsheet">
-						{__('Google sheet', 'kaliforms')}
+						{__('Google sheet', 'kali-forms')}
 						<If condition={!appProps.plugins.googleSheets}>
-							{__(' (requires the google sheets plugin)', 'kaliforms')}
+							{__(' (requires the google sheets plugin)', 'kali-forms')}
 						</If>
 					</Select.Option>
 				</Select>
 
 				<If condition={exportOptions.fileFormat === 'gsheet'}>
 					<Typography.Title level={4} style={{ textAlign: 'center', marginTop: 24, marginBottom: 24 }}>
-						{__('Google sheets export options', 'kaliforms')}
+						{__('Google sheets export options', 'kali-forms')}
 					</Typography.Title>
 					<GSheetTree onChange={gSheetChanged} />
 				</If>

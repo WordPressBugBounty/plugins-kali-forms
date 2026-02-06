@@ -49,7 +49,7 @@ class Edit extends Component {
 	componentDidUpdate(newVal, oldVal) {
 		if (this.props.forms !== null && this.props.forms.length && oldVal.forms.length !== this.props.forms.length) {
 			const formWithFields = [];
-			const formArr = [{ value: 0, label: __('Please select a form', 'kaliforms') }];
+			const formArr = [{ value: 0, label: __('Please select a form', 'kali-forms') }];
 			this.props.forms.map(e => {
 				formArr.push({ value: e.id, label: e.title.rendered })
 				formWithFields.push({ id: e.id, fields: JSON.parse(e.meta.kaliforms_field_components), grid: JSON.parse(e.meta.kaliforms_grid) })
@@ -159,7 +159,7 @@ class Edit extends Component {
 		if (this.props.forms && this.props.forms.length === 0) {
 			return __(
 				'No forms available!',
-				'kaliforms'
+				'kali-forms'
 			);
 		}
 
@@ -169,16 +169,16 @@ class Edit extends Component {
 					<p>{
 						__(
 							'Select a form created through Kali Forms in the sidebar!',
-							'kaliforms'
+							'kali-forms'
 						)
 					}
 					</p>
 					<InspectorControls>
-						<PanelBody title={__('Form selection', 'kaliforms')}>
+						<PanelBody title={__('Form selection', 'kali-forms')}>
 							<SelectControl
 								label={__(
 									'Select a form created through Kali!',
-									'kaliforms'
+									'kali-forms'
 								)}
 								value={this.props.attributes.form}
 								options={this.state.formArr}
@@ -193,11 +193,11 @@ class Edit extends Component {
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={__('Form selection', 'kaliforms')}>
+					<PanelBody title={__('Form selection', 'kali-forms')}>
 						<SelectControl
 							label={__(
 								'Select a form created through Kali!',
-								'kaliforms'
+								'kali-forms'
 							)}
 							value={this.props.attributes.form}
 							options={this.state.formArr}

@@ -48,7 +48,7 @@ class Form_Fields
 		$fields = [
 			[
 				'id'     => 'standard',
-				'label'  => esc_html__('Standard fields', 'kaliforms'),
+				'label'  => esc_html__('Standard fields', 'kali-forms'),
 				'fields' => [
 					$this->textbox(),
 					$this->url(),
@@ -66,7 +66,7 @@ class Form_Fields
 			],
 			[
 				'id'     => 'advanced',
-				'label'  => esc_html__('Advanced', 'kaliforms'),
+				'label'  => esc_html__('Advanced', 'kali-forms'),
 				'fields' => [
 					// $this->date_time_picker(),
 					$this->g_recaptcha(),
@@ -77,7 +77,7 @@ class Form_Fields
 			],
 			[
 				'id'     => 'payments',
-				'label'  => esc_html__('Payments', 'kaliforms'),
+				'label'  => esc_html__('Payments', 'kali-forms'),
 				'fields' => [
 					$this->product_field(),
 					$this->donation_field(),
@@ -86,7 +86,7 @@ class Form_Fields
 			],
 			[
 				'id'     => 'buttons',
-				'label'  => esc_html__('Buttons', 'kaliforms'),
+				'label'  => esc_html__('Buttons', 'kali-forms'),
 				'fields' => [
 					$this->button(),
 					$this->submit_button(),
@@ -107,33 +107,33 @@ class Form_Fields
 	public function address()
 	{
 		return new BuilderFormFields\Collection([
-			'label'  => esc_html__('Address', 'kaliforms'),
+			'label'  => esc_html__('Address', 'kali-forms'),
 			'icon'   => 'icon-address',
 			'fields' => [
 				[
 					'field'  => new BuilderFormFields\TextBox(
 						[
 							'type'        => [
-								'label'   => esc_html__('Field type', 'kaliforms'),
+								'label'   => esc_html__('Field type', 'kali-forms'),
 								'type'    => 'select',
 								'value'   => 'text',
 								'choices' => ['text', 'number'],
 								'group'   => 'advanced',
 							],
 							'placeholder' => [
-								'label' => esc_html__('Field placeholder', 'kaliforms'),
+								'label' => esc_html__('Field placeholder', 'kali-forms'),
 								'type'  => 'textbox',
 								'value' => '',
 								'group' => 'general',
 							],
 							'required'    => [
-								'label' => esc_html__('Required', 'kaliforms'),
+								'label' => esc_html__('Required', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'general',
 							],
 							'readonly'    => [
-								'label' => esc_html__('Readonly', 'kaliforms'),
+								'label' => esc_html__('Readonly', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'advanced',
@@ -143,7 +143,7 @@ class Form_Fields
 					'values' => [
 						'id'      => 'street',
 						'name'    => 'street',
-						'caption' => esc_html__('Address line 1', 'kaliforms'),
+						'caption' => esc_html__('Address line 1', 'kali-forms'),
 					],
 					'grid'   => ['row' => 0, 'w' => 12],
 				],
@@ -151,26 +151,26 @@ class Form_Fields
 					'field'  => new BuilderFormFields\TextBox(
 						[
 							'type'        => [
-								'label'   => esc_html__('Field type', 'kaliforms'),
+								'label'   => esc_html__('Field type', 'kali-forms'),
 								'type'    => 'select',
 								'value'   => 'text',
 								'choices' => ['text', 'number'],
 								'group'   => 'advanced',
 							],
 							'placeholder' => [
-								'label' => esc_html__('Field placeholder', 'kaliforms'),
+								'label' => esc_html__('Field placeholder', 'kali-forms'),
 								'type'  => 'textbox',
 								'value' => '',
 								'group' => 'general',
 							],
 							'required'    => [
-								'label' => esc_html__('Required', 'kaliforms'),
+								'label' => esc_html__('Required', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'general',
 							],
 							'readonly'    => [
-								'label' => esc_html__('Readonly', 'kaliforms'),
+								'label' => esc_html__('Readonly', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'advanced',
@@ -180,7 +180,7 @@ class Form_Fields
 					'values' => [
 						'id'      => 'street1',
 						'name'    => 'street1',
-						'caption' => esc_html__('Address line 2', 'kaliforms'),
+						'caption' => esc_html__('Address line 2', 'kali-forms'),
 					],
 					'grid'   => ['row' => 1, 'w' => 12],
 				],
@@ -188,26 +188,26 @@ class Form_Fields
 					'field'  => new BuilderFormFields\TextBox(
 						[
 							'type'        => [
-								'label'   => esc_html__('Field type', 'kaliforms'),
+								'label'   => esc_html__('Field type', 'kali-forms'),
 								'type'    => 'select',
 								'value'   => 'text',
 								'choices' => ['text', 'number'],
 								'group'   => 'advanced',
 							],
 							'placeholder' => [
-								'label' => esc_html__('Field placeholder', 'kaliforms'),
+								'label' => esc_html__('Field placeholder', 'kali-forms'),
 								'type'  => 'textbox',
 								'value' => '',
 								'group' => 'general',
 							],
 							'required'    => [
-								'label' => esc_html__('Required', 'kaliforms'),
+								'label' => esc_html__('Required', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'general',
 							],
 							'readonly'    => [
-								'label' => esc_html__('Readonly', 'kaliforms'),
+								'label' => esc_html__('Readonly', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'advanced',
@@ -217,7 +217,7 @@ class Form_Fields
 					'values' => [
 						'id'      => 'city',
 						'name'    => 'city',
-						'caption' => esc_html__('City', 'kaliforms'),
+						'caption' => esc_html__('City', 'kali-forms'),
 					],
 					'grid'   => ['row' => 2, 'w' => 12],
 				],
@@ -225,26 +225,26 @@ class Form_Fields
 					'field'  => new BuilderFormFields\TextBox(
 						[
 							'type'        => [
-								'label'   => esc_html__('Field type', 'kaliforms'),
+								'label'   => esc_html__('Field type', 'kali-forms'),
 								'type'    => 'select',
 								'value'   => 'text',
 								'choices' => ['text', 'number'],
 								'group'   => 'advanced',
 							],
 							'placeholder' => [
-								'label' => esc_html__('Field placeholder', 'kaliforms'),
+								'label' => esc_html__('Field placeholder', 'kali-forms'),
 								'type'  => 'textbox',
 								'value' => '',
 								'group' => 'general',
 							],
 							'required'    => [
-								'label' => esc_html__('Required', 'kaliforms'),
+								'label' => esc_html__('Required', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'general',
 							],
 							'readonly'    => [
-								'label' => esc_html__('Readonly', 'kaliforms'),
+								'label' => esc_html__('Readonly', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'advanced',
@@ -254,7 +254,7 @@ class Form_Fields
 					'values' => [
 						'id'      => 'countries',
 						'name'    => 'countries',
-						'caption' => esc_html__('Country', 'kaliforms'),
+						'caption' => esc_html__('Country', 'kali-forms'),
 					],
 					'grid'   => ['row' => 4, 'w' => 12],
 				],
@@ -262,26 +262,26 @@ class Form_Fields
 					'field'  => new BuilderFormFields\TextBox(
 						[
 							'type'        => [
-								'label'   => esc_html__('Field type', 'kaliforms'),
+								'label'   => esc_html__('Field type', 'kali-forms'),
 								'type'    => 'select',
 								'value'   => 'text',
 								'choices' => ['text', 'number'],
 								'group'   => 'advanced',
 							],
 							'placeholder' => [
-								'label' => esc_html__('Field placeholder', 'kaliforms'),
+								'label' => esc_html__('Field placeholder', 'kali-forms'),
 								'type'  => 'textbox',
 								'value' => '',
 								'group' => 'general',
 							],
 							'required'    => [
-								'label' => esc_html__('Required', 'kaliforms'),
+								'label' => esc_html__('Required', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'general',
 							],
 							'readonly'    => [
-								'label' => esc_html__('Readonly', 'kaliforms'),
+								'label' => esc_html__('Readonly', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'advanced',
@@ -291,7 +291,7 @@ class Form_Fields
 					'values' => [
 						'id'      => 'zipCode',
 						'name'    => 'zipCode',
-						'caption' => esc_html__('Zip Code', 'kaliforms'),
+						'caption' => esc_html__('Zip Code', 'kali-forms'),
 					],
 					'grid'   => ['row' => 3, 'w' => 12],
 				],
@@ -299,31 +299,31 @@ class Form_Fields
 					'field'  => new BuilderFormFields\Dropdown(
 						[
 							'default'  => [
-								'label' => esc_html__('Default value', 'kaliforms'),
+								'label' => esc_html__('Default value', 'kali-forms'),
 								'type'  => 'hidden',
 								'value' => '',
 								'group' => 'addable',
 							],
 							'choices'  => [
-								'label'          => esc_html__('Choices', 'kaliforms'),
+								'label'          => esc_html__('Choices', 'kali-forms'),
 								'type'           => 'addableList',
 								'selectableType' => 'single',
 								'value'          => [
 									[
 										'value' => '',
-										'label' => esc_html__('Please select a country ...', 'kaliforms')
+										'label' => esc_html__('Please select a country ...', 'kali-forms')
 									],
 								],
 								'group'          => 'addable',
 							],
 							'required' => [
-								'label' => esc_html__('Required', 'kaliforms'),
+								'label' => esc_html__('Required', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'general',
 							],
 							'readonly' => [
-								'label' => esc_html__('Readonly', 'kaliforms'),
+								'label' => esc_html__('Readonly', 'kali-forms'),
 								'type'  => 'toggle',
 								'value' => false,
 								'group' => 'advanced',
@@ -333,7 +333,7 @@ class Form_Fields
 					'values' => [
 						'id'      => 'state',
 						'name'    => 'state',
-						'caption' => esc_html__('State', 'kaliforms'),
+						'caption' => esc_html__('State', 'kali-forms'),
 					],
 					'grid'   => ['row' => 3, 'w' => 12],
 				],
@@ -350,12 +350,12 @@ class Form_Fields
 	{
 		return new BuilderFormFields\Product([
 			'price'   => [
-				'label' => esc_html__('Price', 'kaliforms'),
+				'label' => esc_html__('Price', 'kali-forms'),
 				'type'  => 'textbox',
 				'value' => '',
 			],
 			'picture' => [
-				'label' => esc_html__('Picture', 'kaliforms'),
+				'label' => esc_html__('Picture', 'kali-forms'),
 				'type'  => 'mediaManager',
 				'value' => '',
 			],
@@ -371,27 +371,27 @@ class Form_Fields
 	{
 		return new BuilderFormFields\Donation([
 			'donationType' => [
-				'label'   => esc_html__('Price type', 'kaliforms'),
+				'label'   => esc_html__('Price type', 'kali-forms'),
 				'type'    => 'select',
 				'value'   => 'custom',
 				'choices' => [
-					'custom' => esc_html__('Custom price', 'kaliforms'),
-					'fixed'  => esc_html__('Fixed price', 'kaliforms'),
+					'custom' => esc_html__('Custom price', 'kali-forms'),
+					'fixed'  => esc_html__('Fixed price', 'kali-forms'),
 				],
 			],
 			'donationName' => [
-				'label' => esc_html__('Donation name', 'kaliforms'),
+				'label' => esc_html__('Donation name', 'kali-forms'),
 				'type'  => 'textbox',
-				'value' => esc_html__('Donation', 'kaliforms'),
+				'value' => esc_html__('Donation', 'kali-forms'),
 			],
 			'required'     => [
-				'label' => esc_html__('Required', 'kaliforms'),
+				'label' => esc_html__('Required', 'kali-forms'),
 				'type'  => 'toggle',
 				'value' => false,
 				'group' => 'general',
 			],
 			'choices'      => [
-				'label'          => esc_html__('Fixed donation amounts', 'kaliforms'),
+				'label'          => esc_html__('Fixed donation amounts', 'kali-forms'),
 				'type'           => 'addableList',
 				'selectableType' => 'single',
 				'dependent'      => [
@@ -399,9 +399,9 @@ class Form_Fields
 					'value' => 'fixed',
 				],
 				'value'          => [
-					['value' => 5, 'label' => esc_html__('5$', 'kaliforms')],
-					['value' => 10, 'label' => esc_html__('10$', 'kaliforms')],
-					['value' => 15, 'label' => esc_html__('15$', 'kaliforms')],
+					['value' => 5, 'label' => esc_html__('5$', 'kali-forms')],
+					['value' => 10, 'label' => esc_html__('10$', 'kali-forms')],
+					['value' => 15, 'label' => esc_html__('15$', 'kali-forms')],
 				],
 				'group'          => 'addable',
 			],
@@ -417,7 +417,7 @@ class Form_Fields
 	{
 		return new BuilderFormFields\PayPal([
 			'merchantEmail' => [
-				'label' => esc_html__('Merchant email', 'kaliforms'),
+				'label' => esc_html__('Merchant email', 'kali-forms'),
 				'type'  => 'textbox',
 				'value' => '',
 			],
@@ -444,12 +444,12 @@ class Form_Fields
 		return new BuilderFormFields\FreeText(
 			[
 				'content'          => [
-					'label' => esc_html__('Content', 'kaliforms'),
+					'label' => esc_html__('Content', 'kali-forms'),
 					'type'  => 'textarea',
 					'value' => '',
 				],
 				'triggerShortcode' => [
-					'label' => esc_html__('Trigger shortcodes', 'kaliforms'),
+					'label' => esc_html__('Trigger shortcodes', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -468,7 +468,7 @@ class Form_Fields
 		return new BuilderFormFields\Divider(
 			[
 				'type' => [
-					'label'   => esc_html__('Divider type', 'kaliforms'),
+					'label'   => esc_html__('Divider type', 'kali-forms'),
 					'type'    => 'select',
 					'value'   => 'line',
 					'choices' => ['line', 'space', 'both'],
@@ -496,12 +496,12 @@ class Form_Fields
 	{
 		return new BuilderFormFields\Date([
 			'required' => [
-				'label' => esc_html__('Required', 'kaliforms'),
+				'label' => esc_html__('Required', 'kali-forms'),
 				'type'  => 'toggle',
 				'value' => false,
 			],
 			'readonly' => [
-				'label' => esc_html__('Readonly', 'kaliforms'),
+				'label' => esc_html__('Readonly', 'kali-forms'),
 				'type'  => 'toggle',
 				'value' => false,
 			],
@@ -516,18 +516,18 @@ class Form_Fields
 		return new BuilderFormFields\File_Upload(
 			[
 				'default'            => [
-					'label' => esc_html__('Default value', 'kaliforms'),
+					'label' => esc_html__('Default value', 'kali-forms'),
 					'type'  => 'hidden',
 					'value' => '',
 					'group' => 'advanced',
 				],
 				'multiple'           => [
-					'label' => esc_html__('Enable multiple file uploads', 'kaliforms'),
+					'label' => esc_html__('Enable multiple file uploads', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 				],
 				'maxFiles'           => [
-					'label'     => esc_html__('Max number of files to be uploaded', 'kaliforms'),
+					'label'     => esc_html__('Max number of files to be uploaded', 'kali-forms'),
 					'type'      => 'number',
 					'value'     => '',
 					'dependent' => [
@@ -536,19 +536,19 @@ class Form_Fields
 					],
 				],
 				'minFileSize'        => [
-					'label' => sprintf(esc_html__('Min file size (e.g. %s)', 'kaliforms'), $this->getMaximumFileUploadSize()),
+					'label' => sprintf(esc_html__('Min file size (e.g. %s)', 'kali-forms'), $this->getMaximumFileUploadSize()),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'advanced',
 				],
 				'maxFileSize'        => [
-					'label' => sprintf(esc_html__('Max file size (e.g. %s)', 'kaliforms'), $this->getMaximumFileUploadSize()),
+					'label' => sprintf(esc_html__('Max file size (e.g. %s)', 'kali-forms'), $this->getMaximumFileUploadSize()),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'advanced',
 				],
 				'maxTotalFileSize'   => [
-					'label'     => sprintf(esc_html__('Max size of all files in list (e.g. %s)', 'kaliforms'), $this->getMaximumFileUploadSize()),
+					'label'     => sprintf(esc_html__('Max size of all files in list (e.g. %s)', 'kali-forms'), $this->getMaximumFileUploadSize()),
 					'type'      => 'textbox',
 					'value'     => '',
 					'group'     => 'advanced',
@@ -558,37 +558,37 @@ class Form_Fields
 					],
 				],
 				'filePrefix'         => [
-					'label' => esc_html__('File prefix', 'kaliforms'),
+					'label' => esc_html__('File prefix', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'advanced',
 				],
 				'acceptedExtensions' => [
-					'label' => esc_html__('Accepted extensions', 'kaliforms'),
+					'label' => esc_html__('Accepted extensions', 'kali-forms'),
 					'type'  => 'extensionPicker',
 					'value' => '',
 					'group' => 'advanced',
 				],
 				'instantUpload'      => [
-					'label' => esc_html__('Instant Upload', 'kaliforms'),
+					'label' => esc_html__('Instant Upload', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => true,
 					'group' => 'advanced',
 				],
 				'imagePreview'       => [
-					'label' => esc_html__('Image preview', 'kaliforms'),
+					'label' => esc_html__('Image preview', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
 				],
 				'required'           => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'readonly'           => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -605,26 +605,26 @@ class Form_Fields
 		return new BuilderFormFields\Dropdown(
 			[
 				'default'  => [
-					'label' => esc_html__('Default value', 'kaliforms'),
+					'label' => esc_html__('Default value', 'kali-forms'),
 					'type'  => 'hidden',
 					'value' => '',
 					'group' => 'addable',
 				],
 				'choices'  => [
-					'label'          => esc_html__('Choices', 'kaliforms'),
+					'label'          => esc_html__('Choices', 'kali-forms'),
 					'type'           => 'addableList',
 					'selectableType' => 'single',
 					'value'          => [],
 					'group'          => 'addable',
 				],
 				'required' => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'readonly' => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -641,13 +641,13 @@ class Form_Fields
 		return new BuilderFormFields\Checkbox(
 			[
 				'default'  => [
-					'label' => esc_html__('Default value', 'kaliforms'),
+					'label' => esc_html__('Default value', 'kali-forms'),
 					'type'  => 'hidden',
 					'value' => '',
 					'group' => 'addable',
 				],
 				'flow'     => [
-					'label'   => esc_html__('Flow', 'kaliforms'),
+					'label'   => esc_html__('Flow', 'kali-forms'),
 					'type'    => 'select',
 					'value'   => 'vertical',
 					'choices' => [
@@ -657,20 +657,20 @@ class Form_Fields
 					'group'   => 'general',
 				],
 				'choices'  => [
-					'label'          => esc_html__('Choices', 'kaliforms'),
+					'label'          => esc_html__('Choices', 'kali-forms'),
 					'type'           => 'addableList',
 					'selectableType' => 'multiple',
 					'value'          => [],
 					'group'          => 'addable',
 				],
 				'required' => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'readonly' => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -688,13 +688,13 @@ class Form_Fields
 		return new BuilderFormFields\Image_Radio(
 			[
 				'default'  => [
-					'label' => esc_html__('Default value', 'kaliforms'),
+					'label' => esc_html__('Default value', 'kali-forms'),
 					'type'  => 'hidden',
 					'value' => '',
 					'group' => 'addable',
 				],
 				'flow'     => [
-					'label'   => esc_html__('Flow', 'kaliforms'),
+					'label'   => esc_html__('Flow', 'kali-forms'),
 					'type'    => 'select',
 					'value'   => 'vertical',
 					'choices' => [
@@ -704,13 +704,13 @@ class Form_Fields
 					'group'   => 'general',
 				],
 				'choices'  => [
-					'label' => esc_html__('Choices', 'kaliforms'),
+					'label' => esc_html__('Choices', 'kali-forms'),
 					'type'  => 'addableImage',
 					'value' => [],
 					'group' => 'addable',
 				],
 				'required' => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
@@ -727,13 +727,13 @@ class Form_Fields
 		return new BuilderFormFields\Radio(
 			[
 				'default'  => [
-					'label' => esc_html__('Default value', 'kaliforms'),
+					'label' => esc_html__('Default value', 'kali-forms'),
 					'type'  => 'hidden',
 					'value' => '',
 					'group' => 'addable',
 				],
 				'flow'     => [
-					'label'   => esc_html__('Flow', 'kaliforms'),
+					'label'   => esc_html__('Flow', 'kali-forms'),
 					'type'    => 'select',
 					'value'   => 'vertical',
 					'choices' => [
@@ -743,20 +743,20 @@ class Form_Fields
 					'group'   => 'general',
 				],
 				'choices'  => [
-					'label'          => esc_html__('Choices', 'kaliforms'),
+					'label'          => esc_html__('Choices', 'kali-forms'),
 					'type'           => 'addableList',
 					'selectableType' => 'single',
 					'value'          => [],
 					'group'          => 'addable',
 				],
 				'required' => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'readonly' => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -772,7 +772,7 @@ class Form_Fields
 	{
 		return new BuilderFormFields\Submit_Button([
 			'style' => [
-				'label' => esc_html__('Style', 'kaliforms'),
+				'label' => esc_html__('Style', 'kali-forms'),
 				'type'  => 'buttonStyles',
 				'value' => 'default',
 				'group' => 'style',
@@ -787,7 +787,7 @@ class Form_Fields
 	{
 		return new BuilderFormFields\Button([
 			'style' => [
-				'label' => esc_html__('Style', 'kaliforms'),
+				'label' => esc_html__('Style', 'kali-forms'),
 				'type'  => 'buttonStyles',
 				'value' => 'default',
 				'group' => 'style',
@@ -803,31 +803,31 @@ class Form_Fields
 		return new BuilderFormFields\TextArea(
 			[
 				'placeholder'    => [
-					'label' => esc_html__('Field placeholder', 'kaliforms'),
+					'label' => esc_html__('Field placeholder', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'general',
 				],
 				'rows'           => [
-					'label' => esc_html__('Rows', 'kaliforms'),
+					'label' => esc_html__('Rows', 'kali-forms'),
 					'type'  => 'number',
 					'value' => 5,
 					'group' => 'general',
 				],
 				'changeToEditor' => [
-					'label' => esc_html__('Transform to WYSIWYG?', 'kaliforms'),
+					'label' => esc_html__('Transform to WYSIWYG?', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'required'       => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'readonly'       => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -844,26 +844,26 @@ class Form_Fields
 		return new BuilderFormFields\TextBox(
 			[
 				'type'        => [
-					'label'   => esc_html__('Field type', 'kaliforms'),
+					'label'   => esc_html__('Field type', 'kali-forms'),
 					'type'    => 'select',
 					'value'   => 'text',
 					'choices' => ['text', 'number'],
 					'group'   => 'advanced',
 				],
 				'placeholder' => [
-					'label' => esc_html__('Field placeholder', 'kaliforms'),
+					'label' => esc_html__('Field placeholder', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'general',
 				],
 				'required'    => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'min'         => [
-					'label' => esc_html__('Minimum value', 'kaliforms'),
+					'label' => esc_html__('Minimum value', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'advanced',
@@ -873,7 +873,7 @@ class Form_Fields
 					],
 				],
 				'max'         => [
-					'label' => esc_html__('Maximum value', 'kaliforms'),
+					'label' => esc_html__('Maximum value', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'advanced',
@@ -883,7 +883,7 @@ class Form_Fields
 					],
 				],
 				'readonly'    => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -900,31 +900,31 @@ class Form_Fields
 		return new BuilderFormFields\Telephone(
 			[
 				'placeholder' => [
-					'label' => esc_html__('Field placeholder', 'kaliforms'),
+					'label' => esc_html__('Field placeholder', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'general',
 				],
 				'required'    => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'format'      => [
-					'label'   => esc_html__('Format', 'kaliforms'),
+					'label'   => esc_html__('Format', 'kali-forms'),
 					'type'    => 'select',
 					'value'   => 'free',
 					'choices' => [
-						'free'          => esc_html__('No format', 'kaliforms'),
-						'us'            => esc_html__('United States format', 'kaliforms'),
-						'usWithCode'    => esc_html__('United States format with country code', 'kaliforms'),
-						'international' => esc_html__('International format', 'kaliforms'),
+						'free'          => esc_html__('No format', 'kali-forms'),
+						'us'            => esc_html__('United States format', 'kali-forms'),
+						'usWithCode'    => esc_html__('United States format with country code', 'kali-forms'),
+						'international' => esc_html__('International format', 'kali-forms'),
 					],
 					'group'   => 'advanced',
 				],
 				'readonly'    => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -941,19 +941,19 @@ class Form_Fields
 		return new BuilderFormFields\Email(
 			[
 				'placeholder' => [
-					'label' => esc_html__('Field placeholder', 'kaliforms'),
+					'label' => esc_html__('Field placeholder', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'general',
 				],
 				'required'    => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'readonly'    => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -970,19 +970,19 @@ class Form_Fields
 		return new BuilderFormFields\URL(
 			[
 				'placeholder' => [
-					'label' => esc_html__('Field placeholder', 'kaliforms'),
+					'label' => esc_html__('Field placeholder', 'kali-forms'),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'general',
 				],
 				'required'    => [
-					'label' => esc_html__('Required', 'kaliforms'),
+					'label' => esc_html__('Required', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'general',
 				],
 				'readonly'    => [
-					'label' => esc_html__('Readonly', 'kaliforms'),
+					'label' => esc_html__('Readonly', 'kali-forms'),
 					'type'  => 'toggle',
 					'value' => false,
 					'group' => 'advanced',
@@ -1005,62 +1005,62 @@ class Form_Fields
 		}
 
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Rating', 'kaliforms'),
+			'label'      => esc_html__('Rating', 'kali-forms'),
 			'upsell_for' => 'rating',
 			'pro'        => true,
 			'icon'       => 'icon-rating',
 		]);
 
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Smart Text Output', 'kaliforms'),
+			'label'      => esc_html__('Smart Text Output', 'kali-forms'),
 			'upsell_for' => 'smartTextOutput',
 			'pro'        => true,
 			'icon'       => 'icon-smart-text',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Range', 'kaliforms'),
+			'label'      => esc_html__('Range', 'kali-forms'),
 			'upsell_for' => 'range',
 			'pro'        => true,
 			'icon'       => 'icon-range',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Date Time Picker', 'kaliforms'),
+			'label'      => esc_html__('Date Time Picker', 'kali-forms'),
 			'upsell_for' => 'dateTimePicker',
 			'pro'        => true,
 			'icon'       => 'icon-data-and-time',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Choices', 'kaliforms'),
+			'label'      => esc_html__('Choices', 'kali-forms'),
 			'upsell_for' => 'choices',
 			'pro'        => true,
 			'icon'       => 'icon-choices',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Page Break', 'kaliforms'),
+			'label'      => esc_html__('Page Break', 'kali-forms'),
 			'upsell_for' => 'pageBreak',
 			'pro'        => true,
 			'icon'       => 'icon-page-break',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Password', 'kaliforms'),
+			'label'      => esc_html__('Password', 'kali-forms'),
 			'upsell_for' => 'password',
 			'pro'        => true,
 			'icon'       => 'icon-password',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Color Picker', 'kaliforms'),
+			'label'      => esc_html__('Color Picker', 'kali-forms'),
 			'upsell_for' => 'colorPicker',
 			'pro'        => true,
 			'icon'       => 'icon-color-picker',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('GDPR', 'kaliforms'),
+			'label'      => esc_html__('GDPR', 'kali-forms'),
 			'upsell_for' => 'gdpr',
 			'pro'        => true,
 			'icon'       => 'icon-checkbox-activated',
 		]);
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Terms and Conditions', 'kaliforms'),
+			'label'      => esc_html__('Terms and Conditions', 'kali-forms'),
 			'upsell_for' => 'termsAndConditions',
 			'pro'        => true,
 			'icon'       => 'icon-checkbox-activated',
@@ -1080,25 +1080,25 @@ class Form_Fields
 			return $fields;
 		}
 		$fields[2]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Multiple products', 'kaliforms'),
+			'label'      => esc_html__('Multiple products', 'kali-forms'),
 			'upsell_for' => 'multiProducts',
 			'pro'        => true,
 			'icon'       => 'icon-multiproduct1',
 		]);
 		$fields[2]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Total', 'kaliforms'),
+			'label'      => esc_html__('Total', 'kali-forms'),
 			'upsell_for' => 'total',
 			'pro'        => true,
 			'icon'       => 'icon-calculator',
 		]);
 		$fields[2]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Wire transfer', 'kaliforms'),
+			'label'      => esc_html__('Wire transfer', 'kali-forms'),
 			'upsell_for' => 'wireTransfer',
 			'pro'        => true,
 			'icon'       => 'icon-payment',
 		]);
 		$fields[2]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Stripe', 'kaliforms'),
+			'label'      => esc_html__('Stripe', 'kali-forms'),
 			'upsell_for' => 'stripe',
 			'pro'        => true,
 			'icon'       => 'icon-stripe',
@@ -1120,7 +1120,7 @@ class Form_Fields
 			return $fields;
 		}
 		$fields[1]['fields'][] = new BuilderFormFields\Upsell_Field([
-			'label'      => esc_html__('Digital Signature', 'kaliforms'),
+			'label'      => esc_html__('Digital Signature', 'kali-forms'),
 			'upsell_for' => 'digitalSignature',
 			'pro'        => true,
 			'icon'       => 'icon-digital-signature',

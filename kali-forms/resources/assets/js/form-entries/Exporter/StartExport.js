@@ -11,29 +11,29 @@ export default function StartExport() {
 
 	const labels = {
 		idle: {
-			title: __('Click the button below to start the export process!', 'kaliforms'),
+			title: __('Click the button below to start the export process!', 'kali-forms'),
 			subTitle: '',
-			button: __('Start export', 'kaliforms'),
+			button: __('Start export', 'kali-forms'),
 		},
 		processing: {
-			title: __('We are currently processing the export file', 'kaliforms'),
-			subTitle: __('Please be patient, this process might take a few minutes to complete', 'kaliforms'),
-			button: __('Processing', 'kaliforms')
+			title: __('We are currently processing the export file', 'kali-forms'),
+			subTitle: __('Please be patient, this process might take a few minutes to complete', 'kali-forms'),
+			button: __('Processing', 'kali-forms')
 		},
 		success: {
-			title: __('Processing complete!', 'kaliforms'),
-			subTitle: __('Click the button below to start the download of your file', 'kaliforms'),
-			button: __('Download file', 'kaliforms'),
+			title: __('Processing complete!', 'kali-forms'),
+			subTitle: __('Click the button below to start the download of your file', 'kali-forms'),
+			button: __('Download file', 'kali-forms'),
 		},
 		successGoogle: {
-			title: __('Processing complete!', 'kaliforms'),
-			subTitle: __('A new file was created to your Google Drive account.', 'kaliforms'),
-			button: __('Take me to Google Drive', 'kaliforms'),
+			title: __('Processing complete!', 'kali-forms'),
+			subTitle: __('A new file was created to your Google Drive account.', 'kali-forms'),
+			button: __('Take me to Google Drive', 'kali-forms'),
 		},
 		error: {
-			title: __('Something went wrong!', 'kaliforms'),
-			subTitle: __('Something went wrong, please try exporting your data again. If you still encounter issues, please contact us directly so we can provide assistance.', 'kaliforms'),
-			button: __('Go back', 'kaliforms'),
+			title: __('Something went wrong!', 'kali-forms'),
+			subTitle: __('Something went wrong, please try exporting your data again. If you still encounter issues, please contact us directly so we can provide assistance.', 'kali-forms'),
+			button: __('Go back', 'kali-forms'),
 		}
 	}
 
@@ -91,7 +91,7 @@ export default function StartExport() {
 
 	const startDownload = () => {
 		if (!downloadUrl) {
-			message.error(__('Download URL is not available. Please try again.', 'kaliforms'));
+			message.error(__('Download URL is not available. Please try again.', 'kali-forms'));
 			return;
 		}
 
@@ -120,7 +120,7 @@ export default function StartExport() {
 			})
 			.catch(err => {
 				console.error('Download error:', err);
-				message.error(__('Download failed. Please ensure you are using HTTPS or contact support.', 'kaliforms'));
+				message.error(__('Download failed. Please ensure you are using HTTPS or contact support.', 'kali-forms'));
 
 				// Try direct navigation as fallback
 				const securePageUrl = window.location.href.replace(/^http:/, 'https:');
@@ -156,7 +156,7 @@ export default function StartExport() {
 
 		Api.startExport(data).then(res => {
 			if (!res.data?.status || !res.data?.url) {
-				message.error(__('Export failed. Please try again.', 'kaliforms'));
+				message.error(__('Export failed. Please try again.', 'kali-forms'));
 				return setExportOptions(prevState => {
 					return {
 						...prevState,
@@ -187,7 +187,7 @@ export default function StartExport() {
 				}
 			})
 		}).catch(err => {
-			message.error(__('Export failed. Please try again.', 'kaliforms'));
+			message.error(__('Export failed. Please try again.', 'kali-forms'));
 			setExportOptions(prevState => {
 				return {
 					...prevState,

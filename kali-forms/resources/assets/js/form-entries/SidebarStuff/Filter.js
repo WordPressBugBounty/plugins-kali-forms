@@ -59,9 +59,9 @@ export default function Filter() {
 								</When>
 								<When condition={['gdpr', 'termsAndConditions'].includes(el.type)}>
 									<Select>
-										<Select.Option value="">{__('-- Please select an option --', 'kaliforms')}</Select.Option>
-										<Select.Option value="yes">{__('Yes', 'kaliforms')}</Select.Option>
-										<Select.Option value="no">{__('No', 'kaliforms')}</Select.Option>
+										<Select.Option value="">{__('-- Please select an option --', 'kali-forms')}</Select.Option>
+										<Select.Option value="yes">{__('Yes', 'kali-forms')}</Select.Option>
+										<Select.Option value="no">{__('No', 'kali-forms')}</Select.Option>
 									</Select>
 								</When>
 								<When condition={['rating', 'range'].includes(el.type) && typeof el.minMax !== 'undefined'}>
@@ -83,10 +83,10 @@ export default function Filter() {
 				<Form.Item>
 					<Space>
 						<Button type="primary" htmlType="submit" loading={loading}>
-							{__('Apply filter', 'kaliforms')}
+							{__('Apply filter', 'kali-forms')}
 						</Button>
 						<Button htmlType="button" onClick={onReset} loading={loading}>
-							{__('Clear', 'kaliforms')}
+							{__('Clear', 'kali-forms')}
 						</Button>
 					</Space>
 				</Form.Item>

@@ -203,11 +203,11 @@ const Newsletter = observer(props => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Newsletter settings', 'kaliforms')} />
+				<SectionTitle title={__('Newsletter settings', 'kali-forms')} />
 				<If condition={!keysFound()}>
 					<Grid container direction="row" spacing={3}>
 						<Grid item xs={12}>
-							<Typography>{__('No api keys provided. Please check your settings.', 'kaliforms')}</Typography>
+							<Typography>{__('No api keys provided. Please check your settings.', 'kali-forms')}</Typography>
 						</Grid>
 					</Grid>
 				</If>
@@ -222,7 +222,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('mailchimp')}
 										/>
 									}
-									label={__('Enable MailChimp', 'kaliforms')}
+									label={__('Enable MailChimp', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -237,7 +237,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('convertkit')}
 										/>
 									}
-									label={__('Enable ConvertKit', 'kaliforms')}
+									label={__('Enable ConvertKit', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -252,7 +252,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('activecampaign')}
 										/>
 									}
-									label={__('Enable Active Campaign', 'kaliforms')}
+									label={__('Enable Active Campaign', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -267,7 +267,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('mailerlite')}
 										/>
 									}
-									label={__('Enable MailerLite', 'kaliforms')}
+									label={__('Enable MailerLite', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -282,7 +282,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('mailpoet')}
 										/>
 									}
-									label={__('Enable MailPoet', 'kaliforms')}
+									label={__('Enable MailPoet', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -297,7 +297,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('sendfox')}
 										/>
 									}
-									label={__('Enable Sendfox', 'kaliforms')}
+									label={__('Enable Sendfox', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -312,7 +312,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('sendinblue')}
 										/>
 									}
-									label={__('Enable Sendinblue', 'kaliforms')}
+									label={__('Enable Sendinblue', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -327,7 +327,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('moosend')}
 										/>
 									}
-									label={__('Enable Moosend', 'kaliforms')}
+									label={__('Enable Moosend', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -342,7 +342,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('getresponse')}
 										/>
 									}
-									label={__('Enable GetResponse', 'kaliforms')}
+									label={__('Enable GetResponse', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -357,7 +357,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('campaignmonitor')}
 										/>
 									}
-									label={__('Enable Campaign Monitor', 'kaliforms')}
+									label={__('Enable Campaign Monitor', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -372,7 +372,7 @@ const Newsletter = observer(props => {
 											onChange={e => providerChanged('revue')}
 										/>
 									}
-									label={__('Enable Revue', 'kaliforms')}
+									label={__('Enable Revue', 'kali-forms')}
 								/>
 							</FormGroup>
 						</Grid>
@@ -387,7 +387,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -401,7 +401,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={activeCampaign.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getActiveCampaignList(store._NEWSLETTER_.list) !== false}>
 							{
@@ -421,12 +421,12 @@ const Newsletter = observer(props => {
 						<If condition={store._NEWSLETTER_.list !== '' && getActiveCampaignList(store._NEWSLETTER_.list).tags.length}>
 							<Grid item xs={12}>
 								<Typography>
-									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button. If a tag is not found, a new one will be created on form submit.', 'kaliforms')}
+									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button. If a tag is not found, a new one will be created on form submit.', 'kali-forms')}
 								</Typography>
 							</Grid>
 							<Grid item xs={6}>
 								<FieldComponentSelect
-									label={__('Tag selector field', 'kaliforms')}
+									label={__('Tag selector field', 'kali-forms')}
 									selectedValue={store._NEWSLETTER_.fields['acTags'] || ''}
 									field="acTags"
 									onChange={fieldChanged}
@@ -442,7 +442,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('Form', 'kaliforms')}
+										{__('Form', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.form}
@@ -456,7 +456,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={convertKit.forms.length === 0}>
-							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.form !== '' && getFormData(store._NEWSLETTER_.form) !== false}>
 							{
@@ -476,12 +476,12 @@ const Newsletter = observer(props => {
 						<If condition={store._NEWSLETTER_.form !== '' && getFormData(store._NEWSLETTER_.form).tags.length}>
 							<Grid item xs={12}>
 								<Typography>
-									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button.', 'kaliforms')}
+									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button.', 'kali-forms')}
 								</Typography>
 							</Grid>
 							<Grid item xs={6}>
 								<FieldComponentSelect
-									label={__('Tag selector field', 'kaliforms')}
+									label={__('Tag selector field', 'kali-forms')}
 									selectedValue={store._NEWSLETTER_.fields['acTags'] || ''}
 									field="acTags"
 									onChange={fieldChanged}
@@ -497,7 +497,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -511,7 +511,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={mailChimpData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getListData(store._NEWSLETTER_.list) !== false}>
 							{
@@ -552,12 +552,12 @@ const Newsletter = observer(props => {
 						<If condition={store._NEWSLETTER_.list !== '' && getListData(store._NEWSLETTER_.list).tags.length}>
 							<Grid item xs={12}>
 								<Typography>
-									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button. If a tag is not found, a new one will be created on form submit.', 'kaliforms')}
+									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button. If a tag is not found, a new one will be created on form submit.', 'kali-forms')}
 								</Typography>
 							</Grid>
 							<Grid item xs={6}>
 								<FieldComponentSelect
-									label={__('Tag selector field', 'kaliforms')}
+									label={__('Tag selector field', 'kali-forms')}
 									selectedValue={store._NEWSLETTER_.fields['acTags'] || ''}
 									field="acTags"
 									onChange={fieldChanged}
@@ -573,7 +573,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={isNaN(store._NEWSLETTER_.list) ? parseFloat(store._NEWSLETTER_.list) : store._NEWSLETTER_.list}
@@ -587,7 +587,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={mailerLiteData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('No lists associated with your account. Please configure your newsletter settings before integrating it with Kali Forms', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getMailerLiteListData(store._NEWSLETTER_.list) !== false}>
 							{
@@ -613,7 +613,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -627,7 +627,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={mailPoetData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('Please configure MailPoet lists before integrating it with Kali Forms', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('Please configure MailPoet lists before integrating it with Kali Forms', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getMailPoetListData(store._NEWSLETTER_.list) !== false}>
 							{
@@ -674,7 +674,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -688,7 +688,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={sendFoxData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('There are no lists created in your Sendfox account. Please make sure you create at least one before configuring this integration.', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('There are no lists created in your Sendfox account. Please make sure you create at least one before configuring this integration.', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getSendfoxListData(store._NEWSLETTER_.list) !== false}>
 							{
@@ -735,7 +735,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -749,7 +749,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={revueData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('There are no lists created in your Revue account. Please make sure you create at least one before configuring this integration.', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('There are no lists created in your Revue account. Please make sure you create at least one before configuring this integration.', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getRevueList(store._NEWSLETTER_.list) !== false}>
 							{
@@ -796,7 +796,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -810,7 +810,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={moosendData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('There are no lists created in your Moosend account. Please make sure you create at least one before configuring this integration.', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('There are no lists created in your Moosend account. Please make sure you create at least one before configuring this integration.', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getMoosendListData(store._NEWSLETTER_.list) !== false}>
 							{
@@ -857,7 +857,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -871,7 +871,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={getResponseData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('There are no lists created in your Get Response account. Please make sure you create at least one before configuring this integration.', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('There are no lists created in your Get Response account. Please make sure you create at least one before configuring this integration.', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getGetresponseList(store._NEWSLETTER_.list) !== false}>
 							{
@@ -912,12 +912,12 @@ const Newsletter = observer(props => {
 						<If condition={store._NEWSLETTER_.list !== '' && getGetresponseList(store._NEWSLETTER_.list).tags.length}>
 							<Grid item xs={12}>
 								<Typography>
-									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button. If a tag is not found, a new one will be created on form submit.', 'kaliforms')}
+									{__('Do you want to add certain tags to your subscribers? You can create one of the following form fields : Select, Choices, Radio, Checkbox and populate options using the Presets button. If a tag is not found, a new one will be created on form submit.', 'kali-forms')}
 								</Typography>
 							</Grid>
 							<Grid item xs={6}>
 								<FieldComponentSelect
-									label={__('Tag selector field', 'kaliforms')}
+									label={__('Tag selector field', 'kali-forms')}
 									selectedValue={store._NEWSLETTER_.fields['grTags'] || ''}
 									field="grTags"
 									onChange={fieldChanged}
@@ -933,7 +933,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -947,7 +947,7 @@ const Newsletter = observer(props => {
 							</Grid>
 						</If>
 						<If condition={campaignMonitorData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('There are no lists created in your Campaign Monitor account. Please make sure you create at least one before configuring this integration.', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('There are no lists created in your Campaign Monitor account. Please make sure you create at least one before configuring this integration.', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getCampaignMonitorList(store._NEWSLETTER_.list) !== false}>
 							{
@@ -995,7 +995,7 @@ const Newsletter = observer(props => {
 							<Grid item xs={12}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('List', 'kaliforms')}
+										{__('List', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.list}
@@ -1010,7 +1010,7 @@ const Newsletter = observer(props => {
 							{/* <Grid item xs={2}>
 								<FormControl>
 									<InputLabel shrink>
-										{__('Double opt-in', 'kaliforms')}
+										{__('Double opt-in', 'kali-forms')}
 									</InputLabel>
 									<Select
 										value={store._NEWSLETTER_.doubleOptIn || 'yes'}
@@ -1018,14 +1018,14 @@ const Newsletter = observer(props => {
 										onChange={e => store._NEWSLETTER_.doubleOptIn = e.target.value}
 										input={<BootstrapInput />}
 									>
-										<MenuItem value="yes">{__('Yes', 'kaliforms')}</MenuItem>
-										<MenuItem value="no">{__('No', 'kaliforms')}</MenuItem>
+										<MenuItem value="yes">{__('Yes', 'kali-forms')}</MenuItem>
+										<MenuItem value="no">{__('No', 'kali-forms')}</MenuItem>
 									</Select>
 								</FormControl>
 							</Grid> */}
 						</If>
 						<If condition={sendinblueData.lists.length === 0}>
-							<Grid item xs={12}><Typography>{__('There are no lists created in your Sendinblue account. Please make sure you create at least one before configuring this integration.', 'kaliforms')}</Typography></Grid>
+							<Grid item xs={12}><Typography>{__('There are no lists created in your Sendinblue account. Please make sure you create at least one before configuring this integration.', 'kali-forms')}</Typography></Grid>
 						</If>
 						<If condition={store._NEWSLETTER_.list !== '' && getSendinblueData(store._NEWSLETTER_.list) !== false}>
 							{
@@ -1069,12 +1069,12 @@ const Newsletter = observer(props => {
 					<Grid container direction="row" spacing={3}>
 						<Grid item xs={12}>
 							<Typography>
-								{__('Subscribe users to your newsletter only if a field has a certain value', 'kaliforms')}
+								{__('Subscribe users to your newsletter only if a field has a certain value', 'kali-forms')}
 							</Typography>
 						</Grid>
 						<Grid item xs={6}>
 							<FieldComponentSelect
-								label={__('User consent field', 'kaliforms')}
+								label={__('User consent field', 'kali-forms')}
 								selectedValue={store._NEWSLETTER_.fields.userConsent || ''}
 								field="userConsent"
 								onChange={fieldChanged}
@@ -1083,7 +1083,7 @@ const Newsletter = observer(props => {
 						<Grid item xs={6}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('User consent value', 'kaliforms')}
+									{__('User consent value', 'kali-forms')}
 								</InputLabel>
 								<If condition={typeof store._NEWSLETTER_.fields.userConsentFieldType !== 'undefined' && selectableTypes.includes(store._NEWSLETTER_.fields.userConsentFieldType)}>
 									<Select

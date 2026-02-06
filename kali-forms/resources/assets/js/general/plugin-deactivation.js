@@ -4,19 +4,19 @@ const { __ } = wp.i18n;
 jQuery(document).ready(_ => {
 	const uninstallScript = UninstallFeedback;
 
-	uninstallScript.slug = 'kaliforms';
+	uninstallScript.slug = 'kali-forms';
 	uninstallScript.template = KaliFormsPluginDeactivationObject.modalHtml;
 	uninstallScript.form = 'kaliforms-deactivate-form';
 	uninstallScript.deactivateUrl = jQuery('#kaliforms-deactivate-link-kaliforms').attr('href');
 	uninstallScript.deactivate = false;
 
 	uninstallScript.translations = {
-		'setup': __('What was the dificult part ?', 'kaliforms'),
-		'docs': __('What can we describe more ?', 'kaliforms'),
-		'features': __('How could we improve ?', 'kaliforms'),
-		'better-plugin': __('Can you mention it ?', 'kaliforms'),
-		'incompatibility': __('With what plugin or theme is incompatible ?', 'kaliforms'),
-		'maintenance': __('Please specify', 'kaliforms'),
+		'setup': __('What was the dificult part ?', 'kali-forms'),
+		'docs': __('What can we describe more ?', 'kali-forms'),
+		'features': __('How could we improve ?', 'kali-forms'),
+		'better-plugin': __('Can you mention it ?', 'kali-forms'),
+		'incompatibility': __('With what plugin or theme is incompatible ?', 'kali-forms'),
+		'maintenance': __('Please specify', 'kali-forms'),
 	};
 
 	uninstallScript.nonce = KaliFormsPluginDeactivationObject.ajax_nonce;

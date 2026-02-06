@@ -84,13 +84,13 @@ const SidebarFormFieldEdit = observer((props) => {
 
 		let returnArr = [];
 		let translations = {
-			'general': __('General', 'kaliforms'),
-			'addable': __('Options', 'kaliforms'),
-			'advanced': __('Advanced', 'kaliforms'),
-			'simple': __('Simple', 'kaliforms'),
-			'conditional': __('Conditional', 'kaliforms'),
-			'style': __('Style', 'kaliforms'),
-			'date': __('Date operations', 'kaliforms')
+			'general': __('General', 'kali-forms'),
+			'addable': __('Options', 'kali-forms'),
+			'advanced': __('Advanced', 'kali-forms'),
+			'simple': __('Simple', 'kali-forms'),
+			'conditional': __('Conditional', 'kali-forms'),
+			'style': __('Style', 'kali-forms'),
+			'date': __('Date operations', 'kali-forms')
 		};
 		for (let key in groups) {
 			if (!groups[key].length) {
@@ -109,7 +109,7 @@ const SidebarFormFieldEdit = observer((props) => {
 			) {
 				returnArr.push({
 					id: 'conditional',
-					label: __('Conditional', 'kaliforms')
+					label: __('Conditional', 'kali-forms')
 				})
 			}
 		}

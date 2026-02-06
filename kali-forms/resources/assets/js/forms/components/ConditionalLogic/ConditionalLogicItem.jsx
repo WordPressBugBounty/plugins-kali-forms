@@ -23,19 +23,19 @@ const ConditionalLogicItem = observer((props) => {
 					<Box onClick={e => setEditingContainer()}>
 						<Icon className={'icon-edit-2'} />
 						<If condition={!props.sidebar}>
-							{__('Edit', 'kaliforms')}
+							{__('Edit', 'kali-forms')}
 						</If>
 					</Box>
 					<Box onClick={e => store._FORM_INFO_.duplicateConditionByAssertion(props.condition)}>
 						<Icon className={'icon-copy'} />
 						<If condition={!props.sidebar}>
-							{__('Duplicate', 'kaliforms')}
+							{__('Duplicate', 'kali-forms')}
 						</If>
 					</Box>
 					<Box onClick={e => store._FORM_INFO_.removeConditionByAssertion(props.condition)}>
 						<Icon className={'icon-remove'} />
 						<If condition={!props.sidebar}>
-							{__('Delete', 'kaliforms')}
+							{__('Delete', 'kali-forms')}
 						</If>
 					</Box>
 				</Box>

@@ -12,7 +12,7 @@ export const resendNotifications = (entryId, formId) => {
 			if (res.data.status) {
 
 				message.success({
-					content: __('Notifications resent', 'kaliforms'),
+					content: __('Notifications resent', 'kali-forms'),
 					duration: 5,
 				});
 			}

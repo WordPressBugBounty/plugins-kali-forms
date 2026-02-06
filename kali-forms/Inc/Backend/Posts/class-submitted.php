@@ -87,16 +87,16 @@ class Submitted
 	{
 		// add_submenu_page(
 		//     'edit.php?post_type=kaliforms_forms',
-		//     esc_html__('Form entries', 'kaliforms'),
-		//     esc_html__('Form entries'),
+		//     esc_html__('Form entries', 'kali-forms'),
+		//     esc_html__('Form entries', 'kali-forms'),
 		//     'manage_options',
 		//     'edit.php?post_type=kaliforms_submitted'
 		// );
 
 		add_submenu_page(
 			'edit.php?post_type=kaliforms_forms',
-			esc_html__('Form entries', 'kaliforms'),
-			esc_html__('Form entries', 'kaliforms'),
+			esc_html__('Form entries', 'kali-forms'),
+			esc_html__('Form entries', 'kali-forms'),
 			'manage_options',
 			'kaliforms-form-entries',
 			new Form_Entries_Page()
@@ -111,11 +111,11 @@ class Submitted
 	{
 		$tabs = [
 			'entries'  => [
-				'name' => esc_html__('Entries', 'kaliforms'),
+				'name' => esc_html__('Entries', 'kali-forms'),
 				'url'  => admin_url('edit.php?post_type=kaliforms_submitted'),
 			],
 			'exporter' => [
-				'name'   => esc_html__('Exporter (PRO)', 'kaliforms'),
+				'name'   => esc_html__('Exporter (PRO)', 'kali-forms'),
 				'url'    => 'https://www.kaliforms.com/pricing?utm_source=entriesPage&utm_campaign=userInterests&utm_medium=navTabButton',
 				'_blank' => true,
 			],
@@ -216,8 +216,8 @@ class Submitted
 			[
 				// Labels
 				'labels'              => [
-					'name'          => esc_html__('Form Entries', 'kaliforms'),
-					'singular_name' => esc_html__('Form Entry', 'kaliforms'),
+					'name'          => esc_html__('Form Entries', 'kali-forms'),
+					'singular_name' => esc_html__('Form Entry', 'kali-forms'),
 				],
 				// Show in ui & menus
 				'show_ui'             => true,
@@ -307,8 +307,8 @@ class Submitted
 		switch ($column) {
 			case 'submissions':
 				echo ($count > 0)
-					? '<a href="edit.php?post_type=kaliforms_forms&page=kaliforms-form-entries#/form-entries/' . absint($post_id) . '">' . sprintf(esc_html__('See entries (%s)', 'kaliforms'), $count) . '</a>'
-					: esc_html__('Form has no entries', 'kaliforms');
+					? '<a href="edit.php?post_type=kaliforms_forms&page=kaliforms-form-entries#/form-entries/' . absint($post_id) . '">' . sprintf(esc_html__('See entries (%s)', 'kali-forms'), $count) . '</a>'
+					: esc_html__('Form has no entries', 'kali-forms');
 				break;
 			default:
 				break;
@@ -328,7 +328,8 @@ class Submitted
 		$columns = array_merge(
 			$columns,
 			[
-				'submissions' => esc_html__('Submissions', 'kaliforms'), 'date' => $date,
+				'submissions' => esc_html__('Submissions', 'kali-forms'),
+				'date' => $date,
 			]
 		);
 		return $columns;
@@ -382,7 +383,7 @@ class Submitted
 				}
 				switch ($this->form_type_map[$column]) {
 					case 'ip':
-						echo empty($val) ? esc_html__('N\A', 'kaliforms') : esc_html($val);
+						echo empty($val) ? esc_html__('N\A', 'kali-forms') : esc_html($val);
 						break;
 					case 'radio':
 					case 'dropdown':
@@ -431,7 +432,7 @@ class Submitted
 						echo '<img style="width:150px" src="' . esc_url($img) . '" />';
 						break;
 					default:
-						echo esc_html__($val);
+						echo esc_html($val);
 						break;
 				}
 		}
@@ -485,8 +486,8 @@ class Submitted
 	public function edit_submission_columns($columns)
 	{
 		$arr               = $this->_get_field_components();
-		$arr['actions']    = esc_html__('Actions', 'kaliforms');
-		$arr['ip_address'] = esc_html__('Ip address', 'kaliforms');
+		$arr['actions']    = esc_html__('Actions', 'kali-forms');
+		$arr['ip_address'] = esc_html__('Ip address', 'kali-forms');
 		$arr['date']       = $columns['date'];
 		unset($columns['title']);
 		unset($columns['date']);

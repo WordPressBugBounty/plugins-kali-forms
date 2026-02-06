@@ -90,7 +90,7 @@ const FormSettings = observer((props) => {
 		<React.Fragment>
 			<Choose>
 				<When condition={is.boolean(component)}>
-					<div>{__("There is nothing here for you", "kaliforms")}</div>
+					<div>{__("There is nothing here for you", "kali-forms")}</div>
 				</When>
 				<Otherwise>{React.createElement(component)}</Otherwise>
 			</Choose>

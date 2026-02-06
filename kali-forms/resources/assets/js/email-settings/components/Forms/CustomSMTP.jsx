@@ -29,22 +29,22 @@ const CustomSMTP = props => {
 	const [formValues, setFormValues] = React.useState(savedState);
 
 	const form = [
-		{ id: 'host', label: __('SMTP server', 'kaliforms'), name: 'kaliforms_smtp_host', type: 'text', help: __('The server that will handle your email sending functionality.', 'kaliforms') },
-		{ id: 'port', label: __('SMTP port', 'kaliforms'), name: 'kaliforms_smtp_port', type: 'number', help: __('The port that will be used to establish the connection to the server.', 'kaliforms'), help: __('The port that will be used to establish the connection to the server.', 'kaliforms') },
+		{ id: 'host', label: __('SMTP server', 'kali-forms'), name: 'kaliforms_smtp_host', type: 'text', help: __('The server that will handle your email sending functionality.', 'kali-forms') },
+		{ id: 'port', label: __('SMTP port', 'kali-forms'), name: 'kaliforms_smtp_port', type: 'number', help: __('The port that will be used to establish the connection to the server.', 'kali-forms'), help: __('The port that will be used to establish the connection to the server.', 'kali-forms') },
 		{
-			id: 'secure', label: __('Secure connection', 'kaliforms'), name: 'kaliforms_smtp_secure', type: 'select', choices: [
-				{ value: 'None', label: __('No', 'kaliforms') },
-				{ value: 'SSL', label: __('SSL', 'kaliforms') },
-				{ value: 'TLS', label: __('TLS', 'kaliforms') },
-				{ value: 'STARTTLS', label: __('STARTTLS', 'kaliforms') },
-			], help: __('Set the encryption method used to secure your connection to the server.', 'kaliforms')
+			id: 'secure', label: __('Secure connection', 'kali-forms'), name: 'kaliforms_smtp_secure', type: 'select', choices: [
+				{ value: 'None', label: __('No', 'kali-forms') },
+				{ value: 'SSL', label: __('SSL', 'kali-forms') },
+				{ value: 'TLS', label: __('TLS', 'kali-forms') },
+				{ value: 'STARTTLS', label: __('STARTTLS', 'kali-forms') },
+			], help: __('Set the encryption method used to secure your connection to the server.', 'kali-forms')
 		},
-		{ id: 'disableAutotls', label: __('Disable AutoTLS', 'kaliforms'), name: 'kaliforms_smtp_disable_autotls', type: 'checkbox', help: __('A TLS encryption is automatically used if the server supports it, which is recommended. If your server does not support this you can disable this default encryption from this option.', 'kaliforms') },
+		{ id: 'disableAutotls', label: __('Disable AutoTLS', 'kali-forms'), name: 'kaliforms_smtp_disable_autotls', type: 'checkbox', help: __('A TLS encryption is automatically used if the server supports it, which is recommended. If your server does not support this you can disable this default encryption from this option.', 'kali-forms') },
 		{
-			id: 'auth', label: __('Authenticate', 'kaliforms'), name: 'kaliforms_smtp_auth', type: 'checkbox', help: __('If the connection requires you to authenticate, this option will provide the fields required to add your login credentials or API Key.', 'kaliforms')
+			id: 'auth', label: __('Authenticate', 'kali-forms'), name: 'kaliforms_smtp_auth', type: 'checkbox', help: __('If the connection requires you to authenticate, this option will provide the fields required to add your login credentials or API Key.', 'kali-forms')
 		},
-		{ id: 'username', label: __('Username', 'kaliforms'), name: 'kaliforms_smtp_username', type: 'text', conditioned: { conditioner: 'auth', value: true }, help: __('The account used for the connection.', 'kaliforms') },
-		{ id: 'password', label: __('Password', 'kaliforms'), name: 'kaliforms_smtp_password', type: 'password', conditioned: { conditioner: 'auth', value: true }, help: __('The password of your account.', 'kaliforms') },
+		{ id: 'username', label: __('Username', 'kali-forms'), name: 'kaliforms_smtp_username', type: 'text', conditioned: { conditioner: 'auth', value: true }, help: __('The account used for the connection.', 'kali-forms') },
+		{ id: 'password', label: __('Password', 'kali-forms'), name: 'kaliforms_smtp_password', type: 'password', conditioned: { conditioner: 'auth', value: true }, help: __('The password of your account.', 'kali-forms') },
 	];
 
 	const showItem = (el) => {
@@ -78,7 +78,7 @@ const CustomSMTP = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('Custom SMTP settings', 'kaliforms')}
+				{__('Custom SMTP settings', 'kali-forms')}
 			</Typography>
 			<hr />
 			<Grid container direction="row">

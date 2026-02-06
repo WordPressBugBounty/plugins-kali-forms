@@ -21,7 +21,7 @@ const ConditionalLogicEditor = observer(props => {
 			<Grid container direction="row" style={{ marginBottom: props.sidebar ? 10 : 30 }} alignItems="center">
 				<FormControl>
 					<InputLabel shrink>
-						{__('Add a name for your logical condition', 'kaliforms')}
+						{__('Add a name for your logical condition', 'kali-forms')}
 					</InputLabel>
 					<BootstrapInput
 						value={editedCondition.name || ''}
@@ -36,7 +36,7 @@ const ConditionalLogicEditor = observer(props => {
 						<ConditionalLogicItemCount count={1} />
 						<FormControl>
 							<InputLabel shrink>
-								{__('The current field', 'kaliforms')}
+								{__('The current field', 'kali-forms')}
 							</InputLabel>
 							<Select
 								value={editedCondition.field || ''}
@@ -63,7 +63,7 @@ const ConditionalLogicEditor = observer(props => {
 						<ConditionalLogicItemCount count={2} />
 						<FormControl>
 							<InputLabel shrink>
-								{__('What will happen to the field', 'kaliforms')}
+								{__('What will happen to the field', 'kali-forms')}
 							</InputLabel>
 							<Select
 								value={editedCondition.state || ''}
@@ -72,10 +72,10 @@ const ConditionalLogicEditor = observer(props => {
 								input={<BootstrapInput />}
 							>
 								<MenuItem value={'show'}>
-									{__('Show', 'kaliforms')}
+									{__('Show', 'kali-forms')}
 								</MenuItem>
 								<MenuItem value={'hide'}>
-									{__('Hide', 'kaliforms')}
+									{__('Hide', 'kali-forms')}
 								</MenuItem>
 							</Select>
 						</FormControl>
@@ -88,7 +88,7 @@ const ConditionalLogicEditor = observer(props => {
 						<ConditionalLogicItemCount count={3} />
 						<FormControl>
 							<InputLabel shrink>
-								{__('If this field', 'kaliforms')}
+								{__('If this field', 'kali-forms')}
 							</InputLabel>
 							<Select
 								value={editedCondition.conditioner || ''}
@@ -120,7 +120,7 @@ const ConditionalLogicEditor = observer(props => {
 						<ConditionalLogicItemCount count={4} />
 						<FormControl>
 							<InputLabel shrink>
-								{__('Has the selected value', 'kaliforms')}
+								{__('Has the selected value', 'kali-forms')}
 							</InputLabel>
 							<Select
 								value={editedCondition.operator || ''}
@@ -129,13 +129,13 @@ const ConditionalLogicEditor = observer(props => {
 								input={<BootstrapInput />}
 							>
 								<MenuItem value={'equal'}>
-									{__('Equal to', 'kaliforms')}
+									{__('Equal to', 'kali-forms')}
 								</MenuItem>
 								<MenuItem value={'different'}>
-									{__('Different than', 'kaliforms')}
+									{__('Different than', 'kali-forms')}
 								</MenuItem>
 								<MenuItem value={'or'}>
-									{__('Can be', 'kaliforms')}
+									{__('Can be', 'kali-forms')}
 								</MenuItem>
 							</Select>
 						</FormControl>
@@ -148,7 +148,7 @@ const ConditionalLogicEditor = observer(props => {
 						<ConditionalLogicItemCount count={5} />
 						<FormControl>
 							<InputLabel shrink>
-								{__('Value', 'kaliforms')}
+								{__('Value', 'kali-forms')}
 							</InputLabel>
 							<Select
 								value={editedCondition.value || ''}
@@ -168,7 +168,7 @@ const ConditionalLogicEditor = observer(props => {
 														<img style={{ width: '100%' }} src={e.image.preview} />
 													</span>
 													<span style={{ paddingLeft: 30 }}>
-														{__('Media ID: #', 'kaliforms')}{e.image.id}
+														{__('Media ID: #', 'kali-forms')}{e.image.id}
 													</span>
 												</If>
 												<If condition={e.hasOwnProperty('value')}>
@@ -187,7 +187,7 @@ const ConditionalLogicEditor = observer(props => {
 				<Grid item xs={12}>
 					<Button onClick={e => props.setEditingCondition(false)} style={{ paddingLeft: 16, paddingRight: 16 }}>
 						<Icon className={'icon-back'} style={{ fontSize: 14, marginRight: 8 }} />
-						{__('Back', 'kaliforms')}
+						{__('Back', 'kali-forms')}
 					</Button>
 				</Grid>
 			</Grid>

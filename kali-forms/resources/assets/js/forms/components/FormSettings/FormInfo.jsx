@@ -27,12 +27,12 @@ const FormInfo = observer((props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__("General settings", "kaliforms")} />
+				<SectionTitle title={__("General settings", "kali-forms")} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__("Required field mark", "kaliforms")}
+								{__("Required field mark", "kali-forms")}
 							</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.requiredFieldMark}
@@ -51,7 +51,7 @@ const FormInfo = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__("Multiple selection separator", "kaliforms")}
+								{__("Multiple selection separator", "kali-forms")}
 							</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.multipleSelectionsSeparator}
@@ -62,7 +62,7 @@ const FormInfo = observer((props) => {
 								}
 								fullWidth={true}
 								variant="filled"
-								placeholder={__(", or . or - or whatyouneed", "kaliforms")}
+								placeholder={__(", or . or - or whatyouneed", "kali-forms")}
 								inputProps={{ maxLength: 5 }}
 							/>
 						</FormControl>
@@ -70,7 +70,7 @@ const FormInfo = observer((props) => {
 					<Grid item xs={12}>
 						<FormControl>
 							<InputLabel shrink>
-								{__("Global error message", "kaliforms")}
+								{__("Global error message", "kali-forms")}
 							</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.globalErrorMessage}
@@ -81,13 +81,13 @@ const FormInfo = observer((props) => {
 								}
 								fullWidth={true}
 								variant="filled"
-								placeholder={__("Something went wrong...", "kaliforms")}
+								placeholder={__("Something went wrong...", "kali-forms")}
 							/>
 						</FormControl>
 					</Grid>
 					<Grid item xs={9}>
 						<FormControl>
-							<InputLabel shrink>{__("Form action", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Form action", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.formAction}
 								onChange={(e) =>
@@ -95,19 +95,19 @@ const FormInfo = observer((props) => {
 								}
 								fullWidth={true}
 								variant="filled"
-								placeholder={__("Form action", "kaliforms")}
+								placeholder={__("Form action", "kali-forms")}
 							/>
 							<FormHelperText>
 								{__(
 									"The form action controls where the collected information will be submitted to (this is optional, and overrides the default form submission process).",
-									"kaliforms"
+									"kali-forms"
 								)}
 							</FormHelperText>
 						</FormControl>
 					</Grid>
 					<Grid item xs={3}>
 						<FormControl>
-							<InputLabel shrink>{__("Form method", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Form method", "kali-forms")}</InputLabel>
 							<Select
 								value={store._FORM_INFO_.formMethod}
 								multiple={false}
@@ -137,7 +137,7 @@ const FormInfo = observer((props) => {
 										}
 									/>
 								}
-								label={__("Hide form name", "kaliforms")}
+								label={__("Hide form name", "kali-forms")}
 							/>
 						</FormGroup>
 					</Grid>
@@ -157,7 +157,7 @@ const FormInfo = observer((props) => {
 										}
 									/>
 								}
-								label={__("Save submitter IP Address", "kaliforms")}
+								label={__("Save submitter IP Address", "kali-forms")}
 							/>
 						</FormGroup>
 					</Grid>
@@ -173,7 +173,7 @@ const FormInfo = observer((props) => {
 							<FormGroup>
 								<FormControl>
 									<InputLabel shrink>
-										{__("Pagebreak progress complete label", "kaliforms")}
+										{__("Pagebreak progress complete label", "kali-forms")}
 									</InputLabel>
 									<BootstrapInput
 										value={store._FORM_INFO_.pagebreakCompleteLabel}
@@ -184,7 +184,7 @@ const FormInfo = observer((props) => {
 										}
 										fullWidth={true}
 										variant="filled"
-										placeholder={__("Complete", "kaliforms")}
+										placeholder={__("Complete", "kali-forms")}
 									/>
 								</FormControl>
 							</FormGroup>
@@ -192,7 +192,7 @@ const FormInfo = observer((props) => {
 					</Grid>
 				</If>
 
-				<SectionTitle title={__("After form submit", "kaliforms")} />
+				<SectionTitle title={__("After form submit", "kali-forms")} />
 				<Grid container direction="row" spacing={3}>
 					<Choose>
 						<When
@@ -216,7 +216,7 @@ const FormInfo = observer((props) => {
 												}
 											/>
 										}
-										label={__("Show thank you message", "kaliforms")}
+										label={__("Show thank you message", "kali-forms")}
 									/>
 								</FormGroup>
 							</Grid>
@@ -224,7 +224,7 @@ const FormInfo = observer((props) => {
 								<Grid item xs={12}>
 									<FormControl>
 										<InputLabel shrink>
-											{__("Thank you message", "kaliforms")}
+											{__("Thank you message", "kali-forms")}
 										</InputLabel>
 										<BootstrapInput
 											value={store._FORM_INFO_.thankYouMessage}
@@ -258,7 +258,7 @@ const FormInfo = observer((props) => {
 													}
 												/>
 											}
-											label={__("Scroll to thank you message", "kaliforms")}
+											label={__("Scroll to thank you message", "kali-forms")}
 										/>
 									</FormGroup>
 								</Grid>
@@ -280,7 +280,7 @@ const FormInfo = observer((props) => {
 										}
 									/>
 								}
-								label={__("Save form submissions", "kaliforms")}
+								label={__("Save form submissions", "kali-forms")}
 							/>
 						</FormGroup>
 					</Grid>
@@ -290,7 +290,7 @@ const FormInfo = observer((props) => {
 								<InputLabel shrink>
 									{__(
 										"Entries view page (page with [kaliform-submission] shortcode)",
-										"kaliforms"
+										"kali-forms"
 									)}
 								</InputLabel>
 								<Select
@@ -304,7 +304,7 @@ const FormInfo = observer((props) => {
 									input={<BootstrapInput />}
 								>
 									<MenuItem value={0}>
-										{__("-- Select a page --", "kaliforms")}
+										{__("-- Select a page --", "kali-forms")}
 									</MenuItem>
 									{KaliFormsObject.websitePages.map((e) => (
 										<MenuItem key={e.id} value={e.id}>
@@ -321,7 +321,7 @@ const FormInfo = observer((props) => {
 								<InputLabel shrink>
 									{__(
 										"Delete entries after a certain amount of time (in days). Use 0 to never delete entries.",
-										"kaliforms"
+										"kali-forms"
 									)}
 								</InputLabel>
 								<BootstrapInput
@@ -365,7 +365,7 @@ const FormInfo = observer((props) => {
 									}
 									label={__(
 										"Prevent multiple entries from same user",
-										"kaliforms"
+										"kali-forms"
 									)}
 								/>
 							</FormGroup>
@@ -391,10 +391,10 @@ const FormInfo = observer((props) => {
 										input={<BootstrapInput />}
 									>
 										<MenuItem value="field">
-											{__("Field", "kaliforms")}
+											{__("Field", "kali-forms")}
 										</MenuItem>
 										<MenuItem value="userid">
-											{__("User Id", "kaliforms")}
+											{__("User Id", "kali-forms")}
 										</MenuItem>
 									</Select>
 								</FormControl>
@@ -406,7 +406,7 @@ const FormInfo = observer((props) => {
 							>
 								<Grid item xs={8}>
 									<FieldComponentSelect
-										label={__("Unique field", "kaliforms")}
+										label={__("Unique field", "kali-forms")}
 										selectedValue={
 											store._FORM_INFO_.multipleEntriesInvalidateField || ""
 										}
@@ -424,7 +424,7 @@ const FormInfo = observer((props) => {
 									<InputLabel shrink>
 										{__(
 											"Message displayed for the users that already submitted the form",
-											"kaliforms"
+											"kali-forms"
 										)}
 									</InputLabel>
 									<BootstrapInput
@@ -438,13 +438,13 @@ const FormInfo = observer((props) => {
 										variant="filled"
 										placeholder={__(
 											"You already completed this form ... only one entry is allowed",
-											"kaliforms"
+											"kali-forms"
 										)}
 									/>
 									<FormHelperText>
 										{__(
 											"If you select to invalidate by user id, the form will only be accessible to logged in users.",
-											"kaliforms"
+											"kali-forms"
 										)}
 									</FormHelperText>
 								</FormControl>
@@ -464,13 +464,13 @@ const FormInfo = observer((props) => {
 										}
 									/>
 								}
-								label={__("Reset form after submit", "kaliforms")}
+								label={__("Reset form after submit", "kali-forms")}
 							/>
 						</FormGroup>
 					</Grid>
 					<Grid item xs={8}>
 						<FormControl>
-							<InputLabel shrink>{__("Redirect URL", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Redirect URL", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.redirectUrl}
 								type="url"
@@ -486,7 +486,7 @@ const FormInfo = observer((props) => {
 					<Grid item xs={4}>
 						<FormControl>
 							<InputLabel shrink>
-								{__("Redirect timeout (in seconds)", "kaliforms")}
+								{__("Redirect timeout (in seconds)", "kali-forms")}
 							</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.redirectTimeout}
@@ -504,11 +504,11 @@ const FormInfo = observer((props) => {
 					</Grid>
 				</Grid>
 
-				<SectionTitle title={__("Form class and id", "kaliforms")} />
+				<SectionTitle title={__("Form class and id", "kali-forms")} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={6}>
 						<FormControl>
-							<InputLabel shrink>{__("CSS Id", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("CSS Id", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.cssId}
 								onChange={(e) =>
@@ -521,7 +521,7 @@ const FormInfo = observer((props) => {
 					</Grid>
 					<Grid item xs={6}>
 						<FormControl>
-							<InputLabel shrink>{__("CSS Class", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("CSS Class", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								value={store._FORM_INFO_.cssClass}
 								onChange={(e) =>
@@ -545,7 +545,7 @@ const FormInfo = observer((props) => {
 										}
 									/>
 								}
-								label={__("Disable bootstrap grid", "kaliforms")}
+								label={__("Disable bootstrap grid", "kali-forms")}
 							/>
 						</FormGroup>
 					</Grid>

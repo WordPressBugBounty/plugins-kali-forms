@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\PredefinedOptions;
 
 if (!defined('ABSPATH')) {
@@ -45,21 +46,20 @@ class Months
      */
     public function set_options()
     {
-        $this->label = esc_html__('Months', 'kaliforms');
+        $this->label = esc_html__('Months', 'kali-forms');
         $this->options = [
-            ['january' => esc_html__('January', 'kaliforms')],
-            ['february' => esc_html__('February', 'kaliforms')],
-            ['march' => esc_html__('March', 'kaliforms')],
-            ['april' => esc_html__('April', 'kaliforms')],
-            ['may' => esc_html__('May', 'kaliforms')],
-            ['june' => esc_html__('June', 'kaliforms')],
-            ['july' => esc_html__('July', 'kaliforms')],
-            ['august' => esc_html__('August', 'kaliforms')],
-            ['september' => esc_html__('September', 'kaliforms')],
-            ['october' => esc_html__('October', 'kaliforms')],
-            ['november' => esc_html__('November', 'kaliforms')],
-            ['december' => esc_html__('December', 'kaliforms')],
+            ['january' => esc_html__('January', 'kali-forms')],
+            ['february' => esc_html__('February', 'kali-forms')],
+            ['march' => esc_html__('March', 'kali-forms')],
+            ['april' => esc_html__('April', 'kali-forms')],
+            ['may' => esc_html__('May', 'kali-forms')],
+            ['june' => esc_html__('June', 'kali-forms')],
+            ['july' => esc_html__('July', 'kali-forms')],
+            ['august' => esc_html__('August', 'kali-forms')],
+            ['september' => esc_html__('September', 'kali-forms')],
+            ['october' => esc_html__('October', 'kali-forms')],
+            ['november' => esc_html__('November', 'kali-forms')],
+            ['december' => esc_html__('December', 'kali-forms')],
         ];
-
     }
 }

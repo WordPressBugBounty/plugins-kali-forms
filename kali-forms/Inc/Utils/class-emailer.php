@@ -69,7 +69,7 @@ class Emailer
 	{
 		$this->form = $form_id;
 		if ($this->form === null) {
-			return new \WP_Error(500, esc_html__('Something went wrong', 'kaliforms'));
+			return new \WP_Error(500, esc_html__('Something went wrong', 'kali-forms'));
 		}
 		$this->data         = $rawData;
 		$this->placeholders = $placeholders;
@@ -98,7 +98,7 @@ class Emailer
 	{
 		$this->submission = $id;
 		if ($this->submission === null) {
-			return new \WP_Error(500, esc_html__('Something went wrong', 'kaliforms'));
+			return new \WP_Error(500, esc_html__('Something went wrong', 'kali-forms'));
 		}
 
 		$this->prepare_data();

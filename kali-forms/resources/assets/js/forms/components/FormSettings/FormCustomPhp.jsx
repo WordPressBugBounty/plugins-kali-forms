@@ -10,7 +10,7 @@ const FormCustomPhp = observer((props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Before form process PHP script', 'kaliforms')} />
+				<SectionTitle title={__('Before form process PHP script', 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
 						<CodeEditor
@@ -29,7 +29,7 @@ const FormCustomPhp = observer((props) => {
 						/>
 					</Grid>
 				</Grid>
-				<SectionTitle title={__('After form process PHP script', 'kaliforms')} />
+				<SectionTitle title={__('After form process PHP script', 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
 						<CodeEditor

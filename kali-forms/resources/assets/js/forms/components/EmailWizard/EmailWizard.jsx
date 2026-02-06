@@ -192,7 +192,7 @@ const EmailWizard = observer((props) => {
 					<Step>
 						<If condition={activeStep === 0}>
 							<StepLabel>
-								{__('What is this email for?', 'kaliforms')}
+								{__('What is this email for?', 'kali-forms')}
 							</StepLabel>
 						</If>
 						<If condition={activeStep > 0}>
@@ -204,18 +204,18 @@ const EmailWizard = observer((props) => {
 						</If>
 						<StepContent>
 							<Typography>
-								<span dangerouslySetInnerHTML={{ __html: __('Add the subject for this email in the field below. (You can click the <> icon in order to add placeholders for your form fields)', 'kaliforms') }}></span>
+								<span dangerouslySetInnerHTML={{ __html: __('Add the subject for this email in the field below. (You can click the <> icon in order to add placeholders for your form fields)', 'kali-forms') }}></span>
 							</Typography>
 							<Grid container direction="row" spacing={8}>
 								<Grid item xs={6}>
 									<FormControl error={errors.includes('emailSubject')}>
 										<InputLabel shrink>
-											{__('Email subject', 'kaliforms')}
+											{__('Email subject', 'kali-forms')}
 										</InputLabel>
 										<BootstrapInput
 											id="emailSubject"
 											value={emailSubject}
-											placeholder={__('Hello World!', 'kaliforms')}
+											placeholder={__('Hello World!', 'kali-forms')}
 											fullWidth={true}
 											endAdornment={(
 												<PlaceholderDialogOpener adornment={true}></PlaceholderDialogOpener>
@@ -231,7 +231,7 @@ const EmailWizard = observer((props) => {
 										onClick={handleNext}
 										className={classes.button}
 									>
-										{__('Next', 'kaliforms')}
+										{__('Next', 'kali-forms')}
 									</StyledButton>
 								</Box>
 							</Box>
@@ -240,25 +240,25 @@ const EmailWizard = observer((props) => {
 					<Step>
 						<If condition={activeStep <= 1}>
 							<StepLabel>
-								{__('Who is sending this email?', 'kaliforms')}
+								{__('Who is sending this email?', 'kali-forms')}
 							</StepLabel>
 						</If>
 						<If condition={activeStep > 1}>
 							<StepLabel>
-								{__('The email sender is:', 'kaliforms')}
+								{__('The email sender is:', 'kali-forms')}
 								<br />
 								<small>{fromName} - {fromEmail}</small>
 							</StepLabel>
 						</If>
 						<StepContent>
 							<Typography>
-								<span dangerouslySetInnerHTML={{ __html: __('Please specify the name and email of the sender in the fields below. (You can click the <> icon in order to add placeholders for your form fields)', 'kaliforms') }}></span>
+								<span dangerouslySetInnerHTML={{ __html: __('Please specify the name and email of the sender in the fields below. (You can click the <> icon in order to add placeholders for your form fields)', 'kali-forms') }}></span>
 							</Typography>
 							<Grid container direction="row" spacing={8}>
 								<Grid item xs={6}>
 									<FormControl error={errors.includes('fromName')}>
 										<InputLabel shrink>
-											{__('Sender name', 'kaliforms')}
+											{__('Sender name', 'kali-forms')}
 										</InputLabel>
 										<BootstrapInput
 											id="fromName"
@@ -276,7 +276,7 @@ const EmailWizard = observer((props) => {
 								<Grid item xs={6}>
 									<FormControl error={errors.includes('fromEmail')}>
 										<InputLabel shrink>
-											{__('Sender email', 'kaliforms')}
+											{__('Sender email', 'kali-forms')}
 										</InputLabel>
 										<BootstrapInput
 											id="fromEmail"
@@ -297,13 +297,13 @@ const EmailWizard = observer((props) => {
 										onClick={handleBack}
 										className={classes.button}
 									>
-										{__('Back', 'kaliforms')}
+										{__('Back', 'kali-forms')}
 									</StyledButton>
 									<StyledButton
 										onClick={handleNext}
 										className={classes.button}
 									>
-										{__('Next', 'kaliforms')}
+										{__('Next', 'kali-forms')}
 									</StyledButton>
 								</Box>
 							</Box>
@@ -312,25 +312,25 @@ const EmailWizard = observer((props) => {
 					<Step>
 						<If condition={activeStep <= 2}>
 							<StepLabel>
-								{__('Who will receive this email?', 'kaliforms')}
+								{__('Who will receive this email?', 'kali-forms')}
 							</StepLabel>
 						</If>
 						<If condition={activeStep > 2}>
 							<StepLabel>
-								{__('The email will be sent to:', 'kaliforms')}
+								{__('The email will be sent to:', 'kali-forms')}
 								<br />
 								<small>{toEmail}</small>
 							</StepLabel>
 						</If>
 						<StepContent>
 							<Typography>
-								<span dangerouslySetInnerHTML={{ __html: __('Please specify the email of the person that will receive this email in the field below. (You can click the <> icon in order to add placeholders for your form fields)', 'kaliforms') }}></span>
+								<span dangerouslySetInnerHTML={{ __html: __('Please specify the email of the person that will receive this email in the field below. (You can click the <> icon in order to add placeholders for your form fields)', 'kali-forms') }}></span>
 							</Typography>
 							<Grid container direction="row" spacing={8}>
 								<Grid item xs={6}>
 									<FormControl error={errors.includes('toEmail')}>
 										<InputLabel shrink>
-											{__('Send notification to', 'kaliforms')}
+											{__('Send notification to', 'kali-forms')}
 										</InputLabel>
 										<BootstrapInput
 											id="toEmail"
@@ -351,13 +351,13 @@ const EmailWizard = observer((props) => {
 										onClick={handleBack}
 										className={classes.button}
 									>
-										{__('Back', 'kaliforms')}
+										{__('Back', 'kali-forms')}
 									</StyledButton>
 									<StyledButton
 										onClick={handleNext}
 										className={classes.button}
 									>
-										{__('Next', 'kaliforms')}
+										{__('Next', 'kali-forms')}
 									</StyledButton>
 								</Box>
 							</Box>
@@ -365,16 +365,16 @@ const EmailWizard = observer((props) => {
 					</Step>
 					<Step>
 						<StepLabel>
-							{__('What information is sent through this email?', 'kaliforms')}
+							{__('What information is sent through this email?', 'kali-forms')}
 						</StepLabel>
 						<StepContent>
 							<Typography>
-								<span dangerouslySetInnerHTML={{ __html: __('Please write the message of the email in the field below. (You can click the <> icon in order to add placeholders for your form fields)', 'kaliforms') }}></span>
+								<span dangerouslySetInnerHTML={{ __html: __('Please write the message of the email in the field below. (You can click the <> icon in order to add placeholders for your form fields)', 'kali-forms') }}></span>
 							</Typography>
 							<Grid container direction="row" spacing={8}>
 								<Grid item xs={10}>
 									<MUIRichTextEditor
-										label={__('Start typing...', 'kaliforms')}
+										label={__('Start typing...', 'kali-forms')}
 										value={emailBody}
 										error={errors.includes('emailBody')}
 										customControls={[
@@ -396,13 +396,13 @@ const EmailWizard = observer((props) => {
 										onClick={handleBack}
 										className={classes.button}
 									>
-										{__('Back', 'kaliforms')}
+										{__('Back', 'kali-forms')}
 									</StyledButton>
 									<StyledButton
 										onClick={handleFinish}
 										className={classes.button}
 									>
-										{__('Finish', 'kaliforms')}
+										{__('Finish', 'kali-forms')}
 									</StyledButton>
 								</Box>
 							</Box>

@@ -147,12 +147,12 @@ class Submission_Shortcode
 		$this->get_hash();
 
 		if ($this->form_id === null || $this->hash === null) {
-			return esc_html__('Something went wrong.', 'kaliforms');
+			return esc_html__('Something went wrong.', 'kali-forms');
 		}
 
 		$this->compute_hash();
 		if (!$this->verify_hash()) {
-			return esc_html__('Denied!', 'kaliforms');
+			return esc_html__('Denied!', 'kali-forms');
 		}
 
 		return $this->render_submission();
@@ -179,7 +179,7 @@ class Submission_Shortcode
 		$html .= '</dl>';
 
 		$html .= '<hr />';
-		$html .= '<button class="button" id="delete-kaliform-submission" data-hash="' . $this->hash . '" data-form-id="' . $this->form_id . '" data-submission-id="' . $this->submission_id . '">' . esc_html__('Delete submission', 'kaliforms') . '</button>';
+		$html .= '<button class="button" id="delete-kaliform-submission" data-hash="' . $this->hash . '" data-form-id="' . $this->form_id . '" data-submission-id="' . $this->submission_id . '">' . esc_html__('Delete submission', 'kali-forms') . '</button>';
 		return $html;
 	}
 
@@ -227,13 +227,13 @@ class Submission_Shortcode
 	{
 		$components = get_post_meta($this->form_id, $this->slug . '_field_components', true);
 		if ($components === null || $components === '' && $components !== null) {
-			return esc_html__('Something went wrong.', 'kaliforms');
+			return esc_html__('Something went wrong.', 'kali-forms');
 		}
 
 		$components = json_decode($components);
 		$arr        = [
 			'publish_date' => [
-				'caption' => __('Submission date', 'kaliforms'),
+				'caption' => __('Submission date', 'kali-forms'),
 				'id'      => 'publish_date',
 				'value'   => get_post_time('F j, Y - g:i a', false, $this->submission_id, true),
 			],

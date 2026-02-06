@@ -5,9 +5,9 @@ export const UiContext = createContext();
 export const UiProvider = props => {
 	let currentPath = useLocation();
 	let navbar = [
-		{ label: __('Forms', 'kaliforms'), key: 'forms', path: '/' },
-		{ label: __('Form entries', 'kaliforms'), key: 'form-entries', path: `/form-entries` },
-		{ label: __('Exporter', 'kaliforms'), key: 'exporter', path: '/exporter' }
+		{ label: __('Forms', 'kali-forms'), key: 'forms', path: '/' },
+		{ label: __('Form entries', 'kali-forms'), key: 'form-entries', path: `/form-entries` },
+		{ label: __('Exporter', 'kali-forms'), key: 'exporter', path: '/exporter' }
 	]
 
 	const [ui, setUi] = useState({

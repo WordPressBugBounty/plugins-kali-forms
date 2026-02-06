@@ -260,10 +260,10 @@ const ExtensionPicker = observer((props) => {
 	]);
 
 	const categories = {
-		images: __("Images", "kaliforms"),
-		documents: __("Documents", "kaliforms"),
-		audio: __("Audio", "kaliforms"),
-		video: __("Video", "kaliforms"),
+		images: __("Images", "kali-forms"),
+		documents: __("Documents", "kali-forms"),
+		audio: __("Audio", "kali-forms"),
+		video: __("Video", "kali-forms"),
 	};
 
 	React.useEffect(() => {
@@ -319,7 +319,7 @@ const ExtensionPicker = observer((props) => {
 							control={
 								<Checkbox onChange={(e) => selectAll()} checked={selectedAll} />
 							}
-							label={__("Select all", "kaliforms")}
+							label={__("Select all", "kali-forms")}
 						/>
 						<Button
 							disableRipple={true}
@@ -327,7 +327,7 @@ const ExtensionPicker = observer((props) => {
 							variant="text"
 							onClick={(e) => setSimple(false)}
 						>
-							{__("Advanced", "kaliforms")}
+							{__("Advanced", "kali-forms")}
 						</Button>
 					</FormGroup>
 					{Object.keys(categories).map((key) => (
@@ -374,7 +374,7 @@ const ExtensionPicker = observer((props) => {
 							variant="text"
 							onClick={(e) => setSimple(true)}
 						>
-							{__("Simple", "kaliforms")}
+							{__("Simple", "kali-forms")}
 						</Button>
 					</FormGroup>
 					<BootstrapInput

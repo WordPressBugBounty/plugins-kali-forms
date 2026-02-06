@@ -31,6 +31,6 @@ class TextBox extends Form_Field
     {
         parent::__construct($args);
         $this->icon  = 'icon-text';
-        $this->label = esc_html__('Text box', 'kaliforms');
+        $this->label = esc_html__('Text box', 'kali-forms');
     }
 }

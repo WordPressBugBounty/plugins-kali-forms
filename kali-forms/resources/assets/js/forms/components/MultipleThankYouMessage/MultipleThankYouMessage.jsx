@@ -13,7 +13,7 @@ const MultipleThankYouMessage = observer(() => {
 	const addNewConditionalMesssage = () => {
 		store._FORM_INFO_.conditionalThankYouMessage.push({
 			message: '',
-			name: __('New thank you message', 'kaliforms'),
+			name: __('New thank you message', 'kali-forms'),
 			condition: {
 				if: '',
 				operator: '',
@@ -47,7 +47,7 @@ const MultipleThankYouMessage = observer(() => {
 				}
 				<Grid item xs={12}>
 					<Button onClick={() => addNewConditionalMesssage()}>
-						{__('Add thank you message', 'kaliforms')}
+						{__('Add thank you message', 'kali-forms')}
 					</Button>
 				</Grid>
 			</If>

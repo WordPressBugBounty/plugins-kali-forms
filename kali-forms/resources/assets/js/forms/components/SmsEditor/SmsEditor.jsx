@@ -35,8 +35,8 @@ const SmsEditor = observer(() => {
 	 * Duplicates an sms
 	 */
 	const duplicateSms = () => {
-		store._CONFIRMATION_DIALOG_.setTitle(__('Duplicate notification', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to duplicate this notification', 'kaliforms'));
+		store._CONFIRMATION_DIALOG_.setTitle(__('Duplicate notification', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to duplicate this notification', 'kali-forms'));
 		store._CONFIRMATION_DIALOG_.setAction(_duplicateSms)
 		store._CONFIRMATION_DIALOG_.setState(true);
 	}
@@ -44,8 +44,8 @@ const SmsEditor = observer(() => {
 	 * Removes an sms from the list
 	 */
 	const removeSms = () => {
-		store._CONFIRMATION_DIALOG_.setTitle(__('Remove notification', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to delete this notification', 'kaliforms'));
+		store._CONFIRMATION_DIALOG_.setTitle(__('Remove notification', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to delete this notification', 'kali-forms'));
 		store._CONFIRMATION_DIALOG_.setAction(_removeSms)
 		store._CONFIRMATION_DIALOG_.setState(true);
 	}
@@ -60,11 +60,11 @@ const SmsEditor = observer(() => {
 				<Grid item xs={8}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Name', 'kaliforms')}
+							{__('Name', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={store._SMS_.getPropertyValue(store._UI_.activeSMSInSidebar, 'name')}
-							placeholder={__('Name of your SMS notification...', 'kaliforms')}
+							placeholder={__('Name of your SMS notification...', 'kali-forms')}
 							fullWidth={true}
 							onChange={e => store._SMS_.setSmsProp(store._UI_.activeSMSInSidebar, 'name', e.target.value)} />
 					</FormControl>
@@ -72,7 +72,7 @@ const SmsEditor = observer(() => {
 				<Grid item xs={4}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Provider', 'kaliforms')}
+							{__('Provider', 'kali-forms')}
 						</InputLabel>
 						<Select
 							multiple={false}
@@ -81,7 +81,7 @@ const SmsEditor = observer(() => {
 							onChange={e => store._SMS_.setSmsProp(store._UI_.activeSMSInSidebar, 'provider', e.target.value)}
 							fullWidth={true}
 						>
-							<MenuItem value="empty">{__('-- Please select a provider --', 'kaliforms')}</MenuItem>
+							<MenuItem value="empty">{__('-- Please select a provider --', 'kali-forms')}</MenuItem>
 							<MenuItem value="twilio">Twilio</MenuItem>
 							<MenuItem value="clickatell">Clickatell</MenuItem>
 							<MenuItem value="smsglobal">SMSGlobal</MenuItem>
@@ -95,11 +95,11 @@ const SmsEditor = observer(() => {
 				<Grid item xs={6}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('To number', 'kaliforms')}
+							{__('To number', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={store._SMS_.getPropertyValue(store._UI_.activeSMSInSidebar, 'to')}
-							placeholder={__('+123456789', 'kaliforms')}
+							placeholder={__('+123456789', 'kali-forms')}
 							fullWidth={true}
 							endAdornment={(
 								<PlaceholderDialogOpener adornment={true}></PlaceholderDialogOpener>
@@ -110,11 +110,11 @@ const SmsEditor = observer(() => {
 				<Grid item xs={6}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('From number or short number', 'kaliforms')}
+							{__('From number or short number', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={store._SMS_.getPropertyValue(store._UI_.activeSMSInSidebar, 'from')}
-							placeholder={__('+987654321', 'kaliforms')}
+							placeholder={__('+987654321', 'kali-forms')}
 							fullWidth={true}
 							endAdornment={(
 								<PlaceholderDialogOpener adornment={true}></PlaceholderDialogOpener>
@@ -127,11 +127,11 @@ const SmsEditor = observer(() => {
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Message body', 'kaliforms')} ({store._SMS_.getPropertyValue(store._UI_.activeSMSInSidebar, 'message').length}/160)
+							{__('Message body', 'kali-forms')} ({store._SMS_.getPropertyValue(store._UI_.activeSMSInSidebar, 'message').length}/160)
 						</InputLabel>
 						<BootstrapInput
 							value={store._SMS_.getPropertyValue(store._UI_.activeSMSInSidebar, 'message')}
-							placeholder={__('A new form submission!', 'kaliforms')}
+							placeholder={__('A new form submission!', 'kali-forms')}
 							fullWidth={true}
 							multiline={true}
 							inputProps={{
@@ -149,7 +149,7 @@ const SmsEditor = observer(() => {
 			<Grid container direction="row" spacing={3}>
 				<Grid item xs={12}>
 					<ConditionalEntity
-						label={__('Should send sms', 'kaliforms')}
+						label={__('Should send sms', 'kali-forms')}
 						onChange={conditionalChanged}
 						changer={store._UI_.activeSMSInSidebar}
 						conditions={store._SMS_.getPropertyValue(store._UI_.activeSMSInSidebar, 'conditions')} />
@@ -162,13 +162,13 @@ const SmsEditor = observer(() => {
 					onClick={() => duplicateSms()}
 				>
 					<Icon className="icon-copy" />
-					{__('Duplicate SMS', 'kaliforms')}
+					{__('Duplicate SMS', 'kali-forms')}
 				</Button>
 
 				<Button variant="text"
 					onClick={() => removeSms()}>
 					<Icon className="icon-remove" />
-					{__('Remove SMS', 'kaliforms')}
+					{__('Remove SMS', 'kali-forms')}
 				</Button>
 			</Box>
 		</React.Fragment>

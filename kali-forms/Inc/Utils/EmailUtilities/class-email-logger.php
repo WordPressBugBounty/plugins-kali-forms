@@ -31,13 +31,13 @@ class Email_Logger
      * @var boolean
      */
     public $enabled = false;
-		public $mailer;
+    public $mailer;
     /**
      * Class constructor
      */
     public function __construct()
     {
-        $enabled =	get_option($this->slug . '_email_log', "");
+        $enabled =    get_option($this->slug . '_email_log', "");
         $this->enabled = !empty($enabled);
         $this->path     = get_temp_dir();
 
@@ -69,8 +69,8 @@ class Email_Logger
      */
     public function error($wp_error)
     {
-        if(!$this->enabled){
-          return;
+        if (!$this->enabled) {
+            return;
         }
         $fp = fopen($this->path . $this->filename, 'a');
 
@@ -87,8 +87,8 @@ class Email_Logger
      */
     public function ok($message)
     {
-        if(!$this->enabled){
-          return;
+        if (!$this->enabled) {
+            return;
         }
         $fp = fopen($this->path . $this->filename, 'a');
         fputs($fp, $this->_template([
@@ -116,29 +116,29 @@ class Email_Logger
      */
     public function get_log()
     {
-			if (!current_user_can('administrator')) {
-				wp_die(wp_json_encode([
-							'success' => false,
-							'message' => esc_html__('Denied', 'kaliforms'),
-					]));
-				}
+        if (!current_user_can('administrator')) {
+            wp_die(wp_json_encode([
+                'success' => false,
+                'message' => esc_html__('Denied', 'kali-forms'),
+            ]));
+        }
 
         if (!isset($_POST['args'], $_POST['args']['nonce'])) {
             wp_die(wp_json_encode([
                 'success' => false,
-                'message' => esc_html__('Denied', 'kaliforms'),
+                'message' => esc_html__('Denied', 'kali-forms'),
             ]));
         }
 
         if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['args']['nonce'])), $this->slug . '_nonce')) {
             wp_die(wp_json_encode([
                 'success' => false,
-                'message' => esc_html__('Denied', 'kaliforms'),
+                'message' => esc_html__('Denied', 'kali-forms'),
             ]));
         }
 
         if (!file_exists($this->path . $this->filename)) {
-            return wp_die(wp_json_encode(['success' => false, 'content' => __('No email sent yet', 'kaliforms')]));
+            return wp_die(wp_json_encode(['success' => false, 'content' => __('No email sent yet', 'kali-forms')]));
         }
 
         $content  = file_get_contents($this->path . $this->filename);
@@ -169,6 +169,6 @@ class Email_Logger
      */
     public function denied()
     {
-        wp_die(esc_html__('Denied', 'kaliforms'));
+        wp_die(esc_html__('Denied', 'kali-forms'));
     }
 }

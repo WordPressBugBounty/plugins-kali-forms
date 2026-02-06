@@ -44,7 +44,7 @@ const Slack = observer(props => {
 					<Grid item xs={12}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Add a name for your Slack action', 'kaliforms')}
+								{__('Add a name for your Slack action', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={newActioName}
@@ -53,7 +53,7 @@ const Slack = observer(props => {
 								endAdornment={(
 									<Box className={classes.createButton}
 										onClick={() => addAction()}>
-										{__('Create', 'kaliforms')}
+										{__('Create', 'kali-forms')}
 									</Box>
 								)}
 							/>
@@ -62,7 +62,7 @@ const Slack = observer(props => {
 				</Grid>
 
 				<If condition={store._SLACK_.actions.length}>
-					<SectionTitle title={__('Slack actions', 'kaliforms')} />
+					<SectionTitle title={__('Slack actions', 'kali-forms')} />
 					<Grid container direction="row" spacing={2} alignItems="center">
 						{
 							store._SLACK_.actions.map((action, idx) => (

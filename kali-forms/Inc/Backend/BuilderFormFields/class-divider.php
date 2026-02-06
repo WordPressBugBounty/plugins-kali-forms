@@ -37,6 +37,6 @@ class Divider extends Form_Field
     {
         parent::__construct($args);
         $this->remove_props(['default', 'description']);
-        $this->label = esc_html__('Divider', 'kaliforms');
+        $this->label = esc_html__('Divider', 'kali-forms');
     }
 }

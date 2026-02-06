@@ -72,9 +72,9 @@ const getFieldComponent = (col, valueGetter, callback) => {
 			);
 		case 'pageBreak':
 			return (<span className={'pagebreak-placeholder'}>
-				<div><button className="button">{__('Back', 'kaliforms')}</button></div>
+				<div><button className="button">{__('Back', 'kali-forms')}</button></div>
 				<div> {col.caption === '' ? col.name : col.caption} </div>
-				<div><button className="button">{__('Next', 'kaliforms')}</button></div>
+				<div><button className="button">{__('Next', 'kali-forms')}</button></div>
 			</span>)
 		case 'text':
 		case 'email':
@@ -112,7 +112,7 @@ const getFieldComponent = (col, valueGetter, callback) => {
 			return <hr />;
 		case 'fileUpload':
 			return (<span className={'fileUpload-placeholder'}>
-				{__('Drag & drop', 'kaliforms')}
+				{__('Drag & drop', 'kali-forms')}
 			</span>);
 		default:
 			return <span className="kali-placeholder">{col.caption === '' ? col.name : col.caption}</span>

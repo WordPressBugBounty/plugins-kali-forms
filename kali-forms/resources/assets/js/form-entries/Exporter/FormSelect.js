@@ -31,12 +31,12 @@ export default function FormSelect() {
 	return (
 		<div style={{ textAlign: 'center' }}>
 			<Typography.Title level={4} style={{ marginBottom: 24 }}>
-				{__('Select a form from which you want to export entries', 'kaliforms')}
+				{__('Select a form from which you want to export entries', 'kali-forms')}
 			</Typography.Title>
 
 			<Space direction="vertical" size="middle" style={{ display: 'flex', alignItems: 'center' }}>
 				<Space align="center">
-					<Typography.Text>{__('Enable multiple form selection', 'kaliforms')}</Typography.Text>
+					<Typography.Text>{__('Enable multiple form selection', 'kali-forms')}</Typography.Text>
 					<Switch
 						checked={exportOptions.multiple}
 						onChange={onMultipleToggle}
@@ -48,7 +48,7 @@ export default function FormSelect() {
 						mode="multiple"
 						allowClear
 						onChange={onSelectMultipleChange}
-						placeholder={__('Please select the forms', 'kaliforms')}
+						placeholder={__('Please select the forms', 'kali-forms')}
 						style={{ width: 250, textAlign: 'left' }}
 						value={exportOptions.forms}
 					>
@@ -56,7 +56,7 @@ export default function FormSelect() {
 					</Select>
 					: <Select
 						onChange={onSelectChange}
-						placeholder={__('Please select a form', 'kaliforms')}
+						placeholder={__('Please select a form', 'kali-forms')}
 						style={{ width: 250, textAlign: 'left' }}
 						value={exportOptions.form}
 					>

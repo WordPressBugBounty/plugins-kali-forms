@@ -31,6 +31,6 @@ class Hidden extends Form_Field
     {
         parent::__construct($args);
         $this->remove_props(['caption', 'description']);
-        $this->label = esc_html__('Hidden field', 'kaliforms');
+        $this->label = esc_html__('Hidden field', 'kali-forms');
     }
 }

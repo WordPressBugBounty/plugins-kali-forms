@@ -23,8 +23,8 @@ class Employee_Information_Form extends Predefined_Form
 	{
 		parent::__construct();
 		$this->id = 'employeeInformation';
-		$this->name = esc_html__('Employee information form', 'kaliforms');
-		$this->description = esc_html__('Create a database with your employee information using this form.', 'kaliforms');
+		$this->name = esc_html__('Employee information form', 'kali-forms');
+		$this->description = esc_html__('Create a database with your employee information using this form.', 'kali-forms');
 		$this->emails = [
 			[
 				"fromName" => "{first-name} {last-name}",

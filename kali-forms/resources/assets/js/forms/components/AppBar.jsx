@@ -73,25 +73,25 @@ const AppBar = props => {
 						<Tab value="formBuilder" label={
 							<React.Fragment>
 								<Icon className="icon-builder" />
-								{__('Builder', 'kaliforms')}
+								{__('Builder', 'kali-forms')}
 							</React.Fragment>
 						} />
 						<Tab value="emailBuilder" label={
 							<React.Fragment>
 								<Icon className="icon-notification" />
-								{__('Notifications', 'kaliforms')}
+								{__('Notifications', 'kali-forms')}
 							</React.Fragment>
 						} />
 						<Tab value="formSettings" label={
 							<React.Fragment>
 								<Icon className="icon-settings" />
-								{__('Settings', 'kaliforms')}
+								{__('Settings', 'kali-forms')}
 							</React.Fragment>
 						} />
 					</NavigationTabs>
 					<AppBarInput
 						onChange={e => changeFormName(e)}
-						placeholder={__('Form name', 'kaliforms')}
+						placeholder={__('Form name', 'kali-forms')}
 						value={store._FORM_INFO_.formName}
 						startAdornment={(<Icon style={{ color: '#fff' }} className="icon-edit" />)}
 					/>

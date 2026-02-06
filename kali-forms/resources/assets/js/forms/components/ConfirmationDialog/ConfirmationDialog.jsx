@@ -48,7 +48,7 @@ const ConfirmationDialog = observer((props) => {
 				<DialogActions>
 					<If condition={!store._CONFIRMATION_DIALOG_.hideCancelButton}>
 						<Button onClick={handleClose} style={{ padding: '6px 16px', height: 44 }}>
-							{__('Cancel', 'kaliforms')}
+							{__('Cancel', 'kali-forms')}
 						</Button>
 					</If>
 					<If condition={!is.null(store._CONFIRMATION_DIALOG_.additionalButton)}>
@@ -57,7 +57,7 @@ const ConfirmationDialog = observer((props) => {
 						</Button>
 					</If>
 					<Button onClick={handleAccept} style={{ padding: '6px 16px', height: 44 }} autoFocus>
-						{__('Ok', 'kaliforms')}
+						{__('Ok', 'kali-forms')}
 					</Button>
 				</DialogActions>
 			</Dialog>

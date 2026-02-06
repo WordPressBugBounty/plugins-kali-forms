@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\BuilderFormFields;
 
 if (!defined('ABSPATH')) {
@@ -92,31 +93,31 @@ abstract class Form_Field
     {
         $this->properties = [
             'id' => [
-                'label' => esc_html__('Field id', 'kaliforms'),
+                'label' => esc_html__('Field id', 'kali-forms'),
                 'type' => 'textbox',
                 'value' => $this->id,
                 'group' => 'advanced',
             ],
             'name' => [
-                'label' => esc_html__('Field name', 'kaliforms'),
+                'label' => esc_html__('Field name', 'kali-forms'),
                 'type' => 'textbox',
                 'value' => $this->id,
                 'group' => 'general',
             ],
             'caption' => [
-                'label' => esc_html__('Field caption/label', 'kaliforms'),
+                'label' => esc_html__('Field caption/label', 'kali-forms'),
                 'type' => 'textbox',
                 'value' => '',
                 'group' => 'general',
             ],
             'description' => [
-                'label' => esc_html__('Field description', 'kaliforms'),
+                'label' => esc_html__('Field description', 'kali-forms'),
                 'type' => 'textbox',
                 'value' => '',
                 'group' => 'general',
             ],
             'default' => [
-                'label' => esc_html__('Default value', 'kaliforms'),
+                'label' => esc_html__('Default value', 'kali-forms'),
                 'type' => 'textbox',
                 'value' => '',
                 'group' => 'advanced',

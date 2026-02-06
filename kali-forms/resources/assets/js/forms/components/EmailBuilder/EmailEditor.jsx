@@ -139,10 +139,10 @@ const EmailEditor = observer((props) => {
 	 */
 	const duplicateEmail = () => {
 		store._CONFIRMATION_DIALOG_.setTitle(
-			__("Duplicate notification", "kaliforms")
+			__("Duplicate notification", "kali-forms")
 		);
 		store._CONFIRMATION_DIALOG_.setMessage(
-			__("Are you sure you want to duplicate this notification", "kaliforms")
+			__("Are you sure you want to duplicate this notification", "kali-forms")
 		);
 		store._CONFIRMATION_DIALOG_.setAction(_duplicateEmail);
 		store._CONFIRMATION_DIALOG_.setState(true);
@@ -152,10 +152,10 @@ const EmailEditor = observer((props) => {
 	 */
 	const removeEmail = () => {
 		store._CONFIRMATION_DIALOG_.setTitle(
-			__("Remove notification", "kaliforms")
+			__("Remove notification", "kali-forms")
 		);
 		store._CONFIRMATION_DIALOG_.setMessage(
-			__("Are you sure you want to delete this notification", "kaliforms")
+			__("Are you sure you want to delete this notification", "kali-forms")
 		);
 		store._CONFIRMATION_DIALOG_.setAction(_removeEmail);
 		store._CONFIRMATION_DIALOG_.setState(true);
@@ -167,14 +167,14 @@ const EmailEditor = observer((props) => {
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
 						<FormControl>
-							<InputLabel shrink>{__("Email subject", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Email subject", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								id="emailSubject"
 								value={store._EMAILS_.getPropertyValue(
 									store._UI_.activeEmailInSidebar,
 									"emailSubject"
 								)}
-								placeholder={__("Hello World!", "kaliforms")}
+								placeholder={__("Hello World!", "kali-forms")}
 								fullWidth={true}
 								endAdornment={
 									<PlaceholderDialogOpener
@@ -195,14 +195,14 @@ const EmailEditor = observer((props) => {
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={6}>
 						<FormControl>
-							<InputLabel shrink>{__("Sender name", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Sender name", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								id="fromName"
 								value={store._EMAILS_.getPropertyValue(
 									store._UI_.activeEmailInSidebar,
 									"fromName"
 								)}
-								placeholder={__("John Doe...", "kaliforms")}
+								placeholder={__("John Doe...", "kali-forms")}
 								fullWidth={true}
 								endAdornment={
 									<PlaceholderDialogOpener
@@ -221,7 +221,7 @@ const EmailEditor = observer((props) => {
 					</Grid>
 					<Grid item xs={6}>
 						<FormControl>
-							<InputLabel shrink>{__("Sender email", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Sender email", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								id="fromName"
 								value={store._EMAILS_.getPropertyValue(
@@ -250,7 +250,7 @@ const EmailEditor = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__("Send notification to", "kaliforms")}
+								{__("Send notification to", "kali-forms")}
 							</InputLabel>
 							<BootstrapInput
 								id="toEmail"
@@ -277,7 +277,7 @@ const EmailEditor = observer((props) => {
 					</Grid>
 					<Grid item xs={6}>
 						<FormControl>
-							<InputLabel shrink>{__("Reply to", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Reply to", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								id="replyTo"
 								value={store._EMAILS_.getPropertyValue(
@@ -305,7 +305,7 @@ const EmailEditor = observer((props) => {
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={6}>
 						<FormControl>
-							<InputLabel shrink>{__("Send copy to", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Send copy to", "kali-forms")}</InputLabel>
 							<BootstrapInput
 								id="ccEmail"
 								value={store._EMAILS_.getPropertyValue(
@@ -332,7 +332,7 @@ const EmailEditor = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__("Send hidden copy to", "kaliforms")}
+								{__("Send hidden copy to", "kali-forms")}
 							</InputLabel>
 							<BootstrapInput
 								id="bccEmail"
@@ -362,7 +362,7 @@ const EmailEditor = observer((props) => {
 					<Grid item xs={12}>
 						{store._UI_.editEmailAsHtml && (
 							<>
-								<InputLabel shrink>{__("Email body", "kaliforms")}</InputLabel>
+								<InputLabel shrink>{__("Email body", "kali-forms")}</InputLabel>
 								<FormControl>
 									<CodeEditor
 										mode="html"
@@ -403,13 +403,13 @@ const EmailEditor = observer((props) => {
 											store._UI_.setEditEmailAsHtml(false);
 										}}
 									>
-										{__("Switch to rich text editor", "kaliforms")}
+										{__("Switch to rich text editor", "kali-forms")}
 									</Button>
 								</FormControl>
 							</>
 						)}
 						<FormControl>
-							<InputLabel shrink>{__("Email body", "kaliforms")}</InputLabel>
+							<InputLabel shrink>{__("Email body", "kali-forms")}</InputLabel>
 							{!store._UI_.editEmailAsHtml && (
 								<MUIRichTextEditor
 									defaultValue={emailBody}
@@ -451,7 +451,7 @@ const EmailEditor = observer((props) => {
 					<Grid item xs={12}>
 						<FormControl>
 							<InputLabel shrink>
-								{__("Attach files from media library", "kaliforms")}
+								{__("Attach files from media library", "kali-forms")}
 							</InputLabel>
 							<MediaSelector
 								value={
@@ -478,7 +478,7 @@ const EmailEditor = observer((props) => {
 								<InputLabel shrink>
 									{__(
 										"Attach the file(s) from the following fields to this email:",
-										"kaliforms"
+										"kali-forms"
 									)}
 								</InputLabel>
 								<br />
@@ -512,12 +512,12 @@ const EmailEditor = observer((props) => {
 				<Box className={classes.emailEditorFooter}>
 					<Button variant="text" onClick={() => duplicateEmail()}>
 						<Icon className="icon-copy" />
-						{__("Duplicate email", "kaliforms")}
+						{__("Duplicate email", "kali-forms")}
 					</Button>
 
 					<Button variant="text" onClick={() => removeEmail()}>
 						<Icon className="icon-remove" />
-						{__("Remove email", "kaliforms")}
+						{__("Remove email", "kali-forms")}
 					</Button>
 				</Box>
 			</Paper>

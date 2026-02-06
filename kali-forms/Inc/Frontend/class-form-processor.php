@@ -273,26 +273,26 @@ class Form_Processor
 	public function run_form_process_checks($placeholder_process)
 	{
 		if (empty($_POST['data'])) {
-			return $this->display_error(esc_html__('There is no post data', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no post data', 'kali-forms'));
 		}
 		if (!isset($_POST['data']['nonce'])) {
-			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kali-forms'));
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['data']['nonce'])), 'kaliforms_nonce')) {
-			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kali-forms'));
 		}
 
 		if (empty($_POST['data']['formId'])) {
-			return $this->display_error(esc_html__('Form didn`t send a form id, are we sure it is correct?', 'kaliforms'));
+			return $this->display_error(esc_html__('Form didn`t send a form id, are we sure it is correct?', 'kali-forms'));
 		}
 
 		$this->post = get_post(absint(wp_unslash($_POST['data']['formId'])));
 		if ($this->post === null) {
-			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
 
 		if ($this->post->post_status !== 'publish') {
-			return $this->display_error(esc_html__('It seems that the form is no longer available', 'kaliforms'));
+			return $this->display_error(esc_html__('It seems that the form is no longer available', 'kali-forms'));
 		}
 
 		$this->multiple_selection_separator = $this->get('multiple_selections_separator', ',');
@@ -583,6 +583,7 @@ class Form_Processor
 				$ids        = [];
 				$urls       = [];
 				$imagePaths = [];
+				$anchors    = [];
 				$ids        = explode(',', $v);
 				foreach ($ids as $uId) {
 					$img = wp_get_attachment_url($uId);
@@ -590,11 +591,12 @@ class Form_Processor
 					if (!$spoofKey || $this->spoofer[$uId] !== $spoofKey) {
 						continue;
 					}
-
-					$title[]      = get_the_title($uId);
+					$current_title = get_the_title($uId);
+					$title[]      = $current_title;
 					$images[]     = '<img style="width:100%" src="' . esc_url($img) . '" />';
 					$imagePaths[] = wp_get_original_image_path($uId);
 					$urls[]       = esc_url($img);
+					$anchors[]    = '<a href="' . esc_url($img) . '" target="_blank">' . $current_title . '</a>';
 				}
 
 				$this->placeholdered_data['{' . $k . ':title}']     = implode(',', $title);
@@ -602,7 +604,7 @@ class Form_Processor
 				$this->placeholdered_data['{' . $k . ':imagePath}'] = implode("\n", $imagePaths);
 				$this->placeholdered_data['{' . $k . ':id}']        = sanitize_text_field($uId);
 				$this->placeholdered_data['{' . $k . ':url}']       = implode(',', $urls);
-
+				$this->placeholdered_data['{' . $k . ':anchor}']    = implode("\n", $anchors);
 				break;
 			case 'imageRadio':
 				$img = wp_get_attachment_url($v);
@@ -611,13 +613,15 @@ class Form_Processor
 				foreach ($this->advanced_field_map[$k]->choices as $choice) {
 					$choice_labels[$choice->image->id] = ['label' => $choice->label, 'caption' => $choice->caption];
 				}
+				$title = get_the_title($v);
 
-				$this->placeholdered_data['{' . $k . ':title}']   = get_the_title($v);
+				$this->placeholdered_data['{' . $k . ':title}']   = $title;
 				$this->placeholdered_data['{' . $k . ':image}']   = '<img style="width:100%" src="' . esc_url($img) . '" />';
 				$this->placeholdered_data['{' . $k . ':id}']      = sanitize_text_field($v);
 				$this->placeholdered_data['{' . $k . ':url}']     = esc_url($img);
 				$this->placeholdered_data['{' . $k . ':label}']   = sanitize_text_field($choice_labels[$v]['label']);
 				$this->placeholdered_data['{' . $k . ':caption}'] = sanitize_text_field($choice_labels[$v]['caption']);
+				$this->placeholdered_data['{' . $k . ':anchor}']    = '<a href="' . esc_url($img) . '" target="_blank">' . $title . '</a>';
 
 				break;
 			case 'digitalSignature':
@@ -750,7 +754,7 @@ class Form_Processor
 				}
 			}
 		} catch (\Error $e) {
-			return $this->display_error(esc_html__('Trying to spoof images that do not exist', 'kaliforms'));
+			return $this->display_error(esc_html__('Trying to spoof images that do not exist', 'kali-forms'));
 		}
 	}
 
@@ -882,28 +886,28 @@ class Form_Processor
 	public function verify_recaptcha()
 	{
 		if (empty($_POST['data'])) {
-			return $this->display_error(esc_html__('There is no post data', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no post data', 'kali-forms'));
 		}
 		if (!isset($_POST['data']['nonce'])) {
-			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kali-forms'));
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['data']['nonce'])), 'kaliforms_nonce')) {
-			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kali-forms'));
 		}
 
 		if (empty($_POST['data']['formId'])) {
-			return $this->display_error(esc_html__('Form didn`t send a form id, are we sure it is correct?', 'kaliforms'));
+			return $this->display_error(esc_html__('Form didn`t send a form id, are we sure it is correct?', 'kali-forms'));
 		}
 
 		$this->post = get_post(absint(wp_unslash($_POST['data']['formId'])));
 
 		if ($this->post === null) {
-			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
 
 		$recaptcha_secret_key = $this->get('google_secret_key', '');
 		if (empty($recaptcha_secret_key)) {
-			return $this->display_error(esc_html__('There is no recaptcha key', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no recaptcha key', 'kali-forms'));
 		}
 
 		$response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
@@ -914,7 +918,7 @@ class Form_Processor
 		]);
 
 		if (is_wp_error($response)) {
-			return $this->display_error(esc_html__('Something went wrong', 'kaliforms'));
+			return $this->display_error(esc_html__('Something went wrong', 'kali-forms'));
 		}
 
 		wp_die(wp_json_encode([
@@ -928,28 +932,28 @@ class Form_Processor
 	public function verify_turnstile()
 	{
 		if (empty($_POST['data'])) {
-			return $this->display_error(esc_html__('There is no post data', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no post data', 'kali-forms'));
 		}
 		if (!isset($_POST['data']['nonce'])) {
-			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kali-forms'));
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['data']['nonce'])), 'kaliforms_nonce')) {
-			return $this->display_error(esc_html__('Sneaky sneaky', 'kaliforms'));
+			return $this->display_error(esc_html__('Sneaky sneaky', 'kali-forms'));
 		}
 
 		if (empty($_POST['data']['formId'])) {
-			return $this->display_error(esc_html__('Form didn`t send a form id, are we sure it is correct?', 'kaliforms'));
+			return $this->display_error(esc_html__('Form didn`t send a form id, are we sure it is correct?', 'kali-forms'));
 		}
 
 		$this->post = get_post(absint(wp_unslash($_POST['data']['formId'])));
 
 		if ($this->post === null) {
-			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
 
 		$turnstile_secret_key = $this->get('turnstile_secret_key', '');
 		if (empty($turnstile_secret_key)) {
-			return $this->display_error(esc_html__('There is no turnstile key', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no turnstile key', 'kali-forms'));
 		}
 
 		$response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
@@ -960,7 +964,7 @@ class Form_Processor
 		]);
 
 		if (is_wp_error($response)) {
-			return $this->display_error(esc_html__('Something went wrong', 'kaliforms'));
+			return $this->display_error(esc_html__('Something went wrong', 'kali-forms'));
 		}
 
 		wp_die(wp_json_encode([

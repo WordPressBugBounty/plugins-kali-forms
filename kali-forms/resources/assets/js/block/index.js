@@ -7,10 +7,10 @@ import Save from './save';
 const { withSelect } = wp.data;
 
 registerBlockType('kali-forms/kali-forms-block', {
-	title: __('Kali Forms Block (BETA)', 'kaliforms'),
+	title: __('Kali Forms Block (BETA)', 'kali-forms'),
 	description: __(
 		'Add a form to your page using this block',
-		'kaliforms'
+		'kali-forms'
 	),
 	category: 'common',
 	icon: KaliIcon,

@@ -66,10 +66,10 @@ const MultipleThankYouMessageEditor = observer(props => {
 			<Grid item xs={12}>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Thank you message', 'kaliforms')}
+						{__('Thank you message', 'kali-forms')}
 					</InputLabel>
 					<MUIRichTextEditor
-						label={__('Start typing ...', 'kaliforms')}
+						label={__('Start typing ...', 'kali-forms')}
 						value={thankYouMessage}
 						customControls={[
 							{
@@ -85,7 +85,7 @@ const MultipleThankYouMessageEditor = observer(props => {
 				</FormControl>
 			</Grid>
 			<Grid item xs={12}>
-				<Button onClick={e => props.setEditorOpen(false)}>{__('Back to listing', 'kaliforms')}</Button>
+				<Button onClick={e => props.setEditorOpen(false)}>{__('Back to listing', 'kali-forms')}</Button>
 			</Grid>
 		</React.Fragment>
 	)

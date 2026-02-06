@@ -228,13 +228,13 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	public function get_sheets($request)
 	{
 		if (!class_exists('KaliForms\Inc\Utils\Export')) {
-			return rest_ensure_response(['status' => false, 'message' => __('Upgrade to PRO', 'kaliforms')]);
+			return rest_ensure_response(['status' => false, 'message' => __('Upgrade to PRO', 'kali-forms')]);
 		}
 
 		if (!class_exists('KaliForms\Inc\Google_Sheets_Helper')) {
 			return rest_ensure_response([
 				'status' => false,
-				'message' => __('Google Sheets plugin not installed', 'kaliforms'),
+				'message' => __('Google Sheets plugin not installed', 'kali-forms'),
 			]);
 		}
 
@@ -252,7 +252,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	public function start_export($request)
 	{
 		if (!class_exists('KaliForms\Inc\Utils\Export')) {
-			return rest_ensure_response(['status' => false, 'message' => __('Upgrade to PRO', 'kaliforms')]);
+			return rest_ensure_response(['status' => false, 'message' => __('Upgrade to PRO', 'kali-forms')]);
 		}
 
 		$params = $request->get_json_params();
@@ -260,7 +260,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 
 		if ($multiple) {
 			if (!isset($params['forms']) || !is_array($params['forms'])) {
-				return rest_ensure_response(['status' => false, 'message' => __('No forms selected', 'kaliforms')]);
+				return rest_ensure_response(['status' => false, 'message' => __('No forms selected', 'kali-forms')]);
 			}
 
 			$forms = $params['forms'];
@@ -273,7 +273,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 			}
 		} else {
 			if (!isset($params['form'])) {
-				return rest_ensure_response(['status' => false, 'message' => __('No form selected', 'kaliforms')]);
+				return rest_ensure_response(['status' => false, 'message' => __('No form selected', 'kali-forms')]);
 			}
 
 			$this->_get_available_meta((int) $params['form']);
@@ -293,7 +293,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	public function get_items_permissions_check($request)
 	{
 		if (!current_user_can('manage_options')) {
-			return new \WP_Error('rest_forbidden', esc_html__('You cannot view the post resource.', 'kaliforms'), ['status' => $this->authorization_status_code()]);
+			return new \WP_Error('rest_forbidden', esc_html__('You cannot view the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
 		}
 
 		return true;
@@ -308,7 +308,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	public function edit_item_check($request)
 	{
 		if (!current_user_can('manage_options')) {
-			return new \WP_Error('rest_forbidden', esc_html__('You cannot edit the post resource.', 'kaliforms'), ['status' => $this->authorization_status_code()]);
+			return new \WP_Error('rest_forbidden', esc_html__('You cannot edit the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
 		}
 
 		return true;
@@ -558,7 +558,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	{
 		$params = $request->get_params();
 		if (!isset($params['forms'])) {
-			return new \WP_Error('rest_post_invalid_forms', esc_html__('You need to query data for certain forms. It can\'t be null.', 'kaliforms'), ['status' => 400]);
+			return new \WP_Error('rest_post_invalid_forms', esc_html__('You need to query data for certain forms. It can\'t be null.', 'kali-forms'), ['status' => 400]);
 		}
 
 		$args         = $this->_initial_routine_aggregate($request);
@@ -577,7 +577,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 		$page      = (int) $query_args['paged'];
 
 		if ($page > $max_pages && $total_posts > 0) {
-			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kaliforms'), ['status' => 400]);
+			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kali-forms'), ['status' => 400]);
 		}
 
 		$response = $this->_prepare_response($request, $posts, (int) $total_posts, (int) $max_pages, $page);
@@ -595,7 +595,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	{
 		$params = $request->get_params();
 		if (!isset($params['forms'])) {
-			return new \WP_Error('rest_post_invalid_forms', esc_html__('You need to query data for certain forms. It can\'t be null.', 'kaliforms'), ['status' => 400]);
+			return new \WP_Error('rest_post_invalid_forms', esc_html__('You need to query data for certain forms. It can\'t be null.', 'kali-forms'), ['status' => 400]);
 		}
 
 		$args         = $this->_initial_routine_aggregate($request);
@@ -616,7 +616,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 		$page      = (int) $query_args['paged'];
 
 		if ($page > $max_pages && $total_posts > 0) {
-			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kaliforms'), ['status' => 400]);
+			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kali-forms'), ['status' => 400]);
 		}
 
 		$response = $this->_prepare_response($request, $posts, (int) $total_posts, (int) $max_pages, $page);
@@ -666,7 +666,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 		$page      = (int) $query_args['paged'];
 
 		if ($page > $max_pages && $total_posts > 0) {
-			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kaliforms'), ['status' => 400]);
+			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kali-forms'), ['status' => 400]);
 		}
 
 		$response = $this->_prepare_response($request, $posts, (int) $total_posts, (int) $max_pages, $page);
@@ -699,7 +699,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 		$page      = (int) $query_args['paged'];
 
 		if ($page > $max_pages && $total_posts > 0) {
-			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kaliforms'), ['status' => 400]);
+			return new WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kali-forms'), ['status' => 400]);
 		}
 
 		$response = $this->_prepare_response($request, $posts, (int) $total_posts, (int) $max_pages, $page);
@@ -781,13 +781,13 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 
 		$post_data['fields'][] = [
 			'id' => 'ip_address',
-			'caption' => __('Ip address', 'kaliforms'),
+			'caption' => __('Ip address', 'kali-forms'),
 			'type' => 'text',
 			'value' => get_post_meta($post->ID, 'ip_address', true),
 		];
 		$post_data['fields'][] = [
 			'id' => 'date_published',
-			'caption' => __('Publish date', 'kaliforms'),
+			'caption' => __('Publish date', 'kali-forms'),
 			'type' => 'date',
 			'value' => get_the_date('Y/m/d g:ia', $post->ID),
 		];
@@ -813,7 +813,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 			'type' => 'object',
 			'properties' => [
 				'id' => [
-					'description' => esc_html__('Unique identifier for the object.', 'kaliforms'),
+					'description' => esc_html__('Unique identifier for the object.', 'kali-forms'),
 					'type' => 'integer',
 					'context' => ['view', 'edit', 'embed'],
 					'readonly' => true,
@@ -1134,7 +1134,7 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	{
 		$params = $request->get_json_params();
 		if (!isset($params['forms']) || !is_array($params['forms'])) {
-			return new \WP_Error('rest_invalid_param', esc_html__('Missing forms parameter or invalid format', 'kaliforms'), ['status' => 400]);
+			return new \WP_Error('rest_invalid_param', esc_html__('Missing forms parameter or invalid format', 'kali-forms'), ['status' => 400]);
 		}
 
 		$response = [];
@@ -1165,13 +1165,13 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 			// Add system fields
 			$fields[] = [
 				'id' => 'ip_address',
-				'caption' => __('Ip address', 'kaliforms'),
+				'caption' => __('Ip address', 'kali-forms'),
 				'type' => 'text',
 				'value' => ''
 			];
 			$fields[] = [
 				'id' => 'date_published',
-				'caption' => __('Publish date', 'kaliforms'),
+				'caption' => __('Publish date', 'kali-forms'),
 				'type' => 'date',
 				'value' => ''
 			];

@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\PredefinedOptions;
 
 if (!defined('ABSPATH')) {
@@ -45,7 +46,7 @@ class Canadian_Provinces
      */
     public function set_options()
     {
-        $this->label = esc_html__('Canadian Provinces', 'kaliforms');
+        $this->label = esc_html__('Canadian Provinces', 'kali-forms');
 
         $this->options = [
             ["NL" => "Newfoundland and Labrador"],

@@ -23,7 +23,7 @@ export const getFrontendLink = (entryId, formId) => {
 
 				copyToClipboard(res.data.url);
 				message.success({
-					content: __('Link copied to clipboard', 'kaliforms'),
+					content: __('Link copied to clipboard', 'kali-forms'),
 					duration: 5,
 				});
 			}

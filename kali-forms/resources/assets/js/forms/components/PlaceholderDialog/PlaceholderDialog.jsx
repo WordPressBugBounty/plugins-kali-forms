@@ -103,8 +103,10 @@ const PlaceholderDialog = observer((props) => {
 			}
 
 			if (e.id === 'imageRadio' || e.id === 'fileUpload') {
+				fieldComponentsSimplified.push('{' + e.properties.name + ':title}');
 				fieldComponentsSimplified.push('{' + e.properties.name + ':image}');
 				fieldComponentsSimplified.push('{' + e.properties.name + ':url}');
+				fieldComponentsSimplified.push('{' + e.properties.name + ':anchor}');
 				fieldComponentsSimplified.push('{' + e.properties.name + ':id}');
 			}
 		})
@@ -128,11 +130,11 @@ const PlaceholderDialog = observer((props) => {
 		let placeholders = [
 			{
 				placeholder: '{sitetitle}',
-				description: __('Site title (set in Settings - General)', 'kaliforms'),
+				description: __('Site title (set in Settings - General)', 'kali-forms'),
 			},
 			{
 				placeholder: '{tagline}',
-				description: __('Site tagline (set in Settings - General)', 'kaliforms'),
+				description: __('Site tagline (set in Settings - General)', 'kali-forms'),
 			},
 			{
 				placeholder: '{siteurl}',
@@ -140,33 +142,33 @@ const PlaceholderDialog = observer((props) => {
 			},
 			{
 				placeholder: '{homeurl}',
-				description: __('The Site address (URL) (set in Settings - General)', 'kaliforms'),
+				description: __('The Site address (URL) (set in Settings - General)', 'kali-forms'),
 			},
 			{
 				placeholder: '{admin_email}',
-				description: __('Admin email (set in Settings - General)', 'kaliforms'),
+				description: __('Admin email (set in Settings - General)', 'kali-forms'),
 			},
 			{
 				placeholder: '{entryCounter}',
-				description: __('Show the current entry number', 'kaliforms'),
+				description: __('Show the current entry number', 'kali-forms'),
 			},
 			{
 				placeholder: '{formName}',
-				description: __('Current form name', 'kaliforms'),
+				description: __('Current form name', 'kali-forms'),
 			},
 		];
 
 		if (KaliFormsObject.hasOwnProperty('submissionViewPage')) {
 			placeholders.push({
 				placeholder: '{submission_link}',
-				description: __('Returns a link to view the submission', 'kaliforms')
+				description: __('Returns a link to view the submission', 'kali-forms')
 			});
 		}
 
 		labels.map(e => {
 			placeholders.push({
 				placeholder: e,
-				description: __('Form field', 'kaliforms')
+				description: __('Form field', 'kali-forms')
 			})
 		})
 		return placeholders;
@@ -187,46 +189,46 @@ const PlaceholderDialog = observer((props) => {
 					icons={tableIcons}
 					components={{ Container: props => <div>{props.children}</div> }}
 					columns={[
-						{ title: __('Placeholder', 'kaliforms'), field: "placeholder" },
-						{ title: __('Description', 'kaliforms'), field: "description" },
+						{ title: __('Placeholder', 'kali-forms'), field: "placeholder" },
+						{ title: __('Description', 'kali-forms'), field: "description" },
 					]}
 					localization={{
 						header: {
-							actions: __('Actions', 'kaliforms'),
+							actions: __('Actions', 'kali-forms'),
 						},
 						toolbar: {
-							searchTooltip: __('Search', 'kaliforms'),
-							searchPlaceholder: __('Search', 'kaliforms')
+							searchTooltip: __('Search', 'kali-forms'),
+							searchPlaceholder: __('Search', 'kali-forms')
 						},
 						body: {
-							emptyDataSourceMessage: __('No records to display', 'kaliforms'),
+							emptyDataSourceMessage: __('No records to display', 'kali-forms'),
 						},
 						pagination: {
-							labelDisplayedRows: __('{from}-{to} of {count}', 'kaliforms'),
-							labelRowsSelect: __('rows', 'kaliforms'),
-							labelRowsPerPage: __('Rows per page:', 'kaliforms'),
-							firstAriaLabel: __('First page', 'kaliforms'),
-							firstTooltip: __('First page', 'kaliforms'),
-							previousAriaLabel: __('Previous page', 'kaliforms'),
-							previousTooltip: __('Previous page', 'kaliforms'),
-							nextAriaLabel: __('Next page', 'kaliforms'),
-							nextTooltip: __('Next page', 'kaliforms'),
-							lastAriaLabel: __('Last page', 'kaliforms'),
-							lastTooltip: __('Last page', 'kaliforms')
+							labelDisplayedRows: __('{from}-{to} of {count}', 'kali-forms'),
+							labelRowsSelect: __('rows', 'kali-forms'),
+							labelRowsPerPage: __('Rows per page:', 'kali-forms'),
+							firstAriaLabel: __('First page', 'kali-forms'),
+							firstTooltip: __('First page', 'kali-forms'),
+							previousAriaLabel: __('Previous page', 'kali-forms'),
+							previousTooltip: __('Previous page', 'kali-forms'),
+							nextAriaLabel: __('Next page', 'kali-forms'),
+							nextTooltip: __('Next page', 'kali-forms'),
+							lastAriaLabel: __('Last page', 'kali-forms'),
+							lastTooltip: __('Last page', 'kali-forms')
 						}
 					}}
 					data={placeholders()}
 					actions={[
 						{
 							icon: () => <FileCopy />,
-							tooltip: __('Copy to clipboard', 'kaliforms'),
+							tooltip: __('Copy to clipboard', 'kali-forms'),
 							onClick: (event, rowData) => {
 								// Do save operation
 								copy(rowData.placeholder);
 								store._UI_.setPlaceholderDialog(false);
 								let key = rowData.placeholder;
 								enqueueSnackbar(
-									`${__('Placeholder', 'kaliforms')} ${rowData.placeholder} ${__('copied to clipboard', 'kaliforms')}`,
+									`${__('Placeholder', 'kali-forms')} ${rowData.placeholder} ${__('copied to clipboard', 'kali-forms')}`,
 									{
 										preventDuplicate: true,
 										variant: 'success',
@@ -236,7 +238,7 @@ const PlaceholderDialog = observer((props) => {
 							}
 						}
 					]}
-					title={__('Available placeholders', 'kaliforms')}
+					title={__('Available placeholders', 'kali-forms')}
 				/>
 			</DialogContent>
 		</Dialog>

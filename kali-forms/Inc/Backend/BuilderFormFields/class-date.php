@@ -2,7 +2,7 @@
 
 namespace KaliForms\Inc\Backend\BuilderFormFields;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Inc\Backend\BuilderFormFields
  */
-class Date extends Form_Field {
+class Date extends Form_Field
+{
 	/**
 	 * @var string
 	 */
@@ -26,9 +27,10 @@ class Date extends Form_Field {
 	 *
 	 * @param $args
 	 */
-	public function __construct( $args ) {
-		parent::__construct( $args );
+	public function __construct($args)
+	{
+		parent::__construct($args);
 		$this->icon = 'icon-data-picker';
-		$this->label = esc_html__( 'Date field', 'kaliforms' );
+		$this->label = esc_html__('Date field', 'kali-forms');
 	}
 }

@@ -114,9 +114,9 @@ const AddableListContainer = (props) => {
 	return (
 		<Box className={classes.container}>
 			<Box display="flex" className={classes.header} flexDirection="row">
-				<Box style={{ width: '15%' }}>{__('Checked', 'kaliforms')}</Box>
-				<Box style={{ width: '32%' }}>{__('Value', 'kaliforms')}</Box>
-				<Box>{__('Label', 'kaliforms')}</Box>
+				<Box style={{ width: '15%' }}>{__('Checked', 'kali-forms')}</Box>
+				<Box style={{ width: '32%' }}>{__('Value', 'kali-forms')}</Box>
+				<Box>{__('Label', 'kali-forms')}</Box>
 			</Box>
 
 			<Box className={classes.listContainer}>
@@ -137,13 +137,13 @@ const AddableListContainer = (props) => {
 			<Box flexDirection="row">
 				<Button className={classes.buttonFullWidth} style={{ marginTop: 10 }} onClick={() => props.addChoice()}>
 					<Icon className={'icon-add-new'} />
-					{__('Add choice', 'kaliforms')}
+					{__('Add choice', 'kali-forms')}
 				</Button>
 			</Box>
 			<Box flexDirection="row">
 				<Button className={classes.button} style={{ marginTop: 10 }} onClick={() => setBulkOptionsVisible(!bulkOptionsVisible)}>
 					<Icon className={'icon-import'} />
-					{__('Bulk add', 'kaliforms')}
+					{__('Bulk add', 'kali-forms')}
 				</Button>
 				<Button className={classes.button} style={{ marginTop: 10 }} onClick={() => {
 					store._UI_.setBottomDrawerCallback(addPresetOptions)
@@ -151,7 +151,7 @@ const AddableListContainer = (props) => {
 					store._UI_.setBottomDrawer(true)
 				}}>
 					<Icon className={'icon-add-new'} />
-					{__('Presets', 'kaliforms')}
+					{__('Presets', 'kali-forms')}
 				</Button>
 			</Box>
 
@@ -159,7 +159,7 @@ const AddableListContainer = (props) => {
 				<Box className={classes.bulkAddContainer}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Add multiple options at once, please make sure to separate each option by a comma(e.g one|One, two|Two)', 'kaliforms')}
+							{__('Add multiple options at once, please make sure to separate each option by a comma(e.g one|One, two|Two)', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={bulkOptions}
@@ -170,7 +170,7 @@ const AddableListContainer = (props) => {
 						/>
 						<Button className={classes.bulkAddButton} onClick={() => addBulkOptions()}>
 							<Icon className={'icon-add-new'} />
-							{sprintf(__('Add the following (%s) options', 'kaliforms'), actualOptionCount())}
+							{sprintf(__('Add the following (%s) options', 'kali-forms'), actualOptionCount())}
 						</Button>
 					</FormControl>
 				</Box>

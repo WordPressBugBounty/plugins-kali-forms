@@ -49,7 +49,7 @@ class Extensions_Page
 		echo '<div id="kaliforms-extensions-page">';
 		$this->generate_extensions_html();
 		echo '</div>';
-		echo '<div style="display:inline-block; margin-top:15px; width:100%"><button id="kali-extensions-reload" class="button button-primary">' . esc_html__('Reload', 'kaliforms') . '</button></div>';
+		echo '<div style="display:inline-block; margin-top:15px; width:100%"><button id="kali-extensions-reload" class="button button-primary">' . esc_html__('Reload', 'kali-forms') . '</button></div>';
 		echo '</div>';
 	}
 
@@ -153,7 +153,7 @@ class Extensions_Page
 	public function generate_extensions_html()
 	{
 		if (empty($this->extensions)) {
-			esc_html_e('No extensions available. Come back later!', 'kaliforms');
+			esc_html_e('No extensions available. Come back later!', 'kali-forms');
 			return;
 		}
 
@@ -180,7 +180,7 @@ class Extensions_Page
 	{
 		$html = '<div class="plugin-card-bottom">';
 		$html .= '<div class="column-updated">';
-		$html .= '<strong>' . esc_html__('Last Updated:', 'kaliforms') . '</strong> 4 weeks ago';
+		$html .= '<strong>' . esc_html__('Last Updated:', 'kali-forms') . '</strong> 4 weeks ago';
 		$html .= '</div>';
 		$html .= '</div>';
 
@@ -249,16 +249,16 @@ class Extensions_Page
 		$html   = '';
 		switch ($this->known_extensions[$extension['slug']]) {
 			case 'installed';
-				$html .= '<a class="button button-primary" data-url="' . $this->generate_activate_link($extension['slug'] . '/' . $extension['slug'] . '.php') . '" data-action="activate" data-slug="' . $extension['slug'] . '">' . esc_html__('Activate', 'kaliforms') . '</a>';
+				$html .= '<a class="button button-primary" data-url="' . $this->generate_activate_link($extension['slug'] . '/' . $extension['slug'] . '.php') . '" data-action="activate" data-slug="' . $extension['slug'] . '">' . esc_html__('Activate', 'kali-forms') . '</a>';
 				break;
 			case 'active':
-				$html .= esc_html__('All done', 'kaliforms');
+				$html .= esc_html__('All done', 'kali-forms');
 				break;
 			case 'not-installed':
 				if ('no-license' === $extension['download_link']) {
-					$html .= '<a class"button" href="' . admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-license') . '">' . esc_html__('Please activate your license', 'kaliforms') . '</a>';
+					$html .= '<a class"button" href="' . admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-license') . '">' . esc_html__('Please activate your license', 'kali-forms') . '</a>';
 				} else {
-					$html .= '<a class="button" data-action="install" data-download-url="' . $extension['download_link'] . '" data-slug="' . $extension['slug'] . '">' . esc_html__('Install Now', 'kaliforms') . '</a>';
+					$html .= '<a class="button" data-action="install" data-download-url="' . $extension['download_link'] . '" data-slug="' . $extension['slug'] . '">' . esc_html__('Install Now', 'kali-forms') . '</a>';
 				}
 
 				break;
@@ -267,7 +267,7 @@ class Extensions_Page
 		}
 
 		if ($this->known_extensions['kali-forms-pro'] !== 'active') {
-			$html = '<a class="button button-primary" target="_blank" href="https://www.kaliforms.com/pricing?utm_source=extensionsPage&utm_campaign=userInterests&utm_medium=upgradeToProButton">' . esc_html__('Upgrade to PRO', 'kaliforms') . '</a>';
+			$html = '<a class="button button-primary" target="_blank" href="https://www.kaliforms.com/pricing?utm_source=extensionsPage&utm_campaign=userInterests&utm_medium=upgradeToProButton">' . esc_html__('Upgrade to PRO', 'kali-forms') . '</a>';
 		}
 
 		return $html;

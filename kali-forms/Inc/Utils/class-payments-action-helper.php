@@ -78,7 +78,7 @@ class Payments_Action_Helper
 		$this->post = get_post($args['formId']);
 
 		if ($this->post === null) {
-			return new \WP_Error(500, esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+			return new \WP_Error(500, esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
 
 		$fields       = json_decode($this->get('stripe_fields', '{}'), false, 512, JSON_HEX_QUOT);
@@ -111,7 +111,7 @@ class Payments_Action_Helper
 		$this->post = get_post($args['formId']);
 
 		if ($this->post === null) {
-			return new \WP_Error(500, esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+			return new \WP_Error(500, esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
 
 		$foreachRun = $this->foreachFieldsToProducts();

@@ -52,7 +52,7 @@ const BuilderZone = observer(props => {
 
 		if (typeof KaliFormsObject.conditionalLogic === 'undefined' && store._FIELD_COMPONENTS_.isRestrictedField(fieldType)) {
 			enqueueSnackbar(
-				__("Unfortunately, you can't edit this field anymore. This field is part of the PRO package.", 'kaliforms'),
+				__("Unfortunately, you can't edit this field anymore. This field is part of the PRO package.", 'kali-forms'),
 				{
 					preventDuplicate: true,
 					variant: 'error',
@@ -138,8 +138,8 @@ const BuilderZone = observer(props => {
 	 * @param {*} field
 	 */
 	const duplicateField = field => {
-		store._CONFIRMATION_DIALOG_.setTitle(__('Duplicate field', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to duplicate this field?', 'kaliforms'));
+		store._CONFIRMATION_DIALOG_.setTitle(__('Duplicate field', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to duplicate this field?', 'kali-forms'));
 		store._CONFIRMATION_DIALOG_.setAction(_duplicateField)
 		store._CONFIRMATION_DIALOG_.setActionProps(field)
 		store._CONFIRMATION_DIALOG_.setState(true);
@@ -157,8 +157,8 @@ const BuilderZone = observer(props => {
 	 * @param {*} idx
 	 */
 	const removeField = field => {
-		store._CONFIRMATION_DIALOG_.setTitle(__('Remove field', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to delete this field?', 'kaliforms'));
+		store._CONFIRMATION_DIALOG_.setTitle(__('Remove field', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setMessage(__('Are you sure you want to delete this field?', 'kali-forms'));
 		store._CONFIRMATION_DIALOG_.setAction(_removeField)
 		store._CONFIRMATION_DIALOG_.setActionProps(field)
 		store._CONFIRMATION_DIALOG_.setState(true);
@@ -254,14 +254,14 @@ const BuilderZone = observer(props => {
 
 		if (paymentMethods.length > 1 && !paymentMethodChooser) {
 			store._CONFIRMATION_DIALOG_.setTitle(__('Payment Methods Issue'));
-			store._CONFIRMATION_DIALOG_.setMessage(__('It seems that you have multiple payment methods in your form. In order for this functionality to work correctly you should add a payment method chooser field. Do you want us to do it for you?', 'kaliforms'));
+			store._CONFIRMATION_DIALOG_.setMessage(__('It seems that you have multiple payment methods in your form. In order for this functionality to work correctly you should add a payment method chooser field. Do you want us to do it for you?', 'kali-forms'));
 			store._CONFIRMATION_DIALOG_.setState(true);
 			store._CONFIRMATION_DIALOG_.setAction(_createFieldAndLogic)
 		}
 
 		if (paymentMethodChooser && paymentMethods.length !== paymentMethodChooser.properties.choices.length) {
 			store._CONFIRMATION_DIALOG_.setTitle(__('Payment Methods Issue'));
-			store._CONFIRMATION_DIALOG_.setMessage(__('Do you want to update the payment method chooser?', 'kaliforms'));
+			store._CONFIRMATION_DIALOG_.setMessage(__('Do you want to update the payment method chooser?', 'kali-forms'));
 			store._CONFIRMATION_DIALOG_.setState(true);
 			store._CONFIRMATION_DIALOG_.setAction(_updateFieldAndLogic)
 			store._CONFIRMATION_DIALOG_.setActionProps({ paymentMethods, paymentMethodChooser })
@@ -290,7 +290,7 @@ const BuilderZone = observer(props => {
 
 		data.paymentMethods.map(pM => {
 			store._FORM_INFO_.addConditional({
-				name: __('Show ', 'kaliforms') + pM.label,
+				name: __('Show ', 'kali-forms') + pM.label,
 				field: pM.internalId,
 				state: 'show',
 				conditioner: data.paymentMethodChooser.internalId,
@@ -315,7 +315,7 @@ const BuilderZone = observer(props => {
 			internalId: radioItem.id.toLowerCase() + store._FIELD_COMPONENTS_.lastIndex,
 		}
 		field.properties.name = 'payment-method';
-		field.properties.caption = __('Select payment method', 'kaliforms');
+		field.properties.caption = __('Select payment method', 'kali-forms');
 		let pmObj = _getAllPaymentMethods();
 		field.properties.choices = pmObj.choices;
 		store._FIELD_COMPONENTS_.addFieldComponent(field)
@@ -323,7 +323,7 @@ const BuilderZone = observer(props => {
 
 		pmObj.paymentMethods.map((e, idx) => {
 			store._FORM_INFO_.addConditional({
-				name: __('Show ', 'kaliforms') + pmObj.choices[idx].label,
+				name: __('Show ', 'kali-forms') + pmObj.choices[idx].label,
 				field: e.internalId,
 				state: 'show',
 				conditioner: field.internalId,
@@ -357,13 +357,13 @@ const BuilderZone = observer(props => {
 		let label = '';
 		switch (id) {
 			case 'stripe':
-				label = __('Stripe', 'kaliforms')
+				label = __('Stripe', 'kali-forms')
 				break;
 			case 'paypal':
-				label = __('PayPal', 'kaliforms')
+				label = __('PayPal', 'kali-forms')
 				break;
 			case 'wireTransfer':
-				label = __('Wire transfer', 'kaliforms')
+				label = __('Wire transfer', 'kali-forms')
 				break;
 			default: break;
 		}
@@ -392,8 +392,8 @@ const BuilderZone = observer(props => {
 	 * @param {*} label
 	 */
 	const initAlert = label => {
-		store._CONFIRMATION_DIALOG_.setTitle(label + __(' field already exists', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setMessage(__('You can add only one field of this type', 'kaliforms'));
+		store._CONFIRMATION_DIALOG_.setTitle(label + __(' field already exists', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setMessage(__('You can add only one field of this type', 'kali-forms'));
 		store._CONFIRMATION_DIALOG_.setHideCancelButton(true);
 		store._CONFIRMATION_DIALOG_.setState(true);
 	}
@@ -434,8 +434,8 @@ const BuilderZone = observer(props => {
 									onClick={(e) => setFormField(item.i, e)}>
 									<BuilderFormField field={item.i} />
 									<Box className={classes.actionButtons}>
-										<Icon className={classes.icon + ' ' + classes.iconDuplicate + ' icon-copy'} onClick={() => duplicateField(item)} aria-label={__('Duplicate', 'kaliforms')} />
-										<Icon className={classes.icon + ' ' + classes.iconRemove + ' icon-remove'} onClick={() => removeField(item, idx)} aria-label={__('Delete', 'kaliforms')} />
+										<Icon className={classes.icon + ' ' + classes.iconDuplicate + ' icon-copy'} onClick={() => duplicateField(item)} aria-label={__('Duplicate', 'kali-forms')} />
+										<Icon className={classes.icon + ' ' + classes.iconRemove + ' icon-remove'} onClick={() => removeField(item, idx)} aria-label={__('Delete', 'kali-forms')} />
 									</Box>
 								</Box>
 							);

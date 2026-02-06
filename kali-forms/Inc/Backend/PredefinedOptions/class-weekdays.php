@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\PredefinedOptions;
 
 if (!defined('ABSPATH')) {
@@ -45,15 +46,15 @@ class WeekDays
      */
     public function set_options()
     {
-        $this->label = esc_html__('Week Days', 'kaliforms');
+        $this->label = esc_html__('Week Days', 'kali-forms');
         $this->options = [
-            ['monday' => esc_html__('Monday', 'kaliforms')],
-            ['tuesday' => esc_html__('Tuesday', 'kaliforms')],
-            ['wednesday' => esc_html__('Wednesday', 'kaliforms')],
-            ['thursday' => esc_html__('Thursday', 'kaliforms')],
-            ['friday' => esc_html__('Friday', 'kaliforms')],
-            ['saturday' => esc_html__('Saturday', 'kaliforms')],
-            ['sunday' => esc_html__('Sunday', 'kaliforms')],
+            ['monday' => esc_html__('Monday', 'kali-forms')],
+            ['tuesday' => esc_html__('Tuesday', 'kali-forms')],
+            ['wednesday' => esc_html__('Wednesday', 'kali-forms')],
+            ['thursday' => esc_html__('Thursday', 'kali-forms')],
+            ['friday' => esc_html__('Friday', 'kali-forms')],
+            ['saturday' => esc_html__('Saturday', 'kali-forms')],
+            ['sunday' => esc_html__('Sunday', 'kali-forms')],
         ];
     }
 }

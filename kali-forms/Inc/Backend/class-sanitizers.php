@@ -60,7 +60,7 @@ class Sanitizers
 			$i++;
 			$obj = new \stdClass();
 
-			$obj->name           = empty($hook->name) ? __('WebHook', 'kaliforms') . ' #' . $i : sanitize_text_field($hook->name);
+			$obj->name           = empty($hook->name) ? __('WebHook', 'kali-forms') . ' #' . $i : sanitize_text_field($hook->name);
 			$obj->event          = sanitize_text_field($hook->event);
 			$obj->url            = esc_url($hook->url);
 			$obj->authentication = sanitize_text_field($hook->authentication);

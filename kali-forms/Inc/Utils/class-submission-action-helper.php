@@ -140,7 +140,7 @@ class Submission_Action_Helper
 		}
 
 		if (!$baseUrl) {
-			return __('Please configure a submission view page', 'kaliforms');
+			return __('Please configure a submission view page', 'kali-forms');
 		}
 
 		$glue   = strpos($baseUrl, '?') > -1 ? '&' : '?';
@@ -164,6 +164,6 @@ class Submission_Action_Helper
 	 */
 	public static function get_anchor($url)
 	{
-		return '<a target="_blank" href="' . $url . '">' . esc_html__('Submission', 'kaliforms') . '</a>';
+		return '<a target="_blank" href="' . $url . '">' . esc_html__('Submission', 'kali-forms') . '</a>';
 	}
 }

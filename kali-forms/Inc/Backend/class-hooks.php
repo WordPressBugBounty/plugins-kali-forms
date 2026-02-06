@@ -110,7 +110,7 @@ class Hooks
 	 */
 	public function denied()
 	{
-		wp_die(esc_html('Denied', 'kaliforms'));
+		wp_die(esc_html('Denied', 'kali-forms'));
 	}
 
 	/**
@@ -118,7 +118,7 @@ class Hooks
 	 */
 	public function load_text_domain()
 	{
-		load_plugin_textdomain('kaliforms');
+		load_plugin_textdomain('kali-forms');
 	}
 
 	/**
@@ -137,7 +137,7 @@ class Hooks
 				'<a href="%sedit.php?post_type=%s_forms">%s</a>',
 				esc_url(get_admin_url()),
 				$this->slug,
-				esc_html__('Create your first form', 'kaliforms')
+				esc_html__('Create your first form', 'kali-forms')
 			)
 		);
 
@@ -164,19 +164,19 @@ class Hooks
 		if (!isset($_POST['action'], $_POST['nonce'])) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['nonce'])), $this->slug . '_nonce')) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 		if (!isset($_POST['id'])) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 
@@ -194,19 +194,19 @@ class Hooks
 		if (!isset($_POST['args'], $_POST['args']['nonce'])) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['args']['nonce'])), $this->slug . '_nonce')) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 		if (!current_user_can('manage_options')) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 
@@ -230,21 +230,21 @@ class Hooks
 		if (!isset($_POST['args'], $_POST['args']['nonce'])) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['args']['nonce'])), $this->slug . '_nonce')) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 
 		if (!current_user_can('manage_options')) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 
@@ -253,7 +253,7 @@ class Hooks
 			unlink($temp_dir . $this->slug . '-mail.log');
 		}
 
-		wp_die(wp_json_encode(['success' => true, 'message' => esc_html__('Log deleted', 'kaliforms')]));
+		wp_die(wp_json_encode(['success' => true, 'message' => esc_html__('Log deleted', 'kali-forms')]));
 	}
 	/**
 	 * Block enqueues

@@ -31,7 +31,7 @@ class Dashboard_Widget
 	{
 		wp_add_dashboard_widget(
 			$this->slug . '_dashboard_widget',
-			esc_html__('WordPress Forms Made Easy - Kali Forms', 'kaliforms'),
+			esc_html__('WordPress Forms Made Easy - Kali Forms', 'kali-forms'),
 			[$this, 'render_widget']
 		);
 
@@ -66,8 +66,8 @@ class Dashboard_Widget
 	 */
 	public function cta_section()
 	{
-		$str = '<p>' . esc_html__('Meet Kali Forms. The powerful & user-friendly WordPress form plugin. Easily create powerful contact forms, payment forms, feedback forms and more for your website without the hassle.', 'kaliforms') . '</p>';
-		$str .= '<p class="action-buttons"><a href="' . admin_url() . 'post-new.php?post_type=kaliforms_forms" class="button button-primary" style="margin-right:10px">' . esc_html__('Create forms!', 'kaliforms') . '</a><a href="https://kaliforms.com/docs?utm_source=dashboardWidget&utm_campaign=userInterests&utm_medium=button" class="button" target="_blank" style="margin-right:10px">' . esc_html__('Read the docs', 'kaliforms') . '</a><a href="https://kaliforms.com/pricing?utm_source=dashboardWidget&utm_campaign=userInterests&utm_medium=button" target="_blank" class="button button-primary">' . esc_html__('Upgrade to PRO', 'kaliforms') . '</a></p><br />';
+		$str = '<p>' . esc_html__('Meet Kali Forms. The powerful & user-friendly WordPress form plugin. Easily create powerful contact forms, payment forms, feedback forms and more for your website without the hassle.', 'kali-forms') . '</p>';
+		$str .= '<p class="action-buttons"><a href="' . admin_url() . 'post-new.php?post_type=kaliforms_forms" class="button button-primary" style="margin-right:10px">' . esc_html__('Create forms!', 'kali-forms') . '</a><a href="https://kaliforms.com/docs?utm_source=dashboardWidget&utm_campaign=userInterests&utm_medium=button" class="button" target="_blank" style="margin-right:10px">' . esc_html__('Read the docs', 'kali-forms') . '</a><a href="https://kaliforms.com/pricing?utm_source=dashboardWidget&utm_campaign=userInterests&utm_medium=button" target="_blank" class="button button-primary">' . esc_html__('Upgrade to PRO', 'kali-forms') . '</a></p><br />';
 		return $str;
 	}
 	/**
@@ -81,12 +81,12 @@ class Dashboard_Widget
 		$posts = new \WP_Query(['post_type' => $this->slug . '_forms', 'posts_per_page' => 3]);
 		if ($posts->have_posts()) {
 			$str .= '<hr /><br />';
-			$str .= '<h3><strong>' . esc_html__('Latest stats', 'kaliforms') . '</strong></h3>';
+			$str .= '<h3><strong>' . esc_html__('Latest stats', 'kali-forms') . '</strong></h3>';
 			$str .= '<table class="wp-list-table widefat striped">';
 			$str .= '<thead><tr>
-			<th>' . esc_html__('Title', 'kaliforms') . '</th>
-			<th>' . esc_html__('Entries', 'kaliforms') . '</th>
-			<th style="text-align:right">' . esc_html__('Actions', 'kaliforms') . '</th>
+			<th>' . esc_html__('Title', 'kali-forms') . '</th>
+			<th>' . esc_html__('Entries', 'kali-forms') . '</th>
+			<th style="text-align:right">' . esc_html__('Actions', 'kali-forms') . '</th>
 			</tr></thead>';
 			$str .= '<tbody>';
 			while ($posts->have_posts()) {
@@ -154,7 +154,7 @@ class Dashboard_Widget
 	{
 		$str = '';
 		$str .= '<hr /><br />';
-		$str .= '<h3><strong>' . esc_html__('Latest from our blog', 'kaliforms') . '</strong></h3>';
+		$str .= '<h3><strong>' . esc_html__('Latest from our blog', 'kali-forms') . '</strong></h3>';
 		$posts = $this->get_latest_blog_posts();
 		if (empty($posts)) {
 			return '';
@@ -171,7 +171,7 @@ class Dashboard_Widget
 		}
 
 		$str .= '<hr /><br />';
-		$str .= '<a class="button button-primary" target="_blank" href="https://www.kaliforms.com/blog?utm_source=dashboardWidget&utm_campaign=userInterests&utm_medium=dashboardLink">' . esc_html__('Read more on our blog', 'kaliforms') . '</a>';
+		$str .= '<a class="button button-primary" target="_blank" href="https://www.kaliforms.com/blog?utm_source=dashboardWidget&utm_campaign=userInterests&utm_medium=dashboardLink">' . esc_html__('Read more on our blog', 'kali-forms') . '</a>';
 		return $str;
 	}
 

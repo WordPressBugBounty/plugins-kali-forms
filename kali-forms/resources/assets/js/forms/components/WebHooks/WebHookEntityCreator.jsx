@@ -46,7 +46,7 @@ const WebHookEntityCreator = observer(props => {
 						<FormControl>
 							<If condition={idx === 0}>
 								<InputLabel shrink>
-									{props.entity.label} - {__('Key', 'kaliforms')}
+									{props.entity.label} - {__('Key', 'kali-forms')}
 								</InputLabel>
 							</If>
 							<BootstrapInput
@@ -61,7 +61,7 @@ const WebHookEntityCreator = observer(props => {
 							<FormControl>
 								<If condition={idx === 0}>
 									<InputLabel shrink>
-										{__('Value', 'kaliforms')}
+										{__('Value', 'kali-forms')}
 									</InputLabel>
 								</If>
 								<BootstrapInput
@@ -74,7 +74,7 @@ const WebHookEntityCreator = observer(props => {
 						<If condition={props.map}>
 							<FormControl>
 								<FieldComponentSelect
-									label={idx === 0 ? __('Field', 'kaliforms') : ''}
+									label={idx === 0 ? __('Field', 'kali-forms') : ''}
 									selectedValue={entity.value}
 									field={idx}
 									onChange={fieldChanged}

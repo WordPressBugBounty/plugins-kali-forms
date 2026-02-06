@@ -23,7 +23,7 @@ const ContactFormFieldsMap = (props) => {
 			<Grid direction="row" container spacing={4}>
 				<Grid item xs={6}>
 					<FieldComponentSelect
-						label={__('Email', 'kaliforms')}
+						label={__('Email', 'kali-forms')}
 						selectedValue={mappedFields.email}
 						field="email"
 						onChange={selectChange} />
@@ -32,7 +32,7 @@ const ContactFormFieldsMap = (props) => {
 			<Grid direction="row" container spacing={4}>
 				<Grid item xs={6}>
 					<FieldComponentSelect
-						label={__('First name', 'kaliforms')}
+						label={__('First name', 'kali-forms')}
 						selectedValue={mappedFields.firstName}
 						field="firstName"
 						onChange={selectChange} />
@@ -41,7 +41,7 @@ const ContactFormFieldsMap = (props) => {
 			<Grid direction="row" container spacing={4}>
 				<Grid item xs={6}>
 					<FieldComponentSelect
-						label={__('Last name', 'kaliforms')}
+						label={__('Last name', 'kali-forms')}
 						selectedValue={mappedFields.lastName}
 						field="lastName"
 						onChange={selectChange} />

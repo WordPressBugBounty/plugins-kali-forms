@@ -33,7 +33,7 @@ class Form_Builder extends Metabox
 	public function skeleton()
 	{
 		$html = '<div class="kaliforms-preloader">';
-		$html .= '<div class="kaliforms-preloader-badge">' . esc_html__('Loading', 'kaliforms') . '</div>';
+		$html .= '<div class="kaliforms-preloader-badge">' . esc_html__('Loading', 'kali-forms') . '</div>';
 		$html .= '</div>';
 		return $html;
 	}

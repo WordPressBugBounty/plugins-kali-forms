@@ -6,7 +6,7 @@ const { __ } = wp.i18n;
 const WebHookList = props => {
 	return (
 		<React.Fragment>
-			<SectionTitle title={__('Webhooks', 'kaliforms')} />
+			<SectionTitle title={__('Webhooks', 'kali-forms')} />
 			<Grid container direction="row" spacing={2} alignItems="center">
 				{
 					props.hooks.length && props.hooks.map((action, idx) => (

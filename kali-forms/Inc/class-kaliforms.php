@@ -11,7 +11,6 @@ use KaliForms\Inc\Backend\Elementor_KaliForms_Widget;
 use KaliForms\Inc\Backend\Hooks;
 use KaliForms\Inc\Backend\Meta_Save;
 use KaliForms\Inc\Backend\Notifications;
-use KaliForms\Inc\Backend\Plugin_Collision;
 use KaliForms\Inc\Backend\Plugin_Deactivation;
 use KaliForms\Inc\Backend\Plugin_Health_Checks;
 use KaliForms\Inc\Backend\Plugin_Review;
@@ -109,10 +108,6 @@ class KaliForms
 		 */
 		Notifications::get_instance();
 		/**
-		 * Initiate the plugin collision class
-		 */
-		$this->check_plugin_collision();
-		/**
 		 * Start the plugin health checks ( for page /wp-admin/site-health.php )
 		 */
 		new Plugin_Health_Checks();
@@ -179,20 +174,7 @@ class KaliForms
 		(new Form_Entries_Rest_Controller())->register_routes();
 		// (new Forms_Processor_Rest_Controller())->register_routes();
 	}
-	/**
-	 * Checks plugin collision
-	 *
-	 * @return void
-	 */
-	public function check_plugin_collision()
-	{
-		$collision = new Plugin_Collision();
-		if (current_user_can('manage_options')) {
-			if (count($collision->activated_plugins) > 0) {
-				$collision->set_notice();
-			}
-		}
-	}
+
 	/**
 	 * Check submission plugin
 	 *
@@ -208,9 +190,9 @@ class KaliForms
 			deactivate_plugins(KALIFORMS_SUBMISSIONS_PLUGIN_FILE, true);
 			$html = '<div class="notice" style="background: #e9eff3;padding: 15px;border: 10px solid #fff;text-align:center;">';
 			$html .= '<h1 style="text-align:center; margin-bottom:15px">';
-			$html .= esc_html__('Kali Forms Submissions Deactivated', 'kaliforms');
+			$html .= esc_html__('Kali Forms Submissions Deactivated', 'kali-forms');
 			$html .= '</h1>';
-			$html .= '<h4>' . esc_html__("The plugin was deactivated because this version is not supported. No worries, everything is still working, but please make sure you update our plugins to the latest versions. You can do so by using the automatic plugin updater functionality, or by downloading the newest plugin file from our website.", 'kaliforms') . '</h4>';
+			$html .= '<h4>' . esc_html__("The plugin was deactivated because this version is not supported. No worries, everything is still working, but please make sure you update our plugins to the latest versions. You can do so by using the automatic plugin updater functionality, or by downloading the newest plugin file from our website.", 'kali-forms') . '</h4>';
 			$html .= '</div>';
 
 			echo $html;
@@ -224,9 +206,9 @@ class KaliForms
 		) {
 			$html = '<div class="notice" style="background: #e9eff3;padding: 15px;border: 10px solid #fff;text-align:center;">';
 			$html .= '<h1 style="text-align:center; margin-bottom:15px">';
-			$html .= esc_html__('Kali Forms Submissions needs update', 'kaliforms');
+			$html .= esc_html__('Kali Forms Submissions needs update', 'kali-forms');
 			$html .= '</h1>';
-			$html .= '<h4>' . esc_html__("Please make sure you are using the latest version of the Kali Forms Submissions plugin.", 'kaliforms') . '</h4>';
+			$html .= '<h4>' . esc_html__("Please make sure you are using the latest version of the Kali Forms Submissions plugin.", 'kali-forms') . '</h4>';
 			$html .= '</div>';
 
 			echo $html;
@@ -253,9 +235,9 @@ class KaliForms
 		if ($status === 'active' && version_compare(KALIFORMS_PRO_VERSION, '1.5.0', '<')) {
 			$html = '<div class="notice" style="background: #e9eff3;padding: 15px;border: 10px solid #fff;text-align:center;">';
 			$html .= '<h1 style="text-align:center; margin-bottom:15px">';
-			$html .= esc_html__('Update Kali Forms Pro to the latest version', 'kaliforms');
+			$html .= esc_html__('Update Kali Forms Pro to the latest version', 'kali-forms');
 			$html .= '</h1>';
-			$html .= '<h4>' . esc_html__("Please make sure you update our plugins to the latest versions. You can do so by using the automatic plugin updater functionality, or by downloading the newest plugin file from our website.", 'kaliforms') . '</h4>';
+			$html .= '<h4>' . esc_html__("Please make sure you update our plugins to the latest versions. You can do so by using the automatic plugin updater functionality, or by downloading the newest plugin file from our website.", 'kali-forms') . '</h4>';
 			$html .= '</div>';
 
 			echo $html;

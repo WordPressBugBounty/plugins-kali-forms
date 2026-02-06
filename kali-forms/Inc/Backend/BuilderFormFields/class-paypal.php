@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\BuilderFormFields;
 
 if (!defined('ABSPATH')) {
@@ -29,7 +30,7 @@ class PayPal extends Form_Field
     public function __construct($args)
     {
         parent::__construct($args);
-        $this->label = esc_html__('PayPal', 'kaliforms');
+        $this->label = esc_html__('PayPal', 'kali-forms');
 
         $this->remove_props(['name', 'default', 'caption', 'description']);
     }

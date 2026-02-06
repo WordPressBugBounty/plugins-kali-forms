@@ -8,10 +8,10 @@ export default function ExportDetails() {
 	return (
 		<Card loading={exportOptions.loading}>
 			<Typography.Paragraph>
-				{__('Selected fields: ', 'kaliforms')} {exportOptions.fields.join(',')}
+				{__('Selected fields: ', 'kali-forms')} {exportOptions.fields.join(',')}
 			</Typography.Paragraph>
 			<Typography.Paragraph>
-				{__('Format: ', 'kaliforms')} {exportOptions.fileFormat}
+				{__('Format: ', 'kali-forms')} {exportOptions.fileFormat}
 			</Typography.Paragraph>
 		</Card>
 	)

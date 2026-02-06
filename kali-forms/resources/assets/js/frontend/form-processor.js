@@ -75,7 +75,7 @@ export default class FormProcessor {
 			if (!checks.turnstile) {
 				this.errorMessage = __(
 					"Turnstile challenge failed",
-					"kaliforms"
+					"kali-forms"
 				);
 			}
 		}
@@ -85,7 +85,7 @@ export default class FormProcessor {
 			if (!checks.recaptcha) {
 				this.errorMessage = __(
 					"Please complete recaptcha challenge",
-					"kaliforms"
+					"kali-forms"
 				);
 			}
 		}
@@ -130,7 +130,7 @@ export default class FormProcessor {
 							allFieldsValid = false;
 							this.errorMessage = __(
 								"Some files were not uploaded",
-								"kaliforms"
+								"kali-forms"
 							);
 							this.throwError()
 						}
@@ -161,7 +161,7 @@ export default class FormProcessor {
 								allFieldsValid = false;
 								this.errorMessage = __(
 									"Some files were not uploaded",
-									"kaliforms"
+									"kali-forms"
 								);
 								this.throwError()
 							}
@@ -833,11 +833,11 @@ export default class FormProcessor {
 			if (field.hasAttribute("multiple")) {
 				generalSettings.labelIdle =
 					sprintf(
-						__("Drag & Drop your files (max %s) or", "kaliforms"),
+						__("Drag & Drop your files (max %s) or", "kali-forms"),
 						options.maxFiles
 					) +
 					' <span class="filepond--label-action"> ' +
-					__("Browse", "kaliforms") +
+					__("Browse", "kali-forms") +
 					" </span>";
 			}
 
@@ -1133,7 +1133,7 @@ export default class FormProcessor {
 		if (paymentMethodValue === "paypal" && this.payments === null) {
 			this.errorMessage = __(
 				"Please complete the payment by clicking the PayPal button",
-				"kaliforms"
+				"kali-forms"
 			);
 			return false;
 		}
@@ -1152,12 +1152,12 @@ export default class FormProcessor {
 	async processStripe(formData, type) {
 		let $stripeProcessed = {
 			success: false,
-			message: __("Something went wrong", "kaliforms"),
+			message: __("Something went wrong", "kali-forms"),
 		};
 		if (!this._products.length) {
 			return {
 				success: false,
-				message: __("You don't have products in your form.", "kaliforms"),
+				message: __("You don't have products in your form.", "kali-forms"),
 			};
 		}
 

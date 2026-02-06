@@ -84,7 +84,7 @@ class Form_Styles
 		if (!current_user_can('manage_options')) {
 			wp_die(wp_json_encode([
 				'success' => false,
-				'message' => esc_html__('Denied', 'kaliforms'),
+				'message' => esc_html__('Denied', 'kali-forms'),
 			]));
 		}
 
@@ -114,57 +114,57 @@ class Form_Styles
 		$this->styles = [
 			[
 				'id'    => 'theme',
-				'label' => esc_html__('Theme styling', 'kaliforms'),
+				'label' => esc_html__('Theme styling', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/standard.png',
 			],
 			[
 				'id'    => 'dark',
-				'label' => esc_html__('Dark theme', 'kaliforms'),
+				'label' => esc_html__('Dark theme', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/dark.png',
 			],
 			[
 				'id'    => 'borderBottom',
-				'label' => esc_html__('Minimalistic', 'kaliforms'),
+				'label' => esc_html__('Minimalistic', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/border-bottom.png',
 			],
 			[
 				'id'    => 'roundedBorders',
-				'label' => esc_html__('Rounded borders', 'kaliforms'),
+				'label' => esc_html__('Rounded borders', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/rounded-borders.png',
 			],
 			[
 				'id'    => 'roundedBordersBg',
-				'label' => esc_html__('Rounded borders grey', 'kaliforms'),
+				'label' => esc_html__('Rounded borders grey', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/rounded-borders-bg.png',
 			],
 			[
 				'id'    => 'straightBorders',
-				'label' => esc_html__('Straight borders', 'kaliforms'),
+				'label' => esc_html__('Straight borders', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/straight-borders.png',
 			],
 			[
 				'id'    => 'straightBordersBg',
-				'label' => esc_html__('Straight borders grey', 'kaliforms'),
+				'label' => esc_html__('Straight borders grey', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/straight-borders-bg.png',
 			],
 			[
 				'id'    => 'inputBg',
-				'label' => esc_html__('Input grey', 'kaliforms'),
+				'label' => esc_html__('Input grey', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/input-with-bg.png',
 			],
 			[
 				'id'    => 'inputBgRounded',
-				'label' => esc_html__('Rounded input grey', 'kaliforms'),
+				'label' => esc_html__('Rounded input grey', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/rounded-borders-bg-only.png',
 			],
 			[
 				'id'    => 'inputLabelMerge',
-				'label' => esc_html__('Compact', 'kaliforms'),
+				'label' => esc_html__('Compact', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/input-label-merge.png',
 			],
 			[
 				'id'    => 'inputLabelMergeOverlap',
-				'label' => esc_html__('Compact overlap', 'kaliforms'),
+				'label' => esc_html__('Compact overlap', 'kali-forms'),
 				'thumb' => KALIFORMS_URL . '/assets/img/styles/input-label-overlap.png',
 			],
 		];

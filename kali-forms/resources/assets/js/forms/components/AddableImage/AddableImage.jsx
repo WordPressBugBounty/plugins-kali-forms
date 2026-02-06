@@ -175,7 +175,7 @@ const AddableImage = observer((props) => {
 			<Box flexDirection="row">
 				<Button className={classes.buttonFullWidth} style={{ marginTop: 10 }} onClick={() => createAndOpenMedia()}>
 					<Icon className={'icon-add-new'} />
-					{__('Add choice', 'kaliforms')}
+					{__('Add choice', 'kali-forms')}
 				</Button>
 			</Box>
 		</React.Fragment>

@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\BuilderFormFields;
 
 if (!defined('ABSPATH')) {
@@ -29,8 +30,8 @@ class Product extends Form_Field
     public function __construct($args)
     {
         parent::__construct($args);
-        $this->label = esc_html__('Product', 'kaliforms');
-        
+        $this->label = esc_html__('Product', 'kali-forms');
+
         $this->remove_prop('default');
     }
 }

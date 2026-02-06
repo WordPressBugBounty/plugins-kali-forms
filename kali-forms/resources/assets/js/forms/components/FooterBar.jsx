@@ -48,12 +48,12 @@ const FooterBar = props => {
 			<Toolbar variant="dense">
 				<Box className={classes.logoBox}>
 					<a href="https://www.kaliforms.com" target="_blank">
-						<img src={LogoSvg} alt={__('Kali Forms logo', 'kaliforms')} />
+						<img src={LogoSvg} alt={__('Kali Forms logo', 'kali-forms')} />
 					</a>
 				</Box>
 				<Box className={classes.alignMiddle}>
 					<a href="https://wordpress.org/support/plugin/kali-forms/reviews/#rate-response" target="_blank">
-						{__('Rate us on WordPress!', 'kaliforms')}
+						{__('Rate us on WordPress!', 'kali-forms')}
 						<Icon className={'icon-rating'} />
 						<Icon className={'icon-rating'} />
 						<Icon className={'icon-rating'} />
@@ -63,10 +63,10 @@ const FooterBar = props => {
 				</Box>
 				<Box className={classes.kfLinks}>
 					<a href="https://www.kaliforms.com/docs" target="_blank">
-						{__('Documentation', 'kaliforms')}
+						{__('Documentation', 'kali-forms')}
 					</a>
 					<a href="https://www.kaliforms.com/contact-us" target="_blank">
-						{__('Contact Us', 'kaliforms')}
+						{__('Contact Us', 'kali-forms')}
 					</a>
 				</Box>
 			</Toolbar>

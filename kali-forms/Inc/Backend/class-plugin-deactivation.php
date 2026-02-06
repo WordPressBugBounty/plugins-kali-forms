@@ -77,7 +77,7 @@ class Plugin_Deactivation
 	 */
 	public function denied()
 	{
-		wp_die(esc_html__('Denied', 'kaliforms'));
+		wp_die(esc_html__('Denied', 'kali-forms'));
 	}
 	/**
 	 * Ajax request
@@ -109,7 +109,7 @@ class Plugin_Deactivation
 				wp_json_encode(
 					[
 						'success' => false,
-						'message' => esc_html__('Something went wrong', 'kaliforms'),
+						'message' => esc_html__('Something went wrong', 'kali-forms'),
 					]
 				)
 			);
@@ -154,43 +154,43 @@ class Plugin_Deactivation
 	public function deactivation_form_template()
 	{
 		$options = [
-			'setup'           => esc_html__('Set up is too difficult', 'kaliforms'),
-			'docs'            => esc_html__('Lack of documentation', 'kaliforms'),
-			'features'        => esc_html__('Not the features I wanted', 'kaliforms'),
-			'better-plugin'   => esc_html__('Found a better plugin', 'kaliforms'),
-			'incompatibility' => esc_html__('Incompatible with theme or plugin', 'kaliforms'),
-			'maintenance'     => esc_html__('Other', 'kaliforms'),
+			'setup'           => esc_html__('Set up is too difficult', 'kali-forms'),
+			'docs'            => esc_html__('Lack of documentation', 'kali-forms'),
+			'features'        => esc_html__('Not the features I wanted', 'kali-forms'),
+			'better-plugin'   => esc_html__('Found a better plugin', 'kali-forms'),
+			'incompatibility' => esc_html__('Incompatible with theme or plugin', 'kali-forms'),
+			'maintenance'     => esc_html__('Other', 'kali-forms'),
 		];
 
-		$html = '<div class="kaliforms-deactivate-form-head"><strong>' . esc_html__('Sorry to see you go', 'kaliforms') . '</strong>';
+		$html = '<div class="kaliforms-deactivate-form-head"><strong>' . esc_html__('Sorry to see you go', 'kali-forms') . '</strong>';
 		$html .= '</div>';
 		// Start kaliforms deactivate form body <div>
 		$html .= '<div class="kaliforms-deactivate-form-body">';
 		// Start kaliforms deactivate options <div>
 		$html .= '<div class="kaliforms-deactivate-options">';
-		$html .= '<p><strong>' . esc_html__('Before you deactivate the plugin, would you quickly give us your reason for doing so?', 'kaliforms') . '</strong></p>';
+		$html .= '<p><strong>' . esc_html__('Before you deactivate the plugin, would you quickly give us your reason for doing so?', 'kali-forms') . '</strong></p>';
 		$html .= '<p>';
 		foreach ($options as $value => $label) {
 			$html .= '<input type="radio" name="' . $this->slug . '-deactivate-reason" id="' . $value . '"  value="' . $value . '"/><label for="' . $value . '">' . $label . '</label><br/>';
 		}
 		$html .= '</p>';
-		$html .= '<label id="' . $this->slug . '-deactivate-details-label" for="' . $this->slug . '-deactivate-reasons" ><strong>' . esc_html__('How can we improve', 'kaliforms') . '</strong></label>';
+		$html .= '<label id="' . $this->slug . '-deactivate-details-label" for="' . $this->slug . '-deactivate-reasons" ><strong>' . esc_html__('How can we improve', 'kali-forms') . '</strong></label>';
 		$html .= '<textarea name="' . $this->slug . '-deactivate-details" id="' . $this->slug . '-deactivate-details" rows="2" style="width:100%"></textarea>';
 		$html .= '</div>';
 		// End kaliforms deactivate options </div>
 		$html .= '<hr />';
 		$html .= '</div>';
 		// End kaliforms deactivate form body <div>
-		$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . esc_html__('Submitting form', 'kaliforms') . '</p>';
+		$html .= '<p class="deactivating-spinner"><span class="spinner"></span> ' . esc_html__('Submitting form', 'kali-forms') . '</p>';
 		$html .= '<div class="' . $this->slug . '-deactivate-form-footer">';
 		$html .= '<p id="' . $this->slug . '-anonymous">';
 		$html .= '<label>';
-		$html .= esc_html__('If you UNCHECK this then your email address will be sent along with your feedback. This can be used by Kali Forms to get back to you for more info or a solution.', 'kaliforms');
+		$html .= esc_html__('If you UNCHECK this then your email address will be sent along with your feedback. This can be used by Kali Forms to get back to you for more info or a solution.', 'kali-forms');
 		$html .= '<br />';
-		$html .= '<input type="checkbox" name="' . $this->slug . '-anonymous" checked="checked" id="' . $this->slug . '-anonymous" />' . esc_html__('Send anonyous', 'kaliforms');
+		$html .= '<input type="checkbox" name="' . $this->slug . '-anonymous" checked="checked" id="' . $this->slug . '-anonymous" />' . esc_html__('Send anonyous', 'kali-forms');
 		$html .= '</label>';
 		$html .= '</p>';
-		$html .= '<p><a class="button button-primary" href="#" id="' . $this->slug . '-deactivate-submit-form"> <span>Submit & </span>' . esc_html__(' Deactivate', 'kaliforms') . '</a></p>';
+		$html .= '<p><a class="button button-primary" href="#" id="' . $this->slug . '-deactivate-submit-form"> <span>Submit & </span>' . esc_html__(' Deactivate', 'kali-forms') . '</a></p>';
 		$html .= '</div>';
 
 		return $html;

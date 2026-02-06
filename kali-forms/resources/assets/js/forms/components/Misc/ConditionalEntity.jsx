@@ -83,13 +83,13 @@ const ConditionalEntity = observer((props) => {
 							fullWidth={true}
 						>
 							<MenuItem value="always">
-								{__('Always', 'kaliforms')}
+								{__('Always', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value="any">
-								{__('If any of the fields', 'kaliforms')}
+								{__('If any of the fields', 'kali-forms')}
 							</MenuItem>
 							<MenuItem value="all">
-								{__('If all fields', 'kaliforms')}
+								{__('If all fields', 'kali-forms')}
 							</MenuItem>
 						</Select>
 					</FormControl>
@@ -100,7 +100,7 @@ const ConditionalEntity = observer((props) => {
 					<Grid container direction="row" key={idx} spacing={3}>
 						<Grid item xs={3}>
 							<FieldComponentSelect
-								label={__('Form field', 'kaliforms')}
+								label={__('Form field', 'kali-forms')}
 								field={idx}
 								selectedValue={condition.formField || ''}
 								onChange={selectChange} />
@@ -108,7 +108,7 @@ const ConditionalEntity = observer((props) => {
 						<Grid item xs={3}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('Operator', 'kaliforms')}
+									{__('Operator', 'kali-forms')}
 								</InputLabel>
 								<Select
 									multiple={false}
@@ -117,20 +117,20 @@ const ConditionalEntity = observer((props) => {
 									onChange={e => changeFieldCondition(idx, e.target.value)}
 									fullWidth={true}
 								>
-									<MenuItem value='is'>{__('Is', 'kaliforms')}</MenuItem>
-									<MenuItem value='not'>{__('Is not', 'kaliforms')}</MenuItem>
-									<MenuItem value='greater'>{__('Greater than', 'kaliforms')}</MenuItem>
-									<MenuItem value='less'>{__('Less than', 'kaliforms')}</MenuItem>
-									<MenuItem value='contains'>{__('Contains', 'kaliforms')}</MenuItem>
-									<MenuItem value='starts'>{__('Starts', 'kaliforms')}</MenuItem>
-									<MenuItem value='ends'>{__('Ends', 'kaliforms')}</MenuItem>
+									<MenuItem value='is'>{__('Is', 'kali-forms')}</MenuItem>
+									<MenuItem value='not'>{__('Is not', 'kali-forms')}</MenuItem>
+									<MenuItem value='greater'>{__('Greater than', 'kali-forms')}</MenuItem>
+									<MenuItem value='less'>{__('Less than', 'kali-forms')}</MenuItem>
+									<MenuItem value='contains'>{__('Contains', 'kali-forms')}</MenuItem>
+									<MenuItem value='starts'>{__('Starts', 'kali-forms')}</MenuItem>
+									<MenuItem value='ends'>{__('Ends', 'kali-forms')}</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
 						<Grid item xs={3}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('Value', 'kaliforms')}
+									{__('Value', 'kali-forms')}
 								</InputLabel>
 								<Choose>
 									<When condition={selectableTypes.includes(condition.formFieldType)}>
@@ -164,14 +164,14 @@ const ConditionalEntity = observer((props) => {
 
 						<Grid item xs={3} style={{ paddingTop: 38 }}>
 							<Button
-								aria-label={__('Add condition', 'kaliforms')}
+								aria-label={__('Add condition', 'kali-forms')}
 								variant="text"
 								onClick={() => addCondition()}
 							>
 								<Icon className="icon-add-new" />
 							</Button>
 							<Button
-								aria-label={__('Remove condition', 'kaliforms')}
+								aria-label={__('Remove condition', 'kali-forms')}
 								variant="text"
 								onClick={() => conditions.length === 1 ? setDefaultCondition() : removeCondition(idx)}
 							>

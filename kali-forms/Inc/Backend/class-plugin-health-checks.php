@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) {
 }
 
 use KaliForms\Inc\Backend\Notifications\Notification;
-use KaliForms\Inc\Backend\Plugin_Collision;
 use KaliForms\Inc\Utils\EmailProviders\Default_Mailer;
 use KaliForms\Inc\Utils\EmailProviders\Mailgun;
 use KaliForms\Inc\Utils\EmailProviders\Postmark;
@@ -76,7 +75,7 @@ class Plugin_Health_Checks
 	 */
 	public function denied()
 	{
-		wp_die(esc_html__('Denied', 'kaliforms'));
+		wp_die(esc_html__('Denied', 'kali-forms'));
 	}
 	/**
 	 * Adds the tests in the site health page
@@ -99,65 +98,19 @@ class Plugin_Health_Checks
 	 */
 	public function set_tests()
 	{
-		$tests = [
-			'plugin_collision' => [
-				'label' => esc_html__('Kali Forms - Plugin Collision Test', 'kaliforms'),
-				'test'  => [$this, 'plugin_collision'],
-			],
-		];
+		$tests = [];
 
 		$option = get_option($this->slug . '_email_smtp_settings_dismissed', false);
 		if (!$option) {
 			$tests['smtp_test'] = [
-				'label' => esc_html__('Kali Forms - SMTP Test', 'kaliforms'),
+				'label' => esc_html__('Kali Forms - SMTP Test', 'kali-forms'),
 				'test'  => [$this, 'test_smtp'],
 			];
 		}
 
 		$this->tests = apply_filters($this->slug . '_plugin_health_checks', $tests);
 	}
-	/**
-	 * Plugin collision test
-	 *
-	 * @return void
-	 */
-	public function plugin_collision()
-	{
-		$collision   = new Plugin_Collision();
-		$status      = 'good';
-		$label       = esc_html__('Kali Forms - No plugin collision detected', 'kaliforms');
-		$description = esc_html__('We check your WordPress installation for plugins that might interfere Kali Forms so you get the best experience', 'kaliforms');
-		$actions     = '';
 
-		if (count($collision->activated_plugins) > 0) {
-			$status      = 'recommended';
-			$label       = esc_html__('Kali Forms - Plugin collision detected', 'kaliforms');
-			$description = '<p>';
-			$description .= vsprintf( // Translators: 1 is list of plugins, 2 is opening Anchor, 3 is closing.
-				esc_html__('We noticed that the following plugins are active: %1$s. We recommend that you de-activate them so they don\'t interfere with Kali Forms. You can do it manually in the plugins page, or click the button below and we\'ll do it for you!', 'kaliforms'),
-				[
-					implode(', ', $collision->activated_plugins_name),
-				]
-			);
-			$description .= '</p>';
-			$actions = sprintf(
-				'<p><a class="button button-primary" href="%s">%s</a></p>',
-				esc_url($collision->create_url(true)),
-				esc_html__('Deactivate Plugins', 'kaliforms')
-			);
-		}
-		return $this->create_result(
-			'plugin-collision',
-			$label,
-			$status,
-			$description,
-			[
-				'label' => esc_html__('Performance', 'kaliforms'),
-				'color' => 'blue',
-			],
-			$actions
-		);
-	}
 	/**
 	 * Test SMTP and show the result
 	 *
@@ -166,38 +119,38 @@ class Plugin_Health_Checks
 	public function test_smtp()
 	{
 		$status      = 'good';
-		$label       = esc_html__('Kali Forms - Email uses SMTP', 'kaliforms');
+		$label       = esc_html__('Kali Forms - Email uses SMTP', 'kali-forms');
 		$description = sprintf(
 			'<p>%s</p>',
-			esc_html__('This improves deliverability of emails.', 'kaliforms')
+			esc_html__('This improves deliverability of emails.', 'kali-forms')
 		);
 		$actions = sprintf(
 			'<p><a href="#" class="button button-primary" target="_blank" id="kaliforms-system-check-email-send">%s</a></p>',
-			esc_html__('Test email sending', 'kaliforms')
+			esc_html__('Test email sending', 'kali-forms')
 		);
 		$smtp = $this->is_smtp();
 
 		if (!$smtp['status']) {
 			$status = 'recommended';
-			$label  = esc_html__('Kali Forms - Emails do not use SMTP', 'kaliforms');
+			$label  = esc_html__('Kali Forms - Emails do not use SMTP', 'kali-forms');
 
 			switch ($smtp['reason']) {
 				case 'no-host':
 					$description = sprintf(
 						'<p>%s</p>',
-						esc_html__('Use a dedicated SMTP server to improve deliverability of emails. Please check the Host field on our dedicated Email Settings page.', 'kaliforms')
+						esc_html__('Use a dedicated SMTP server to improve deliverability of emails. Please check the Host field on our dedicated Email Settings page.', 'kali-forms')
 					);
 					break;
 				case 'credentials':
 					$description = sprintf(
 						'<p>%s</p>',
-						esc_html__('Use a dedicated SMTP server to improve deliverability of emails. Please check the credentials added on our dedicated Email Settings page.', 'kaliforms')
+						esc_html__('Use a dedicated SMTP server to improve deliverability of emails. Please check the credentials added on our dedicated Email Settings page.', 'kali-forms')
 					);
 					break;
 				default:
 					$description = sprintf(
 						'<p>%s</p>',
-						esc_html__('Use a dedicated SMTP server to improve deliverability of emails. It might be a misconfiguration on our dedicated Email Settings page.', 'kaliforms')
+						esc_html__('Use a dedicated SMTP server to improve deliverability of emails. It might be a misconfiguration on our dedicated Email Settings page.', 'kali-forms')
 					);
 					break;
 			}
@@ -205,7 +158,7 @@ class Plugin_Health_Checks
 			$actions = sprintf(
 				'<p><a href="%s" target="_blank">%s</a></p>',
 				esc_url(admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-email-settings')),
-				esc_html__('Use SMTP', 'kaliforms')
+				esc_html__('Use SMTP', 'kali-forms')
 			);
 		}
 
@@ -215,7 +168,7 @@ class Plugin_Health_Checks
 			$status,
 			$description,
 			[
-				'label' => esc_html__('Improvement', 'kaliforms'),
+				'label' => esc_html__('Improvement', 'kali-forms'),
 				'color' => 'orange',
 			],
 			$actions
@@ -269,9 +222,9 @@ class Plugin_Health_Checks
 
 		$fromEmail = isset($_POST['args']['from']) ? $_POST['args']['from'] : get_bloginfo('admin_email');
 
-		$subject = esc_html__('Kali Forms - Email sending test', 'kaliforms');
-		$body    = esc_html__('This is a test. Feel free to delete the message.', 'kaliforms');
-		$body .= '<br/> <a href="' . esc_url(admin_url('edit.php?post_type=kaliforms_forms&confirm_email_delivery=true')) . '">' . esc_html__('Confirm email delivery', 'kaliforms') . '</a>';
+		$subject = esc_html__('Kali Forms - Email sending test', 'kali-forms');
+		$body    = esc_html__('This is a test. Feel free to delete the message.', 'kali-forms');
+		$body .= '<br/> <a href="' . esc_url(admin_url('edit.php?post_type=kaliforms_forms&confirm_email_delivery=true')) . '">' . esc_html__('Confirm email delivery', 'kali-forms') . '</a>';
 
 		$emailer = $this->providers[$this->selected_provider];
 		$emailer = $emailer::get_instance();
@@ -288,7 +241,7 @@ class Plugin_Health_Checks
 		wp_die(wp_json_encode([
 			'success' => true,
 			'sent'    => $sent,
-			'message' => $sent ? sprintf(esc_html__('A message was sent to the following email address: %s. Please follow the link in the email body to dismiss this notice.', 'kaliforms'), $toEmail) : esc_html__('Something went wrong. Check email log.', 'kaliforms'),
+			'message' => $sent ? sprintf(esc_html__('A message was sent to the following email address: %s. Please follow the link in the email body to dismiss this notice.', 'kali-forms'), $toEmail) : esc_html__('Something went wrong. Check email log.', 'kali-forms'),
 		]));
 	}
 	/**
@@ -333,7 +286,7 @@ class Plugin_Health_Checks
 		$notifications[] = new Notification(
 			'email_smtp_settings',
 			'warning',
-			esc_html__('We recommend that you set up SMTP settings to increase the deliverability of email notifications.', 'kaliforms'),
+			esc_html__('We recommend that you set up SMTP settings to increase the deliverability of email notifications.', 'kali-forms'),
 			'redirect',
 			admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-email-settings'),
 			true
@@ -357,7 +310,7 @@ class Plugin_Health_Checks
 		$notifications[] = new Notification(
 			'email_send_test',
 			'info',
-			esc_html__('Send a test email to the administrator account.', 'kaliforms'),
+			esc_html__('Send a test email to the administrator account.', 'kali-forms'),
 			'ajax',
 			'test_email',
 			true

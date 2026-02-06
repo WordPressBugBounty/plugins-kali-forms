@@ -25,13 +25,13 @@ const LogPage = props => {
 		setModalText(text);
 	}
 	const columns = [
-		{ field: 'id', headerName: __('#', 'kaliforms'), width: 40, sortable: false, },
-		{ field: 'mailer', headerName: __('Sender', 'kaliforms'), width: 110, sortable: false },
-		{ field: 'type', headerName: __('Type', 'kaliforms'), width: 75, sortable: false, },
-		{ field: 'date', headerName: __('Date', 'kaliforms'), width: 170, sortable: false, },
+		{ field: 'id', headerName: __('#', 'kali-forms'), width: 40, sortable: false, },
+		{ field: 'mailer', headerName: __('Sender', 'kali-forms'), width: 110, sortable: false },
+		{ field: 'type', headerName: __('Type', 'kali-forms'), width: 75, sortable: false, },
+		{ field: 'date', headerName: __('Date', 'kali-forms'), width: 170, sortable: false, },
 		{
 			field: 'message',
-			headerName: __('Content', 'kaliforms'),
+			headerName: __('Content', 'kali-forms'),
 			width: 520,
 			sortable: false,
 			renderCell: params => {
@@ -62,7 +62,7 @@ const LogPage = props => {
 			field: 'info',
 			width: 50,
 			sortable: false,
-			headerName: __('Help', 'kaliforms'),
+			headerName: __('Help', 'kali-forms'),
 			renderCell: (params) => {
 				const value = params.getValue('info');
 				return (
@@ -125,11 +125,11 @@ const LogPage = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('See your email log', 'kaliforms')}
+				{__('See your email log', 'kali-forms')}
 			</Typography>
 			<Grid container direction="row">
 				<Grid item xs={12}>
-					<Button onClick={e => clearLog()}>{__('Clear log', 'kaliforms')}</Button>
+					<Button onClick={e => clearLog()}>{__('Clear log', 'kali-forms')}</Button>
 				</Grid>
 				<Grid item xs={12} style={{ background: '#fff', height: 650, width: '100%' }}>
 					<DataGrid loading={loading} rows={rows} columns={columns} pageSize={10} />
@@ -142,7 +142,7 @@ const LogPage = props => {
 					setModalText('');
 				}}
 			>
-				<DialogTitle>{__('Error Info', 'kaliforms')}</DialogTitle>
+				<DialogTitle>{__('Error Info', 'kali-forms')}</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
 						{modalText}
@@ -153,7 +153,7 @@ const LogPage = props => {
 						setOpenModal(false);
 						setModalText('');
 					}} color="primary" autoFocus>
-						{__('Ok', 'kaliforms')}
+						{__('Ok', 'kali-forms')}
 					</Button>
 				</DialogActions>
 			</Dialog>

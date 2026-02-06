@@ -49,7 +49,7 @@ document.getElementById('kaliforms_email_fail_log').addEventListener('click', e 
 		let textNode = document.createElement('span');
 		textNode.setAttribute('id', 'kaliforms-log-notice');
 		textNode.setAttribute('style', 'color: red')
-		let text = document.createTextNode(__('Log will appear after page refresh if this is checked', 'kaliforms'));
+		let text = document.createTextNode(__('Log will appear after page refresh if this is checked', 'kali-forms'));
 		textNode.appendChild(text);
 		e.target.parentElement.appendChild(textNode);
 	}

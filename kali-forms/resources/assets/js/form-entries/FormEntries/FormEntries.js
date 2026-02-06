@@ -63,13 +63,13 @@ export default function FormEntries() {
 			<If condition={id}>
 				<div style={{ marginBottom: 16 }}>
 					<Button type="primary" onClick={deleteEntries} disabled={!hasSelected} loading={loading}>
-						{__('Delete', 'kaliforms')}
+						{__('Delete', 'kali-forms')}
 					</Button>
 					<span style={{ marginLeft: 8 }}>
-						{hasSelected ? sprintf(__('Selected %s items', 'kaliforms'), selectedRowKeys.length) : ''}
+						{hasSelected ? sprintf(__('Selected %s items', 'kali-forms'), selectedRowKeys.length) : ''}
 					</span>
 					<Button type="primary" onClick={onClickColumnSelector} style={{ marginLeft: 20 }}>
-						{__('Column selector', 'kaliforms')}
+						{__('Column selector', 'kali-forms')}
 					</Button>
 				</div>
 
@@ -95,7 +95,7 @@ export default function FormEntries() {
 				/>
 			</If>
 			<If condition={!id}>
-				<Link to={'/'} onClick={updateUi}>{__('... select a form first!', 'kaliforms')}</Link>
+				<Link to={'/'} onClick={updateUi}>{__('... select a form first!', 'kali-forms')}</Link>
 			</If>
 			<Modal visible={modalShown} onCancel={() => setModalShown(false)} onOk={() => setModalShown(false)}>
 				{columns.map((column) =>

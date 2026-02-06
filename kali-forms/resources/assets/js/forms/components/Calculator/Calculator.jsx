@@ -17,7 +17,7 @@ const Calculator = observer(props => {
 			<If condition={simple}>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Current field', 'kaliforms')}
+						{__('Current field', 'kali-forms')}
 					</InputLabel>
 					<BootstrapInput
 						value={label}

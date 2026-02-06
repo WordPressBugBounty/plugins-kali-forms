@@ -13,7 +13,7 @@ const FormStyling = observer(props => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Form styling', 'kaliforms')} />
+				<SectionTitle title={__('Form styling', 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					{store._FORM_STYLES_.styles.map(e => (
 						<Grid item xs={6} key={e.id}>

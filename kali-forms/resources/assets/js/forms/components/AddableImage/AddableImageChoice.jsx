@@ -70,8 +70,8 @@ const AddableImageChoice = observer((props) => {
 					<Grid item xs={6}>
 						<MediaManager
 							shrinkMargin={true}
-							title={__('Select image', 'kaliforms')}
-							buttonLabel={__('Use selected image', 'kaliforms')}
+							title={__('Select image', 'kali-forms')}
+							buttonLabel={__('Use selected image', 'kali-forms')}
 							mediaValue={props.mediaValue.image}
 							onChange={val => props.onChange(props.currentIndex, 'image', val)}
 						/>
@@ -79,7 +79,7 @@ const AddableImageChoice = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl style={{ marginBottom: 0 }}>
 							<InputLabel shrink>
-								{__('Label', 'kaliforms')}
+								{__('Label', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={props.mediaValue.label}
@@ -89,7 +89,7 @@ const AddableImageChoice = observer((props) => {
 						</FormControl>
 						<FormControl style={{ marginBottom: 0, marginTop: 20 }}>
 							<InputLabel shrink>
-								{__('Caption', 'kaliforms')}
+								{__('Caption', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={props.mediaValue.caption}

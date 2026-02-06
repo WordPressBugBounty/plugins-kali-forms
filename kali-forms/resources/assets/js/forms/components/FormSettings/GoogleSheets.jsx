@@ -93,7 +93,7 @@ const GoogleSheets = observer((props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__("Google sheets settings", "kaliforms")} />
+				<SectionTitle title={__("Google sheets settings", "kali-forms")} />
 				<Choose>
 					<When condition={googleSheetsData.hasOwnProperty("error")}>
 						<Grid container direction="row" spacing={3}>
@@ -101,7 +101,7 @@ const GoogleSheets = observer((props) => {
 								<Typography>
 									{__(
 										"Something went wrong, please authenticate with Google.",
-										"kaliforms"
+										"kali-forms"
 									)}
 								</Typography>
 							</Grid>
@@ -122,7 +122,7 @@ const GoogleSheets = observer((props) => {
 												}
 											/>
 										}
-										label={__("Enable Google Sheets Integration", "kaliforms")}
+										label={__("Enable Google Sheets Integration", "kali-forms")}
 									/>
 								</FormGroup>
 							</Grid>
@@ -133,7 +133,7 @@ const GoogleSheets = observer((props) => {
 								<Grid item xs={6}>
 									<FormControl>
 										<InputLabel shrink>
-											{__("Spreadsheet", "kaliforms")}
+											{__("Spreadsheet", "kali-forms")}
 										</InputLabel>
 										<Select
 											value={
@@ -150,7 +150,7 @@ const GoogleSheets = observer((props) => {
 											input={<BootstrapInput />}
 										>
 											<MenuItem value="kf-select-field">
-												{__("Select a spreadsheet", "kaliforms")}
+												{__("Select a spreadsheet", "kali-forms")}
 											</MenuItem>
 											{googleSheetsData.spreadsheets.map((spreadsheet) => (
 												<MenuItem key={spreadsheet.id} value={spreadsheet.id}>
@@ -169,7 +169,7 @@ const GoogleSheets = observer((props) => {
 								>
 									<Grid item xs={6}>
 										<FormControl>
-											<InputLabel shrink>{__("Sheet", "kaliforms")}</InputLabel>
+											<InputLabel shrink>{__("Sheet", "kali-forms")}</InputLabel>
 											<Select
 												value={store._GOOGLE_SHEETS_.sheet || "kf-select-field"}
 												multiple={false}
@@ -182,7 +182,7 @@ const GoogleSheets = observer((props) => {
 												input={<BootstrapInput />}
 											>
 												<MenuItem value="kf-select-field">
-													{__("Select a sheet", "kaliforms")}
+													{__("Select a sheet", "kali-forms")}
 												</MenuItem>
 												{selectedSpreadSheet &&
 													selectedSpreadSheet.sheets.map((sheet) => (
@@ -213,7 +213,7 @@ const GoogleSheets = observer((props) => {
 											<FieldComponentSelect
 												label={
 													is.empty(field.name)
-														? __("Cell has no label", "kaliforms")
+														? __("Cell has no label", "kali-forms")
 														: field.name
 												}
 												selectedValue={
@@ -233,7 +233,7 @@ const GoogleSheets = observer((props) => {
 									<Grid item xs={12}>
 										{__(
 											"Please make sure the spreadsheet has the table headers created",
-											"kaliforms"
+											"kali-forms"
 										)}
 									</Grid>
 								</Grid>

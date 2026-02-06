@@ -11,19 +11,19 @@ import { __ } from '@wordpress/i18n';
 
 const steps = [
 	{
-		title: __('Form select', 'kaliforms'),
+		title: __('Form select', 'kali-forms'),
 		content: <FormSelect />,
 	},
 	{
-		title: __('Options', 'kaliforms'),
+		title: __('Options', 'kali-forms'),
 		content: <ExportOptions />,
 	},
 	{
-		title: __('Formatting', 'kaliforms'),
+		title: __('Formatting', 'kali-forms'),
 		content: <ExportFormatting />
 	},
 	{
-		title: __('Start export', 'kaliforms'),
+		title: __('Start export', 'kali-forms'),
 		content: <StartExport />,
 	},
 ];
@@ -79,12 +79,12 @@ export default function Exporter() {
 				<div className="steps-action" style={{ textAlign: 'center' }}>
 					{exportOptions.currentStep > 0 && (
 						<Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-							{__('Previous', 'kaliforms')}
+							{__('Previous', 'kali-forms')}
 						</Button>
 					)}
 					{exportOptions.currentStep < steps.length - 1 && (
 						<Button type="primary" disabled={validateStep()} onClick={() => next()}>
-							{__('Next', 'kaliforms')}
+							{__('Next', 'kali-forms')}
 						</Button>
 					)}
 				</div>

@@ -2,7 +2,7 @@
 
 namespace KaliForms\Inc\Backend\BuilderFormFields;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Inc\Backend\BuilderFormFields
  */
-class Radio extends Form_Field {
+class Radio extends Form_Field
+{
 	/**
 	 * @var string
 	 */
@@ -26,8 +27,9 @@ class Radio extends Form_Field {
 	 *
 	 * @param $args
 	 */
-	public function __construct( $args ) {
-		parent::__construct( $args );
-		$this->label = esc_html__( 'Radio', 'kaliforms' );
+	public function __construct($args)
+	{
+		parent::__construct($args);
+		$this->label = esc_html__('Radio', 'kali-forms');
 	}
 }

@@ -81,8 +81,8 @@ const SidebarFieldComponentItem = observer(props => {
 	 * @param {*} label
 	 */
 	const initAlert = label => {
-		store._CONFIRMATION_DIALOG_.setTitle(label + __(' field already exists', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setMessage(__('You can add only one field of this type', 'kaliforms'));
+		store._CONFIRMATION_DIALOG_.setTitle(label + __(' field already exists', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setMessage(__('You can add only one field of this type', 'kali-forms'));
 		store._CONFIRMATION_DIALOG_.setHideCancelButton(true);
 		store._CONFIRMATION_DIALOG_.setState(true);
 	}
@@ -150,14 +150,14 @@ const SidebarFieldComponentItem = observer(props => {
 
 		if (paymentMethods.length > 1 && !paymentMethodChooser) {
 			store._CONFIRMATION_DIALOG_.setTitle(__('Payment Methods Issue'));
-			store._CONFIRMATION_DIALOG_.setMessage(__('It seems that you have multiple payment methods in your form. In order for this functionality to work correctly you should add a payment method chooser field. Do you want us to do it for you?', 'kaliforms'));
+			store._CONFIRMATION_DIALOG_.setMessage(__('It seems that you have multiple payment methods in your form. In order for this functionality to work correctly you should add a payment method chooser field. Do you want us to do it for you?', 'kali-forms'));
 			store._CONFIRMATION_DIALOG_.setState(true);
 			store._CONFIRMATION_DIALOG_.setAction(_createFieldAndLogic)
 		}
 
 		if (paymentMethods.length < 3 && paymentMethodChooser) {
 			store._CONFIRMATION_DIALOG_.setTitle(__('Payment Methods Issue'));
-			store._CONFIRMATION_DIALOG_.setMessage(__('Do you want to update the payment method chooser?', 'kaliforms'));
+			store._CONFIRMATION_DIALOG_.setMessage(__('Do you want to update the payment method chooser?', 'kali-forms'));
 			store._CONFIRMATION_DIALOG_.setState(true);
 			store._CONFIRMATION_DIALOG_.setAction(_updateFieldAndLogic)
 			store._CONFIRMATION_DIALOG_.setActionProps(id)
@@ -179,7 +179,7 @@ const SidebarFieldComponentItem = observer(props => {
 			constraint: 'none',
 			internalId: radioItem.id.toLowerCase() + store._FIELD_COMPONENTS_.lastIndex,
 		}
-		field.properties.caption = __('Select payment method', 'kaliforms');
+		field.properties.caption = __('Select payment method', 'kali-forms');
 		let pmObj = _getAllPaymentMethods();
 		field.properties.choices = pmObj.choices;
 		store._FIELD_COMPONENTS_.addFieldComponent(field)
@@ -187,7 +187,7 @@ const SidebarFieldComponentItem = observer(props => {
 
 		pmObj.paymentMethods.map((e, idx) => {
 			store._FORM_INFO_.addConditional({
-				name: __('Show ', 'kaliforms') + pmObj.choices[idx].label,
+				name: __('Show ', 'kali-forms') + pmObj.choices[idx].label,
 				field: e.internalId,
 				state: 'show',
 				conditioner: field.internalId,
@@ -214,7 +214,7 @@ const SidebarFieldComponentItem = observer(props => {
 			})
 
 			store._FORM_INFO_.addConditional({
-				name: __('Show ', 'kaliforms') + _translatePmById(id),
+				name: __('Show ', 'kali-forms') + _translatePmById(id),
 				field: pMField.internalId,
 				state: 'show',
 				conditioner: pMFound.conditioner,
@@ -250,13 +250,13 @@ const SidebarFieldComponentItem = observer(props => {
 		let label = '';
 		switch (id) {
 			case 'stripe':
-				label = __('Stripe', 'kaliforms')
+				label = __('Stripe', 'kali-forms')
 				break;
 			case 'paypal':
-				label = __('PayPal', 'kaliforms')
+				label = __('PayPal', 'kali-forms')
 				break;
 			case 'wireTransfer':
-				label = __('Wire transfer', 'kaliforms')
+				label = __('Wire transfer', 'kali-forms')
 				break;
 			default: break;
 		}

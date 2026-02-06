@@ -47,7 +47,7 @@ const TemplateCard = props => {
 						className={classes.actionButton}
 						onClick={() => store._UI_.setTemplateSelecting(false)}
 					>
-						{__('Create new', 'kaliforms')}
+						{__('Create new', 'kali-forms')}
 					</Button>
 				</If>
 				<If condition={!props.blank}>
@@ -59,7 +59,7 @@ const TemplateCard = props => {
 							className={classes.proButton}
 							onClick={() => redirectToPro()}
 						>
-							{__('Upgrade to Pro', 'kaliforms')}
+							{__('Upgrade to Pro', 'kali-forms')}
 						</Button>
 					</If>
 					<If condition={!props.pro}>
@@ -70,7 +70,7 @@ const TemplateCard = props => {
 							className={classes.actionButtonGroup}
 							onClick={() => window.open(props.demoUrl, '_blank')}
 						>
-							{__('See demo', 'kaliforms')}
+							{__('See demo', 'kali-forms')}
 						</Button>
 						<Button
 							size="small"
@@ -79,7 +79,7 @@ const TemplateCard = props => {
 							className={classes.actionButtonGroup}
 							onClick={() => props.selectForm(props.predefinedFormKey)}
 						>
-							{__('Get started', 'kaliforms')}
+							{__('Get started', 'kali-forms')}
 						</Button>
 					</If>
 				</If>

@@ -46,7 +46,7 @@ class Payments_Simple
 	 */
 	public function nothing_to_see_here()
 	{
-		wp_die(esc_html__('Upgrade to Pro version for a payment log'));
+		wp_die(esc_html__('Upgrade to Pro version for a payment log', 'kali-forms'));
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Payments_Simple
 	 */
 	public function denied()
 	{
-		wp_die(esc_html__('Denied', 'kaliforms'));
+		wp_die(esc_html__('Denied', 'kali-forms'));
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Payments_Simple
 		$this->verify($args);
 		$actionHelper = new Payments_Action_Helper($args['formId']);
 		wp_die(
-			is_wp_error($actionHelper) ? esc_html__('Something went wrong', 'kaliforms') : $actionHelper->get_products($args)
+			is_wp_error($actionHelper) ? esc_html__('Something went wrong', 'kali-forms') : $actionHelper->get_products($args)
 		);
 	}
 

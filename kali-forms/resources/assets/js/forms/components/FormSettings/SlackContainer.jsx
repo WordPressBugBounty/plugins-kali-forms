@@ -11,7 +11,7 @@ const SlackContainer = observer(() => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Slack settings', 'kaliforms')} />
+				<SectionTitle title={__('Slack settings', 'kali-forms')} />
 
 				<If condition={slackData.hasOwnProperty('error')}>
 					<Grid container direction="row" spacing={3}>

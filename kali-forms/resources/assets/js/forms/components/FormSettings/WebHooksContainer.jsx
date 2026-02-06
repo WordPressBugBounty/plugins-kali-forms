@@ -10,7 +10,7 @@ const WebHooksContainer = observer(() => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Webhooks', 'kaliforms')} />
+				<SectionTitle title={__('Webhooks', 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
 						<WebHooks />

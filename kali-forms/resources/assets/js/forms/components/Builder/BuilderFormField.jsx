@@ -69,7 +69,7 @@ const BuilderFormField = observer((props) => {
 				var label = setComputedLabelFunc(field);
 				var checked = field.properties.default;
 				var required = field.properties.required;
-				var value = checked === '' ? __('-- Select an option --', 'kaliforms') : checked.split(',')[0];
+				var value = checked === '' ? __('-- Select an option --', 'kali-forms') : checked.split(',')[0];
 				return (
 					<React.Fragment>
 						<Box component="label" className={classes.label}>
@@ -181,7 +181,7 @@ const BuilderFormField = observer((props) => {
 			case 'fileUpload':
 				return (
 					<span className={classes.fileUpload}>
-						<span>{__('Drag & Drop your files or Browse', 'kaliforms')}</span>
+						<span>{__('Drag & Drop your files or Browse', 'kali-forms')}</span>
 					</span>
 				);
 			case 'button':
@@ -226,9 +226,9 @@ const BuilderFormField = observer((props) => {
 				var label = setComputedLabelFunc(field);
 				return (
 					<span className={classes.pageBreak}>
-						<div><button className="button">{__('Back', 'kaliforms')}</button></div>
+						<div><button className="button">{__('Back', 'kali-forms')}</button></div>
 						<div> {label} </div>
-						<div><button className="button">{__('Next', 'kaliforms')}</button></div>
+						<div><button className="button">{__('Next', 'kali-forms')}</button></div>
 					</span>
 				);
 			case 'dateTimePicker':
@@ -294,7 +294,7 @@ const BuilderFormField = observer((props) => {
 				return (<React.Fragment>
 					<Box className={classes.wireTransfer}>
 						<Icon className={'icon-new-letter'} />
-						<span style={{ marginLeft: 8 }}>{__('Wire Transfer', 'kaliforms')}</span>
+						<span style={{ marginLeft: 8 }}>{__('Wire Transfer', 'kali-forms')}</span>
 					</Box>
 				</React.Fragment>)
 			case 'product':
@@ -310,7 +310,7 @@ const BuilderFormField = observer((props) => {
 				return (
 					<React.Fragment>
 						<Box className={classes.multipleProductField}>
-							{!field.properties.products.length && (<div>{__('Add your first product', 'kaliforms')}</div>)}
+							{!field.properties.products.length && (<div>{__('Add your first product', 'kali-forms')}</div>)}
 							{field.properties.products.length > 0 && field.properties.products.map(product => (
 								<Box key={product.id} className={classes.productField}>
 									<ShoppingBasketIcon />
@@ -344,7 +344,7 @@ const BuilderFormField = observer((props) => {
 						</Box>
 						<input className={classes.input} type="textbox" placeholder={placeholder} value={defaultVal || ''} onChange={e => e} />
 						<Box className={classes.stripe} component="div">
-							<Box className={classes.stripeCard}>{__('Card Number', 'kaliforms')}</Box>
+							<Box className={classes.stripeCard}>{__('Card Number', 'kali-forms')}</Box>
 							<Box className={classes.stripeDate}>MM/YY</Box>
 							<Box className={classes.stripeCvc}>CVC</Box>
 						</Box>

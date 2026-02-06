@@ -52,7 +52,7 @@ const FormFieldMapper = (props) => {
 								>
 									<MenuItem
 										value={'empty'}>
-										{__('-- Select a field --', 'kaliforms')}
+										{__('-- Select a field --', 'kali-forms')}
 									</MenuItem>
 									{
 										Object.keys(store._FIELD_COMPONENTS_.simplifiedFields).map((key, index) => {

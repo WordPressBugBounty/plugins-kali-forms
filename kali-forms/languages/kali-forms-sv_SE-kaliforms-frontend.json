@@ -1,0 +1,96 @@
+{
+	"translation-revision-date": "2021-02-16T14:10:42+00:00",
+	"generator": "WP-CLI\/2.5.0-alpha",
+	"source": "public\/assets\/frontend\/js\/frontend.js",
+	"domain": "kali-forms",
+	"locale_data": {
+		"kali-forms": {
+			"": {
+				"domain": "kali-forms",
+				"lang": "sv",
+				"plural-forms": "nplurals=2; plural=(n != 1);"
+			},
+			"Something went wrong": [
+				"N\u00e5got blev fel"
+			],
+			"Browse": [
+				"Bl\u00e4ddra"
+			],
+			"Please complete recaptcha challenge": [
+				"Var sn\u00e4ll och genomf\u00f6r recaptcha kontrollen"
+			],
+			"Drag & Drop your files (max %s) or": [
+				"Dra & sl\u00e4pp dina filer (max %s) eller"
+			],
+			"Please complete the payment by clicking the PayPal button": [
+				"Var sn\u00e4ll och slutf\u00f6r betalningen genom att klicka p\u00e5 PayPal-knappen"
+			],
+			"You don't have products in your form.": [
+				"Du har inga produkter i ditt formul\u00e4r."
+			],
+			"Field contains invalid files": [
+				"F\u00e4ltet inneh\u00e5ller ogiltliga filer"
+			],
+			"Waiting for size": [
+				"V\u00e4ntar p\u00e5 storlek"
+			],
+			"Size not available": [
+				"Storlek ej tillg\u00e4nglig"
+			],
+			"Loading": [
+				"L\u00e4ser in"
+			],
+			"Error during load": [
+				"Inl\u00e4sning misslyckad"
+			],
+			"Uploading": [
+				"Uppladdning p\u00e5g\u00e5r"
+			],
+			"Upload complete": [
+				"Uppladdning genomf\u00f6rd"
+			],
+			"Upload cancelled": [
+				"Uppladdning avbruten"
+			],
+			"Error during upload": [
+				"Uppladdning misslyckad"
+			],
+			"Error during revert": [
+				"Gick ej att backa"
+			],
+			"Error during remove": [
+				"Borttagning misslyckades"
+			],
+			"tap to cancel": [
+				"klicka f\u00f6r att avbryta"
+			],
+			"tap to retry": [
+				"klicka f\u00f6r prova igen"
+			],
+			"tap to undo": [
+				"klicka f\u00f6r att \u00e5ngra"
+			],
+			"Remove": [
+				"ta bort"
+			],
+			"Abort": [
+				"Avbryt"
+			],
+			"Retry": [
+				"F\u00f6rs\u00f6k igen"
+			],
+			"Cancel": [
+				"Avbryt"
+			],
+			"Undo": [
+				"\u00c5ngra"
+			],
+			"Upload": [
+				"Ladda upp"
+			],
+			"Drag & Drop your files or %sBrowse%s": [
+				"Drag & sl\u00e4pp dina filer eller %sv\u00e4lj fil(er)%s"
+			]
+		}
+	}
+}

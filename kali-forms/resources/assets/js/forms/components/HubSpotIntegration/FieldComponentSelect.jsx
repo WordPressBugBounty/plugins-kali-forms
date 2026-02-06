@@ -28,7 +28,7 @@ const FieldComponentSelect = (props) => {
 				}}
 				fullWidth={true}
 			>
-				<MenuItem value={'empty'}>{__('-- Select a field --', 'kaliforms')}</MenuItem>
+				<MenuItem value={'empty'}>{__('-- Select a field --', 'kali-forms')}</MenuItem>
 				{store._FIELD_COMPONENTS_.fieldComponents.map(field => {
 					if (
 						(field.properties.name !== '')

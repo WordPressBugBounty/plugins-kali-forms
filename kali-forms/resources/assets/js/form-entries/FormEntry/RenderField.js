@@ -55,7 +55,7 @@ export default function RenderField(props) {
 						{props?.value?.combined ? props.value.combined.map((el, idx) => {
 							return el.url !== ''
 								? <li key={'uploaded-' + el.id}><Button onClick={e => uploadClick(el)}>{el.title}</Button></li>
-								: <li key={'uploaded-' + idx}>{__('No file uploaded', 'kaliforms')}</li>
+								: <li key={'uploaded-' + idx}>{__('No file uploaded', 'kali-forms')}</li>
 						}) : ''}
 					</ul>
 				</React.Fragment>
@@ -71,7 +71,7 @@ export default function RenderField(props) {
 			return (
 				<Card style={{ width: 200 }}>
 					<Meta title={props.props?.donationName ? props.props.donationName : props.props.caption}
-						description={__('Price: ', 'kaliforms') + ' ' + (props.value !== '' ? parseFloat(props.value).toFixed(2) : '0.00')} />
+						description={__('Price: ', 'kali-forms') + ' ' + (props.value !== '' ? parseFloat(props.value).toFixed(2) : '0.00')} />
 				</Card>
 			);
 		case 'gdpr':
@@ -84,7 +84,7 @@ export default function RenderField(props) {
 				<Card style={{ width: 200 }}
 					cover={<img src={props.props?.picture?.fullUrl ? props.props.picture.fullUrl : fallbackSrc} />}
 				>
-					<Meta title={props.value.label} description={__('Price: ', 'kaliforms') + ' ' + parseFloat(props.value.price).toFixed(2)} />
+					<Meta title={props.value.label} description={__('Price: ', 'kali-forms') + ' ' + parseFloat(props.value.price).toFixed(2)} />
 				</Card>
 			);
 		case 'rating':

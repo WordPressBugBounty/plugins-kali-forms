@@ -8,7 +8,7 @@ const FormConditionalLogic = observer((props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__('Conditional logic', 'kaliforms')} />
+				<SectionTitle title={__('Conditional logic', 'kali-forms')} />
 				<ConditionalLogicComponent sidebar={false} />
 			</Container>
 		</React.Fragment>

@@ -27,13 +27,13 @@ const EmailEditorContainer = observer(props => {
 			<Choose>
 				<When condition={!store._EMAILS_.emails.length}>
 					<Paper className={classes.formEmailsPlaceholder}>
-						<Typography variant="subtitle1">{__('You currently do not have any emails configured.', 'kaliforms')}</Typography>
-						<StyledButton onClick={event => store._EMAILS_.emailWizardVisibility = true}>{__('Add your first email', 'kaliforms')}</StyledButton>
+						<Typography variant="subtitle1">{__('You currently do not have any emails configured.', 'kali-forms')}</Typography>
+						<StyledButton onClick={event => store._EMAILS_.emailWizardVisibility = true}>{__('Add your first email', 'kali-forms')}</StyledButton>
 					</Paper>
 				</When>
 				<When condition={store._EMAILS_.emails.length && store._UI_.activeEmailInSidebar === false}>
 					<Paper className={classes.formEmailsPlaceholder}>
-						<Typography variant="subtitle1">{__('Please select an email from the list', 'kaliforms')}</Typography>
+						<Typography variant="subtitle1">{__('Please select an email from the list', 'kali-forms')}</Typography>
 					</Paper>
 				</When>
 				<Otherwise>

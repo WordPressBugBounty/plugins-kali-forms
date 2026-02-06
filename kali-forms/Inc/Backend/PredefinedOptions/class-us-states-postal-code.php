@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\PredefinedOptions;
 
 if (!defined('ABSPATH')) {
@@ -45,7 +46,7 @@ class US_States_Postal_Code
      */
     public function set_options()
     {
-        $this->label = esc_html__('US States Postal Code', 'kaliforms');
+        $this->label = esc_html__('US States Postal Code', 'kali-forms');
 
         $this->options = [
             ["AL" => "Alabama"],

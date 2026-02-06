@@ -80,47 +80,47 @@ class Email_Settings_Page
                     'providers'    => [
                         'wp'         => [
                             'logo'  => KALIFORMS_URL . 'assets/img/wp_logo.svg',
-                            'label' => __('Default WP Mailer', 'kaliforms'),
+                            'label' => __('Default WP Mailer', 'kali-forms'),
                         ],
                         'php'        => [
                             'logo'  => KALIFORMS_URL . 'assets/img/php-logo.svg',
-                            'label' => __('PHP Mailer', 'kaliforms'),
+                            'label' => __('PHP Mailer', 'kali-forms'),
                         ],
                         'smtp'       => [
                             'logo'  => KALIFORMS_URL . 'assets/img/smtp.svg',
-                            'label' => __('Custom SMTP', 'kaliforms'),
+                            'label' => __('Custom SMTP', 'kali-forms'),
                         ],
                         'smtpcom'    => [
                             'logo'  => KALIFORMS_URL . 'assets/img/smtp-com.svg',
-                            'label' => __('SMTP.com', 'kaliforms'),
+                            'label' => __('SMTP.com', 'kali-forms'),
                         ],
                         'sendinblue' => [
                             'logo'  => KALIFORMS_URL . 'assets/img/sendinblue.svg',
-                            'label' => __('Send in blue', 'kaliforms'),
+                            'label' => __('Send in blue', 'kali-forms'),
                         ],
                         'mailgun'    => [
                             'logo'  => KALIFORMS_URL . 'assets/img/mailgun.svg',
-                            'label' => __('Mailgun', 'kaliforms'),
+                            'label' => __('Mailgun', 'kali-forms'),
                         ],
                         'postmark'   => [
                             'logo'  => KALIFORMS_URL . 'assets/img/postmark.svg',
-                            'label' => __('Postmark', 'kaliforms'),
+                            'label' => __('Postmark', 'kali-forms'),
                         ],
                         // 'gmail'    => [
                         //     'logo'  => KALIFORMS_URL . 'assets/img/gmail.png',
-                        //     'label' => __('GMail', 'kaliforms'),
+                        //     'label' => __('GMail', 'kali-forms'),
                         // ],
                         // 'mandrill' => [
                         //     'logo'  => KALIFORMS_URL . 'assets/img/mandrill.png',
-                        //     'label' => __('Mandrill', 'kaliforms'),
+                        //     'label' => __('Mandrill', 'kali-forms'),
                         // ],
                         // 'sendgrid' => [
                         //     'logo'  => KALIFORMS_URL . 'assets/img/sendgrid.png',
-                        //     'label' => __('Sendgrid', 'kaliforms'),
+                        //     'label' => __('Sendgrid', 'kali-forms'),
                         // ],
                     ],
                     'translations' => [
-                        'logInfo' => esc_html__('Log will appear after page refresh if this is checked', 'kaliforms'),
+                        'logInfo' => esc_html__('Log will appear after page refresh if this is checked', 'kali-forms'),
                     ],
                 ]
             );
@@ -131,7 +131,6 @@ class Email_Settings_Page
                 KALIFORMS_VERSION
             );
         }
-
     }
     /**
      * Gets the selected tab
@@ -228,5 +227,4 @@ class Email_Settings_Page
          */
         do_action($this->slug . '_after_email_settings_page_rendering');
     }
-
 }

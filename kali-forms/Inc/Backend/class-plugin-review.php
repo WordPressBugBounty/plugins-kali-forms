@@ -56,10 +56,10 @@ class Plugin_Review
 	public function set_messages()
 	{
 		$this->messages = array(
-			'notice'  => esc_html__("Hi there! Stoked to see you're using Kali Forms for a few days now - hope you like it! And if you do, please consider rating it. It would mean the world to us.  Keep on rocking!", 'kaliforms'),
-			'rate'    => esc_html__('Rate the plugin', 'kaliforms'),
-			'later'   => esc_html__('Remind me later', 'kaliforms'),
-			'no_rate' => esc_html__('Don\'t show again', 'kaliforms'),
+			'notice'  => esc_html__("Hi there! Stoked to see you're using Kali Forms for a few days now - hope you like it! And if you do, please consider rating it. It would mean the world to us.  Keep on rocking!", 'kali-forms'),
+			'rate'    => esc_html__('Rate the plugin', 'kali-forms'),
+			'later'   => esc_html__('Remind me later', 'kali-forms'),
+			'no_rate' => esc_html__('Don\'t show again', 'kali-forms'),
 		);
 	}
 	/**
@@ -108,7 +108,7 @@ class Plugin_Review
 	 */
 	public function notice()
 	{
-		$html = '<div id="' . esc_attr($this->slug) . '-review-notice" class="notice notice-success is-dismissible" data-title="' . esc_html__('Hi there !', 'kaliforms') . '">';
+		$html = '<div id="' . esc_attr($this->slug) . '-review-notice" class="notice notice-success is-dismissible" data-title="' . esc_html__('Hi there !', 'kali-forms') . '">';
 		$html .= '<p>' . esc_html($this->messages['notice']) . '</p>';
 		$html .= '<p class="actions">';
 		$html .= '<a class="' . esc_attr($this->slug) . '-review-button button button-primary" id="' . esc_attr($this->slug) . '-rate" href="' . esc_url(sprintf($this->link, $this->wp_org_slug)) . '" target="_blank">' . esc_html($this->messages['rate']) . '</a>';
@@ -144,7 +144,7 @@ class Plugin_Review
 	 */
 	public function denied()
 	{
-		wp_die(esc_html__('Denied', 'kaliforms'));
+		wp_die(esc_html__('Denied', 'kali-forms'));
 	}
 	/**
 	 * Ajax request
@@ -162,7 +162,7 @@ class Plugin_Review
 		$_POST['args'] = stripslashes_deep($_POST['args']);
 
 		if (!isset($_POST['args']['user_action'])) {
-			wp_die(esc_html__('Something went wrong', 'kaliforms'));
+			wp_die(esc_html__('Something went wrong', 'kali-forms'));
 		}
 
 		switch ($_POST['args']['user_action']) {

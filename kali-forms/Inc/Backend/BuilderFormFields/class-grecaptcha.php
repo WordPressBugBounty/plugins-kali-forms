@@ -32,7 +32,6 @@ class GRecaptcha extends Form_Field
         parent::__construct($args);
         $this->remove_props(['name', 'default', 'description', 'caption']);
         $this->icon  = 'icon-recaptcha';
-        $this->label = esc_html__('Google Recaptcha', 'kaliforms');
-
+        $this->label = esc_html__('Google Recaptcha', 'kali-forms');
     }
 }

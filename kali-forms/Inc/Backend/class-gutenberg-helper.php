@@ -56,10 +56,10 @@ class Gutenberg_Helper
 	{
 		$this->post = get_post($id);
 		if ($this->post === null) {
-			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
 		if ($this->post->post_status !== 'publish') {
-			return $this->display_error(esc_html__('This form is not published.', 'kaliforms'));
+			return $this->display_error(esc_html__('This form is not published.', 'kali-forms'));
 		}
 
 		$fields = json_decode($this->get('field_components', '[]'));

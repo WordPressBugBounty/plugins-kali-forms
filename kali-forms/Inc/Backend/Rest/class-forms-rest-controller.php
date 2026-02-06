@@ -116,7 +116,7 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	public function get_items_permissions_check($request)
 	{
 		if (!current_user_can('edit_posts')) {
-			return new \WP_Error('rest_forbidden', esc_html__('You cannot view the post resource.', 'kaliforms'), ['status' => $this->authorization_status_code()]);
+			return new \WP_Error('rest_forbidden', esc_html__('You cannot view the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
 		}
 
 		return true;
@@ -131,7 +131,7 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	public function edit_item_check($request)
 	{
 		if (!current_user_can('edit_posts')) {
-			return new \WP_Error('rest_forbidden', esc_html__('You cannot edit the post resource.', 'kaliforms'), ['status' => $this->authorization_status_code()]);
+			return new \WP_Error('rest_forbidden', esc_html__('You cannot edit the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
 		}
 
 		return true;
@@ -213,7 +213,7 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 
 		$max_pages = ceil($total_posts / (int) $posts_query->query_vars['posts_per_page']);
 		if ($page > $max_pages && $total_posts > 0) {
-			return new \WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kaliforms'), ['status' => 400]);
+			return new \WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kali-forms'), ['status' => 400]);
 		}
 
 		$response = rest_ensure_response($posts);
@@ -388,33 +388,33 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 			'type' => 'object',
 			'properties' => [
 				'id' => [
-					'description' => esc_html__('Unique identifier for the object.', 'kaliforms'),
+					'description' => esc_html__('Unique identifier for the object.', 'kali-forms'),
 					'type' => 'integer',
 					'context' => ['view', 'edit', 'embed'],
 					'readonly' => true,
 				],
 				'formFields' => [
-					'description' => esc_html__('Fields.', 'kaliforms'),
+					'description' => esc_html__('Fields.', 'kali-forms'),
 					'type' => 'object',
 				],
 				'formGrid' => [
-					'description' => esc_html__('Grid.', 'kaliforms'),
+					'description' => esc_html__('Grid.', 'kali-forms'),
 					'type' => 'object',
 				],
 				'formOptions' => [
-					'description' => esc_html__('Form options.', 'kaliforms'),
+					'description' => esc_html__('Form options.', 'kali-forms'),
 					'type' => 'object',
 				],
 				'formNotifications' => [
-					'description' => esc_html__('Form notifications, that include emails and sms.', 'kaliforms'),
+					'description' => esc_html__('Form notifications, that include emails and sms.', 'kali-forms'),
 					'type' => 'array',
 				],
 				'immutableState' => [
-					'description' => esc_html__('Immutable data, that is needed for form building', 'kaliforms'),
+					'description' => esc_html__('Immutable data, that is needed for form building', 'kali-forms'),
 					'type' => 'object',
 				],
 				'plugins' => [
-					'description' => esc_html__('What plugins we have installed.', 'kaliforms'),
+					'description' => esc_html__('What plugins we have installed.', 'kali-forms'),
 					'type' => 'object',
 				],
 			],

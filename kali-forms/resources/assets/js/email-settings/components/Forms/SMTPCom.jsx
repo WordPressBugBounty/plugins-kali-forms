@@ -17,17 +17,17 @@ const CustomSMTP = props => {
 
 	const form = [
 		{
-			id: 'api_key', label: __('API key', 'kaliforms'), name: 'kaliforms_smtp_com_api_key', type: 'text',
+			id: 'api_key', label: __('API key', 'kali-forms'), name: 'kaliforms_smtp_com_api_key', type: 'text',
 			help: sprintf(
-				__('The API key used for the connection to this service. You can retrieve this from your %sSMTP.com account%s.', 'kaliforms'),
+				__('The API key used for the connection to this service. You can retrieve this from your %sSMTP.com account%s.', 'kali-forms'),
 				'<a target="_blank" href="https://my.smtp.com/settings/api">',
 				'</a>'
 			)
 		},
 		{
-			id: 'sender_name', label: __('Sender name', 'kaliforms'), name: 'kaliforms_smtp_com_sender_name', type: 'text',
+			id: 'sender_name', label: __('Sender name', 'kali-forms'), name: 'kaliforms_smtp_com_sender_name', type: 'text',
 			help: sprintf(
-				__('The sender name can be found in your %saccount%s.', 'kaliforms'),
+				__('The sender name can be found in your %saccount%s.', 'kali-forms'),
 				'<a target="_blank" href="https://my.smtp.com/senders/">',
 				'</a>'
 			)
@@ -65,7 +65,7 @@ const CustomSMTP = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('SMTP.com settings', 'kaliforms')}
+				{__('SMTP.com settings', 'kali-forms')}
 			</Typography>
 			<hr />
 			<Grid container direction="row">

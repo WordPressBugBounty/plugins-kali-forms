@@ -1,0 +1,96 @@
+{
+	"translation-revision-date": "2021-02-16T14:10:42+00:00",
+	"generator": "WP-CLI\/2.5.0-alpha",
+	"source": "public\/assets\/frontend\/js\/frontend.js",
+	"domain": "kali-forms",
+	"locale_data": {
+		"kali-forms": {
+			"": {
+				"domain": "kali-forms",
+				"lang": "de",
+				"plural-forms": "nplurals=2; plural=(n != 1);"
+			},
+			"Something went wrong": [
+				"Es ist leider ein Fehler passiert"
+			],
+			"Browse": [
+				"Durchsuche"
+			],
+			"Please complete recaptcha challenge": [
+				"Bitte vervollständige die ReCaptcha Abfrage"
+			],
+			"Drag & Drop your files (max %s) or": [
+				"Drag & Drop deine Dateien (max %s) oder"
+			],
+			"Please complete the payment by clicking the PayPal button": [
+				"Bitte vervollständige die Zahlung durch einen Klick auf den PayPal Button"
+			],
+			"You don't have products in your form.": [
+				"Sie haben keine Produkte in Ihrem Formular."
+			],
+			"Field contains invalid files": [
+				"Feld beinhaltet ungültige Dateien"
+			],
+			"Waiting for size": [
+				"Warte auf die Größe"
+			],
+			"Size not available": [
+				"Größe ist nicht verfügbar"
+			],
+			"Loading": [
+				"Lade"
+			],
+			"Error during load": [
+				"Laden ist fehlgeschlagen"
+			],
+			"Uploading": [
+				"Lade hoch"
+			],
+			"Upload complete": [
+				"Hochladen fertig"
+			],
+			"Upload cancelled": [
+				"Hochladen abgebrochen"
+			],
+			"Error during upload": [
+				"Fehler während hochladen"
+			],
+			"Error during revert": [
+				"Fehler beim Zurücksetzen"
+			],
+			"Error during remove": [
+				"Fehler beim Löschen"
+			],
+			"tap to cancel": [
+				"Tippe um abzubrechen"
+			],
+			"tap to retry": [
+				"Tippe um es erneut zu versuchen"
+			],
+			"tap to undo": [
+				"Tippe um es rückgängig zu machen"
+			],
+			"Remove": [
+				"Lösche"
+			],
+			"Abort": [
+				"Abbrechen"
+			],
+			"Retry": [
+				"Wiederholen"
+			],
+			"Cancel": [
+				"Abbrechen"
+			],
+			"Undo": [
+				"Rückgängig"
+			],
+			"Upload": [
+				"Hochladen"
+			],
+			"Drag & Drop your files or %sBrowse%s": [
+				"Drag & Drop deine Dateien oder %Dateien auswählen%s"
+			]
+		}
+	}
+}

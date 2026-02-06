@@ -56,15 +56,15 @@ const EmailBuilderSidebar = observer((props) => {
 				textColor="primary"
 				onChange={toggle}
 			>
-				<Tab value="email" label={__('Email', 'kaliforms')} />
+				<Tab value="email" label={__('Email', 'kali-forms')} />
 				<If condition={smsInstalled}>
-					<Tab value="sms" label={__('SMS', 'kaliforms')} />
+					<Tab value="sms" label={__('SMS', 'kali-forms')} />
 				</If>
 				<If condition={!smsInstalled}>
 					<Tab value="sms" label={
 						<React.Fragment>
 							<StyledBadge badgeContent={'Pro'} color="secondary">
-								{__('SMS', 'kaliforms')}
+								{__('SMS', 'kali-forms')}
 							</StyledBadge>
 						</React.Fragment>
 					} />
@@ -75,7 +75,7 @@ const EmailBuilderSidebar = observer((props) => {
 					<ListItem button onClick={event => store._EMAILS_.emailWizardVisibility = true} className={classes.addEmailButtonParent}>
 						<ListItemText
 							primary={<React.Fragment>
-								<Icon className={'icon-add-new'} /> {__('Create new email notification', 'kaliforms')}
+								<Icon className={'icon-add-new'} /> {__('Create new email notification', 'kali-forms')}
 							</React.Fragment>}
 							className={classes.addEmailButton}
 						/>
@@ -99,7 +99,7 @@ const EmailBuilderSidebar = observer((props) => {
 					<ListItem button onClick={event => store._SMS_.addSms(newSms())} className={classes.addEmailButtonParent}>
 						<ListItemText
 							primary={<React.Fragment>
-								<Icon className={'icon-add-new'} /> {__('Create new SMS notification', 'kaliforms')}
+								<Icon className={'icon-add-new'} /> {__('Create new SMS notification', 'kali-forms')}
 							</React.Fragment>}
 							className={classes.addEmailButton}
 						/>

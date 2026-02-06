@@ -69,8 +69,8 @@ const AddableProductChoice = observer((props) => {
 		<Grid item xs={6}>
 			<Box className={classes.container}>
 				<MediaManager
-					title={__('Select product', 'kaliforms')}
-					buttonLabel={__('Use selected product', 'kaliforms')}
+					title={__('Select product', 'kali-forms')}
+					buttonLabel={__('Use selected product', 'kali-forms')}
 					mediaValue={props.mediaValue.image}
 					onChange={val => props.onChange(props.currentIndex, 'image', val)}
 				/>
@@ -78,7 +78,7 @@ const AddableProductChoice = observer((props) => {
 			<Box className={classes.priceAndLabel}>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Label', 'kaliforms')}
+						{__('Label', 'kali-forms')}
 					</InputLabel>
 					<BootstrapInput
 						value={props.mediaValue.label}
@@ -88,7 +88,7 @@ const AddableProductChoice = observer((props) => {
 				</FormControl>
 				<FormControl>
 					<InputLabel shrink>
-						{__('Price', 'kaliforms')}
+						{__('Price', 'kali-forms')}
 					</InputLabel>
 					<BootstrapInput
 						value={props.mediaValue.price}

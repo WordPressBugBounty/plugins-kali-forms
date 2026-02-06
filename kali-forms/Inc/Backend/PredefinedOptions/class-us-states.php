@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Backend\PredefinedOptions;
 
 if (!defined('ABSPATH')) {
@@ -45,7 +46,7 @@ class US_States
      */
     public function set_options()
     {
-        $this->label = esc_html__('US States', 'kaliforms');
+        $this->label = esc_html__('US States', 'kali-forms');
 
         $this->options = [
             ["Alabama" => "Alabama"],
@@ -100,6 +101,5 @@ class US_States
             ["Wisconsin" => "Wisconsin"],
             ["Wyoming" => "Wyoming"],
         ];
-
     }
 }

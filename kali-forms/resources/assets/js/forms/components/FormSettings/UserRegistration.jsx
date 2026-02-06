@@ -22,14 +22,14 @@ const UserRegistration = observer(props => {
 	const [newCustomFieldKey, setNewCustomFieldKey] = React.useState('');
 	const [newCustomFieldLabel, setNewCustomFieldLabel] = React.useState('');
 	const [fieldsToMap, setFieldsToMap] = React.useState([
-		{ id: 'user_login', label: __('Username', 'kaliforms') },
-		{ id: 'user_email', label: __('Email', 'kaliforms') },
-		{ id: 'first_name', label: __('First name', 'kaliforms') },
-		{ id: 'last_name', label: __('Last name', 'kaliforms') },
-		{ id: 'display_name', label: __('Display name', 'kaliforms') },
-		{ id: 'nickname', label: __('Nick name', 'kaliforms') },
-		{ id: 'user_url', label: __('Website', 'kaliforms') },
-		{ id: 'user_pass', label: __('Password', 'kaliforms') },
+		{ id: 'user_login', label: __('Username', 'kali-forms') },
+		{ id: 'user_email', label: __('Email', 'kali-forms') },
+		{ id: 'first_name', label: __('First name', 'kali-forms') },
+		{ id: 'last_name', label: __('Last name', 'kali-forms') },
+		{ id: 'display_name', label: __('Display name', 'kali-forms') },
+		{ id: 'nickname', label: __('Nick name', 'kali-forms') },
+		{ id: 'user_url', label: __('Website', 'kali-forms') },
+		{ id: 'user_pass', label: __('Password', 'kali-forms') },
 	]);
 
 	const addCustomField = () => {
@@ -48,7 +48,7 @@ const UserRegistration = observer(props => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="md">
-				<SectionTitle title={__("User registration", 'kaliforms')} />
+				<SectionTitle title={__("User registration", 'kali-forms')} />
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
 						<FormGroup row>
@@ -59,7 +59,7 @@ const UserRegistration = observer(props => {
 										onChange={e => store._USER_REGISTRATION_.setEnabled(e.target.checked ? '1' : '0')}
 									/>
 								}
-								label={__('Enable user registration', 'kaliforms')}
+								label={__('Enable user registration', 'kali-forms')}
 							/>
 						</FormGroup>
 					</Grid>
@@ -75,7 +75,7 @@ const UserRegistration = observer(props => {
 						</Grid>
 						<Grid item xs={6}>
 							<InputLabel shrink>
-								{__('User role', 'kaliforms')}
+								{__('User role', 'kali-forms')}
 							</InputLabel>
 							<Select
 								multiple={false}
@@ -97,7 +97,7 @@ const UserRegistration = observer(props => {
 
 					<Grid container direction="row" spacing={3} style={{ marginBottom: 16, marginTop: 16 }}>
 						<Grid item xs={12}>
-							<Typography variant="body1">{__('Custom fields', 'kaliforms')}</Typography>
+							<Typography variant="body1">{__('Custom fields', 'kali-forms')}</Typography>
 						</Grid>
 					</Grid>
 
@@ -118,7 +118,7 @@ const UserRegistration = observer(props => {
 						<Grid item xs={5}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('Custom field key', 'kaliforms')}
+									{__('Custom field key', 'kali-forms')}
 								</InputLabel>
 								<BootstrapInput
 									value={newCustomFieldKey}
@@ -130,7 +130,7 @@ const UserRegistration = observer(props => {
 						<Grid item xs={5}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('Custom field label', 'kaliforms')}
+									{__('Custom field label', 'kali-forms')}
 								</InputLabel>
 								<BootstrapInput
 									value={newCustomFieldLabel}

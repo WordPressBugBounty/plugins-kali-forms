@@ -31,6 +31,6 @@ class Checkbox extends Form_Field
     {
         parent::__construct($args);
         $this->icon  = 'icon-checkbox-activated';
-        $this->label = esc_html__('Checkbox', 'kaliforms');
+        $this->label = esc_html__('Checkbox', 'kali-forms');
     }
 }

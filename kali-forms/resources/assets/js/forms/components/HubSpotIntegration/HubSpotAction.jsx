@@ -57,14 +57,14 @@ const HubSpotAction = (props) => {
 	return (
 		<React.Fragment>
 			<HubSpotSectionHeader
-				header={__('HubSpot Action', 'kaliforms')}
+				header={__('HubSpot Action', 'kali-forms')}
 				backButton={true}
 				backButtonAction={props.goBack} />
 			<Grid container direction="row" spacing={4}>
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('HubSpot action name', 'kaliforms')}
+							{__('HubSpot action name', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							required
@@ -72,9 +72,9 @@ const HubSpotAction = (props) => {
 							onChange={e => setHubSpotAction(e.target.value)}
 							fullWidth={true}
 							variant="filled"
-							placeholder={__('HubSpot Action', 'kaliforms')}
+							placeholder={__('HubSpot Action', 'kali-forms')}
 						/>
-						<FormHelperText>{__('Name of the HubSpot action', 'kaliforms')}</FormHelperText>
+						<FormHelperText>{__('Name of the HubSpot action', 'kali-forms')}</FormHelperText>
 					</FormControl>
 				</Grid>
 			</Grid>
@@ -82,7 +82,7 @@ const HubSpotAction = (props) => {
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('HubSpot form name', 'kaliforms')}
+							{__('HubSpot form name', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							required
@@ -90,7 +90,7 @@ const HubSpotAction = (props) => {
 							onChange={e => setHubSpotFormName(e.target.value)}
 							fullWidth={true}
 							variant="filled"
-							placeholder={__('Contact form', 'kaliforms')}
+							placeholder={__('Contact form', 'kali-forms')}
 						/>
 						<FormHelperText>{__('Name of the contact form that will be created in your HubSpot account')}</FormHelperText>
 					</FormControl>
@@ -100,7 +100,7 @@ const HubSpotAction = (props) => {
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Lead status', 'kaliforms')}
+							{__('Lead status', 'kali-forms')}
 						</InputLabel>
 						<Select
 							multiple={false}
@@ -109,34 +109,34 @@ const HubSpotAction = (props) => {
 							onChange={e => setLeadStatus(e.target.value)}
 						>
 							<MenuItem key="select-option" value="">
-								{__('Select an option', 'kaliforms')}
+								{__('Select an option', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="NEW" value="NEW">
-								{__('New', 'kaliforms')}
+								{__('New', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="OPEN" value="OPEN">
-								{__('Open', 'kaliforms')}
+								{__('Open', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="IN_PROGRESS" value="IN_PROGRESS">
-								{__('In Progress', 'kaliforms')}
+								{__('In Progress', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="OPEN_DEAL" value="OPEN_DEAL">
-								{__('Open Deal', 'kaliforms')}
+								{__('Open Deal', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="UNQUALIFIED" value="UNQUALIFIED">
-								{__('Unqualified', 'kaliforms')}
+								{__('Unqualified', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="ATTEMPTED_TO_CONTACT" value="ATTEMPTED_TO_CONTACT">
-								{__('Attempted to Contact', 'kaliforms')}
+								{__('Attempted to Contact', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="CONNECTED" value="CONNECTED">
-								{__('Connected', 'kaliforms')}
+								{__('Connected', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="BAD_TIMING" value="BAD_TIMING">
-								{__('Bad Timing', 'kaliforms')}
+								{__('Bad Timing', 'kali-forms')}
 							</MenuItem>
 						</Select>
-						<FormHelperText>{__('Lead status of the newly created contact', 'kaliforms')}</FormHelperText>
+						<FormHelperText>{__('Lead status of the newly created contact', 'kali-forms')}</FormHelperText>
 					</FormControl>
 				</Grid>
 			</Grid>
@@ -144,7 +144,7 @@ const HubSpotAction = (props) => {
 				<Grid item xs={12}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Life cycle stage', 'kaliforms')}
+							{__('Life cycle stage', 'kali-forms')}
 						</InputLabel>
 						<Select
 							multiple={false}
@@ -153,39 +153,39 @@ const HubSpotAction = (props) => {
 							onChange={e => setLifecycleStage(e.target.value)}
 						>
 							<MenuItem key="select-option" value="">
-								{__('Select an option', 'kaliforms')}
+								{__('Select an option', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="subscriber" value="subscriber">
-								{__('Subscriber', 'kaliforms')}
+								{__('Subscriber', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="lead" value="lead">
-								{__('Lead', 'kaliforms')}
+								{__('Lead', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="marketingqualifiedlead" value="marketingqualifiedlead">
-								{__('Marketing Qualified Lead', 'kaliforms')}
+								{__('Marketing Qualified Lead', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="salesqualifiedlead" value="salesqualifiedlead">
-								{__('Sales Qualified Lead', 'kaliforms')}
+								{__('Sales Qualified Lead', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="opportunity" value="opportunity">
-								{__('Opportunity', 'kaliforms')}
+								{__('Opportunity', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="customer" value="customer">
-								{__('Customer', 'kaliforms')}
+								{__('Customer', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="evangelist" value="evangelist">
-								{__('Evangelist', 'kaliforms')}
+								{__('Evangelist', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="other" value="other">
-								{__('Other', 'kaliforms')}
+								{__('Other', 'kali-forms')}
 							</MenuItem>
 						</Select>
-						<FormHelperText>{__('Life cycle stage value of the contact', 'kaliforms')}</FormHelperText>
+						<FormHelperText>{__('Life cycle stage value of the contact', 'kali-forms')}</FormHelperText>
 					</FormControl>
 				</Grid>
 			</Grid>
 
-			<HubSpotSectionHeader header={__('Owner', 'kaliforms')} />
+			<HubSpotSectionHeader header={__('Owner', 'kali-forms')} />
 			<OwnerSelection
 				setContactOwnerOption={setContactOwnerOption}
 				contactOwnerOption={contactOwnerOption}
@@ -195,10 +195,10 @@ const HubSpotAction = (props) => {
 				setConditionalOwner={setConditionalOwner}
 			/>
 
-			<HubSpotSectionHeader header={__('Map Form Fields', 'kaliforms')} />
+			<HubSpotSectionHeader header={__('Map Form Fields', 'kali-forms')} />
 			<ContactFormFieldsMap setFormFieldsMap={setFormFieldsMap} formFieldsMap={formFieldsMap} />
 
-			<HubSpotSectionHeader header={__('Additional Form Fields', 'kaliforms')} />
+			<HubSpotSectionHeader header={__('Additional Form Fields', 'kali-forms')} />
 			{
 				additionalFormFields.map((formField, idx) => (
 					<AdditionalFormFields
@@ -212,7 +212,7 @@ const HubSpotAction = (props) => {
 				))
 			}
 
-			<HubSpotSectionHeader header={__('Conditional Logic', 'kaliforms')} />
+			<HubSpotSectionHeader header={__('Conditional Logic', 'kali-forms')} />
 			<ActionConditionalLogic
 				conditionalLogic={conditionalLogic}
 				conditionalLogicConditions={conditionalLogicConditions}

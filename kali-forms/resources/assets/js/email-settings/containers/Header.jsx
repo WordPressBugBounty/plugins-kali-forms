@@ -32,13 +32,13 @@ const Header = props => {
 				<Tab
 					disableTouchRipple
 					classes={useGmailTabItemStyles({ color: indicatorColors[1] })}
-					label={__('Email test', 'kaliforms')}
+					label={__('Email test', 'kali-forms')}
 					icon={<SendOutlinedIcon />}
 				/>
 				<Tab
 					disableTouchRipple
 					classes={useGmailTabItemStyles({ color: indicatorColors[2] })}
-					label={__('Log', 'kaliforms')}
+					label={__('Log', 'kali-forms')}
 					icon={<BugReportOutlinedIcon />}
 				/>
 			</Tabs>

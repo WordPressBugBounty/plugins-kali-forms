@@ -187,9 +187,9 @@ const TemplateSelector = observer((props) => {
 			return importData();
 		}
 
-		store._CONFIRMATION_DIALOG_.setTitle(__('SMTP Settings', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setMessage(__('We noticed that you did not setup your SMTP settings. We strongly suggest that you set this up before publishing your form as it will increase the deliverability of your email notifications.', 'kaliforms'));
-		store._CONFIRMATION_DIALOG_.setAdditionalButton({ action: notif.action, actionType: notif.actionType, buttonText: __('Set up SMTP now', 'kaliforms') });
+		store._CONFIRMATION_DIALOG_.setTitle(__('SMTP Settings', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setMessage(__('We noticed that you did not setup your SMTP settings. We strongly suggest that you set this up before publishing your form as it will increase the deliverability of your email notifications.', 'kali-forms'));
+		store._CONFIRMATION_DIALOG_.setAdditionalButton({ action: notif.action, actionType: notif.actionType, buttonText: __('Set up SMTP now', 'kali-forms') });
 		store._CONFIRMATION_DIALOG_.setHideCancelButton(true);
 		store._CONFIRMATION_DIALOG_.setAction(importData)
 		store._CONFIRMATION_DIALOG_.setActionProps({})
@@ -256,21 +256,21 @@ const TemplateSelector = observer((props) => {
 		<React.Fragment>
 			<Container className={classes.paper}>
 				<If condition={!selectedCard}>
-					<Typography variant="h4" className={classes.title} >{__('One-Click Forms', 'kaliforms')}</Typography>
+					<Typography variant="h4" className={classes.title} >{__('One-Click Forms', 'kali-forms')}</Typography>
 					<Typography variant="subtitle1" className={classes.subtitle}>
-						{__('We prepared some templates for you! You can import one of them or create your own from scratch.', 'kaliforms')}
+						{__('We prepared some templates for you! You can import one of them or create your own from scratch.', 'kali-forms')}
 					</Typography>
 					<Grid container direction="row" className={classes.toolbar}>
 						<Grid item xs={6}>
 							{/* <Button variant="text" className={classes.toolbarButtons}>
-								<Icon className={'icon-refresh'} /> {__('Refresh templates', 'kaliforms')}
+								<Icon className={'icon-refresh'} /> {__('Refresh templates', 'kali-forms')}
 							</Button> */}
 							<Button variant="text" className={classes.toolbarButtons} onClick={() => window.open('https://www.kaliforms.com/contact-us?utm_source=formBuilder&utm_campaign=userInterests&utm_medium=suggestNewTemplateButton&department=tech', '_blank')}>
-								<Icon className={'icon-suggest'} /> {__('Suggest a new template', 'kaliforms')}
+								<Icon className={'icon-suggest'} /> {__('Suggest a new template', 'kali-forms')}
 							</Button>
 						</Grid>
 						<Grid item xs={6} style={{ textAlign: 'right' }}>
-							{__('Show: ', 'kaliforms')}
+							{__('Show: ', 'kali-forms')}
 							<Button
 								variant="text"
 								className={classes.toolbarButtons}
@@ -280,7 +280,7 @@ const TemplateSelector = observer((props) => {
 								}}
 								onClick={() => setDemoFilters('all')}
 							>
-								{__('All', 'kaliforms')}
+								{__('All', 'kali-forms')}
 							</Button>
 							<Button
 								variant="text"
@@ -290,7 +290,7 @@ const TemplateSelector = observer((props) => {
 								}}
 								onClick={() => setDemoFilters('free')}
 							>
-								{__('Free', 'kaliforms')}
+								{__('Free', 'kali-forms')}
 							</Button>
 							<Button
 								variant="text"
@@ -300,15 +300,15 @@ const TemplateSelector = observer((props) => {
 								}}
 								onClick={() => setDemoFilters('premium')}
 							>
-								<Icon className={'icon-star'} /> {__('Premium', 'kaliforms')}
+								<Icon className={'icon-star'} /> {__('Premium', 'kali-forms')}
 							</Button>
 						</Grid>
 					</Grid>
 					<Grid container direction="row" spacing={4}>
 						<Grid item xs={3}>
 							<TemplateCard
-								title={__('Blank', 'kaliforms')}
-								description={__('Start a new form from scratch', 'kaliforms')}
+								title={__('Blank', 'kali-forms')}
+								description={__('Start a new form from scratch', 'kali-forms')}
 								blank={true}
 								thumb={false}
 							>
@@ -354,35 +354,35 @@ const TemplateSelector = observer((props) => {
 
 							<FormControl component="fieldset" className={classes.formControl}>
 								<Box mb={2} className={classes.importStuff}>
-									{__('Import this information for your form', 'kaliforms')}
+									{__('Import this information for your form', 'kali-forms')}
 								</Box>
 								<FormGroup row>
 									<FormControlLabel
 										control={<Checkbox checked={dataToImport.includes('layout')} onChange={(e) => handleImportData('layout', e.target.checked)} value="layout" />}
-										label={__('Layout', 'kaliforms')}
+										label={__('Layout', 'kali-forms')}
 									/>
 									<FormControlLabel
 										control={<Checkbox checked={dataToImport.includes('emails')} onChange={(e) => handleImportData('emails', e.target.checked)} value="emails" />}
-										label={__('Notifications', 'kaliforms')}
+										label={__('Notifications', 'kali-forms')}
 									/>
 									<FormControlLabel
 										control={<Checkbox checked={dataToImport.includes('settings')} onChange={(e) => handleImportData('settings', e.target.checked)} value="settings" />}
-										label={__('Settings', 'kaliforms')}
+										label={__('Settings', 'kali-forms')}
 									/>
 									<FormControlLabel
 										control={<Checkbox checked={dataToImport.includes('conditionalLogic')} onChange={(e) => handleImportData('conditionalLogic', e.target.checked)} value="conditionalLogic" />}
-										label={__('Conditional logic', 'kaliforms')}
+										label={__('Conditional logic', 'kali-forms')}
 									/>
 									<FormControlLabel
 										control={<Checkbox checked={dataToImport.includes('formCalculator')} onChange={(e) => handleImportData('formCalculator', e.target.checked)} value="formCalculator" />}
-										label={__('Form calculator', 'kaliforms')}
+										label={__('Form calculator', 'kali-forms')}
 									/>
 								</FormGroup>
 							</FormControl>
 
 							<FormControl component="fieldset" className={classes.formControl}>
 								<Box mb={2} className={classes.importStuff}>
-									{__('Select the visual style', 'kaliforms')}
+									{__('Select the visual style', 'kali-forms')}
 								</Box>
 								<Grid container direction="row" spacing={4}>
 									{store._FORM_STYLES_.getStylesPage(stylesPage).map(e => (
@@ -415,7 +415,7 @@ const TemplateSelector = observer((props) => {
 								className={classes.button}
 								onClick={() => checkSMTP()}
 							>
-								{__('Import', 'kaliforms')}
+								{__('Import', 'kali-forms')}
 							</Button>
 
 						</Box>

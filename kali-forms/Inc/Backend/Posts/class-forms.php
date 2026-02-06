@@ -120,7 +120,7 @@ class Forms
 					'type'    => 'notice notice-info',
 					'message' => esc_html__(
 						'Email delivery confirmed',
-						'kaliforms'
+						'kali-forms'
 					),
 				]
 			);
@@ -136,8 +136,8 @@ class Forms
 	{
 		add_submenu_page(
 			'edit.php?post_type=kaliforms_forms',
-			esc_html__('SMTP Settings', 'kaliforms'),
-			esc_html__('SMTP Settings', 'kaliforms'),
+			esc_html__('SMTP Settings', 'kali-forms'),
+			esc_html__('SMTP Settings', 'kali-forms'),
 			'manage_options',
 			'kaliforms-email-settings',
 			new Email_Settings_Page()
@@ -149,8 +149,8 @@ class Forms
 
 		add_submenu_page(
 			'edit.php?post_type=kaliforms_forms',
-			esc_html__('Extensions', 'kaliforms'),
-			esc_html__('Extensions', 'kaliforms'),
+			esc_html__('Extensions', 'kali-forms'),
+			esc_html__('Extensions', 'kali-forms'),
 			'manage_options',
 			'kaliforms-extensions',
 			new Extensions_Page()
@@ -176,7 +176,7 @@ class Forms
 		$html          .= vsprintf( // Translators: 1 is Plugin Name, 2 is opening Anchor, 3 is closing.
 			esc_html__(
 				'We\'ve been working hard on making %1$s the best one out there. We\'re interested in hearing your thoughts about %1$s and what we could do to make it even better. %2$sSend your feedback our way%3$s.',
-				'kaliforms'
+				'kali-forms'
 			),
 			[
 				'Kali Forms',
@@ -272,7 +272,7 @@ class Forms
 
 			wp_set_script_translations(
 				'kaliforms-forms',
-				'kaliforms',
+				'kali-forms',
 				KALIFORMS_BASE . 'languages'
 			);
 
@@ -300,71 +300,71 @@ class Forms
 				'labels'            => [
 					'name'                  => esc_html__(
 						'Kali Forms',
-						'kaliforms'
+						'kali-forms'
 					),
 					'singular_name'         => esc_html__(
 						'Kali Form',
-						'kaliforms'
+						'kali-forms'
 					),
 					'edit_item'             => esc_html__(
 						'Edit form',
-						'kaliforms'
+						'kali-forms'
 					),
 					'new_item'              => esc_html__(
 						'New form',
-						'kaliforms'
+						'kali-forms'
 					),
 					'add_new_item'          => esc_html__(
 						'Add new form',
-						'kaliforms'
+						'kali-forms'
 					),
 					'view_item'             => esc_html__(
 						'View form',
-						'kaliforms'
+						'kali-forms'
 					),
 					'view_items'            => esc_html__(
 						'View forms',
-						'kaliforms'
+						'kali-forms'
 					),
 					'search_items'          => esc_html__(
 						'Search forms',
-						'kaliforms'
+						'kali-forms'
 					),
 					'not_found'             => esc_html__(
 						'No forms found',
-						'kaliforms'
+						'kali-forms'
 					),
 					'not_found_in_trash'    => esc_html__(
 						'No forms found in Trash',
-						'kaliforms'
+						'kali-forms'
 					),
 					'all_items'             => esc_html__(
 						'All forms',
-						'kaliforms'
+						'kali-forms'
 					),
 					'attributes'            => esc_html__(
 						'Form attributes',
-						'kaliforms'
+						'kali-forms'
 					),
 					'filter_items_list'     => esc_html__(
 						'Filter forms list',
-						'kaliforms'
+						'kali-forms'
 					),
 					'items_list_navigation' => esc_html__(
 						'Forms list navigation',
-						'kaliforms'
+						'kali-forms'
 					),
 					'items_list'            => esc_html__(
 						'Forms list',
-						'kaliforms'
+						'kali-forms'
 					),
 					'item_published'        => esc_html__(
 						'Form published',
-						'kaliforms'
+						'kali-forms'
 					),
 					'item_updated'          => esc_html__(
 						'Form updated',
-						'kaliforms'
+						'kali-forms'
 					),
 				],
 				'public'            => false,
@@ -404,7 +404,7 @@ class Forms
 			'image_size_names_choose',
 			function ($sizes) {
 				$sizes['form-edit-image-preview'] =
-					esc_html__('Custom form edit preview', 'kaliforms');
+					esc_html__('Custom form edit preview', 'kali-forms');
 
 				return $sizes;
 			}
@@ -418,7 +418,7 @@ class Forms
 	{
 		add_meta_box(
 			'kaliforms_forms_builder',
-			esc_html__('Form Builder', 'kaliforms'),
+			esc_html__('Form Builder', 'kali-forms'),
 			new Form_Builder(),
 			'kaliforms_forms',
 			'normal',
@@ -441,8 +441,8 @@ class Forms
 		return array_merge(
 			$columns,
 			[
-				'theme'     => esc_html__('Theme', 'kaliforms'),
-				'shortcode' => esc_html__('Shortcode', 'kaliforms'),
+				'theme'     => esc_html__('Theme', 'kali-forms'),
+				'shortcode' => esc_html__('Shortcode', 'kali-forms'),
 				'date'      => $date,
 			]
 		);
@@ -463,7 +463,7 @@ class Forms
 				'<a href="#" data-post-id="%s" class="kaliforms-duplicate-form-link" id="kaliforms-duplicate-%s">%s</a>',
 				$post->ID,
 				$post->ID,
-				esc_html__('Duplicate form', 'kaliforms')
+				esc_html__('Duplicate form', 'kali-forms')
 			);
 		}
 

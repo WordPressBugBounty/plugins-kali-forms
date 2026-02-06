@@ -29,14 +29,14 @@ const FormBuilder = observer((props) => {
 					<When condition={store._FIELD_COMPONENTS_.fieldComponents.length === 0 && !store._GRID_.dragStarted}>
 						<Box className={classes.placeholder + ' ' + 'MuiPaper-elevation4'} droppable="true">
 							<img src={LogoPng} style={{ width: 250 }} alt="logo" />
-							<h4>{__('Add fields to the builder by dragging them from the sidebar', 'kaliforms')}</h4>
+							<h4>{__('Add fields to the builder by dragging them from the sidebar', 'kali-forms')}</h4>
 							<Button
 								variant="text"
 								color="inherit"
 								className={classes.placeholderButton}
 								onClick={() => store._UI_.setTemplateSelecting(true)}
 							>
-								{__('Or select a pre-defined template', 'kaliforms')}
+								{__('Or select a pre-defined template', 'kali-forms')}
 							</Button>
 						</Box>
 					</When>

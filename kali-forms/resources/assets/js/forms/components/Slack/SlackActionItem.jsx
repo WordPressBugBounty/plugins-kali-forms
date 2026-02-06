@@ -21,15 +21,15 @@ const SlackActionItem = observer(props => {
 				<Box className={classes.actionBox}>
 					<Box onClick={() => setEditingContainer()}>
 						<Icon className={'icon-edit-2'} />
-						{__('Edit', 'kaliforms')}
+						{__('Edit', 'kali-forms')}
 					</Box>
 					<Box onClick={e => store._SLACK_.duplicateAction(props.action)}>
 						<Icon className={'icon-copy'} />
-						{__('Duplicate', 'kaliforms')}
+						{__('Duplicate', 'kali-forms')}
 					</Box>
 					<Box onClick={() => store._SLACK_.removeAction(props.action)}>
 						<Icon className={'icon-remove'} />
-						{__('Delete', 'kaliforms')}
+						{__('Delete', 'kali-forms')}
 					</Box>
 				</Box>
 			</Box>

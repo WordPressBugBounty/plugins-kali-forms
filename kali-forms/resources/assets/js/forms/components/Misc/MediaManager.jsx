@@ -120,7 +120,7 @@ const MediaManager = observer(props => {
 			<If condition={mediaValue.id === null}>
 				<React.Fragment>
 					<Icon className={'icon-upload ' + classes.icon} />
-					{__('Media Manager', 'kaliforms')}
+					{__('Media Manager', 'kali-forms')}
 				</React.Fragment>
 			</If>
 			<If condition={mediaValue.id !== null}>

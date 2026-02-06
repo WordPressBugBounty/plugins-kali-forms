@@ -16,9 +16,9 @@ const Sendinblue = props => {
 
 	const form = [
 		{
-			id: 'api_key', label: __('API key', 'kaliforms'), name: 'kaliforms_sendin_blue_api', type: 'text',
+			id: 'api_key', label: __('API key', 'kali-forms'), name: 'kaliforms_sendin_blue_api', type: 'text',
 			help: sprintf(
-				__('The API key used for the connection to this service. You can retrieve this from your %sSendinblue account%s', 'kaliforms'),
+				__('The API key used for the connection to this service. You can retrieve this from your %sSendinblue account%s', 'kali-forms'),
 				'<a target="_blank" href="https://account.sendinblue.com/advanced/api">',
 				'</a>'),
 		},
@@ -55,7 +55,7 @@ const Sendinblue = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('Send in blue settings', 'kaliforms')}
+				{__('Send in blue settings', 'kali-forms')}
 			</Typography>
 			<hr />
 			<Grid container direction="row">

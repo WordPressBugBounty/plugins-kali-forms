@@ -17,58 +17,58 @@ const { __ } = wp.i18n;
 
 const StripeSettings = observer((props) => {
 	const stripeCountries = {
-		AE: __('United Arab Emirates', 'kaliforms'),
-		AT: __('Austria', 'kaliforms'),
-		AU: __('Australia', 'kaliforms'),
-		BE: __('Belgium', 'kaliforms'),
-		BG: __('Bulgaria', 'kaliforms'),
-		BR: __('Brasil', 'kaliforms'),
-		CA: __('Canada', 'kaliforms'),
-		CH: __('Switzerland', 'kaliforms'),
-		CI: __('Côte d’Ivoire', 'kaliforms'),
-		CR: __('Croatia', 'kaliforms'),
-		CY: __('Cyprus', 'kaliforms'),
-		CZ: __('Czech Republic', 'kaliforms'),
-		DE: __('Germany', 'kaliforms'),
-		DK: __('Denmark', 'kaliforms'),
-		DO: __('Dominican Republic', 'kaliforms'),
-		EE: __('Estonia', 'kaliforms'),
-		ES: __('Spain', 'kaliforms'),
-		FI: __('Finland', 'kaliforms'),
-		FR: __('France', 'kaliforms'),
-		GB: __('United Kingdom', 'kaliforms'),
-		GR: __('Greece', 'kaliforms'),
-		GT: __('Guatemala', 'kaliforms'),
-		HK: __('Hong Kong', 'kaliforms'),
-		HU: __('Hungary', 'kaliforms'),
-		ID: __('Indonesia', 'kaliforms'),
-		IE: __('Ireland', 'kaliforms'),
-		IN: __('India', 'kaliforms'),
-		IT: __('Italy', 'kaliforms'),
-		JP: __('Japan', 'kaliforms'),
-		LT: __('Lithuania', 'kaliforms'),
-		LU: __('Luxembourg', 'kaliforms'),
-		LV: __('Latvia', 'kaliforms'),
-		MT: __('Malta', 'kaliforms'),
-		MX: __('Mexico', 'kaliforms'),
-		MY: __('Malaysia', 'kaliforms'),
-		NL: __('Netherlands', 'kaliforms'),
-		NO: __('Norway', 'kaliforms'),
-		NZ: __('New Zealand', 'kaliforms'),
-		PE: __('Peru', 'kaliforms'),
-		PH: __('Philippines', 'kaliforms'),
-		PL: __('Poland', 'kaliforms'),
-		PT: __('Portugal', 'kaliforms'),
-		RO: __('Romania', 'kaliforms'),
-		SE: __('Sweden', 'kaliforms'),
-		SG: __('Singapore', 'kaliforms'),
-		SI: __('Slovenia', 'kaliforms'),
-		SK: __('Slovakia', 'kaliforms'),
-		SN: __('Senegal', 'kaliforms'),
-		TH: __('Thailand', 'kaliforms'),
-		TT: __('Trinidad & Tobago', 'kaliforms'),
-		US: __('United States', 'kaliforms'),
-		UY: __('Uruguay', 'kaliforms')
+		AE: __('United Arab Emirates', 'kali-forms'),
+		AT: __('Austria', 'kali-forms'),
+		AU: __('Australia', 'kali-forms'),
+		BE: __('Belgium', 'kali-forms'),
+		BG: __('Bulgaria', 'kali-forms'),
+		BR: __('Brasil', 'kali-forms'),
+		CA: __('Canada', 'kali-forms'),
+		CH: __('Switzerland', 'kali-forms'),
+		CI: __('Côte d’Ivoire', 'kali-forms'),
+		CR: __('Croatia', 'kali-forms'),
+		CY: __('Cyprus', 'kali-forms'),
+		CZ: __('Czech Republic', 'kali-forms'),
+		DE: __('Germany', 'kali-forms'),
+		DK: __('Denmark', 'kali-forms'),
+		DO: __('Dominican Republic', 'kali-forms'),
+		EE: __('Estonia', 'kali-forms'),
+		ES: __('Spain', 'kali-forms'),
+		FI: __('Finland', 'kali-forms'),
+		FR: __('France', 'kali-forms'),
+		GB: __('United Kingdom', 'kali-forms'),
+		GR: __('Greece', 'kali-forms'),
+		GT: __('Guatemala', 'kali-forms'),
+		HK: __('Hong Kong', 'kali-forms'),
+		HU: __('Hungary', 'kali-forms'),
+		ID: __('Indonesia', 'kali-forms'),
+		IE: __('Ireland', 'kali-forms'),
+		IN: __('India', 'kali-forms'),
+		IT: __('Italy', 'kali-forms'),
+		JP: __('Japan', 'kali-forms'),
+		LT: __('Lithuania', 'kali-forms'),
+		LU: __('Luxembourg', 'kali-forms'),
+		LV: __('Latvia', 'kali-forms'),
+		MT: __('Malta', 'kali-forms'),
+		MX: __('Mexico', 'kali-forms'),
+		MY: __('Malaysia', 'kali-forms'),
+		NL: __('Netherlands', 'kali-forms'),
+		NO: __('Norway', 'kali-forms'),
+		NZ: __('New Zealand', 'kali-forms'),
+		PE: __('Peru', 'kali-forms'),
+		PH: __('Philippines', 'kali-forms'),
+		PL: __('Poland', 'kali-forms'),
+		PT: __('Portugal', 'kali-forms'),
+		RO: __('Romania', 'kali-forms'),
+		SE: __('Sweden', 'kali-forms'),
+		SG: __('Singapore', 'kali-forms'),
+		SI: __('Slovenia', 'kali-forms'),
+		SK: __('Slovakia', 'kali-forms'),
+		SN: __('Senegal', 'kali-forms'),
+		TH: __('Thailand', 'kali-forms'),
+		TT: __('Trinidad & Tobago', 'kali-forms'),
+		US: __('United States', 'kali-forms'),
+		UY: __('Uruguay', 'kali-forms')
 	};
 
 	return (
@@ -79,7 +79,7 @@ const StripeSettings = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Publishable key (sandbox)', 'kaliforms')}
+								{__('Publishable key (sandbox)', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={store._PAYMENTS_.stripePKey}
@@ -92,7 +92,7 @@ const StripeSettings = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Secret key (sandbox)', 'kaliforms')}
+								{__('Secret key (sandbox)', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={store._PAYMENTS_.stripeSKey}
@@ -107,7 +107,7 @@ const StripeSettings = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Publishable key (LIVE)', 'kaliforms')}
+								{__('Publishable key (LIVE)', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={store._PAYMENTS_.stripePKeyLive}
@@ -120,7 +120,7 @@ const StripeSettings = observer((props) => {
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Secret key (LIVE)', 'kaliforms')}
+								{__('Secret key (LIVE)', 'kali-forms')}
 							</InputLabel>
 							<BootstrapInput
 								value={store._PAYMENTS_.stripeSKeyLive}
@@ -142,14 +142,14 @@ const StripeSettings = observer((props) => {
 										onChange={e => store._PAYMENTS_.stripePaymentRequestButton = e.target.checked ? '1' : '0'}
 									/>
 								}
-								label={__('Add Pay Now button', 'kaliforms')}
+								label={__('Add Pay Now button', 'kali-forms')}
 							/>
 						</FormGroup>
 					</Grid>
 					<Grid item xs={6}>
 						<FormControl>
 							<InputLabel shrink>
-								{__('Account country', 'kaliforms')}
+								{__('Account country', 'kali-forms')}
 							</InputLabel>
 							<Select
 								value={store._PAYMENTS_.stripeCountry}
@@ -167,15 +167,15 @@ const StripeSettings = observer((props) => {
 					<Grid item xs={12}>
 						<FormFieldMapper
 							fieldsToMap={[
-								{ id: 'name', label: __('Card name', 'kaliforms') },
-								{ id: 'email', label: __('Email', 'kaliforms') },
-								{ id: 'phone', label: __('Phone', 'kaliforms') },
-								{ id: 'city', label: __('City', 'kaliforms') },
-								{ id: 'country', label: __('Country (country code)', 'kaliforms') },
-								{ id: 'line1', label: __('Address line 1', 'kaliforms') },
-								{ id: 'line2', label: __('Address line 2', 'kaliforms') },
-								{ id: 'state', label: __('State', 'kaliforms') },
-								{ id: 'postal_code', label: __('Postal code', 'kaliforms') }
+								{ id: 'name', label: __('Card name', 'kali-forms') },
+								{ id: 'email', label: __('Email', 'kali-forms') },
+								{ id: 'phone', label: __('Phone', 'kali-forms') },
+								{ id: 'city', label: __('City', 'kali-forms') },
+								{ id: 'country', label: __('Country (country code)', 'kali-forms') },
+								{ id: 'line1', label: __('Address line 1', 'kali-forms') },
+								{ id: 'line2', label: __('Address line 2', 'kali-forms') },
+								{ id: 'state', label: __('State', 'kali-forms') },
+								{ id: 'postal_code', label: __('Postal code', 'kali-forms') }
 							]}
 							values={store._PAYMENTS_.stripeFields}
 							onChange={val => store._PAYMENTS_.stripeFields = val}

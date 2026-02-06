@@ -17,23 +17,23 @@ const Sendinblue = props => {
 
 	const form = [
 		{
-			id: 'api_key', label: __('API key', 'kaliforms'), name: 'kaliforms_mailgun_private_key', type: 'text',
+			id: 'api_key', label: __('API key', 'kali-forms'), name: 'kaliforms_mailgun_private_key', type: 'text',
 			help: sprintf(
-				__('The Private API key used for the connection to this service. You can retrieve this from your %sMailgun account%s.', 'kaliforms'),
+				__('The Private API key used for the connection to this service. You can retrieve this from your %sMailgun account%s.', 'kali-forms'),
 				'<a target="_blank" href="https://app.mailgun.com/app/account/security/api_keys">',
 				'</a>'),
 		},
 		{
-			id: 'domain_name', label: __('Domain name', 'kaliforms'), name: 'kaliforms_mailgun_domain_name', type: 'text',
+			id: 'domain_name', label: __('Domain name', 'kali-forms'), name: 'kaliforms_mailgun_domain_name', type: 'text',
 			help: sprintf(
-				__('You can retrieve this from %shere%s.', 'kaliforms'),
+				__('You can retrieve this from %shere%s.', 'kali-forms'),
 				'<a target="_blank" href="https://app.mailgun.com/app/sending/domains">',
 				'</a>'),
 		},
 		{
-			id: 'region', label: __('Region', 'kaliforms'), name: 'kaliforms_mailgun_region', type: 'select', choices: [
-				{ value: 'us', label: __('US', 'kaliforms') },
-				{ value: 'eu', label: __('EU', 'kaliforms') },
+			id: 'region', label: __('Region', 'kali-forms'), name: 'kaliforms_mailgun_region', type: 'select', choices: [
+				{ value: 'us', label: __('US', 'kali-forms') },
+				{ value: 'eu', label: __('EU', 'kali-forms') },
 			]
 		},
 	];
@@ -69,7 +69,7 @@ const Sendinblue = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('Mailgun settings', 'kaliforms')}
+				{__('Mailgun settings', 'kali-forms')}
 			</Typography>
 			<hr />
 			<Grid container direction="row">

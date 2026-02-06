@@ -38,7 +38,7 @@ const EmailTestPage = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('Send a test email', 'kaliforms')}
+				{__('Send a test email', 'kali-forms')}
 			</Typography>
 			<hr />
 			<Grid container direction="row">
@@ -46,7 +46,7 @@ const EmailTestPage = props => {
 					<Grid container direction="row" style={{ marginBottom: 16 }}>
 						<Grid item xs={3}>
 							<Typography variant="body1">
-								<label htmlFor={'sendFromField'}>{__('Send from', 'kaliforms')}</label>
+								<label htmlFor={'sendFromField'}>{__('Send from', 'kali-forms')}</label>
 							</Typography>
 						</Grid>
 						<Grid item xs={9}>
@@ -60,7 +60,7 @@ const EmailTestPage = props => {
 					<Grid container direction="row">
 						<Grid item xs={3}>
 							<Typography variant="body1">
-								<label htmlFor={'sendToField'}>{__('Send to', 'kaliforms')}</label>
+								<label htmlFor={'sendToField'}>{__('Send to', 'kali-forms')}</label>
 							</Typography>
 						</Grid>
 						<Grid item xs={9}>
@@ -71,15 +71,15 @@ const EmailTestPage = props => {
 							/>
 
 							<Typography style={{ maxWidth: 400, marginBottom: 16 }} variant="body2">
-								{__('Use an email address that you can access to see if the emails are delivered.', 'kaliforms')}
+								{__('Use an email address that you can access to see if the emails are delivered.', 'kali-forms')}
 							</Typography>
 						</Grid>
 					</Grid>
 					<Grid container direction="row">
 						<Grid item xs={12}>
 							<Button onClick={e => sendEmail()} variant="contained" color="primary" disabled={loading}>
-								<If condition={emailSent}>{__('√ Email sent', 'kaliforms')}</If>
-								<If condition={!emailSent}>{__('Send', 'kaliforms')}</If>
+								<If condition={emailSent}>{__('√ Email sent', 'kali-forms')}</If>
+								<If condition={!emailSent}>{__('Send', 'kali-forms')}</If>
 							</Button>
 						</Grid>
 					</Grid>

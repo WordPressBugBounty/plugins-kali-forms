@@ -29,7 +29,7 @@ const AppBarBackButton = () => {
 		<React.Fragment>
 			<a href="#" onClick={e => backToWp(e)} className={classes.root}>
 				<ArrowBackIosIcon className={classes.icon} fontSize="small"></ArrowBackIosIcon>
-				{__('Back', 'kaliforms')}
+				{__('Back', 'kali-forms')}
 			</a>
 		</React.Fragment>
 	)

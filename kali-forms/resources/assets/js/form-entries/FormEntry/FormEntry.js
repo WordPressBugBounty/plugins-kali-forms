@@ -56,7 +56,7 @@ export default function FormEntry() {
 		Api.saveEntry({ id, fields: saneValues }).then(res => {
 			setLoading(false)
 			message.success({
-				content: __('Entry has been updated successfully', 'kaliforms'),
+				content: __('Entry has been updated successfully', 'kali-forms'),
 				duration: 5,
 			});
 
@@ -68,8 +68,8 @@ export default function FormEntry() {
 		<React.Fragment>
 			<PageHeader
 				onBack={() => history.goBack()}
-				title={__('Form entry', 'kaliforms')}
-				subTitle={__('edit', 'kaliforms')}
+				title={__('Form entry', 'kali-forms')}
+				subTitle={__('edit', 'kali-forms')}
 			/>
 			<Form {...layout}
 				autoComplete={'false'}
@@ -94,10 +94,10 @@ export default function FormEntry() {
 				<Form.Item {...tailLayout}>
 					<Space>
 						<Button type="primary" htmlType="submit" loading={loading}>
-							{__('Save', 'kaliforms')}
+							{__('Save', 'kali-forms')}
 						</Button>
 						<Button htmlType="button" onClick={history.goBack}>
-							{__('Go back', 'kaliforms')}
+							{__('Go back', 'kali-forms')}
 						</Button>
 					</Space>
 				</Form.Item>

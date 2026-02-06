@@ -36,7 +36,7 @@ const AppBarSaveButton = () => {
 		if (nameErrors.duplicates) {
 			store._ERRORS_.addError({
 				type: 'field',
-				message: __('Found fields with the same "Name" property.', 'kaliforms'),
+				message: __('Found fields with the same "Name" property.', 'kali-forms'),
 				args: nameErrors.items
 			})
 			continueToSave = false;
@@ -45,7 +45,7 @@ const AppBarSaveButton = () => {
 		if (idErrors.duplicates) {
 			store._ERRORS_.addError({
 				type: 'field',
-				message: __('Found fields with the same "Id" property.', 'kaliforms'),
+				message: __('Found fields with the same "Id" property.', 'kali-forms'),
 				args: nameErrors.items
 			})
 			continueToSave = false;
@@ -62,7 +62,7 @@ const AppBarSaveButton = () => {
 		<React.Fragment>
 			<a href="#" onClick={e => save(e)} className={classes.root}>
 				<Icon className={classes.icon + ' icon-save'} />
-				{__('Save', 'kaliforms')}
+				{__('Save', 'kali-forms')}
 			</a>
 		</React.Fragment>
 	)

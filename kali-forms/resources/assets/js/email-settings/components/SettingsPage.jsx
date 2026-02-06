@@ -33,7 +33,7 @@ const SettingsPage = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'h6'}>
-				{__('General Settings', 'kaliforms')}
+				{__('General Settings', 'kali-forms')}
 			</Typography>
 			<hr />
 			<form method="POST" action="options.php" id="kali-email-form" autoComplete="off">
@@ -42,21 +42,21 @@ const SettingsPage = props => {
 						<Grid container direction="row" style={{ marginBottom: 16 }}>
 							<Grid item xs={3}>
 								<Typography variant="body1">
-									{__('Send emails using', 'kaliforms')}
+									{__('Send emails using', 'kali-forms')}
 								</Typography>
 							</Grid>
 							<Grid item xs={9}>
 								<MailerSelect providers={props.providers} selected={provider} setProvider={setProvider} />
 								<input type="hidden" value={provider} name="kaliforms_smtp_provider" />
 								<Typography style={{ maxWidth: 400, marginBottom: 16, color: 'rgba(0, 0, 0, 0.54)' }} variant="body2">
-									{__('Select the method or service for sending out your form emails.', 'kaliforms')}
+									{__('Select the method or service for sending out your form emails.', 'kali-forms')}
 								</Typography>
 							</Grid>
 						</Grid>
 						<Grid container direction="row">
 							<Grid item xs={3}>
 								<Typography variant="body1">
-									<label htmlFor={'kali-email-log'}>{__('Enable mail log', 'kaliforms')}</label>
+									<label htmlFor={'kali-email-log'}>{__('Enable mail log', 'kali-forms')}</label>
 								</Typography>
 							</Grid>
 							<Grid item xs={9}>
@@ -67,14 +67,14 @@ const SettingsPage = props => {
 									id={'kali-email-log'}
 									onChange={evt => setEmailLog(evt.target.checked)} />
 								<Typography style={{ maxWidth: 400, marginBottom: 16, color: 'rgba(0, 0, 0, 0.54)' }} variant="body2">
-									{__('Record each attempt to send out an email notification, this will help you resolve any potential errors with the email sending functionality or provide a confirmation that an email has been sent.', 'kaliforms')}
+									{__('Record each attempt to send out an email notification, this will help you resolve any potential errors with the email sending functionality or provide a confirmation that an email has been sent.', 'kali-forms')}
 								</Typography>
 							</Grid>
 						</Grid>
 						<Grid container direction="row">
 							<Grid item xs={3}>
 								<Typography variant="body1">
-									<label htmlFor={'kali-email-return-path'}>{__('Failure email', 'kaliforms')}</label>
+									<label htmlFor={'kali-email-return-path'}>{__('Failure email', 'kali-forms')}</label>
 								</Typography>
 							</Grid>
 							<Grid item xs={9}>
@@ -87,7 +87,7 @@ const SettingsPage = props => {
 									autoComplete={'off'}
 								/>
 								<Typography style={{ maxWidth: 400, marginBottom: 16, color: 'rgba(0, 0, 0, 0.54)' }} variant="body2">
-									{__('When an email fails to be delivered, a notification will be received at this email in the form of a non-delivery receipt or bounce message. If you do not set an email in this field then bounce emails may be lost.', 'kaliforms')}
+									{__('When an email fails to be delivered, a notification will be received at this email in the form of a non-delivery receipt or bounce message. If you do not set an email in this field then bounce emails may be lost.', 'kali-forms')}
 								</Typography>
 							</Grid>
 						</Grid>
@@ -112,7 +112,7 @@ const SettingsPage = props => {
 					<Postmark {...props} />
 				</If>
 				<Grid container direction="row">
-					<Button type="submit" variant="contained" color="primary" >{__('Save', 'kaliforms')}</Button>
+					<Button type="submit" variant="contained" color="primary" >{__('Save', 'kali-forms')}</Button>
 				</Grid>
 			</form>
 		</React.Fragment>

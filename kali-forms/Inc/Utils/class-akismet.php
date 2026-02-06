@@ -90,7 +90,7 @@ class Akismet
 			return [
 				'response' => '',
 				'success'  => false,
-				'message'  => esc_html__('Something went wrong', 'kaliforms'),
+				'message'  => esc_html__('Something went wrong', 'kali-forms'),
 			];
 		};
 

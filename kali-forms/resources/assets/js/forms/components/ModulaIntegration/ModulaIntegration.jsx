@@ -29,7 +29,7 @@ const ModulaIntegration = observer((props) => {
 								<Typography>
 									{__(
 										"Please install and activate Modula to use this integration",
-										"kaliforms"
+										"kali-forms"
 									)}
 								</Typography>
 							</When>
@@ -49,7 +49,7 @@ const ModulaIntegration = observer((props) => {
 											}
 											label={__(
 												"Enable Modula gallery integration",
-												"kaliforms"
+												"kali-forms"
 											)}
 										/>
 									</FormGroup>
@@ -58,7 +58,7 @@ const ModulaIntegration = observer((props) => {
 											<FormGroup row style={{ marginTop: 20 }}>
 												<FormControl>
 													<InputLabel shrink>
-														{__("Form action", "kaliforms")}
+														{__("Form action", "kali-forms")}
 													</InputLabel>
 													<Select
 														value={store._FORM_INFO_.modulaAction || "new"}
@@ -71,10 +71,10 @@ const ModulaIntegration = observer((props) => {
 														input={<BootstrapInput />}
 													>
 														<MenuItem value="new">
-															{__("Create new gallery", "kaliforms")}
+															{__("Create new gallery", "kali-forms")}
 														</MenuItem>
 														<MenuItem value="existing">
-															{__("Add to existing gallery", "kaliforms")}
+															{__("Add to existing gallery", "kali-forms")}
 														</MenuItem>
 													</Select>
 												</FormControl>
@@ -87,7 +87,7 @@ const ModulaIntegration = observer((props) => {
 												<FormGroup row style={{ marginTop: 20 }}>
 													<FormControl>
 														<InputLabel shrink>
-															{__("Select existing gallery", "kaliforms")}
+															{__("Select existing gallery", "kali-forms")}
 														</InputLabel>
 														<Select
 															value={store._FORM_INFO_.modulaGallery || "0"}
@@ -100,7 +100,7 @@ const ModulaIntegration = observer((props) => {
 															input={<BootstrapInput />}
 														>
 															<MenuItem value="0">
-																{__("Select a gallery", "kaliforms")}
+																{__("Select a gallery", "kali-forms")}
 															</MenuItem>
 															{store._FORM_INFO_.modulaGalleries.map(
 																(gallery) => (
@@ -117,7 +117,7 @@ const ModulaIntegration = observer((props) => {
 												<FormGroup row style={{ marginTop: 20 }}>
 													<FormControl>
 														<InputLabel shrink>
-															{__("Gallery name prefix", "kaliforms")}
+															{__("Gallery name prefix", "kali-forms")}
 														</InputLabel>
 														<BootstrapInput
 															value={store._FORM_INFO_.modulaGalleryName}
@@ -127,7 +127,7 @@ const ModulaIntegration = observer((props) => {
 																})
 															}
 															fullWidth={true}
-															placeholder={__("{email} - gallery", "kaliforms")}
+															placeholder={__("{email} - gallery", "kali-forms")}
 															variant="filled"
 															endAdornment={
 																<PlaceholderDialogOpener adornment={true} />
@@ -141,7 +141,7 @@ const ModulaIntegration = observer((props) => {
 															<InputLabel shrink>
 																{__(
 																	"Select existing gallery defaults",
-																	"kaliforms"
+																	"kali-forms"
 																)}
 															</InputLabel>
 															<Select
@@ -157,7 +157,7 @@ const ModulaIntegration = observer((props) => {
 																<MenuItem value="0">
 																	{__(
 																		"Select a gallery default entry",
-																		"kaliforms"
+																		"kali-forms"
 																	)}
 																</MenuItem>
 																{store._FORM_INFO_.modulaDefaults.map(

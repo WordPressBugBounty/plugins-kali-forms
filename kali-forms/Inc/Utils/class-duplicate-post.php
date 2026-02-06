@@ -40,7 +40,7 @@ trait Duplicate_Post
 	 */
 	public function denied()
 	{
-		wp_die(esc_html__('Denied', 'kaliforms'));
+		wp_die(esc_html__('Denied', 'kali-forms'));
 	}
 	/**
 	 * Duplicate post function
@@ -65,7 +65,7 @@ trait Duplicate_Post
 		$title   = get_the_title($_POST['args']['id']);
 		$oldpost = get_post($_POST['args']['id']);
 		$post    = array(
-			'post_title'  => $title . ' ' . esc_html__('(duplicate)'),
+			'post_title'  => $title . ' ' . esc_html__('(duplicate)', 'kali-forms'),
 			'post_status' => 'publish',
 			'post_type'   => $oldpost->post_type,
 			'post_author' => $_POST['args']['userId'],

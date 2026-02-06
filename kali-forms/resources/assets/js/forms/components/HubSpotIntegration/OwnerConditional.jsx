@@ -17,7 +17,7 @@ const OwnerConditional = (props) => {
 				<Grid item xs={3}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Assign owner', 'kaliforms')}
+							{__('Assign owner', 'kali-forms')}
 						</InputLabel>
 						<Select
 							multiple={false}
@@ -26,7 +26,7 @@ const OwnerConditional = (props) => {
 							onChange={e => props.changeCondition({ index: props.idx, key: 'owner', value: e.target.value })}
 							fullWidth={true}
 						>
-							<MenuItem value="">{__('Select owner', 'kaliforms')}</MenuItem>
+							<MenuItem value="">{__('Select owner', 'kali-forms')}</MenuItem>
 							{KaliFormsHubSpot.contactOwners.map(owner => <MenuItem key={owner.ownerId} value={owner.ownerId}>{owner.firstName} {owner.lastName}</MenuItem>)}
 						</Select>
 					</FormControl>
@@ -34,7 +34,7 @@ const OwnerConditional = (props) => {
 				<Grid item xs={2}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('If', 'kaliforms')}
+							{__('If', 'kali-forms')}
 						</InputLabel>
 						<Select
 							multiple={false}
@@ -73,7 +73,7 @@ const OwnerConditional = (props) => {
 				<Grid item xs={2}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Operator', 'kaliforms')}
+							{__('Operator', 'kali-forms')}
 						</InputLabel>
 						<Select
 							multiple={false}
@@ -83,10 +83,10 @@ const OwnerConditional = (props) => {
 							fullWidth={true}
 						>
 							<MenuItem key="contains" value="contains">
-								{__('Contains', 'kaliforms')}
+								{__('Contains', 'kali-forms')}
 							</MenuItem>
 							<MenuItem key="equal" value="equal">
-								{__('Equal', 'kaliforms')}
+								{__('Equal', 'kali-forms')}
 							</MenuItem>
 						</Select>
 					</FormControl>
@@ -94,7 +94,7 @@ const OwnerConditional = (props) => {
 				<Grid item xs={3}>
 					<FormControl>
 						<InputLabel shrink>
-							{__('Value', 'kaliforms')}
+							{__('Value', 'kali-forms')}
 						</InputLabel>
 						<BootstrapInput
 							value={props.condition.value}
@@ -106,7 +106,7 @@ const OwnerConditional = (props) => {
 				</Grid>
 				<Grid item xs={2} style={{ paddingTop: 27 }}>
 					<IconButton
-						aria-label={__('Add condition', 'kaliforms')}
+						aria-label={__('Add condition', 'kali-forms')}
 						onClick={props.addCondition}
 						variant="contained"
 						color="primary"
@@ -114,7 +114,7 @@ const OwnerConditional = (props) => {
 						<AddIcon fontSize="inherit" />
 					</IconButton>
 					<IconButton
-						aria-label={__('Remove condition', 'kaliforms')}
+						aria-label={__('Remove condition', 'kali-forms')}
 						onClick={() => props.conditionalLength === 1 ? props.setDefaultCondition() : props.removeCondition(props.idx)}
 						variant="contained"
 						color="primary"

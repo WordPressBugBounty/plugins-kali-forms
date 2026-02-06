@@ -108,15 +108,15 @@ class Form_Shortcode
 	public function __construct($args)
 	{
 		if (!isset($args['id'])) {
-			return $this->display_error(esc_html__('The shortcode does not provide an id for the form', 'kaliforms'));
+			return $this->display_error(esc_html__('The shortcode does not provide an id for the form', 'kali-forms'));
 		}
 
 		$this->post = get_post($args['id']);
 		if ($this->post === null) {
-			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kaliforms'));
+			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
 		if ($this->post->post_status !== 'publish') {
-			return $this->display_error(esc_html__('This form is not published.', 'kaliforms'));
+			return $this->display_error(esc_html__('This form is not published.', 'kali-forms'));
 		}
 
 		$this->disable_bootstrap = $this->get('disable_bootstrap_grid', "0") === "1";
@@ -311,7 +311,7 @@ class Form_Shortcode
 			]
 		);
 
-		wp_set_script_translations('kaliforms-frontend', 'kaliforms', KALIFORMS_BASE . 'languages');
+		wp_set_script_translations('kaliforms-frontend', 'kali-forms', KALIFORMS_BASE . 'languages');
 
 		do_action($this->slug . '_after_load_script_function', $this);
 	}

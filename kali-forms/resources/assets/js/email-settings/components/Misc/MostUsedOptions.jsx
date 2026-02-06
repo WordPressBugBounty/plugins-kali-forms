@@ -66,7 +66,7 @@ const MostUsedOptions = props => {
 	return (
 		<React.Fragment>
 			<Typography variant={'subtitle2'}>
-				{__('Most used options', 'kaliforms')}
+				{__('Most used options', 'kali-forms')}
 
 				<Select
 					value={'none'}
@@ -76,7 +76,7 @@ const MostUsedOptions = props => {
 					input={<BootstrapInput />}
 					style={{ maxWidth: 245 }}
 				>
-					<MenuItem value="none">{__('-- Select an option --', 'kaliforms')}</MenuItem>
+					<MenuItem value="none">{__('-- Select an option --', 'kali-forms')}</MenuItem>
 					<MenuItem value="gmail">Google</MenuItem>
 					<MenuItem value="mandrill">Mandrill</MenuItem>
 					<MenuItem value="mailgun">Mailgun</MenuItem>
@@ -88,17 +88,17 @@ const MostUsedOptions = props => {
 				<Card variant="outlined">
 					<CardContent>
 						<Typography variant="body2" component="p" className={classes.cardContentItem}>
-							<span>{__('Host:', 'kaliforms')}</span> <span>{predefinedSettings[optionSet].host}</span>
+							<span>{__('Host:', 'kali-forms')}</span> <span>{predefinedSettings[optionSet].host}</span>
 						</Typography>
 						<Typography variant="body2" component="p" className={classes.cardContentItem}>
-							<span>{__('Port:', 'kaliforms')}</span> <span>{predefinedSettings[optionSet].port}</span>
+							<span>{__('Port:', 'kali-forms')}</span> <span>{predefinedSettings[optionSet].port}</span>
 						</Typography>
 						<Typography variant="body2" component="p" className={classes.cardContentItem}>
-							<span>{__('Secure:', 'kaliforms')}</span> <span>{predefinedSettings[optionSet].ssl}</span>
+							<span>{__('Secure:', 'kali-forms')}</span> <span>{predefinedSettings[optionSet].ssl}</span>
 						</Typography>
 					</CardContent>
 					<CardActions>
-						<Button size="small" variant="outlined" color="primary" onClick={e => useSettings()}>{__('Use', 'kaliforms')}</Button>
+						<Button size="small" variant="outlined" color="primary" onClick={e => useSettings()}>{__('Use', 'kali-forms')}</Button>
 					</CardActions>
 				</Card>
 			</If>

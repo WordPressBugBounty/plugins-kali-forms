@@ -17,13 +17,13 @@ const FormConditionalLogic = observer((props) => {
 	const classes = conditionalLogicComponentStyles(props);
 	const labels = {
 		states: {
-			hide: __('Hide', 'kaliforms'),
-			show: __('Show', 'kaliforms'),
+			hide: __('Hide', 'kali-forms'),
+			show: __('Show', 'kali-forms'),
 		},
 		operator: {
-			equal: __('Equal to', 'kaliforms'),
-			different: __('Different than', 'kaliforms'),
-			or: __('Can be', 'kaliforms')
+			equal: __('Equal to', 'kali-forms'),
+			different: __('Different than', 'kali-forms'),
+			or: __('Can be', 'kali-forms')
 		},
 	};
 	const [newConditionalName, setNewConditionalName] = useState('')
@@ -36,7 +36,7 @@ const FormConditionalLogic = observer((props) => {
 		}
 		let caption = typeof field.properties.caption !== 'undefined' && field.properties.caption !== '' ? field.properties.caption : field.properties.id
 
-		return `<span style="text-decoration:underline">${caption}</span> ${__('Should', 'kaliforms')} ${labels.states[condition.state]} ${__('If', 'kaliforms')} ${condition.conditioner} ${__('Is', 'kaliforms')} ${labels.operator[condition.operator]} ${condition.value}`;
+		return `<span style="text-decoration:underline">${caption}</span> ${__('Should', 'kali-forms')} ${labels.states[condition.state]} ${__('If', 'kali-forms')} ${condition.conditioner} ${__('Is', 'kali-forms')} ${labels.operator[condition.operator]} ${condition.value}`;
 	}
 
 	const addCondition = () => {
@@ -76,7 +76,7 @@ const FormConditionalLogic = observer((props) => {
 						<Grid item xs={12}>
 							<FormControl>
 								<InputLabel shrink>
-									{__('Add a name for your logical condition', 'kaliforms')}
+									{__('Add a name for your logical condition', 'kali-forms')}
 								</InputLabel>
 								<BootstrapInput
 									value={newConditionalName}
@@ -85,7 +85,7 @@ const FormConditionalLogic = observer((props) => {
 									endAdornment={(
 										<Box className={classes.createButton}
 											onClick={e => addCondition()}>
-											{__('Create', 'kaliforms')}
+											{__('Create', 'kali-forms')}
 										</Box>
 									)}
 								/>
@@ -95,10 +95,10 @@ const FormConditionalLogic = observer((props) => {
 
 					<If condition={currentConditions.length}>
 						<If condition={props.sidebar}>
-							<Typography variant={'body1'} style={{ marginBottom: 8 }}>{__('Your logical conditions', 'kaliforms')}</Typography>
+							<Typography variant={'body1'} style={{ marginBottom: 8 }}>{__('Your logical conditions', 'kali-forms')}</Typography>
 						</If>
 						<If condition={!props.sidebar}>
-							<SectionTitle title={__('Your logical conditions', 'kaliforms')} />
+							<SectionTitle title={__('Your logical conditions', 'kali-forms')} />
 						</If>
 						<Grid container direction="row" spacing={2} alignItems="center">
 							{
@@ -133,7 +133,7 @@ const FormConditionalLogic = observer((props) => {
 				</If>
 			</If>
 			<If condition={!store._FORM_INFO_.conditionsAvailable}>
-				<Typography variant={'body1'}>{__('There are no fields that allow conditionals (e.g. Dropdowns, Checkboxes, Radios).', 'kaliforms')}</Typography>
+				<Typography variant={'body1'}>{__('There are no fields that allow conditionals (e.g. Dropdowns, Checkboxes, Radios).', 'kali-forms')}</Typography>
 			</If>
 		</React.Fragment>
 	);

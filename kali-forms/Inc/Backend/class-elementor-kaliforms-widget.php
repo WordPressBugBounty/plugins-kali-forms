@@ -103,7 +103,7 @@ class Elementor_KaliForms_Widget extends \Elementor\Widget_Base
 	 */
 	public function get_title()
 	{
-		return esc_html__('Kali Form', 'kaliforms');
+		return esc_html__('Kali Form', 'kali-forms');
 	}
 
 	/**
@@ -134,12 +134,12 @@ class Elementor_KaliForms_Widget extends \Elementor\Widget_Base
 	protected function _register_controls()
 	{
 		$this->start_controls_section('content_section', [
-			'label' => esc_html__('General', 'kaliforms'),
+			'label' => esc_html__('General', 'kali-forms'),
 			'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 		]);
 
 		$this->add_control('formId', [
-			'label' => esc_html__('Form id', 'kaliforms'),
+			'label' => esc_html__('Form id', 'kali-forms'),
 			'type' => \Elementor\Controls_Manager::SELECT2,
 			'input_type' => 'text',
 			'options' => $this->_get_forms(),
@@ -147,17 +147,17 @@ class Elementor_KaliForms_Widget extends \Elementor\Widget_Base
 
 		$repeater = new \Elementor\Repeater();
 		$repeater->add_control('kali_field_name', [
-			'label' => __('Field', 'kaliforms'),
+			'label' => __('Field', 'kali-forms'),
 			'type' => \Elementor\Controls_Manager::TEXT,
 			'label_block' => true,
 		]);
 		$repeater->add_control('kali_field_value', [
-			'label' => __('Value', 'kaliforms'),
+			'label' => __('Value', 'kali-forms'),
 			'type' => \Elementor\Controls_Manager::TEXT,
 			'label_block' => true,
 		]);
 		$this->add_control('kaliPlaceholderValues', [
-			'label' => esc_html__('Placeholder values', 'domain'),
+			'label' => esc_html__('Placeholder values', 'kali-forms'),
 			'type' => \Elementor\Controls_Manager::REPEATER,
 			'fields' => $repeater->get_controls(),
 			'title_field' => '{{{ kali_field_name }}}',
@@ -179,7 +179,7 @@ class Elementor_KaliForms_Widget extends \Elementor\Widget_Base
 		];
 		$query = new \WP_Query($args);
 		$forms = [
-			0 => esc_html__('Select a form', 'kaliforms'),
+			0 => esc_html__('Select a form', 'kali-forms'),
 		];
 		foreach ($query->posts as $form) {
 			$forms[$form->ID] = $form->post_title;
@@ -197,12 +197,12 @@ class Elementor_KaliForms_Widget extends \Elementor\Widget_Base
 	{
 		$settings = $this->get_settings_for_display();
 		if ((int) $settings['formId'] === 0) {
-			echo esc_html__('Please select a form from the dropdown', 'kaliforms');
+			echo esc_html__('Please select a form from the dropdown', 'kali-forms');
 
 			return;
 		}
 		if ($this->_check_if_elementor_preview()) {
-			echo ' <em>' . esc_html__('Form may not look the same in the Elementor preview as on the actual page', 'kaliforms') . ' </em > ';
+			echo ' <em>' . esc_html__('Form may not look the same in the Elementor preview as on the actual page', 'kali-forms') . ' </em > ';
 		}
 		$string = '';
 		if (isset($settings['kaliPlaceholderValues']) && !empty($settings['kaliPlaceholderValues'])) {

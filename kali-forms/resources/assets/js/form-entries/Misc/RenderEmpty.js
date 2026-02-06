@@ -5,8 +5,8 @@ import InfoCircleOutlined from '@ant-design/icons/InfoCircleOutlined';
 export default function RenderEmpty() {
 	return (
 		<div>
-			<p>{__('No entry found ', 'kaliforms')}
-				<Tooltip title={__('Most likely, user did not complete this field', 'kaliforms')}>
+			<p>{__('No entry found ', 'kali-forms')}
+				<Tooltip title={__('Most likely, user did not complete this field', 'kali-forms')}>
 					<InfoCircleOutlined />
 				</Tooltip>
 			</p>

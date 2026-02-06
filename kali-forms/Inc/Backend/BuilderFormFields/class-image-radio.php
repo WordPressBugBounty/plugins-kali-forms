@@ -29,7 +29,7 @@ class Image_Radio extends Form_Field
     public function __construct($args)
     {
         parent::__construct($args);
-        $this->label = esc_html__('Image Radio', 'kaliforms');
+        $this->label = esc_html__('Image Radio', 'kali-forms');
         $this->icon = 'icon-image-choices';
     }
 }

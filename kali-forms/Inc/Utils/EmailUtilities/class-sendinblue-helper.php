@@ -1,4 +1,5 @@
 <?php
+
 namespace KaliForms\Inc\Utils\EmailUtilities;
 
 class Sendinblue_Helper
@@ -25,9 +26,7 @@ class Sendinblue_Helper
     /**
      * Class constructor
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
     /**
      * Send the actual email
      *
@@ -36,7 +35,7 @@ class Sendinblue_Helper
     public function send()
     {
         if (empty($this->token)) {
-            throw new \Exception(__('No Api Key configured', 'kaliforms'));
+            throw new \Exception(__('No Api Key configured', 'kali-forms'));
         }
         return $this->make_request();
     }

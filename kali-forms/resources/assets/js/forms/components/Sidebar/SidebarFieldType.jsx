@@ -60,8 +60,8 @@ const SidebarFieldType = observer((props) => {
 						{props.field.label}
 					</InputLabel>
 					<MediaManager
-						title={__('Select image', 'kaliforms')}
-						buttonLabel={__('Use selected image', 'kaliforms')}
+						title={__('Select image', 'kali-forms')}
+						buttonLabel={__('Use selected image', 'kali-forms')}
 						mediaValue={store._FIELD_COMPONENTS_.getPropertyValue(store._UI_.activeFormFieldInSidebar, props.field.id)}
 						onChange={val => store._FIELD_COMPONENTS_.updatePropertyValue(store._UI_.activeFormFieldInSidebar, props.field.id, val)}
 					/>
@@ -147,7 +147,7 @@ const SidebarFieldType = observer((props) => {
 						input={<BootstrapInput />}
 					>
 						<MenuItem value={'kf-select-field'}>
-							{__('Select a field', 'kaliforms')}
+							{__('Select a field', 'kali-forms')}
 						</MenuItem>
 						{
 							options.map((el, index) => {
@@ -174,7 +174,7 @@ const SidebarFieldType = observer((props) => {
 						input={<BootstrapInput />}
 					>
 						<MenuItem value={'kf-select-field'}>
-							{__('Select a field', 'kaliforms')}
+							{__('Select a field', 'kali-forms')}
 						</MenuItem>
 						{
 							Object.keys(store._FIELD_COMPONENTS_.fieldConditioners).map((key, index) => {
