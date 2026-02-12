@@ -110,6 +110,9 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	}
 
 	/**
+	 * Checks permission for listing and viewing forms.
+	 * Users must have edit_posts. For single-item requests, user must be the form author or have manage_options.
+	 *
 	 * @param \WP_REST_Request $request
 	 * @return bool|\WP_Error
 	 */
@@ -119,19 +122,38 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 			return new \WP_Error('rest_forbidden', esc_html__('You cannot view the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
 		}
 
+		// For single-item requests, check ownership.
+		if (isset($request['id'])) {
+			$post = get_post((int) $request['id']);
+			if ($post && $post->post_type === $this->slug . '_forms') {
+				if ((int) $post->post_author !== get_current_user_id() && !current_user_can('manage_options')) {
+					return new \WP_Error('rest_forbidden', esc_html__('You do not have permission to access this form.', 'kali-forms'), ['status' => 403]);
+				}
+			}
+		}
+
 		return true;
 	}
 
 	/**
-	 * Check permission to edit a post
+	 * Check permission to edit a form. User must have edit_posts and be the form author or have manage_options.
 	 *
-	 * @param [type] $request
-	 * @return void
+	 * @param \WP_REST_Request $request
+	 * @return bool|\WP_Error
 	 */
 	public function edit_item_check($request)
 	{
 		if (!current_user_can('edit_posts')) {
 			return new \WP_Error('rest_forbidden', esc_html__('You cannot edit the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
+		}
+
+		if (isset($request['id'])) {
+			$post = get_post((int) $request['id']);
+			if ($post && $post->post_type === $this->slug . '_forms') {
+				if ((int) $post->post_author !== get_current_user_id() && !current_user_can('manage_options')) {
+					return new \WP_Error('rest_forbidden', esc_html__('You do not have permission to edit this form.', 'kali-forms'), ['status' => 403]);
+				}
+			}
 		}
 
 		return true;
@@ -188,6 +210,11 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 			if (isset($registered[$api_param], $request[$api_param])) {
 				$args[$wp_param] = $request[$api_param];
 			}
+		}
+
+		// Restrict to current user's forms unless they can manage options.
+		if (!current_user_can('manage_options')) {
+			$args['author'] = get_current_user_id();
 		}
 
 		$query_args = $this->prepare_items_query($args, $request);
