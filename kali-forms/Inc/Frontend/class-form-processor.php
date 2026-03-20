@@ -256,11 +256,22 @@ class Form_Processor
 	public function check_if_placeholders_changed()
 	{
 		// 1.6.3 fix - the checkbox "string" value was overwritten with the "source of truth"
+		if ($this->post !== null && empty($this->field_type_map)) {
+			$prepared_maps            = $this->setup_field_map();
+			$this->field_type_map     = $prepared_maps['map'];
+			$this->advanced_field_map = $prepared_maps['advanced'];
+		}
+
 		foreach ($this->data as $key => $value) {
+			if (!array_key_exists($key, $this->field_type_map)) {
+				continue;
+			}
+
 			$type = 'textbox';
-			if (isset($this->field_type_map[$key]) && !empty($this->field_type_map[$key])) {
+			if (!empty($this->field_type_map[$key])) {
 				$type = $this->field_type_map[$key];
 			}
+
 			$this->_run_placeholder_switch($type, $key, $value);
 		}
 	}
@@ -340,8 +351,12 @@ class Form_Processor
 
 		$data = array_merge($data, $this->_get_product_fields($data));
 		foreach ($data as $k => $v) {
+			if (!array_key_exists($k, $this->field_type_map)) {
+				continue;
+			}
+
 			$type = 'textbox';
-			if (isset($this->field_type_map[$k]) && !empty($this->field_type_map[$k])) {
+			if (!empty($this->field_type_map[$k])) {
 				$type = $this->field_type_map[$k];
 			}
 
@@ -380,7 +395,25 @@ class Form_Processor
 
 		$this->placeholdered_data = apply_filters($this->slug . '_form_placeholders', $this->placeholdered_data);
 
+		$this->restore_internal_callable_placeholders();
+
 		return $data;
+	}
+
+	/**
+	 * Ensure built-in placeholder callbacks cannot be replaced by field names that mirror
+	 * reserved keys or untrusted POST keys (call_user_func targets in _save_data).
+	 *
+	 * @return void
+	 */
+	private function restore_internal_callable_placeholders()
+	{
+		$defaults = (new GeneralPlaceholders())->general_placeholders;
+		foreach (['{entryCounter}', '{thisPermalink}', '{submission_link}'] as $key) {
+			if (isset($defaults[$key])) {
+				$this->placeholdered_data[$key] = $defaults[$key];
+			}
+		}
 	}
 
 	/**
