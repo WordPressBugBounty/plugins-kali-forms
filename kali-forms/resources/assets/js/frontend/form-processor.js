@@ -913,59 +913,28 @@ export default class FormProcessor {
 	 * @param {String} res
 	 */
 	verifyRecaptchaCallback(res) {
-		const data = {
-			action: "kaliforms_form_verify_recaptcha",
-			data: { formId: this.formId, nonce: this.nonce, token: res },
-		};
+		this.recaptchaToken = res;
+		this.grecaptchaValidation = !!res;
 		if (this.submitButton !== null) {
-			this.submitButton.setAttribute("disabled", "disabled");
+			this.submitButton.removeAttribute("disabled");
 		}
-		this.axios
-			.post(KaliFormsObject.ajaxurl, this.Qs.stringify(data))
-			.then((r) => {
-				if (this.submitButton !== null) {
-					this.submitButton.removeAttribute("disabled");
-				}
-				if (r.data.hasOwnProperty("error")) {
-					this.throwError();
-				} else {
-					this.grecaptchaValidation = r.data.response.success;
-
-					let evnt = new Event("change");
-					this.form.dispatchEvent(evnt);
-				}
-			})
-			.catch((e) => {
-				console.log(e);
-			});
+		this.form.dispatchEvent(new Event("change"));
 	}
 
+	/**
+	 * Tokens are verified once on the server during kaliforms_form_process (single-use with Google/Cloudflare).
+	 * We only ensure a token exists before submit.
+	 */
 	async verifyTurnstile() {
-		const data = {
-			action: "kaliforms_form_verify_turnstile",
-			data: { formId: this.formId, nonce: this.nonce, token: this.turnstileToken },
-		};
-		try {
-			const response = await this.axios
-				.post(KaliFormsObject.ajaxurl, this.Qs.stringify(data));
-
-			if (response?.data?.response?.success) {
-				this.turnstileValidation = true;
-				let evnt = new Event("change");
-				this.form.dispatchEvent(evnt);
-
-				if (this.submitButton !== null) {
-					this.submitButton.removeAttribute("disabled");
-				}
+		if (this.turnstileToken) {
+			this.turnstileValidation = true;
+			this.form.dispatchEvent(new Event("change"));
+			if (this.submitButton !== null) {
+				this.submitButton.removeAttribute("disabled");
 			}
-
-			if (!response?.data?.response?.success) {
-				this.throwError();
-			}
-
-		} catch (error) {
-			console.log(error);
+			return;
 		}
+		this.throwError();
 	}
 
 	/**
@@ -1357,6 +1326,13 @@ export default class FormProcessor {
 					break;
 			}
 		});
+
+		if (this.grecaptcha && this.recaptchaToken) {
+			arr.kaliforms_recaptcha_token = this.recaptchaToken;
+		}
+		if (this.turnstile && this.turnstileToken) {
+			arr.kaliforms_turnstile_token = this.turnstileToken;
+		}
 
 		this._formData = internIdMap;
 		return arr;

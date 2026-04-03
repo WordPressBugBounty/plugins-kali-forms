@@ -175,20 +175,9 @@ export default class Handlers {
 	 * @param {String} res
 	 */
 	verifyRecaptchaCallback(res) {
-		const data = { action: 'kaliforms_form_verify_recaptcha', data: { formId: this.formId, nonce: this.nonce, token: res } };
-		this.submitButton.setAttribute('disabled', 'disabled');
-		this.axios.post(KaliFormsObject.ajaxurl, this.Qs.stringify(data))
-			.then(r => {
-				this.submitButton.removeAttribute('disabled');
-				if (r.data.hasOwnProperty('error')) {
-					this.throwError();
-				} else {
-					this.grecaptchaValidation = r.data.response.success;
-				}
-			})
-			.catch(e => {
-				console.log(e);
-			});
+		this.recaptchaToken = res;
+		this.grecaptchaValidation = !!res;
+		this.submitButton.removeAttribute('disabled');
 	}
 
 }

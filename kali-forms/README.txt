@@ -3,7 +3,7 @@ Contributors: kaliforms, andreic86, wpchill
 Tags: contact form, forms, form builder, payment form, stripe payment
 Tested up to: 6.9
 Requires PHP: 5.6
-Stable tag: 2.4.10
+Stable tag: 2.4.11
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -346,6 +346,9 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.11
+- Security: added turnstile and recaptcha verification during the form processor to discourage bots from submitting forms
+
 2.4.10
 - Security: Fixed an issue where crafted submission data could overwrite internal placeholders and invoke arbitrary callables during form processing. Only keys that match real form fields are now mapped into placeholder data, and built-in callable placeholders are restored from trusted defaults after filters run.
 

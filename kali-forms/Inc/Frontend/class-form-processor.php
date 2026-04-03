@@ -274,6 +274,8 @@ class Form_Processor
 
 			$this->_run_placeholder_switch($type, $key, $value);
 		}
+
+		$this->set_submitter_ip_placeholders($this->data);
 	}
 
 	/**
@@ -309,9 +311,277 @@ class Form_Processor
 		$this->multiple_selection_separator = $this->get('multiple_selections_separator', ',');
 
 		if ($placeholder_process) {
+			$this->verify_required_captcha_tokens();
 			$this->_handle_media_upload_spoofing();
 			$this->data = $this->prepare_post_data(stripslashes_deep($_POST['data']));
 		}
+	}
+
+	/**
+	 * Whether captcha checks are skipped for the current visitor (matches frontend behaviour for reCAPTCHA field).
+	 *
+	 * @return bool
+	 */
+	private function captcha_skipped_for_logged_user()
+	{
+		return $this->get('remove_captcha_for_logged_users', '0') === '1' && is_user_logged_in();
+	}
+
+	/**
+	 * Form definition includes a reCAPTCHA field.
+	 *
+	 * @return bool
+	 */
+	private function form_has_recaptcha_field()
+	{
+		$fields = json_decode($this->get('field_components', '[]'), false, 512, JSON_HEX_QUOT);
+		if (!is_array($fields)) {
+			return false;
+		}
+		foreach ($fields as $field) {
+			if (isset($field->id) && $field->id === 'grecaptcha') {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Require and verify Turnstile / reCAPTCHA response tokens on submission so bots cannot bypass widgets by posting to AJAX directly.
+	 *
+	 * When both are configured (reCAPTCHA field + Turnstile in settings), behaviour matches the frontend: either challenge is enough.
+	 *
+	 * @return void
+	 */
+	private function verify_required_captcha_tokens()
+	{
+		if (apply_filters($this->slug . '_skip_server_captcha_verification', false, $this->post)) {
+			return;
+		}
+
+		if ($this->captcha_skipped_for_logged_user()) {
+			return;
+		}
+
+		$raw = isset($_POST['data']) ? wp_unslash($_POST['data']) : [];
+		if (!is_array($raw)) {
+			return $this->display_error(esc_html__('Invalid submission data', 'kali-forms'));
+		}
+
+		$needs_recaptcha = $this->form_has_recaptcha_field() && !empty($this->get('google_secret_key', ''));
+		$needs_turnstile = $this->get('turnstile_enabled', '0') === '1' && !empty($this->get('turnstile_secret_key', ''));
+
+		if (!$needs_recaptcha && !$needs_turnstile) {
+			return;
+		}
+
+		if ($needs_recaptcha && $needs_turnstile) {
+			$recaptcha_token = $this->get_posted_recaptcha_response_token($raw);
+			$turnstile_token = $this->get_posted_turnstile_response_token($raw);
+			$recaptcha_ok    = $recaptcha_token !== '' && $this->remote_verify_recaptcha_site($recaptcha_token);
+			$turnstile_ok    = $turnstile_token !== '' && $this->remote_verify_turnstile_site($turnstile_token);
+			if (!$recaptcha_ok && !$turnstile_ok) {
+				return $this->display_error(esc_html__('Security verification failed. Please complete the challenge and try again.', 'kali-forms'));
+			}
+			return;
+		}
+
+		if ($needs_recaptcha) {
+			$token = $this->get_posted_recaptcha_response_token($raw);
+			if ($token === '') {
+				return $this->display_error(esc_html__('reCAPTCHA verification is required.', 'kali-forms'));
+			}
+			if (!$this->remote_verify_recaptcha_site($token)) {
+				return $this->display_error(esc_html__('reCAPTCHA verification failed.', 'kali-forms'));
+			}
+			return;
+		}
+
+		if ($needs_turnstile) {
+			$token = $this->get_posted_turnstile_response_token($raw);
+			if ($token === '') {
+				return $this->display_error(esc_html__('Turnstile verification is required.', 'kali-forms'));
+			}
+			if (!$this->remote_verify_turnstile_site($token)) {
+				return $this->display_error(esc_html__('Turnstile verification failed.', 'kali-forms'));
+			}
+		}
+	}
+
+	/**
+	 * Normalise captcha response strings (do not use sanitize_text_field — it can alter token characters).
+	 *
+	 * @param mixed $value
+	 * @return string
+	 */
+	private function normalise_captcha_response_token($value)
+	{
+		if (is_string($value) || is_numeric($value)) {
+			$token = trim((string) $value);
+			if (strlen($token) > 4096) {
+				$token = substr($token, 0, 4096);
+			}
+			return $token;
+		}
+
+		return '';
+	}
+
+	/**
+	 * @param array $raw Unslashed POST data array.
+	 * @return string
+	 */
+	private function get_posted_recaptcha_response_token(array $raw)
+	{
+		if (isset($raw['kaliforms_recaptcha_token'])) {
+			$t = $this->normalise_captcha_response_token($raw['kaliforms_recaptcha_token']);
+			if ($t !== '') {
+				return $t;
+			}
+		}
+		if (isset($raw['g-recaptcha-response'])) {
+			return $this->normalise_captcha_response_token($raw['g-recaptcha-response']);
+		}
+
+		return '';
+	}
+
+	/**
+	 * @param array $raw Unslashed POST data array.
+	 * @return string
+	 */
+	private function get_posted_turnstile_response_token(array $raw)
+	{
+		if (!isset($raw['kaliforms_turnstile_token'])) {
+			return '';
+		}
+
+		return $this->normalise_captcha_response_token($raw['kaliforms_turnstile_token']);
+	}
+
+	/**
+	 * Client IP for provider siteverify (optional; helps providers score requests behind proxies).
+	 *
+	 * @return string
+	 */
+	private function get_request_ip_for_captcha()
+	{
+		$candidates = [];
+		if (!empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+			$candidates[] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+		}
+		if (!empty($_SERVER['HTTP_X_REAL_IP'])) {
+			$candidates[] = $_SERVER['HTTP_X_REAL_IP'];
+		}
+		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$candidates[] = explode(',', wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']))[0];
+		}
+		if (!empty($_SERVER['REMOTE_ADDR'])) {
+			$candidates[] = $_SERVER['REMOTE_ADDR'];
+		}
+		foreach ($candidates as $ip_src) {
+			$ip = filter_var(trim(wp_unslash($ip_src)), FILTER_VALIDATE_IP);
+			if ($ip) {
+				return $ip;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Set {ip_address} / {ipAddress} placeholders (hidden field is not in field_components map).
+	 *
+	 * @param array $data Form submission data.
+	 * @return void
+	 */
+	private function set_submitter_ip_placeholders(array $data)
+	{
+		$ip_placeholder = '';
+		if (isset($data['ip_address']) && (is_string($data['ip_address']) || is_numeric($data['ip_address']))) {
+			$candidate = sanitize_text_field((string) $data['ip_address']);
+			if ($candidate !== '' && filter_var($candidate, FILTER_VALIDATE_IP)) {
+				$ip_placeholder = $candidate;
+			}
+		}
+		if ($ip_placeholder === '') {
+			$ip_placeholder = $this->get_request_ip_for_captcha();
+		}
+		if ($ip_placeholder !== '') {
+			$this->placeholdered_data['{ip_address}'] = $ip_placeholder;
+			$this->placeholdered_data['{ipAddress}']  = $ip_placeholder;
+		}
+	}
+
+	/**
+	 * Ask Google whether the reCAPTCHA token is valid (single-use; must run on each submit).
+	 *
+	 * @param string $token
+	 * @return bool
+	 */
+	private function remote_verify_recaptcha_site($token)
+	{
+		$secret = $this->get('google_secret_key', '');
+		if ($secret === '' || $token === '') {
+			return false;
+		}
+
+		$body = [
+			'secret'   => $secret,
+			'response' => $token,
+		];
+		$ip = $this->get_request_ip_for_captcha();
+		if ($ip !== '') {
+			$body['remoteip'] = $ip;
+		}
+
+		$response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
+			'body' => $body,
+		]);
+
+		if (is_wp_error($response)) {
+			return false;
+		}
+
+		$data = json_decode(wp_remote_retrieve_body($response), true);
+
+		return is_array($data) && !empty($data['success']);
+	}
+
+	/**
+	 * Ask Cloudflare whether the Turnstile token is valid.
+	 *
+	 * @param string $token
+	 * @return bool
+	 */
+	private function remote_verify_turnstile_site($token)
+	{
+		$secret = $this->get('turnstile_secret_key', '');
+		if ($secret === '' || $token === '') {
+			return false;
+		}
+
+		$body = [
+			'secret'   => $secret,
+			'response' => $token,
+		];
+		$ip = $this->get_request_ip_for_captcha();
+		if ($ip !== '') {
+			$body['remoteip'] = $ip;
+		}
+
+		$response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+			'body' => $body,
+		]);
+
+		if (is_wp_error($response)) {
+			return false;
+		}
+
+		$data = json_decode(wp_remote_retrieve_body($response), true);
+
+		return is_array($data) && !empty($data['success']);
 	}
 
 	/**
@@ -344,6 +614,10 @@ class Form_Processor
 	 */
 	public function prepare_post_data($data)
 	{
+		if (is_array($data)) {
+			unset($data['kaliforms_recaptcha_token'], $data['kaliforms_turnstile_token']);
+		}
+
 		$prepared_maps            = $this->setup_field_map();
 		$this->field_type_map     = $prepared_maps['map'];
 		$this->advanced_field_map = $prepared_maps['advanced'];
@@ -362,6 +636,8 @@ class Form_Processor
 
 			$this->_run_placeholder_switch($type, $k, $v);
 		}
+
+		$this->set_submitter_ip_placeholders($data);
 
 		$simplified = [];
 		$hooks      = $this->get('webhooks', []);
@@ -485,6 +761,8 @@ class Form_Processor
 				'ip_address',
 				'grecaptcha',
 				'g-recaptcha-response',
+				'kaliforms_recaptcha_token',
+				'kaliforms_turnstile_token',
 				'kf_submitted_user_id',
 			];
 
