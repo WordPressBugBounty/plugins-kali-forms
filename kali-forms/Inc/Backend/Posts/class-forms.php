@@ -382,20 +382,24 @@ class Forms
 			'kaliforms_forms',
 			'kaliforms_field_components',
 			[
-				'single'       => true,
-				'show_in_rest' => true,
-				'description'  => 'A meta key associated with a string meta value.',
-				'type'         => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+				'description'       => 'A meta key associated with a string meta value.',
+				'type'              => 'string',
+				'sanitize_callback' => 'KaliForms\Inc\Backend\Sanitizers::sanitize_field_components',
+				'auth_callback'     => [ __CLASS__, 'auth_callback_form_builder_meta' ],
 			]
 		);
 		register_post_meta(
 			'kaliforms_forms',
 			'kaliforms_grid',
 			[
-				'single'       => true,
-				'show_in_rest' => true,
-				'description'  => 'A meta key associated with a string meta value.',
-				'type'         => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+				'description'       => 'A meta key associated with a string meta value.',
+				'type'              => 'string',
+				'sanitize_callback' => 'KaliForms\Inc\Backend\Sanitizers::sanitize_grid_layout',
+				'auth_callback'     => [ __CLASS__, 'auth_callback_form_builder_meta' ],
 			]
 		);
 
@@ -789,6 +793,29 @@ class Forms
 	/**
 	 * @return bool
 	 */
+	/**
+	 * Auth check for form builder meta registered for REST API access.
+	 *
+	 * @param bool   $allowed   Whether the user can add the meta.
+	 * @param string $meta_key  Meta key.
+	 * @param int    $object_id Post ID.
+	 * @param int    $user_id   User ID.
+	 * @param string $cap       Capability name.
+	 * @param array  $caps      Capabilities.
+	 * @return bool
+	 */
+	public static function auth_callback_form_builder_meta( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
+		if ( ! get_current_user_id() && doing_action( 'activate_plugin' ) ) {
+			return true;
+		}
+
+		if ( $object_id && current_user_can( 'edit_post', (int) $object_id ) ) {
+			return true;
+		}
+
+		return current_user_can( 'edit_posts' );
+	}
+
 	public function network()
 	{
 		if (!function_exists('is_plugin_active_for_network')) {

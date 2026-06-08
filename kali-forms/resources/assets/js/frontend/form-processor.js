@@ -1334,8 +1334,45 @@ export default class FormProcessor {
 			arr.kaliforms_turnstile_token = this.turnstileToken;
 		}
 
+		this._mergeUploadFieldValues(arr, internIdMap);
 		this._formData = internIdMap;
 		return arr;
+	}
+
+	/**
+	 * Merge FilePond server IDs into form data for upload fields.
+	 *
+	 * @param {Object} formData
+	 * @param {Object} internIdMap
+	 */
+	_mergeUploadFieldValues(formData, internIdMap) {
+		if (!this.uploadFields || !this.uploadFields.length) {
+			return;
+		}
+
+		this.uploadFields.forEach((field) => {
+			const fieldName = field.getAttribute("name");
+			const internalId = field.getAttribute("data-internal-id");
+			const pond = this.uploadFieldsPond[internalId];
+
+			if (!pond || !fieldName) {
+				return;
+			}
+
+			const serverIds = pond
+				.getFiles()
+				.map((file) => file.serverId)
+				.filter((serverId) => serverId);
+
+			if (!serverIds.length) {
+				return;
+			}
+
+			formData[fieldName] = serverIds.join(",");
+			if (internalId) {
+				internIdMap[internalId] = formData[fieldName];
+			}
+		});
 	}
 
 	/**

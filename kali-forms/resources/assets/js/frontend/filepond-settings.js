@@ -95,7 +95,7 @@ export default class FilePondSettings {
 			const formData = new FormData();
 
 			formData.append('action', 'kaliforms_form_delete_uploaded_file')
-			formData.append('id', parseFloat(uniqueFileId))
+			formData.append('id', uniqueFileId)
 			formData.append('nonce', KaliFormsObject.ajax_nonce)
 			const request = new XMLHttpRequest();
 			request.open('POST', this.url);

@@ -3,7 +3,7 @@ Contributors: kaliforms, andreic86, wpchill
 Tags: contact form, forms, form builder, payment form, stripe payment
 Tested up to: 6.9
 Requires PHP: 5.6
-Stable tag: 2.4.11
+Stable tag: 2.4.13
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -346,6 +346,13 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+
+2.4.13
+- Security: Fixed a vulnerability in the form builder
+
+2.4.12
+- Security: Sanitize form builder meta fields exposed via the WordPress REST API to prevent stored XSS in the admin form builder
+
 2.4.11
 - Security: added turnstile and recaptcha verification during the form processor to discourage bots from submitting forms
 

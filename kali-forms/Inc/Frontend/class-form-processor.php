@@ -1046,16 +1046,25 @@ class Form_Processor
 					$uniqueIds = explode(',', $id);
 					$actualIds = [];
 					foreach ($uniqueIds as $uId) {
-						set_transient('kaliforms_dont_delete_this_image_' . sanitize_text_field($uId), 'submitted');
+						$uId = sanitize_text_field(trim($uId));
+						if ($uId === '') {
+							continue;
+						}
+
 						$actualId = $this->_match_id_to_media($uId);
 						if ($actualId === null) {
 							throw new \Error('Trying to spoof an image that does not exist');
 						}
 
+						set_transient(
+							'kaliforms_dont_delete_this_image_' . absint($actualId),
+							'submitted',
+							YEAR_IN_SECONDS
+						);
+						wp_clear_scheduled_hook($this->slug . '_delete_transient_file', [absint($actualId)]);
+
 						$this->spoofer[$actualId] = $uId;
-						if ($actualId) {
-							$actualIds[] = $actualId;
-						}
+						$actualIds[] = $actualId;
 					}
 
 					if (!empty($actualIds)) {

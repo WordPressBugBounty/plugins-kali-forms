@@ -146,10 +146,22 @@ trait FileManager
 			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
 
-		$_POST['id'] = absint(wp_unslash($_POST['id']));
-		if (get_post_type($_POST['id']) !== 'attachment') {
+		if (!isset($_POST['id'])) {
 			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
+
+		$posted_id     = sanitize_text_field(wp_unslash($_POST['id']));
+		$attachment_id = absint($posted_id);
+
+		if (!$attachment_id || get_post_type($attachment_id) !== 'attachment') {
+			$attachment_id = $this->_resolve_upload_attachment_id($posted_id);
+		}
+
+		if (!$attachment_id || get_post_type($attachment_id) !== 'attachment') {
+			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
+		}
+
+		$_POST['id'] = $attachment_id;
 
 		$crons  = _get_cron_array();
 		$delete = false;
@@ -160,7 +172,7 @@ trait FileManager
 				}
 
 				foreach ($event as $sig => $data) {
-					if ($data['args'][0] === $_POST['id']) {
+					if ((int) $data['args'][0] === (int) $_POST['id']) {
 						$delete = true;
 					}
 				}
@@ -176,9 +188,43 @@ trait FileManager
 				]
 			);
 
-			wp_die($_POST['id']);
+			wp_die((string) $_POST['id']);
 		}
 
 		$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
+	}
+
+	/**
+	 * Resolve a frontend upload token to a media attachment ID.
+	 *
+	 * @param string $token Frontend uniqid or attachment ID string.
+	 * @return int
+	 */
+	private function _resolve_upload_attachment_id($token)
+	{
+		$attachment_id = absint($token);
+		if ($attachment_id && get_post_type($attachment_id) === 'attachment') {
+			return $attachment_id;
+		}
+
+		$attachments = get_posts(
+			[
+				'post_type'      => 'attachment',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'meta_query'     => [
+					[
+						'key'   => 'kaliforms_file_id',
+						'value' => $token,
+					],
+				],
+			]
+		);
+
+		if (empty($attachments)) {
+			return 0;
+		}
+
+		return absint($attachments[0]);
 	}
 }
