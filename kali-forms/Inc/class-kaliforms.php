@@ -16,6 +16,7 @@ use KaliForms\Inc\Backend\Plugin_Health_Checks;
 use KaliForms\Inc\Backend\Plugin_Review;
 use KaliForms\Inc\Backend\Entries_Deleter;
 use KaliForms\Inc\Backend\License_Checker;
+use KaliForms\Inc\Backend\Sanitizers;
 use KaliForms\Inc\Backend\Posts\Forms;
 use KaliForms\Inc\Backend\Posts\Submitted;
 use KaliForms\Inc\Backend\Predefined_Forms;
@@ -82,6 +83,7 @@ class KaliForms
 		 * Create an instance of the meta save
 		 */
 		Meta_Save::get_instance();
+		Sanitizers::register_hooks();
 		/**
 		 * Register the new custom post types
 		 */

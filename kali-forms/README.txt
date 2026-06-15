@@ -1,9 +1,9 @@
 === Kali Forms — Contact Form & Drag-and-Drop Builder ===
 Contributors: kaliforms, andreic86, wpchill
 Tags: contact form, forms, form builder, payment form, stripe payment
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.13
+Stable tag: 2.4.14
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -346,6 +346,8 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.14
+- Security: Fixed a bug that did not allow form builder to render properly
 
 2.4.13
 - Security: Fixed a vulnerability in the form builder

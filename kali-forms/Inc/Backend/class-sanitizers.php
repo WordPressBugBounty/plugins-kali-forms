@@ -150,13 +150,256 @@ class Sanitizers
 	}
 
 	/**
+	 * JSON post meta keys that may have been corrupted by legacy slash escaping.
+	 *
+	 * @var string[]
+	 */
+	private static $json_meta_keys = [
+		'kaliforms_field_components',
+		'kaliforms_grid',
+		'kaliforms_emails',
+		'kaliforms_akismet_fields',
+		'kaliforms_conditional_thank_you_message',
+	];
+
+	/**
+	 * Prevent recursive meta repair while persisting a fixed value.
+	 *
+	 * @var array<string, bool>
+	 */
+	private static $repairing_meta = [];
+
+	/**
+	 * Register runtime hooks for JSON meta repair.
+	 *
+	 * @return void
+	 */
+	public static function register_hooks()
+	{
+		add_filter('get_post_metadata', [__CLASS__, 'filter_repair_json_post_meta'], 10, 4);
+	}
+
+	/**
+	 * Repair corrupted JSON post meta on read and persist the cleaned value.
+	 *
+	 * @param mixed  $check      Short-circuit return value.
+	 * @param int    $object_id  Post ID.
+	 * @param string $meta_key   Meta key.
+	 * @param bool   $single     Whether a single value was requested.
+	 * @return mixed
+	 */
+	public static function filter_repair_json_post_meta($check, $object_id, $meta_key, $single)
+	{
+		if (null !== $check || ! $single) {
+			return $check;
+		}
+
+		if (! in_array($meta_key, self::$json_meta_keys, true)) {
+			return null;
+		}
+
+		if ('kaliforms_forms' !== get_post_type($object_id)) {
+			return null;
+		}
+
+		$cache_key = $object_id . ':' . $meta_key;
+		if (! empty(self::$repairing_meta[$cache_key])) {
+			return null;
+		}
+
+		self::$repairing_meta[$cache_key] = true;
+
+		$raw = get_metadata_raw('post', $object_id, $meta_key, true);
+		if (! is_string($raw) || '' === trim($raw)) {
+			unset(self::$repairing_meta[$cache_key]);
+			return null;
+		}
+
+		$repair = self::repair_json_meta_string($raw);
+
+		if (! $repair['valid']) {
+			unset(self::$repairing_meta[$cache_key]);
+			return null;
+		}
+
+		if ($repair['was_repaired']) {
+			update_post_meta($object_id, $meta_key, $repair['canonical']);
+			$stored = get_metadata_raw('post', $object_id, $meta_key, true);
+			unset(self::$repairing_meta[$cache_key]);
+			return is_string($stored) ? $stored : $repair['canonical'];
+		}
+
+		unset(self::$repairing_meta[$cache_key]);
+		return null;
+	}
+
+	/**
+	 * Attempt to recover JSON from over-escaped post meta strings.
+	 *
+	 * @param string $value Raw meta value.
+	 * @return array{valid:bool,was_repaired:bool,canonical:string,decoded:mixed}
+	 */
+	public static function repair_json_meta_string($value)
+	{
+		$failure = [
+			'valid'        => false,
+			'was_repaired' => false,
+			'canonical'    => '[]',
+			'decoded'      => [],
+		];
+
+		if (! is_string($value) || '' === trim($value)) {
+			return [
+				'valid'        => true,
+				'was_repaired' => false,
+				'canonical'    => '[]',
+				'decoded'      => [],
+			];
+		}
+
+		$direct = json_decode($value, true);
+		if (JSON_ERROR_NONE === json_last_error()) {
+			return [
+				'valid'        => true,
+				'was_repaired' => false,
+				'canonical'    => wp_json_encode($direct),
+				'decoded'      => $direct,
+			];
+		}
+
+		$attempts = array_unique(
+			[
+				$value,
+				wp_unslash($value),
+				stripslashes($value),
+				wp_unslash(stripslashes($value)),
+			]
+		);
+
+		foreach ($attempts as $candidate) {
+			$decoded = json_decode($candidate, true);
+			if (JSON_ERROR_NONE === json_last_error()) {
+				return [
+					'valid'        => true,
+					'was_repaired' => true,
+					'canonical'    => wp_json_encode($decoded),
+					'decoded'      => $decoded,
+				];
+			}
+		}
+
+		$repaired = self::iteratively_unescape_json_string($value, 'stripslashes');
+		if (null !== $repaired) {
+			return [
+				'valid'        => true,
+				'was_repaired' => true,
+				'canonical'    => wp_json_encode($repaired),
+				'decoded'      => $repaired,
+			];
+		}
+
+		$repaired = self::iteratively_unescape_json_string($value, 'wp_unslash');
+		if (null !== $repaired) {
+			return [
+				'valid'        => true,
+				'was_repaired' => true,
+				'canonical'    => wp_json_encode($repaired),
+				'decoded'      => $repaired,
+			];
+		}
+
+		$repaired = self::iteratively_unescape_json_string($value, 'collapse_slashes');
+		if (null !== $repaired) {
+			return [
+				'valid'        => true,
+				'was_repaired' => true,
+				'canonical'    => wp_json_encode($repaired),
+				'decoded'      => $repaired,
+			];
+		}
+
+		return $failure;
+	}
+
+	/**
+	 * Repeatedly unescape a JSON string until it decodes or stops changing.
+	 *
+	 * @param string $value  Raw value.
+	 * @param string $method Unescape strategy.
+	 * @return array|null
+	 */
+	private static function iteratively_unescape_json_string($value, $method)
+	{
+		$candidate = $value;
+
+		for ($i = 0; $i < 25; $i++) {
+			$decoded = json_decode($candidate, true);
+			if (JSON_ERROR_NONE === json_last_error()) {
+				return $decoded;
+			}
+
+			if ('stripslashes' === $method) {
+				$next = stripslashes($candidate);
+			} elseif ('wp_unslash' === $method) {
+				$next = wp_unslash($candidate);
+			} else {
+				$next = str_replace('\\\\', '\\', $candidate);
+			}
+
+			if ($next === $candidate) {
+				break;
+			}
+
+			$candidate = $next;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Decode JSON stored in post meta, tolerating legacy slash-escaping.
+	 *
+	 * @param mixed $value   Raw meta value.
+	 * @param bool  $assoc   json_decode associative flag.
+	 * @param int   $depth   json_decode depth.
+	 * @param int   $flags   json_decode flags.
+	 * @return mixed
+	 */
+	public static function decode_json_meta($value, $assoc = false, $depth = 512, $flags = 0)
+	{
+		if (is_array($value)) {
+			return $value;
+		}
+
+		if (! is_string($value) || '' === trim($value)) {
+			return [];
+		}
+
+		$repair = self::repair_json_meta_string($value);
+		if (! $repair['valid']) {
+			return [];
+		}
+
+		$decoded = json_decode($repair['canonical'], $assoc, $depth, $flags);
+		if (JSON_ERROR_NONE === json_last_error()) {
+			return $decoded;
+		}
+
+		return [];
+	}
+
+	/**
 	 * @param $input
 	 *
 	 * @return false|string
 	 */
 	public static function sanitize_grid_layout($input)
 	{
-		$input     = json_decode(stripslashes($input));
+		$input = self::decode_json_meta($input);
+		if (! is_array($input)) {
+			return wp_json_encode([]);
+		}
+
 		$sanitized = [];
 		foreach ($input as $item) {
 			$grid = Sanitizers::sanitize_grid_item($item);
@@ -207,8 +450,8 @@ class Sanitizers
 	 */
 	public static function sanitize_field_components($input)
 	{
-		$input = json_decode(stripslashes($input));
-		if (null === $input) {
+		$input = self::decode_json_meta($input);
+		if (! is_array($input)) {
 			return wp_json_encode([]);
 		}
 
@@ -217,7 +460,7 @@ class Sanitizers
 			$sanitized[] = Sanitizers::sanitize_field_component($field);
 		}
 
-		return wp_slash(wp_json_encode($sanitized, JSON_HEX_QUOT));
+		return wp_json_encode($sanitized, JSON_HEX_QUOT);
 	}
 
 	/**
@@ -232,7 +475,7 @@ class Sanitizers
 		$fieldItem->internalId = sanitize_key($item->internalId);
 		$fieldItem->label      = sanitize_text_field($item->label);
 		$fieldItem->properties = Sanitizers::sanitize_properties_object($item->properties, $item->id);
-		$fieldItem->constraint = empty($item->constraint) ? 'none' : absint($item->constraint);
+		$fieldItem->constraint = (empty($item->constraint) || 'none' === $item->constraint) ? 'none' : absint($item->constraint);
 		return $fieldItem;
 	}
 
@@ -421,7 +664,7 @@ class Sanitizers
 			}
 		}
 
-		return wp_slash(wp_json_encode($sanitized, JSON_HEX_QUOT));
+		return wp_json_encode($sanitized, JSON_HEX_QUOT);
 	}
 
 	/**

@@ -109,11 +109,16 @@ class JS_Vars
 		/**
 		 * Grid content
 		 */
-		$this->content['grid'] = json_decode($this->get('grid', '[]'));
+		$this->content['grid'] = Sanitizers::decode_json_meta($this->get('grid', '[]'));
 		/**
 		 * Field components saved in the database
 		 */
-		$this->content['fieldComponents'] = json_decode($this->get('field_components', '[]'), false, 512, JSON_HEX_QUOT);
+		$this->content['fieldComponents'] = Sanitizers::decode_json_meta(
+			$this->get('field_components', '[]'),
+			false,
+			512,
+			JSON_HEX_QUOT
+		);
 		/**
 		 * Form Info Fields
 		 */
