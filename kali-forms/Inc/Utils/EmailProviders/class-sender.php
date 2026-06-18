@@ -26,6 +26,12 @@ abstract class Sender
      */
     public $body = '';
     /**
+     * Email content type: html or plain
+     *
+     * @var string
+     */
+    public $contentType = 'html';
+    /**
      * Attachments
      *
      * @var array
@@ -213,9 +219,7 @@ abstract class Sender
      *
      * @return void
      */
-    protected function _after_prep()
-    {
-    }
+    protected function _after_prep() {}
     /**
      * Prep the mailer client
      *
@@ -223,7 +227,8 @@ abstract class Sender
      */
     protected function _prep_mailer()
     {
-        $this->mailer->isHTML(true);
+        $is_html = $this->contentType !== 'plain';
+        $this->mailer->isHTML($is_html);
         $this->mailer->setFrom($this->from, wp_specialchars_decode($this->fromName));
         if (!empty($this->options['return_path'])) {
             $this->mailer->Sender = $this->options['return_path'];
@@ -251,6 +256,6 @@ abstract class Sender
         $this->mailer->CharSet  = 'UTF-8';
         $this->mailer->Subject  = wp_specialchars_decode($this->subject);
         $this->mailer->Body     = $this->body;
-        $this->mailer->AltBody  = wp_strip_all_tags($this->body);
+        $this->mailer->AltBody  = $is_html ? wp_strip_all_tags($this->body) : '';
     }
 }

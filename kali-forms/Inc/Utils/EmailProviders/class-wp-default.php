@@ -76,7 +76,8 @@ class WP_Default extends Sender
     protected function _get_headers()
     {
         $headers   = [];
-        $headers[] = "Content-Type: text/html; charset=UTF-8;";
+        $mime_type = $this->contentType === 'plain' ? 'text/plain' : 'text/html';
+        $headers[] = "Content-Type: {$mime_type}; charset=UTF-8;";
         $headers[] = "From: {$this->fromName} <{$this->from}>";
         if (!empty($this->cc)) {
             foreach ($this->cc as $email) {

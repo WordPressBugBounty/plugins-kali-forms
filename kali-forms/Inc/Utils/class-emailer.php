@@ -511,12 +511,18 @@ class Emailer
 
 		$attachments = array_filter($attachments);
 
+		$content_type = 'html';
+		if (isset($props['emailContentType']) && $props['emailContentType'] === 'plain') {
+			$content_type = 'plain';
+		}
+
 		$emailer_props = apply_filters(
 			$this->slug . '_email_properties_create_' . $this->form . '_' . $idx,
 			[
 				'to'          => explode(',', $props['toEmail']),
 				'subject'     => $props['emailSubject'],
 				'body'        => $props['emailBody'],
+				'contentType' => $content_type,
 				'from'        => $props['fromEmail'],
 				'fromName'    => $props['fromName'],
 				'attachments' => $attachments,

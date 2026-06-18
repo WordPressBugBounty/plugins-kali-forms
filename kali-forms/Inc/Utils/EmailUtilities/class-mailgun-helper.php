@@ -79,10 +79,15 @@ class Mailgun_Helper
 			'bcc'        => $this->_format_array_of_address($recipients['bcc']),
 			'h:Reply-To' => $this->_format_array_of_address($recipients['ReplyTo']),
 			'subject'    => $PHPMAILER->Subject,
-			'text'       => $PHPMAILER->AltBody,
-			'html'       => $PHPMAILER->Body,
 			'attachment' => $this->get_attachments($PHPMAILER),
 		];
+
+		if ($PHPMAILER->ContentType === 'text/html') {
+			$this->send_mail_obj['text'] = $PHPMAILER->AltBody;
+			$this->send_mail_obj['html'] = $PHPMAILER->Body;
+		} else {
+			$this->send_mail_obj['text'] = $PHPMAILER->Body;
+		}
 
 		$this->send_mail_obj = array_filter($this->send_mail_obj);
 	}

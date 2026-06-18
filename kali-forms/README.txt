@@ -3,7 +3,7 @@ Contributors: kaliforms, andreic86, wpchill
 Tags: contact form, forms, form builder, payment form, stripe payment
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.14
+Stable tag: 2.4.16
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -346,6 +346,12 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.16
+- Fixed: email editor was not working correctly
+
+2.4.15
+- Added: Feature flag to send emails as plain text
+
 2.4.14
 - Security: Fixed a bug that did not allow form builder to render properly
 

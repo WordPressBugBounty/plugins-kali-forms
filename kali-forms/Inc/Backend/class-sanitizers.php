@@ -639,7 +639,15 @@ class Sanitizers
 		foreach ($value as $item) {
 			$obj = new \stdClass();
 			foreach ($item as $k => $v) {
+				if ($k === 'emailContentType') {
+					$obj->{sanitize_text_field($k)} = in_array($v, ['plain', 'html'], true) ? $v : 'html';
+					continue;
+				}
 				if ($k === 'emailBody') {
+					if (isset($item->emailContentType) && $item->emailContentType === 'plain') {
+						$obj->{sanitize_text_field($k)} = sanitize_textarea_field($v);
+						continue;
+					}
 					if (isset($item->saveAsHtml) && $item->saveAsHtml) {
 						$obj->{sanitize_text_field($k)} = wp_kses_post($v);
 						continue;

@@ -78,9 +78,13 @@ class Sendinblue_Helper
                 'email' => $this->_format_array_of_address($recipients['replyTo']),
             ];
         };
-        $this->send_mail_obj['subject']     = $PHPMAILER->Subject;
-        $this->send_mail_obj['htmlContent'] = $PHPMAILER->Body;
-        $this->send_mail_obj['textContent'] = $PHPMAILER->AltBody;
+        $this->send_mail_obj['subject'] = $PHPMAILER->Subject;
+        if ($PHPMAILER->ContentType === 'text/html') {
+            $this->send_mail_obj['htmlContent'] = $PHPMAILER->Body;
+            $this->send_mail_obj['textContent'] = $PHPMAILER->AltBody;
+        } else {
+            $this->send_mail_obj['textContent'] = $PHPMAILER->Body;
+        }
         $this->send_mail_obj['attachment']  = $this->get_attachments($PHPMAILER);
         $this->send_mail_obj                = array_filter($this->send_mail_obj);
     }

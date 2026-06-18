@@ -104,20 +104,29 @@ class SMTPCom_Helper
     public function get_content($PHPMAILER)
     {
         $parts = [];
-        if (!empty($PHPMAILER->AltBody)) {
+        if ($PHPMAILER->ContentType === 'text/html') {
+            if (!empty($PHPMAILER->AltBody)) {
+                $parts[] = [
+                    'type'     => 'text/plain',
+                    'charset'  => $PHPMAILER->CharSet,
+                    'encoding' => $PHPMAILER->Encoding,
+                    'content'  => $PHPMAILER->AltBody,
+                ];
+            }
+            $parts[] = [
+                'type'     => 'text/html',
+                'charset'  => $PHPMAILER->CharSet,
+                'encoding' => $PHPMAILER->Encoding,
+                'content'  => $PHPMAILER->Body,
+            ];
+        } else {
             $parts[] = [
                 'type'     => 'text/plain',
                 'charset'  => $PHPMAILER->CharSet,
                 'encoding' => $PHPMAILER->Encoding,
-                'content'  => $PHPMAILER->AltBody,
+                'content'  => $PHPMAILER->Body,
             ];
         }
-        $parts[] = [
-            'type'     => 'text/html',
-            'charset'  => $PHPMAILER->CharSet,
-            'encoding' => $PHPMAILER->Encoding,
-            'content'  => $PHPMAILER->Body,
-        ];
         return [
             'parts'       => $parts,
             'attachments' => $this->get_attachments($PHPMAILER),

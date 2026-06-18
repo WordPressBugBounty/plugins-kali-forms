@@ -59,8 +59,12 @@ class Postmark_Helper
         $this->send_mail_obj['Bcc']           = $this->_format_array_of_address($recipients['Bcc']);
         $this->send_mail_obj['From']          = $this->_format_address($PHPMAILER->From, $PHPMAILER->FromName);
         $this->send_mail_obj['Subject']       = $PHPMAILER->Subject;
-        $this->send_mail_obj['HtmlBody']      = $PHPMAILER->Body;
-        $this->send_mail_obj['TextBody']      = $PHPMAILER->AltBody;
+        if ($PHPMAILER->ContentType === 'text/html') {
+            $this->send_mail_obj['HtmlBody'] = $PHPMAILER->Body;
+            $this->send_mail_obj['TextBody'] = $PHPMAILER->AltBody;
+        } else {
+            $this->send_mail_obj['TextBody'] = $PHPMAILER->Body;
+        }
         $this->send_mail_obj['MessageStream'] = 'outbound';
         $this->send_mail_obj['Attachments']   = $this->get_attachments($PHPMAILER);
 

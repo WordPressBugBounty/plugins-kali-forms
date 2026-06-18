@@ -88,6 +88,30 @@ const EmailEditor = observer((props) => {
 		return () => setEmailBody("");
 	}, [currentIndex]);
 
+	const isPlainTextEmail = () => {
+		const contentType = store._EMAILS_.getPropertyValue(
+			store._UI_.activeEmailInSidebar,
+			"emailContentType"
+		);
+		return contentType === "plain";
+	};
+
+	const togglePlainTextEmail = (e) => {
+		const contentType = e.target.checked ? "plain" : "html";
+		store._EMAILS_.setEmailProp(
+			store._UI_.activeEmailInSidebar,
+			"emailContentType",
+			contentType
+		);
+		if (contentType === "plain") {
+			store._UI_.setEditEmailAsHtml(false);
+		}
+	};
+
+	const savePlainTextBody = (val) => {
+		store._EMAILS_.setEmailProp(currentIndex, "emailBody", val);
+	};
+
 	const setEmailBodyToString = (val) => {
 		debouncedSaveToStore(val, currentIndex);
 	};
@@ -360,7 +384,41 @@ const EmailEditor = observer((props) => {
 				</Grid>
 				<Grid container direction="row" spacing={3}>
 					<Grid item xs={12}>
-						{store._UI_.editEmailAsHtml && (
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={isPlainTextEmail()}
+									onChange={togglePlainTextEmail}
+								/>
+							}
+							label={__("Send as plain text", "kali-forms")}
+						/>
+					</Grid>
+				</Grid>
+				<Grid container direction="row" spacing={3}>
+					<Grid item xs={12}>
+						{isPlainTextEmail() && (
+							<FormControl>
+								<InputLabel shrink>{__("Email body", "kali-forms")}</InputLabel>
+								<BootstrapInput
+									value={store._EMAILS_.getPropertyValue(
+										store._UI_.activeEmailInSidebar,
+										"emailBody"
+									)}
+									placeholder={__("Start typing...", "kali-forms")}
+									fullWidth={true}
+									multiline={true}
+									rows={12}
+									endAdornment={
+										<PlaceholderDialogOpener
+											adornment={true}
+										></PlaceholderDialogOpener>
+									}
+									onChange={(e) => savePlainTextBody(e.target.value)}
+								/>
+							</FormControl>
+						)}
+						{!isPlainTextEmail() && store._UI_.editEmailAsHtml && (
 							<>
 								<InputLabel shrink>{__("Email body", "kali-forms")}</InputLabel>
 								<FormControl>
@@ -408,6 +466,7 @@ const EmailEditor = observer((props) => {
 								</FormControl>
 							</>
 						)}
+						{!isPlainTextEmail() && (
 						<FormControl>
 							<InputLabel shrink>{__("Email body", "kali-forms")}</InputLabel>
 							{!store._UI_.editEmailAsHtml && (
@@ -445,6 +504,7 @@ const EmailEditor = observer((props) => {
 								/>
 							)}
 						</FormControl>
+						)}
 					</Grid>
 				</Grid>
 				<Grid container direction="row" spacing={3}>
