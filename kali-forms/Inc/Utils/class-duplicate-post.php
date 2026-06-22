@@ -49,7 +49,7 @@ trait Duplicate_Post
 	 */
 	public function duplicate_post()
 	{
-		if (!isset($_POST['args'], $_POST['args']['nonce'])) {
+		if (!isset($_POST['args'], $_POST['args']['nonce'], $_POST['args']['id'])) {
 			wp_die('Denied');
 		}
 		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['args']['nonce'])), 'kaliforms_nonce')) {
@@ -60,22 +60,37 @@ trait Duplicate_Post
 			wp_die('Denied');
 		}
 
-		$_POST['args'] = stripslashes_deep($_POST['args']);
+		$source_id = absint(wp_unslash($_POST['args']['id']));
+		if (!$source_id) {
+			wp_die('Denied');
+		}
 
-		$title   = get_the_title($_POST['args']['id']);
-		$oldpost = get_post($_POST['args']['id']);
-		$post    = array(
+		if (!current_user_can('edit_post', $source_id)) {
+			wp_die('Denied');
+		}
+
+		$oldpost = get_post($source_id);
+		if (!$oldpost || $oldpost->post_type !== 'kaliforms_forms') {
+			wp_die('Denied');
+		}
+
+		$title = get_the_title($source_id);
+		$post  = [
 			'post_title'  => $title . ' ' . esc_html__('(duplicate)', 'kali-forms'),
-			'post_status' => 'publish',
-			'post_type'   => $oldpost->post_type,
-			'post_author' => $_POST['args']['userId'],
-		);
+			'post_status' => current_user_can('publish_posts') ? 'publish' : 'draft',
+			'post_type'   => 'kaliforms_forms',
+			'post_author' => get_current_user_id(),
+		];
 
 		$new_post_id = wp_insert_post($post);
-		$data        = get_post_custom($_POST['args']['id']);
+		if (is_wp_error($new_post_id) || !$new_post_id) {
+			wp_die('Denied');
+		}
+
+		$data = get_post_custom($source_id);
 		foreach ($data as $key => $values) {
 			foreach ($values as $value) {
-				if (in_array($key, ['kaliforms_field_components', 'kaliforms_grid', 'kaliforms_emails'])) {
+				if (in_array($key, ['kaliforms_field_components', 'kaliforms_grid', 'kaliforms_emails'], true)) {
 					$value = $this->_get_value($value);
 				}
 				add_post_meta($new_post_id, $key, $value);

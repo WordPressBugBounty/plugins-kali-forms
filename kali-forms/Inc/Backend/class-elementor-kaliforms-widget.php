@@ -39,7 +39,8 @@ class Elementor_KaliForms_Widget extends \Elementor\Widget_Base
 	 */
 	private function _register_scripts()
 	{
-		wp_register_script('kali-grecaptcha', '//www.google.com/recaptcha/api.js', false, false, false);
+		// phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent -- reCAPTCHA must load from Google.
+		wp_register_script('kali-grecaptcha', 'https://www.google.com/recaptcha/api.js', [], KALIFORMS_VERSION, true);
 		wp_register_script('kaliforms-filepond', KALIFORMS_URL . 'assets/frontend/js/filepond.js', ['wp-i18n'], KALIFORMS_VERSION);
 		wp_localize_script('kaliforms-filepond', 'KaliFormsFilePondObject', [
 			'ajaxurl' => esc_url(admin_url('admin-ajax.php')),

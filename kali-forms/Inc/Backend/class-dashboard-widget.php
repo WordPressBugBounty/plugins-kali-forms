@@ -52,11 +52,11 @@ class Dashboard_Widget
 	public function render_widget()
 	{
 		$str = '';
-		$str .= '<img src="' . KALIFORMS_URL . 'assets/img/logo--dark.svg" />';
+		$str .= '<img src="' . esc_url(KALIFORMS_URL . 'assets/img/logo--dark.svg') . '" />';
 		$str .= $this->cta_section();
 		$str .= $this->created_forms_section();
 		$str .= $this->latest_blog_posts_section();
-		echo $str;
+		echo wp_kses_post($str);
 	}
 
 	/**

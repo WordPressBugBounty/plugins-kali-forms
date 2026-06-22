@@ -98,7 +98,7 @@ class Forms
 		$this->init_email_deliverability_confirmation();
 
 		add_action('wp_ajax_kaliforms_get_js_var', [$this, 'get_js_var']);
-		add_action('wp_ajax_nopriv_kaliforms_get_js_var', [$this, 'get_js_var']);
+		add_action('wp_ajax_nopriv_kaliforms_get_js_var', [$this, 'denied']);
 	}
 
 	/**
@@ -387,7 +387,7 @@ class Forms
 				'description'       => 'A meta key associated with a string meta value.',
 				'type'              => 'string',
 				'sanitize_callback' => 'KaliForms\Inc\Backend\Sanitizers::sanitize_field_components',
-				'auth_callback'     => [ __CLASS__, 'auth_callback_form_builder_meta' ],
+				'auth_callback'     => [__CLASS__, 'auth_callback_form_builder_meta'],
 			]
 		);
 		register_post_meta(
@@ -399,7 +399,7 @@ class Forms
 				'description'       => 'A meta key associated with a string meta value.',
 				'type'              => 'string',
 				'sanitize_callback' => 'KaliForms\Inc\Backend\Sanitizers::sanitize_grid_layout',
-				'auth_callback'     => [ __CLASS__, 'auth_callback_form_builder_meta' ],
+				'auth_callback'     => [__CLASS__, 'auth_callback_form_builder_meta'],
 			]
 		);
 
@@ -462,7 +462,10 @@ class Forms
 	 */
 	public function add_duplicate_link($actions, $post)
 	{
-		if ($post->post_type === 'kaliforms_forms') {
+		if (
+			$post->post_type === 'kaliforms_forms'
+			&& current_user_can('edit_post', $post->ID)
+		) {
 			$actions['kaliforms-duplicate'] = sprintf(
 				'<a href="#" data-post-id="%s" class="kaliforms-duplicate-form-link" id="kaliforms-duplicate-%s">%s</a>',
 				$post->ID,
@@ -488,18 +491,18 @@ class Forms
 		switch ($column) {
 			case 'theme':
 				echo '<div class="kaliforms-themes-formgroup">';
-				echo '<select data-form-id="' . $post_id . '" value="' .
-					$form_styles->get_applied_form_style($post_id, 'theme') .
+				echo '<select data-form-id="' . esc_attr((string) absint($post_id)) . '" value="' .
+					esc_attr($form_styles->get_applied_form_style($post_id, 'theme')) .
 					'">';
 				foreach ($form_styles->styles as $style) {
-					echo '<option value=' . $style['id'] . ' ' . selected(
+					echo '<option value="' . esc_attr($style['id']) . '" ' . selected(
 						$form_styles->get_applied_form_style(
 							$post_id,
 							'theme'
 						),
 						$style['id'],
 						false
-					) . '>' . $style['label'] . '</option>';
+					) . '>' . esc_html($style['label']) . '</option>';
 				}
 				echo '</select>';
 				echo '</div>';
@@ -804,16 +807,17 @@ class Forms
 	 * @param array  $caps      Capabilities.
 	 * @return bool
 	 */
-	public static function auth_callback_form_builder_meta( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
-		if ( ! get_current_user_id() && doing_action( 'activate_plugin' ) ) {
+	public static function auth_callback_form_builder_meta($allowed, $meta_key, $object_id, $user_id, $cap, $caps)
+	{
+		if (! get_current_user_id() && doing_action('activate_plugin')) {
 			return true;
 		}
 
-		if ( $object_id && current_user_can( 'edit_post', (int) $object_id ) ) {
+		if ($object_id && current_user_can('edit_post', (int) $object_id)) {
 			return true;
 		}
 
-		return current_user_can( 'edit_posts' );
+		return current_user_can('edit_posts');
 	}
 
 	public function network()
@@ -831,6 +835,10 @@ class Forms
 	{
 		if (!isset($_POST['data'])) {
 			return false;
+		}
+
+		if (!current_user_can('edit_posts')) {
+			return wp_send_json_error();
 		}
 
 		$data = stripslashes_deep($_POST['data']);

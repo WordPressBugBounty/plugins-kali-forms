@@ -528,7 +528,7 @@ class Sanitizers
 			}
 			if ($k === 'name' || $k === 'id') {
 				if (empty($v)) {
-					$v = $id . substr(md5($id . mt_rand(15, 50)), 0, 3);
+					$v = $id . substr(md5($id . wp_rand(15, 50)), 0, 3);
 				}
 
 				$props->{sanitize_text_field($k)} = sanitize_text_field($v);

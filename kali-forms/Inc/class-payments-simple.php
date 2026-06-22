@@ -67,9 +67,11 @@ class Payments_Simple
 		$args = $this->sanitize_post();
 		$this->verify($args);
 		$actionHelper = new Payments_Action_Helper($args['formId']);
-		wp_die(
-			is_wp_error($actionHelper) ? esc_html__('Something went wrong', 'kali-forms') : $actionHelper->get_products($args)
-		);
+		if (is_wp_error($actionHelper)) {
+			wp_die(esc_html__('Something went wrong', 'kali-forms'));
+		}
+
+		wp_die($actionHelper->get_products($args)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON AJAX response.
 	}
 
 	/**

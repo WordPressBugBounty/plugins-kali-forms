@@ -76,7 +76,7 @@ class Gutenberg_Helper
 	 */
 	public function display_error($err)
 	{
-		wp_die($err);
+		wp_die(esc_html($err));
 	}
 	/**
 	 * Returns rows

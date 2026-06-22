@@ -241,7 +241,11 @@ class Plugin_Health_Checks
 		wp_die(wp_json_encode([
 			'success' => true,
 			'sent'    => $sent,
-			'message' => $sent ? sprintf(esc_html__('A message was sent to the following email address: %s. Please follow the link in the email body to dismiss this notice.', 'kali-forms'), $toEmail) : esc_html__('Something went wrong. Check email log.', 'kali-forms'),
+			'message' => $sent ? sprintf(
+				/* translators: %s: recipient email address */
+				esc_html__('A message was sent to the following email address: %s. Please follow the link in the email body to dismiss this notice.', 'kali-forms'),
+				esc_html($toEmail)
+			) : esc_html__('Something went wrong. Check email log.', 'kali-forms'),
 		]));
 	}
 	/**

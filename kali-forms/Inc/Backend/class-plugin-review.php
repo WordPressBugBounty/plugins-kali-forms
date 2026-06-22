@@ -116,7 +116,7 @@ class Plugin_Review
 		$html .= '<a class="' . esc_attr($this->slug) . '-review-button js-notice-hide" id="' . esc_attr($this->slug) . '-no-rate" href="#" style="margin-left:10px">' . esc_html($this->messages['no_rate']) . '</a>';
 		$html .= '</p>';
 		$html .= '</div>';
-		echo $html;
+		echo wp_kses_post($html);
 	}
 	/**
 	 * Enqueue function

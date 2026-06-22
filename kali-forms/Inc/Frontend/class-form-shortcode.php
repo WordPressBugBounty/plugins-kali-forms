@@ -226,21 +226,24 @@ class Form_Shortcode
 	 */
 	public function load_scripts_and_styles()
 	{
+		// phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent -- reCAPTCHA must load from Google.
 		wp_register_script(
 			'kali-grecaptcha',
-			'//www.google.com/recaptcha/api.js',
-			false,
-			false,
-			false
+			'https://www.google.com/recaptcha/api.js',
+			[],
+			KALIFORMS_VERSION,
+			true
 		);
 		$args = array('onload' => 'onloadTurnstileCallback');
+		// phpcs:disable PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent -- Turnstile must load from Cloudflare.
 		wp_register_script(
 			'kali-turnstile',
 			add_query_arg($args, 'https://challenges.cloudflare.com/turnstile/v0/api.js'),
-			false,
-			false,
-			false
+			[],
+			KALIFORMS_VERSION,
+			true
 		);
+		// phpcs:enable PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent
 		wp_register_script(
 			'kaliforms-filepond',
 			KALIFORMS_URL . 'assets/frontend/js/filepond.js',

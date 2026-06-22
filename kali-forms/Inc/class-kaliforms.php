@@ -28,6 +28,7 @@ use KaliForms\Inc\Handle_Payments;
 use KaliForms\Inc\Payments_Simple;
 use KaliForms\Inc\Utils\First_Install;
 use KaliForms\Inc\Utils\Installation;
+use KaliForms\Inc\Utils\Legacy_Snapshot_Downgrade_Guard;
 use KaliForms\Inc\Utils\TransientHelper;
 
 /**
@@ -71,6 +72,8 @@ class KaliForms
 	 */
 	public function init_kaliforms()
 	{
+		Legacy_Snapshot_Downgrade_Guard::boot();
+
 		/**
 		 * Hook before the plugin is constructed
 		 */
@@ -197,7 +200,7 @@ class KaliForms
 			$html .= '<h4>' . esc_html__("The plugin was deactivated because this version is not supported. No worries, everything is still working, but please make sure you update our plugins to the latest versions. You can do so by using the automatic plugin updater functionality, or by downloading the newest plugin file from our website.", 'kali-forms') . '</h4>';
 			$html .= '</div>';
 
-			echo $html;
+			echo wp_kses_post($html);
 			return;
 		}
 
@@ -213,7 +216,7 @@ class KaliForms
 			$html .= '<h4>' . esc_html__("Please make sure you are using the latest version of the Kali Forms Submissions plugin.", 'kali-forms') . '</h4>';
 			$html .= '</div>';
 
-			echo $html;
+			echo wp_kses_post($html);
 		}
 	}
 	/**
@@ -242,7 +245,7 @@ class KaliForms
 			$html .= '<h4>' . esc_html__("Please make sure you update our plugins to the latest versions. You can do so by using the automatic plugin updater functionality, or by downloading the newest plugin file from our website.", 'kali-forms') . '</h4>';
 			$html .= '</div>';
 
-			echo $html;
+			echo wp_kses_post($html);
 		}
 	}
 

@@ -2,7 +2,13 @@
 
 namespace KaliForms\Inc\Utils;
 
-define('KALIFORMS_AKISMET_URL', 'https://%s.rest.akismet.com/1.1/comment-check');
+if (!defined('ABSPATH')) {
+	exit;
+}
+
+if (!defined('KALIFORMS_AKISMET_URL')) {
+	define('KALIFORMS_AKISMET_URL', 'https://%s.rest.akismet.com/1.1/comment-check');
+}
 /**
  * Akismet Class
  */

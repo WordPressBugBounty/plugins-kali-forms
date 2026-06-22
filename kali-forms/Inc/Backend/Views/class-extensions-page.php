@@ -164,7 +164,7 @@ class Extensions_Page
 
 		foreach ($this->extensions as $extension) {
 			echo '<div class="plugin-card">';
-			echo $this->_get_card_top($extension);
+			echo wp_kses_post($this->_get_card_top($extension));
 			// echo $this->_get_card_bottom($extension);
 			echo '</div>';
 		}
@@ -201,7 +201,7 @@ class Extensions_Page
 
 		$html = '<div class="plugin-card-top">';
 		$html .= '<div class="name column-name">';
-		$html .= '<h3>' . esc_html($extension['name']) . '<img style="height:auto" class="plugin-icon" src="' . $extension['image'] . '" /></h3>';
+		$html .= '<h3>' . esc_html($extension['name']) . '<img style="height:auto" class="plugin-icon" src="' . esc_url($extension['image']) . '" /></h3>';
 		$html .= '</div>';
 		$html .= $this->_get_action_links($extension);
 		$html .= '<div class="desc column-descripton"><p>' . esc_html($extension['description']) . '</p></div>';

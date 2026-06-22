@@ -5,12 +5,12 @@
  * Plugin URI: https://www.kaliforms.com
  * Description: Kali Forms provides a user-friendly form creation experience for WordPress.
  * Author: Kali Forms
- * Version: 2.4.16
+ * Version: 2.4.17
  * Author URI: https://www.kaliforms.com/
  * License: GPLv3 or later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Requires PHP: 5.6
- * Text Domain: kaliforms
+ * Text Domain: kali-forms
  * Domain Path: /languages
  *
  * Copyright 2019        Kali Forms         hello@kaliforms.com

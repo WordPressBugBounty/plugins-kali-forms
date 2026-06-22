@@ -157,7 +157,7 @@ class Email_Settings_Page
         }
 
         // Set so process it
-        return strip_tags((string) wp_unslash($_REQUEST[$key]));
+        return wp_strip_all_tags((string) wp_unslash($_REQUEST[$key]));
     }
 
     /**

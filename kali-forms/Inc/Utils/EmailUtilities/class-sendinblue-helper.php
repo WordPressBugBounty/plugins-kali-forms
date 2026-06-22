@@ -35,7 +35,7 @@ class Sendinblue_Helper
     public function send()
     {
         if (empty($this->token)) {
-            throw new \Exception(__('No Api Key configured', 'kali-forms'));
+            throw new \Exception(esc_html__('No Api Key configured', 'kali-forms'));
         }
         return $this->make_request();
     }
@@ -163,12 +163,14 @@ class Sendinblue_Helper
         );
 
         if (is_wp_error($response)) {
-            throw new \Exception($response->get_error_message(), $response->get_error_code());
+            throw new \Exception(esc_html(sanitize_text_field($response->get_error_message())), (int) $response->get_error_code());
         }
 
         $data = json_decode(wp_remote_retrieve_body($response));
         if (!isset($data->messageId)) {
-            throw new \Exception($data->code . ' ' . $data->message);
+            $code    = isset($data->code) ? sanitize_text_field((string) $data->code) : '';
+            $message = isset($data->message) ? sanitize_text_field((string) $data->message) : '';
+            throw new \Exception(esc_html(trim($code . ' ' . $message)));
         };
 
         return true;

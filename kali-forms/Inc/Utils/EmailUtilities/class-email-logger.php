@@ -72,13 +72,11 @@ class Email_Logger
         if (!$this->enabled) {
             return;
         }
-        $fp = fopen($this->path . $this->filename, 'a');
 
-        fputs($fp, $this->_template([
+        $this->append_to_log($this->_template([
             'type'    => 'ERROR',
             'message' => $wp_error->get_error_message(),
-        ]) . "\n");
-        fclose($fp);
+        ]));
     }
     /**
      * Ok function
@@ -90,12 +88,11 @@ class Email_Logger
         if (!$this->enabled) {
             return;
         }
-        $fp = fopen($this->path . $this->filename, 'a');
-        fputs($fp, $this->_template([
+
+        $this->append_to_log($this->_template([
             'type'    => 'INFO',
             'message' => $message,
-        ]) . "\n");
-        fclose($fp);
+        ]));
     }
     /**
      * Template
@@ -106,8 +103,28 @@ class Email_Logger
     public function _template($data)
     {
         $data['message'] = str_replace(["\r", "\n"], ' ', $data['message']);
-        $str             = $this->mailer . "|" . date('Y-m-d H:i:s') . "|" . $data['type'] . "|" . $data['message'];
+        $str             = $this->mailer . "|" . gmdate('Y-m-d H:i:s') . "|" . $data['type'] . "|" . $data['message'];
         return $str;
+    }
+
+    /**
+     * Append a line to the email log file.
+     *
+     * @param string $line Log line.
+     * @return void
+     */
+    private function append_to_log($line)
+    {
+        global $wp_filesystem;
+
+        if (empty($wp_filesystem)) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            WP_Filesystem();
+        }
+
+        $file     = $this->path . $this->filename;
+        $existing = $wp_filesystem->exists($file) ? $wp_filesystem->get_contents($file) : '';
+        $wp_filesystem->put_contents($file, $existing . $line . "\n", FS_CHMOD_FILE);
     }
     /**
      * Gets the user log

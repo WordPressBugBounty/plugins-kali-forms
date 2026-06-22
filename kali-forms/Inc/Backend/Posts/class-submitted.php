@@ -127,10 +127,10 @@ class Submitted
 		foreach ($tabs as $id => $tab) {
 			$blank  = isset($tab['_blank']) && $tab['_blank'] ? 'target="_blank"' : '';
 			$active = ('entries' === $id ? ' nav-tab-active' : '');
-			$str .= '<a href="' . esc_url($tab['url']) . '" ' . $blank . ' class="nav-tab ' . $active . '">' . $tab['name'] . '</a>';
+			$str .= '<a href="' . esc_url($tab['url']) . '" ' . $blank . ' class="nav-tab ' . $active . '">' . esc_html($tab['name']) . '</a>';
 		}
 		$str .= '</div><br />';
-		echo $str;
+		echo wp_kses_post($str);
 	}
 	/**
 	 * Custom post type enqueue
@@ -189,7 +189,7 @@ class Submitted
 			$str .= '<option value="' . absint($id) . '" ' . $checked . '>' . esc_html($title) . '</option>';
 		}
 		$str .= '</select>';
-		echo $str;
+		echo wp_kses_post($str);
 	}
 	/**
 	 * Edit the views
@@ -307,7 +307,11 @@ class Submitted
 		switch ($column) {
 			case 'submissions':
 				echo ($count > 0)
-					? '<a href="edit.php?post_type=kaliforms_forms&page=kaliforms-form-entries#/form-entries/' . absint($post_id) . '">' . sprintf(esc_html__('See entries (%s)', 'kali-forms'), $count) . '</a>'
+					? '<a href="edit.php?post_type=kaliforms_forms&page=kaliforms-form-entries#/form-entries/' . absint($post_id) . '">' . sprintf(
+						/* translators: %s: number of form entries */
+						esc_html__('See entries (%s)', 'kali-forms'),
+						absint($count)
+					) . '</a>'
 					: esc_html__('Form has no entries', 'kali-forms');
 				break;
 			default:
@@ -362,17 +366,17 @@ class Submitted
 				}
 
 				echo '<div class="button-group">';
-				echo sprintf(
+				echo wp_kses_post(sprintf(
 					'<button class="button button-small kaliforms-submission-link" data-link="%s">%s</button>',
-					Action_Helper::get_submission_link(false, $post_id, $form_id),
+					esc_url(Action_Helper::get_submission_link(false, $post_id, $form_id)),
 					'<span class="dashicons dashicons-admin-links"></span>'
-				);
-				echo sprintf(
+				));
+				echo wp_kses_post(sprintf(
 					'<button class="button button-small kaliforms-resend-emails" data-submission-id="%s" data-form-id="%s">%s</button>',
-					$post_id,
-					$form_id,
+					esc_attr((string) absint($post_id)),
+					esc_attr((string) absint($form_id)),
 					'<span class="dashicons dashicons-email-alt"></span>'
-				);
+				));
 				echo '</div>';
 				break;
 			default:
@@ -425,7 +429,7 @@ class Submitted
 					case 'digitalSignature':
 						$validB64 = preg_match("/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).base64,.*/", $val);
 						if ($validB64 > 0) {
-							echo '<img style="width:150px" src="' . $val . '" />';
+							echo '<img style="width:150px" src="' . esc_attr($val) . '" />';
 							break;
 						}
 						$img = wp_get_attachment_url($val);

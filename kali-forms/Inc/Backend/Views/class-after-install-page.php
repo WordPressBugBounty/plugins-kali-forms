@@ -30,7 +30,7 @@ class After_Install_Page
 	public function render_app()
 	{
 		echo '<div class="wrap">';
-		echo '<div id="kaliforms-after-install-page"> ' . $this->generate_page() . ' </div>';
+		echo '<div id="kaliforms-after-install-page"> ' . wp_kses_post($this->generate_page()) . ' </div>';
 		echo '</div>';
 	}
 
@@ -67,7 +67,11 @@ class After_Install_Page
 	public function generate_footer()
 	{
 		$str = '<div class="page-card footer">';
-		$str .= '<p>' . vsprintf(esc_html__('If you have any questions about Kali Forms, what features are available or how to get started – feel free to get in touch with us using the form from our %1$sContact Page%2$s.', 'kali-forms'), ['<a href="https://www.kaliforms.com/contact-us?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button" target="_blank">', '</a>']) . '</p>';
+		$str .= '<p>' . vsprintf(
+			/* translators: 1: opening anchor tag, 2: closing anchor tag */
+			esc_html__('If you have any questions about Kali Forms, what features are available or how to get started – feel free to get in touch with us using the form from our %1$sContact Page%2$s.', 'kali-forms'),
+			['<a href="https://www.kaliforms.com/contact-us?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button" target="_blank">', '</a>']
+		) . '</p>';
 		$str .= '<p style="text-align:center"><a href="' . admin_url() . 'post-new.php?post_type=kaliforms_forms
 " class="button button-primary">' . esc_html__('Create your first form', 'kali-forms') . '</a><a href="https://kaliforms.com/docs?utm_source=welcomeBanner&utm_campaign=userInterests&utm_medium=button
 " target="_blank" class="button">' . esc_html__('Upgrade to PRO', 'kali-forms') . '</a></p>';

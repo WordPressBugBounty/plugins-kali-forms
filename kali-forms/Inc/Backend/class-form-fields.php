@@ -536,19 +536,31 @@ class Form_Fields
 					],
 				],
 				'minFileSize'        => [
-					'label' => sprintf(esc_html__('Min file size (e.g. %s)', 'kali-forms'), $this->getMaximumFileUploadSize()),
+					'label' => sprintf(
+						/* translators: %s: example maximum upload size */
+						esc_html__('Min file size (e.g. %s)', 'kali-forms'),
+						$this->getMaximumFileUploadSize()
+					),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'advanced',
 				],
 				'maxFileSize'        => [
-					'label' => sprintf(esc_html__('Max file size (e.g. %s)', 'kali-forms'), $this->getMaximumFileUploadSize()),
+					'label' => sprintf(
+						/* translators: %s: example maximum upload size */
+						esc_html__('Max file size (e.g. %s)', 'kali-forms'),
+						$this->getMaximumFileUploadSize()
+					),
 					'type'  => 'textbox',
 					'value' => '',
 					'group' => 'advanced',
 				],
 				'maxTotalFileSize'   => [
-					'label'     => sprintf(esc_html__('Max size of all files in list (e.g. %s)', 'kali-forms'), $this->getMaximumFileUploadSize()),
+					'label'     => sprintf(
+						/* translators: %s: example maximum upload size */
+						esc_html__('Max size of all files in list (e.g. %s)', 'kali-forms'),
+						$this->getMaximumFileUploadSize()
+					),
 					'type'      => 'textbox',
 					'value'     => '',
 					'group'     => 'advanced',

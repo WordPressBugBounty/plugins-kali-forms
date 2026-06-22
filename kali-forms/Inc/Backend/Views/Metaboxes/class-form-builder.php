@@ -21,7 +21,7 @@ class Form_Builder extends Metabox
 	{
 		wp_nonce_field(KALIFORMS_BASE, 'kaliforms_fields');
 		echo '<div id="kaliforms-container" class="kaliforms-wrapper">';
-		echo $this->skeleton();
+		echo wp_kses_post($this->skeleton());
 		echo '</div>';
 	}
 

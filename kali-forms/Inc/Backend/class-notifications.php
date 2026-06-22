@@ -92,7 +92,12 @@ class Notifications
 			) {
 				continue;
 			}
-			printf($this->html, esc_attr($notice['type']), esc_attr($notice['id']), wp_kses_post($notice['message']));
+			printf(
+				'<div class="kaliforms-notice is-dismissible %1$s" data-unique-id="%2$s">%3$s</div>',
+				esc_attr($notice['type']),
+				esc_attr($notice['id']),
+				wp_kses_post($notice['message'])
+			);
 		}
 	}
 	/**

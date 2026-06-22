@@ -5,6 +5,7 @@ namespace KaliForms\Inc\Backend\Views;
 if (!defined('WPINC')) {
     die;
 }
+
 use KaliForms\Inc\Utils\Post_Translator;
 
 /**
@@ -73,7 +74,6 @@ class Form_Entries_Page
                 KALIFORMS_VERSION
             );
         }
-
     }
     /**
      * Gets the selected tab
@@ -100,7 +100,7 @@ class Form_Entries_Page
         }
 
         // Set so process it
-        return strip_tags((string) wp_unslash($_REQUEST[$key]));
+        return wp_strip_all_tags((string) wp_unslash($_REQUEST[$key]));
     }
     /**
      * Get forms with entry count
@@ -204,5 +204,4 @@ class Form_Entries_Page
          */
         do_action($this->slug . '_after_form_entries_page_rendering');
     }
-
 }

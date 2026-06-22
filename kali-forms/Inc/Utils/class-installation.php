@@ -163,7 +163,7 @@ class Installation
 	{
 		$temp_dir = get_temp_dir();
 		if (file_exists($temp_dir . $this->slug . '-mail.log')) {
-			unlink($temp_dir . $this->slug . '-mail.log');
+			wp_delete_file($temp_dir . $this->slug . '-mail.log');
 		}
 	}
 }

@@ -90,7 +90,7 @@ class License_Checker
 		$notifications = Notifications::get_instance();
 
 		if (!$transient) {
-			set_transient($transient_name, date('Y-m-d'));
+			set_transient($transient_name, gmdate('Y-m-d'));
 			return;
 		}
 		$notice_time = strtotime($transient);
@@ -102,9 +102,9 @@ class License_Checker
 				"id" => "license_checker",
 				"type" => "notice notice-info",
 				"message" => sprintf(
-					__("You have not activated your Kali Forms Pro license. Please %sactivate it%s to receive updates and support.", 'kali-forms'),
-
-					'<a class="link" href="' . admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-store-auth') . '">',
+					/* translators: 1: opening anchor tag, 2: closing anchor tag */
+					__("You have not activated your Kali Forms Pro license. Please %1$s activate it %2$s to receive updates and support.", 'kali-forms'),
+					'<a class="link" href="' . esc_url(admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-store-auth')) . '">',
 					'</a>'
 				),
 				"dismissable" => true,
