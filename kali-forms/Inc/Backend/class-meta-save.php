@@ -169,6 +169,10 @@ class Meta_Save
 				continue;
 			}
 
+			if (is_string($value)) {
+				$value = wp_unslash($value);
+			}
+
 			$sanitized[sanitize_text_field($key)] = call_user_func($this->fields[$key]['sanitize'], $value);
 		}
 

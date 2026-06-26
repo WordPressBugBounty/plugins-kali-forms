@@ -33,7 +33,11 @@ class Sanitizers
 	public static function sanitize_field_mapper($props)
 	{
 		$obj  = new \stdClass();
-		$json = json_decode(stripslashes($props));
+		$json = self::decode_json_meta($props, false);
+
+		if (! is_object($json) && ! is_array($json)) {
+			return wp_json_encode($obj);
+		}
 
 		foreach ($json as $k => $v) {
 			// Use esc_attr for keys to ensure they're safe for HTML attributes
@@ -43,7 +47,7 @@ class Sanitizers
 			$obj->{$safe_key} = $safe_value;
 		}
 
-		return json_encode($obj);
+		return wp_json_encode($obj);
 	}
 	/**
 	 * Sanitize webhooks
@@ -54,8 +58,12 @@ class Sanitizers
 	public static function sanitize_webhooks($input)
 	{
 		$sanitized = [];
-		$json      = json_decode(stripslashes($input));
-		$i         = 0;
+		$json      = self::decode_json_meta($input, false);
+		if (! is_array($json)) {
+			return [];
+		}
+
+		$i = 0;
 		foreach ($json as $hook) {
 			$i++;
 			$obj = new \stdClass();
@@ -257,42 +265,24 @@ class Sanitizers
 			];
 		}
 
-		$direct = json_decode($value, true);
-		if (JSON_ERROR_NONE === json_last_error()) {
-			return [
-				'valid'        => true,
-				'was_repaired' => false,
-				'canonical'    => wp_json_encode($direct),
-				'decoded'      => $direct,
-			];
+		$candidates = [$value];
+		$unslashed  = wp_unslash($value);
+		if ($unslashed !== $value) {
+			$candidates[] = $unslashed;
 		}
 
-		$attempts = array_unique(
-			[
-				$value,
-				wp_unslash($value),
-				stripslashes($value),
-				wp_unslash(stripslashes($value)),
-			]
-		);
-
-		foreach ($attempts as $candidate) {
+		foreach (array_unique($candidates) as $candidate) {
 			$decoded = json_decode($candidate, true);
-			if (JSON_ERROR_NONE === json_last_error()) {
-				return [
-					'valid'        => true,
-					'was_repaired' => true,
-					'canonical'    => wp_json_encode($decoded),
-					'decoded'      => $decoded,
-				];
+			if (JSON_ERROR_NONE !== json_last_error()) {
+				continue;
 			}
-		}
 
-		$repaired = self::iteratively_unescape_json_string($value, 'stripslashes');
-		if (null !== $repaired) {
+			$repaired     = self::repair_corrupted_unicode_escapes($decoded);
+			$was_repaired = self::json_values_changed($decoded, $repaired) || $candidate !== $value;
+
 			return [
 				'valid'        => true,
-				'was_repaired' => true,
+				'was_repaired' => $was_repaired,
 				'canonical'    => wp_json_encode($repaired),
 				'decoded'      => $repaired,
 			];
@@ -300,9 +290,12 @@ class Sanitizers
 
 		$repaired = self::iteratively_unescape_json_string($value, 'wp_unslash');
 		if (null !== $repaired) {
+			$repaired     = self::repair_corrupted_unicode_escapes($repaired);
+			$was_repaired = true;
+
 			return [
 				'valid'        => true,
-				'was_repaired' => true,
+				'was_repaired' => $was_repaired,
 				'canonical'    => wp_json_encode($repaired),
 				'decoded'      => $repaired,
 			];
@@ -310,15 +303,70 @@ class Sanitizers
 
 		$repaired = self::iteratively_unescape_json_string($value, 'collapse_slashes');
 		if (null !== $repaired) {
+			$repaired     = self::repair_corrupted_unicode_escapes($repaired);
+			$was_repaired = true;
+
 			return [
 				'valid'        => true,
-				'was_repaired' => true,
+				'was_repaired' => $was_repaired,
 				'canonical'    => wp_json_encode($repaired),
 				'decoded'      => $repaired,
 			];
 		}
 
 		return $failure;
+	}
+
+	/**
+	 * Repair strings where JSON unicode escapes lost their backslash (e.g. Lu00e4 -> Lä).
+	 *
+	 * @param mixed $value Decoded JSON value.
+	 * @return mixed
+	 */
+	public static function repair_corrupted_unicode_escapes($value)
+	{
+		if (is_string($value)) {
+			if (! preg_match('/(?<!\\\\)u[0-9a-fA-F]{4}/', $value)) {
+				return $value;
+			}
+
+			$repaired = preg_replace_callback(
+				'/(?<!\\\\)u([0-9a-fA-F]{4})/',
+				static function ($matches) {
+					$decoded = json_decode('"\\u' . $matches[1] . '"');
+
+					return is_string($decoded) ? $decoded : $matches[0];
+				},
+				$value
+			);
+
+			return is_string($repaired) ? $repaired : $value;
+		}
+
+		if (is_array($value)) {
+			foreach ($value as $key => $item) {
+				$value[$key] = self::repair_corrupted_unicode_escapes($item);
+			}
+
+			return $value;
+		}
+
+		if (is_object($value)) {
+			foreach ($value as $key => $item) {
+				$value->{$key} = self::repair_corrupted_unicode_escapes($item);
+			}
+		}
+
+		return $value;
+	}
+
+	/**
+	 * @param mixed $before Original decoded JSON.
+	 * @param mixed $after  Repaired decoded JSON.
+	 */
+	private static function json_values_changed($before, $after): bool
+	{
+		return wp_json_encode($before) !== wp_json_encode($after);
 	}
 
 	/**
@@ -630,9 +678,9 @@ class Sanitizers
 	 */
 	public static function sanitize_email_builder($value)
 	{
-		$value     = json_decode(stripslashes($value));
+		$value     = self::decode_json_meta($value, false);
 		$sanitized = [];
-		if (!is_array($value)) {
+		if (! is_array($value)) {
 			return false;
 		}
 
