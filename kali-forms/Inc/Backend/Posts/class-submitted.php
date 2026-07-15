@@ -3,6 +3,7 @@
 namespace KaliForms\Inc\Backend\Posts;
 
 use KaliForms\Inc\Frontend\Submission_Shortcode;
+use KaliForms\Inc\Utils\Digital_Signature_Helper;
 use KaliForms\Inc\Utils\Submission_Actions;
 use KaliForms\Inc\Utils\Submission_Action_Helper as Action_Helper;
 use KaliForms\Inc\Backend\Views\Form_Entries_Page;
@@ -427,13 +428,7 @@ class Submitted
 						echo '<img style="width:150px" src="' . esc_url($img) . '" />';
 						break;
 					case 'digitalSignature':
-						$validB64 = preg_match("/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).base64,.*/", $val);
-						if ($validB64 > 0) {
-							echo '<img style="width:150px" src="' . esc_attr($val) . '" />';
-							break;
-						}
-						$img = wp_get_attachment_url($val);
-						echo '<img style="width:150px" src="' . esc_url($img) . '" />';
+						echo Digital_Signature_Helper::render_image_tag($val, '150px');
 						break;
 					default:
 						echo esc_html($val);

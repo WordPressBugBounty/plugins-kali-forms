@@ -48,12 +48,39 @@ class Submission_Action_Helper
 	 */
 	public function __construct($formId, $submissionId)
 	{
-		$this->form       = $formId;
-		$this->submission = $submissionId;
+		$this->form       = absint($formId);
+		$this->submission = absint($submissionId);
+	}
 
-		if ($this->form === null || $this->submission === null) {
-			return new \WP_Error();
+	/**
+	 * Ensure the form and submission IDs refer to valid, linked posts.
+	 *
+	 * @param mixed $form_id
+	 * @param mixed $submission_id
+	 * @return true|\WP_Error
+	 */
+	public static function validate_pair($form_id, $submission_id)
+	{
+		$form_id       = absint($form_id);
+		$submission_id = absint($submission_id);
+
+		if ($form_id < 1 || $submission_id < 1) {
+			return new \WP_Error('kaliforms_invalid_ids', esc_html__('Something went wrong', 'kali-forms'));
 		}
+
+		if (get_post_type($form_id) !== 'kaliforms_forms') {
+			return new \WP_Error('kaliforms_invalid_form', esc_html__('Something went wrong', 'kali-forms'));
+		}
+
+		if (get_post_type($submission_id) !== 'kaliforms_submitted') {
+			return new \WP_Error('kaliforms_invalid_submission', esc_html__('Something went wrong', 'kali-forms'));
+		}
+
+		if (absint(get_post_meta($submission_id, 'formId', true)) !== $form_id) {
+			return new \WP_Error('kaliforms_submission_mismatch', esc_html__('Something went wrong', 'kali-forms'));
+		}
+
+		return true;
 	}
 	/**
 	 * Adds the hash to the class constructor

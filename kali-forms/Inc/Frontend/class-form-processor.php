@@ -3,6 +3,7 @@
 namespace KaliForms\Inc\Frontend;
 
 use KaliForms\Inc\Utils\Akismet;
+use KaliForms\Inc\Utils\Digital_Signature_Helper;
 use KaliForms\Inc\Utils\Emailer;
 use KaliForms\Inc\Utils\FileManager;
 use KaliForms\Inc\Utils\GeneralPlaceholders;
@@ -936,16 +937,15 @@ class Form_Processor
 
 				break;
 			case 'digitalSignature':
-				$validB64 = preg_match("/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).base64,.*/", $v);
-				if ($validB64 > 0) {
-					$this->placeholdered_data['{' . $k . ':signature}'] = '<img style="width:100%" src="' . sanitize_text_field($v) . '" />';
-					$this->placeholdered_data['{' . $k . ':src}']       = sanitize_text_field($v);
+				$signature_html = Digital_Signature_Helper::render_image_tag($v, '100%');
+				$this->placeholdered_data['{' . $k . ':signature}'] = $signature_html;
+				if (Digital_Signature_Helper::is_valid_data_uri($v)) {
+					$this->placeholdered_data['{' . $k . ':src}'] = esc_attr($v);
 					break;
 				}
 				$img = wp_get_attachment_url($v);
-
-				$this->placeholdered_data['{' . $k . ':signature}'] = '<img style="width:100%" src="' . esc_url($img) . '" />';
-				$this->placeholdered_data['{' . $k . ':id}']        = sanitize_text_field($v);
+				$this->placeholdered_data['{' . $k . ':src}'] = esc_url($img);
+				$this->placeholdered_data['{' . $k . ':id}'] = sanitize_text_field($v);
 				break;
 			case 'textarea':
 				$this->placeholdered_data['{' . $k . '}'] = wp_kses_post(wpautop($v));
@@ -965,7 +965,7 @@ class Form_Processor
 		if ($save !== '0') {
 			$arr = [
 				'post'          => $this->post,
-				'data'          => $this->data,
+				'data'          => $this->filter_submission_data_for_storage($this->data),
 				'submission_id' => false,
 				'extra'         => [
 					'separator' => $this->get('multiple_selections_separator', ','),
@@ -1016,6 +1016,55 @@ class Form_Processor
 		}
 
 		return $this->saved;
+	}
+
+	/**
+	 * Keep only trusted field values when persisting a submission.
+	 *
+	 * @param array $data Raw submission data.
+	 * @return array
+	 */
+	private function filter_submission_data_for_storage(array $data)
+	{
+		$filtered    = [];
+		$static_keys = [];
+
+		if ($this->get('save_ip_address', '0') !== '0') {
+			$static_keys[] = 'ip_address';
+		}
+
+		foreach ($data as $k => $v) {
+			if ($k === 'kf_hooks' && is_array($v)) {
+				continue;
+			}
+			if (strpos((string) $k, 'kaliforms_') === 0) {
+				continue;
+			}
+			if (in_array($k, ['formId', 'nonce', 'grecaptcha', 'g-recaptcha-response', 'kf_submitted_user_id'], true)) {
+				continue;
+			}
+			if (!array_key_exists($k, $this->field_type_map) && !in_array($k, $static_keys, true)) {
+				continue;
+			}
+
+			$filtered[$k] = $v;
+		}
+
+		foreach ($filtered as $k => $v) {
+			if (
+				isset($this->field_type_map[$k])
+				&& $this->field_type_map[$k] === 'digitalSignature'
+				&& is_string($v)
+				&& !Digital_Signature_Helper::is_valid_data_uri($v)
+				&& absint($v) === 0
+			) {
+				$filtered[$k] = '';
+			}
+		}
+
+		$filtered['formId'] = $this->post->ID;
+
+		return $filtered;
 	}
 
 

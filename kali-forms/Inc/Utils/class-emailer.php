@@ -243,16 +243,15 @@ class Emailer
 
 					break;
 				case 'digitalSignature':
-					$validB64 = preg_match("/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).base64,.*/", $v);
-					if ($validB64 > 0) {
-						$this->placeholders['{' . $k . ':signature}'] = '<img style="width:100%" src="' . sanitize_text_field($v) . '" />';
-						$this->placeholders['{' . $k . ':src}']       = sanitize_text_field($v);
+					$signature_html = Digital_Signature_Helper::render_image_tag($v, '100%');
+					$this->placeholders['{' . $k . ':signature}'] = $signature_html;
+					if (Digital_Signature_Helper::is_valid_data_uri($v)) {
+						$this->placeholders['{' . $k . ':src}'] = esc_attr($v);
 						break;
 					}
 					$img = wp_get_attachment_url($v);
-
-					$this->placeholders['{' . $k . ':signature}'] = '<img style="width:100%" src="' . esc_url($img) . '" />';
-					$this->placeholders['{' . $k . ':id}']        = sanitize_text_field($v);
+					$this->placeholders['{' . $k . ':src}'] = esc_url($img);
+					$this->placeholders['{' . $k . ':id}']   = sanitize_text_field($v);
 					break;
 				default:
 					$this->placeholders['{' . $k . '}'] = is_array($v)
@@ -263,22 +262,63 @@ class Emailer
 		}
 
 		$this->placeholders = array_merge((new GeneralPlaceholders())->general_placeholders, $this->placeholders);
+		$this->restore_internal_callable_placeholders();
+
 		if (isset($this->placeholders['{entryCounter}'])) {
-			$this->placeholders['{entryCounter}'] = call_user_func($this->placeholders['{entryCounter}'], $this->form);
+			$this->placeholders['{entryCounter}'] = $this->invoke_trusted_callable('{entryCounter}', [$this->form]);
 		}
 		if (isset($this->placeholders['{thisPermalink}'])) {
-			$this->placeholders['{thisPermalink}'] = call_user_func($this->placeholders['{thisPermalink}']);
+			$this->placeholders['{thisPermalink}'] = $this->invoke_trusted_callable('{thisPermalink}');
 		}
 
 		if (isset($this->placeholders['{submission_link}'])) {
-			$this->placeholders['{submission_link}'] = call_user_func(
-				$this->placeholders['{submission_link}'],
-				$this->get('form', true, 'submission_view_page', 0),
-				$this->submission,
-				$this->form,
-				true
+			$this->placeholders['{submission_link}'] = $this->invoke_trusted_callable(
+				'{submission_link}',
+				[
+					$this->get('form', true, 'submission_view_page', 0),
+					$this->submission,
+					$this->form,
+					true,
+				]
 			);
 		}
+	}
+
+	/**
+	 * Ensure built-in placeholder callbacks cannot be replaced by field data.
+	 *
+	 * @return void
+	 */
+	private function restore_internal_callable_placeholders()
+	{
+		$defaults = (new GeneralPlaceholders())->general_placeholders;
+		foreach (['{entryCounter}', '{thisPermalink}', '{submission_link}'] as $key) {
+			if (isset($defaults[$key])) {
+				$this->placeholders[$key] = $defaults[$key];
+			}
+		}
+	}
+
+	/**
+	 * Invoke a reserved placeholder callback from trusted defaults only.
+	 *
+	 * @param string $placeholder_key
+	 * @param array  $args
+	 * @return mixed
+	 */
+	private function invoke_trusted_callable($placeholder_key, array $args = [])
+	{
+		$defaults = (new GeneralPlaceholders())->general_placeholders;
+		if (!isset($defaults[$placeholder_key])) {
+			return '';
+		}
+
+		$callable = $defaults[$placeholder_key];
+		if (!is_string($callable) || strpos($callable, '::') === false) {
+			return '';
+		}
+
+		return call_user_func($callable, ...$args);
 	}
 	/**
 	 * Get product total
@@ -492,8 +532,7 @@ class Emailer
 		$fileFromMedia = explode(',', $props['emailAttachmentMediaIds']);
 
 		foreach ($fileUploads as $upload) {
-			$validB64 = preg_match("/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).base64,.*/", $upload);
-			if ($validB64 > 0) {
+			if (Digital_Signature_Helper::is_valid_data_uri($upload)) {
 				continue;
 			}
 

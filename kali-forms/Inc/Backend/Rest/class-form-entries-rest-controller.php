@@ -171,11 +171,9 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	public function get_frontend_link($request)
 	{
 		$params = $request->get_json_params();
-		if (get_post_type((int) $params['id']) !== $this->slug . '_submitted') {
-			return rest_ensure_response(['status' => false, 'message' => 'post is not an entry']);
-		}
-		if (get_post_type((int) $params['formId']) !== $this->slug . '_forms') {
-			return rest_ensure_response(['status' => false, 'message' => 'post is not a form']);
+		$validated = Action_Helper::validate_pair($params['formId'], $params['id']);
+		if (is_wp_error($validated)) {
+			return rest_ensure_response(['status' => false, 'message' => 'post is not a valid form entry pair']);
 		}
 
 		return rest_ensure_response([
@@ -193,20 +191,12 @@ class Form_Entries_Rest_Controller extends \WP_REST_Controller
 	public function resend_emails($request)
 	{
 		$params = $request->get_json_params();
-		if (get_post_type((int) $params['id']) !== $this->slug . '_submitted') {
-			return rest_ensure_response(['status' => false, 'message' => 'post is not an entry']);
-		}
-		if (get_post_type((int) $params['formId']) !== $this->slug . '_forms') {
-			return rest_ensure_response(['status' => false, 'message' => 'post is not a form']);
+		$validated = Action_Helper::validate_pair($params['formId'], $params['id']);
+		if (is_wp_error($validated)) {
+			return rest_ensure_response(['status' => false, 'message' => 'post is not a valid form entry pair']);
 		}
 
 		$action = new Action_Helper((int) $params['formId'], (int) $params['id']);
-		if (is_wp_error($action)) {
-			return rest_ensure_response([
-				'status' => false,
-				'message' => sprintf('Soemthing wrong with formId: %s or submissionID : %s', $params['formId'], $params['id']),
-			]);
-		}
 
 		$status = $action->send_emails();
 		if (is_wp_error($status)) {

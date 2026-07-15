@@ -5,6 +5,9 @@ namespace KaliForms\Inc\Frontend;
 if (!defined('ABSPATH')) {
 	exit;
 }
+
+use KaliForms\Inc\Utils\Digital_Signature_Helper;
+
 class Submission_Shortcode
 {
 	/**
@@ -192,15 +195,7 @@ class Submission_Shortcode
 	{
 		switch ($type) {
 			case 'digitalSignature':
-				$html     = '';
-				$validB64 = preg_match("/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).base64,.*/", $v['value']);
-				if ($validB64 > 0) {
-					$html .= '<img style="width:350px" src="' . $v['value'] . '" />';
-					return $html;
-				}
-				$img = wp_get_attachment_url($v['value']);
-				$html .= '<img style="width:350px" src="' . esc_url($img) . '" />';
-				return $html;
+				return Digital_Signature_Helper::render_image_tag($v['value'], '350px');
 				break;
 			case 'fileUpload':
 				$images = explode(',', $v['value']);

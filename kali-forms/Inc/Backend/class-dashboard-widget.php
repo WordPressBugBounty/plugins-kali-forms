@@ -29,6 +29,9 @@ class Dashboard_Widget
 	 */
 	public function add_widgets()
 	{
+		if (!current_user_can('manage_options')) {
+			return;
+		}
 		wp_add_dashboard_widget(
 			$this->slug . '_dashboard_widget',
 			esc_html__('WordPress Forms Made Easy - Kali Forms', 'kali-forms'),

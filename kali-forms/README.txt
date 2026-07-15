@@ -4,7 +4,7 @@ Tags: contact form, forms, form builder, payment form, stripe payment
 Requires at least: 5.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.18
+Stable tag: 2.4.19
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -347,6 +347,14 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.19
+- Security: Fixed unauthenticated stored XSS via crafted digitalSignature values in the submission view shortcode
+- Security: Escape and strictly validate digital signature data URIs across submission rendering, admin entries, and email placeholders
+- Security: Restrict submission resend and delete actions with capability checks and form-submission pair validation
+- Security: Prevent arbitrary callable invocation via email placeholder overrides
+- Security: Filter untrusted keys when persisting form submissions
+- Security: Restrict the admin dashboard widget to users with manage_options capability
+
 2.4.18
 - Fixed: Scandinavian and Finnish characters (e.g. Lähetä, ä, ö, Å) were corrupted after saving in the form builder
 - Fixed: JSON form meta sanitization no longer strips unicode escape sequences on repeated save

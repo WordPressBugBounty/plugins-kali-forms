@@ -84,6 +84,10 @@ class Submission_Actions
 	 */
 	public function resend_emails()
 	{
+		if (!current_user_can('manage_options')) {
+			wp_die(esc_html__('Denied', 'kali-forms'));
+		}
+
 		$args = $this->sanitize_post();
 		if (!$args) {
 			wp_die(esc_html__('Denied', 'kali-forms'));
@@ -95,10 +99,12 @@ class Submission_Actions
 			wp_die(esc_html__('Something went wrong', 'kali-forms'));
 		}
 
-		$actionHelper = new Action_Helper($args['formId'], $args['submissionId']);
-		if (is_wp_error($actionHelper)) {
+		$validated = Action_Helper::validate_pair($args['formId'], $args['submissionId']);
+		if (is_wp_error($validated)) {
 			wp_die(esc_html__('Something went wrong', 'kali-forms'));
 		}
+
+		$actionHelper = new Action_Helper($args['formId'], $args['submissionId']);
 
 		wp_die(wp_json_encode($actionHelper->send_emails()));
 	}
@@ -114,11 +120,17 @@ class Submission_Actions
 		if (!$args) {
 			wp_die(esc_html__('Denied', 'kali-forms'));
 		}
-		$actionHelper = new Action_Helper($args['formId'], $args['submissionId']);
-		$actionHelper->add_hash($args['hash']);
-		if (is_wp_error($actionHelper)) {
+		if (!isset($args['formId'], $args['submissionId'], $args['hash'])) {
 			wp_die(esc_html__('Something went wrong', 'kali-forms'));
 		}
+
+		$validated = Action_Helper::validate_pair($args['formId'], $args['submissionId']);
+		if (is_wp_error($validated)) {
+			wp_die(esc_html__('Something went wrong', 'kali-forms'));
+		}
+
+		$actionHelper = new Action_Helper($args['formId'], $args['submissionId']);
+		$actionHelper->add_hash($args['hash']);
 
 		wp_die(wp_json_encode($actionHelper->delete_submission()));
 	}
