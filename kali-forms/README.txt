@@ -4,7 +4,7 @@ Tags: contact form, forms, form builder, payment form, stripe payment
 Requires at least: 5.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.19
+Stable tag: 2.4.20
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -347,6 +347,9 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.20
+- Fixed: Special characters were not working correctly
+
 2.4.19
 - Security: Fixed unauthenticated stored XSS via crafted digitalSignature values in the submission view shortcode
 - Security: Escape and strictly validate digital signature data URIs across submission rendering, admin entries, and email placeholders

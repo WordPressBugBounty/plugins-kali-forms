@@ -2,6 +2,7 @@
 
 namespace KaliForms\Inc\Frontend;
 
+use KaliForms\Inc\Backend\Sanitizers;
 use KaliForms\Inc\Utils\Akismet;
 use KaliForms\Inc\Utils\Digital_Signature_Helper;
 use KaliForms\Inc\Utils\Emailer;
@@ -335,7 +336,12 @@ class Form_Processor
 	 */
 	private function form_has_recaptcha_field()
 	{
-		$fields = json_decode($this->get('field_components', '[]'), false, 512, JSON_HEX_QUOT);
+		$fields = Sanitizers::decode_json_meta(
+			$this->get('field_components', '[]'),
+			false,
+			512,
+			JSON_HEX_QUOT
+		);
 		if (!is_array($fields)) {
 			return false;
 		}
@@ -594,7 +600,15 @@ class Form_Processor
 	{
 		$map         = [];
 		$advancedMap = [];
-		$fields      = json_decode($this->get('field_components', '[]'), false, 512, JSON_HEX_QUOT);
+		$fields = Sanitizers::decode_json_meta(
+			$this->get('field_components', '[]'),
+			false,
+			512,
+			JSON_HEX_QUOT
+		);
+		if (!is_array($fields)) {
+			$fields = [];
+		}
 		foreach ($fields as $field) {
 			if (empty($field->properties->name)) {
 				continue;
@@ -797,8 +811,16 @@ class Form_Processor
 	 */
 	public function get_field_label($key)
 	{
-		$fields = json_decode($this->get('field_components', '[]'), false, 512, JSON_HEX_QUOT);
-		$label  = '';
+		$fields = Sanitizers::decode_json_meta(
+			$this->get('field_components', '[]'),
+			false,
+			512,
+			JSON_HEX_QUOT
+		);
+		if (!is_array($fields)) {
+			$fields = [];
+		}
+		$label = '';
 		foreach ($fields as $idx => $field) {
 			if (isset($field->properties->name) && $field->properties->name === $key) {
 				$label = !empty($field->properties->caption) ? $field->properties->caption : $field->properties->name;
@@ -1167,7 +1189,12 @@ class Form_Processor
 	 */
 	public function get_conditional_thank_you()
 	{
-		$messages = json_decode($this->get('conditional_thank_you_message', '[]'), false, 512, JSON_HEX_QUOT);
+		$messages = Sanitizers::decode_json_meta(
+			$this->get('conditional_thank_you_message', '[]'),
+			false,
+			512,
+			JSON_HEX_QUOT
+		);
 		$cond     = false;
 
 		$msg = '';

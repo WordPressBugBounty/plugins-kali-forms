@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+use KaliForms\Inc\Backend\Sanitizers;
+
 class Post_Translator
 {
 	use MetaHelper;
@@ -96,8 +98,10 @@ class Post_Translator
 			$this->slug . '_form_notifications',
 			[
 				'formId' => absint($this->post->ID),
-				'emails' => json_decode($this->get('emails', '[]')),
-				'sms'    => class_exists('KaliForms\Inc\KaliForms_Sms') ? json_decode($this->get('sms', '[]')) : [],
+				'emails' => Sanitizers::decode_json_meta($this->get('emails', '[]'), false),
+				'sms'    => class_exists('KaliForms\Inc\KaliForms_Sms')
+					? Sanitizers::decode_json_meta($this->get('sms', '[]'), false)
+					: [],
 			]
 		);
 	}
@@ -187,7 +191,7 @@ class Post_Translator
 	{
 		return apply_filters(
 			$this->slug . '_form_grid',
-			json_decode($this->get('grid', '[]'))
+			Sanitizers::decode_json_meta($this->get('grid', '[]'))
 		);
 	}
 
@@ -200,7 +204,12 @@ class Post_Translator
 	{
 		return apply_filters(
 			$this->slug . '_form_fields',
-			json_decode($this->get('field_components', '[]'), false, 512, JSON_HEX_QUOT)
+			Sanitizers::decode_json_meta(
+				$this->get('field_components', '[]'),
+				false,
+				512,
+				JSON_HEX_QUOT
+			)
 		);
 	}
 

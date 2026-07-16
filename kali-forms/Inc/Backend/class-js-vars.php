@@ -164,7 +164,7 @@ class JS_Vars
 		/**
 		 * Form Emails
 		 */
-		$this->content['formEmails'] = json_decode($this->get('emails', '[]'));
+		$this->content['formEmails'] = Sanitizers::decode_json_meta($this->get('emails', '[]'), false);
 		/**
 		 * Predefined forms
 		 */

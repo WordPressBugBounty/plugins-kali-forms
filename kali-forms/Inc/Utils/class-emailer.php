@@ -2,6 +2,7 @@
 
 namespace KaliForms\Inc\Utils;
 
+use KaliForms\Inc\Backend\Sanitizers;
 use KaliForms\Inc\Utils\EmailProviders\Default_Mailer;
 use KaliForms\Inc\Utils\EmailProviders\Mailgun;
 use KaliForms\Inc\Utils\EmailProviders\Postmark;
@@ -117,7 +118,7 @@ class Emailer
 			return;
 		}
 
-		$components = json_decode($components);
+		$components = Sanitizers::decode_json_meta($components, false);
 		$arr        = [];
 
 		foreach ($components as $component) {
@@ -377,7 +378,15 @@ class Emailer
 	{
 		$map         = [];
 		$advancedMap = [];
-		$fields      = json_decode($this->get('form', true, 'field_components', '[]'), false, 512, JSON_HEX_QUOT);
+		$fields = Sanitizers::decode_json_meta(
+			$this->get('form', true, 'field_components', '[]'),
+			false,
+			512,
+			JSON_HEX_QUOT
+		);
+		if (!is_array($fields)) {
+			$fields = [];
+		}
 		foreach ($fields as $field) {
 			if (empty($field->properties->name)) {
 				continue;
@@ -412,8 +421,16 @@ class Emailer
 	 */
 	public function get_field_label($key)
 	{
-		$fields = json_decode($this->get('form', true, 'field_components', '[]'), false, 512, JSON_HEX_QUOT);
-		$label  = '';
+		$fields = Sanitizers::decode_json_meta(
+			$this->get('form', true, 'field_components', '[]'),
+			false,
+			512,
+			JSON_HEX_QUOT
+		);
+		if (!is_array($fields)) {
+			$fields = [];
+		}
+		$label = '';
 		foreach ($fields as $idx => $field) {
 			if ($field->properties->name === $key) {
 				$label = !empty($field->properties->caption) ? $field->properties->caption : $field->properties->name;
@@ -505,7 +522,10 @@ class Emailer
 	 */
 	public function send()
 	{
-		$emails = json_decode($this->get('form', true, 'emails', '[]'));
+		$emails = Sanitizers::decode_json_meta($this->get('form', true, 'emails', '[]'), false);
+		if (!is_array($emails)) {
+			$emails = [];
+		}
 
 		$sent = [];
 		foreach ($emails as $idx => $email) {

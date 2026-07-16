@@ -2,6 +2,8 @@
 
 namespace KaliForms\Inc\Utils;
 
+use KaliForms\Inc\Backend\Sanitizers;
+
 /**
  * Trait Option Interpreter
  *
@@ -27,12 +29,16 @@ trait OptionInterpreter
 	 */
 	private function _middleware($option, $value)
 	{
-		if (in_array($option, ['emails', 'userRegistrationData'])) {
-			$value = ($value !== null && $value !== '') ? json_decode($value) : [];
+		if (in_array($option, ['emails', 'userRegistrationData'], true)) {
+			$value = ($value !== null && $value !== '')
+				? Sanitizers::decode_json_meta($value, false)
+				: [];
 		}
 
-		if (in_array($option, ['fieldComponents'])) {
-			$value = ($value !== null && $value !== '') ? json_decode($value, false, 512, JSON_HEX_QUOT) : [];
+		if (in_array($option, ['fieldComponents'], true)) {
+			$value = ($value !== null && $value !== '')
+				? Sanitizers::decode_json_meta($value, false, 512, JSON_HEX_QUOT)
+				: [];
 		}
 
 		return $value;
