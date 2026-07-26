@@ -2,16 +2,17 @@
 
 namespace KaliForms\Inc\Backend\Rest;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 use KaliForms\Inc\Utils\Builder_Translator;
+use KaliForms\Inc\Utils\Form_Definition_Backup;
 use KaliForms\Inc\Utils\OptionInterpreter;
 use KaliForms\Inc\Utils\Post_Translator;
 
-class Forms_Rest_Controller extends \WP_REST_Controller
-{
+class Forms_Rest_Controller extends \WP_REST_Controller {
+
 	/**
 	 * Along the way, we might have strayed from the path
 	 */
@@ -29,16 +30,15 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 *
 	 * @var array
 	 */
-	public $schema = [];
+	public $schema = array();
 
 	public $resource_name = '';
 
 	/**
 	 * Class constructor
 	 */
-	public function __construct()
-	{
-		$this->namespace = $this->slug . '/v1';
+	public function __construct() {
+		$this->namespace     = $this->slug . '/v1';
 		$this->resource_name = 'forms';
 	}
 
@@ -47,66 +47,93 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 *
 	 * @return void
 	 */
-	public function register_routes()
-	{
-		register_rest_route($this->namespace, '/' . $this->resource_name, [
-			[
-				'methods' => 'GET',
-				'callback' => [$this, 'get_items'],
-				'permission_callback' => [$this, 'get_items_permissions_check'],
-				'args' => $this->get_collection_params(),
-			],
-			'schema' => [$this, 'get_item_schema'],
-		]);
+	public function register_routes() {
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->resource_name,
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( $this, 'get_items' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+					'args'                => $this->get_collection_params(),
+				),
+				'schema' => array( $this, 'get_item_schema' ),
+			)
+		);
 
-		register_rest_route($this->namespace, '/' . $this->resource_name . '/(?P<id>[\d]+)', [
-			[
-				'methods' => 'GET',
-				'callback' => [$this, 'get_item'],
-				'permission_callback' => [$this, 'get_items_permissions_check'],
-			],
-			'schema' => [$this, 'get_item_schema'],
-		]);
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->resource_name . '/(?P<id>[\d]+)',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( $this, 'get_item' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+				),
+				'schema' => array( $this, 'get_item_schema' ),
+			)
+		);
 
-		register_rest_route($this->namespace, '/' . $this->resource_name . '/(?P<id>[\d]+)', [
-			[
-				'methods' => 'PATCH',
-				'callback' => [$this, 'update_item'],
-				'permission_callback' => [$this, 'edit_item_check'],
-			],
-		]);
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->resource_name . '/(?P<id>[\d]+)',
+			array(
+				array(
+					'methods'             => 'PATCH',
+					'callback'            => array( $this, 'update_item' ),
+					'permission_callback' => array( $this, 'edit_item_check' ),
+				),
+			)
+		);
 
-		register_rest_route($this->namespace, '/' . $this->resource_name . '/options/', [
-			[
-				'methods' => 'GET',
-				'callback' => [$this, 'get_item_properties'],
-				'permission_callback' => [$this, 'get_items_permissions_check'],
-			],
-		]);
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->resource_name . '/options/',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( $this, 'get_item_properties' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+				),
+			)
+		);
 
-		register_rest_route($this->namespace, '/' . $this->resource_name . '/builder/(?P<retrieve>[\w]+)', [
-			[
-				'methods' => 'GET',
-				'callback' => [$this, 'get_builder'],
-				'permission_callback' => [$this, 'get_items_permissions_check'],
-			],
-		]);
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->resource_name . '/builder/(?P<retrieve>[\w]+)',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( $this, 'get_builder' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+				),
+			)
+		);
 
-		register_rest_route($this->namespace, '/' . $this->resource_name . '/notifications', [
-			[
-				'methods' => 'GET',
-				'callback' => [$this, 'get_notifications'],
-				'permission_callback' => [$this, 'get_items_permissions_check'],
-			],
-		]);
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->resource_name . '/notifications',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( $this, 'get_notifications' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+				),
+			)
+		);
 
-		register_rest_route($this->namespace, '/' . $this->resource_name . '/entries/(?P<id>[\d]+)', [
-			[
-				'methods' => 'GET',
-				'callback' => [$this, 'get_form_entries'],
-				'permission_callback' => [$this, 'get_items_permissions_check'],
-			],
-		]);
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->resource_name . '/entries/(?P<id>[\d]+)',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( $this, 'get_form_entries' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+				),
+			)
+		);
 	}
 
 	/**
@@ -116,18 +143,17 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param \WP_REST_Request $request
 	 * @return bool|\WP_Error
 	 */
-	public function get_items_permissions_check($request)
-	{
-		if (!current_user_can('edit_posts')) {
-			return new \WP_Error('rest_forbidden', esc_html__('You cannot view the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
+	public function get_items_permissions_check( $request ) {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return new \WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the post resource.', 'kali-forms' ), array( 'status' => $this->authorization_status_code() ) );
 		}
 
 		// For single-item requests, check ownership.
-		if (isset($request['id'])) {
-			$post = get_post((int) $request['id']);
-			if ($post && $post->post_type === $this->slug . '_forms') {
-				if ((int) $post->post_author !== get_current_user_id() && !current_user_can('manage_options')) {
-					return new \WP_Error('rest_forbidden', esc_html__('You do not have permission to access this form.', 'kali-forms'), ['status' => 403]);
+		if ( isset( $request['id'] ) ) {
+			$post = get_post( (int) $request['id'] );
+			if ( $post && $post->post_type === $this->slug . '_forms' ) {
+				if ( (int) $post->post_author !== get_current_user_id() && ! current_user_can( 'manage_options' ) ) {
+					return new \WP_Error( 'rest_forbidden', esc_html__( 'You do not have permission to access this form.', 'kali-forms' ), array( 'status' => 403 ) );
 				}
 			}
 		}
@@ -141,17 +167,16 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param \WP_REST_Request $request
 	 * @return bool|\WP_Error
 	 */
-	public function edit_item_check($request)
-	{
-		if (!current_user_can('edit_posts')) {
-			return new \WP_Error('rest_forbidden', esc_html__('You cannot edit the post resource.', 'kali-forms'), ['status' => $this->authorization_status_code()]);
+	public function edit_item_check( $request ) {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return new \WP_Error( 'rest_forbidden', esc_html__( 'You cannot edit the post resource.', 'kali-forms' ), array( 'status' => $this->authorization_status_code() ) );
 		}
 
-		if (isset($request['id'])) {
-			$post = get_post((int) $request['id']);
-			if ($post && $post->post_type === $this->slug . '_forms') {
-				if ((int) $post->post_author !== get_current_user_id() && !current_user_can('manage_options')) {
-					return new \WP_Error('rest_forbidden', esc_html__('You do not have permission to edit this form.', 'kali-forms'), ['status' => 403]);
+		if ( isset( $request['id'] ) ) {
+			$post = get_post( (int) $request['id'] );
+			if ( $post && $post->post_type === $this->slug . '_forms' ) {
+				if ( (int) $post->post_author !== get_current_user_id() && ! current_user_can( 'manage_options' ) ) {
+					return new \WP_Error( 'rest_forbidden', esc_html__( 'You do not have permission to edit this form.', 'kali-forms' ), array( 'status' => 403 ) );
 				}
 			}
 		}
@@ -165,11 +190,10 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $request
 	 * @return void
 	 */
-	public function get_item_properties($request)
-	{
-		$options = $this->_get_options($request['id'], $request['options']);
+	public function get_item_properties( $request ) {
+		$options = $this->_get_options( $request['id'], $request['options'] );
 
-		return rest_ensure_response($options);
+		return rest_ensure_response( $options );
 	}
 
 	/**
@@ -178,12 +202,14 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $request
 	 * @return void
 	 */
-	public function update_item($request)
-	{
-		$options = $this->_get_options_to_update($request);
-		$response = $this->_update_item_meta((int) $request['id'], $options);
+	public function update_item( $request ) {
+		$form_id = (int) $request['id'];
+		Form_Definition_Backup::capture( $form_id, 'save' );
 
-		return rest_ensure_response($response);
+		$options  = $this->_get_options_to_update( $request );
+		$response = $this->_update_item_meta( $form_id, $options );
+
+		return rest_ensure_response( $response );
 	}
 
 	/**
@@ -191,79 +217,78 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 *
 	 * @param WP_REST_Request $request Current request.
 	 */
-	public function get_items($request)
-	{
-		$posts_per_page = isset($request['per_page']) ? (int) $request['per_page'] : 5;
-		$args = [
+	public function get_items( $request ) {
+		$posts_per_page = isset( $request['per_page'] ) ? (int) $request['per_page'] : 5;
+		$args           = array(
 			'posts_per_page' => $posts_per_page,
-			'post_type' => $this->slug . '_forms',
-			'status' => 'published',
-		];
+			'post_type'      => $this->slug . '_forms',
+			'status'         => 'published',
+		);
 
-		$registered = $this->get_collection_params();
-		$parameter_mappings = [
-			'page' => 'paged',
+		$registered         = $this->get_collection_params();
+		$parameter_mappings = array(
+			'page'   => 'paged',
 			'search' => 's',
-		];
+		);
 
-		foreach ($parameter_mappings as $api_param => $wp_param) {
-			if (isset($registered[$api_param], $request[$api_param])) {
-				$args[$wp_param] = $request[$api_param];
+		foreach ( $parameter_mappings as $api_param => $wp_param ) {
+			if ( isset( $registered[ $api_param ], $request[ $api_param ] ) ) {
+				$args[ $wp_param ] = $request[ $api_param ];
 			}
 		}
 
 		// Restrict to current user's forms unless they can manage options.
-		if (!current_user_can('manage_options')) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			$args['author'] = get_current_user_id();
 		}
 
-		$query_args = $this->prepare_items_query($args, $request);
+		$query_args = $this->prepare_items_query( $args, $request );
 
-		$posts_query = new \WP_Query();
-		$query_result = $posts_query->query($query_args);
-		$posts = [];
+		$posts_query  = new \WP_Query();
+		$query_result = $posts_query->query( $query_args );
+		$posts        = array();
 
-		foreach ($query_result as $post) {
-			$data = $this->prepare_item_for_response($post, $request);
-			$posts[] = $this->prepare_response_for_collection($data);
+		foreach ( $query_result as $post ) {
+			$data    = $this->prepare_item_for_response( $post, $request );
+			$posts[] = $this->prepare_response_for_collection( $data );
 		}
 
-		$page = (int) $query_args['paged'];
+		$page        = (int) $query_args['paged'];
 		$total_posts = $posts_query->found_posts;
 
-		if ($total_posts < 1) {
-			unset($query_args['paged']);
+		if ( $total_posts < 1 ) {
+			unset( $query_args['paged'] );
 			$count_query = new \WP_Query();
-			$count_query->query($query_args);
+			$count_query->query( $query_args );
 			$total_posts = $count_query->found_posts;
 		}
 
-		$max_pages = ceil($total_posts / (int) $posts_query->query_vars['posts_per_page']);
-		if ($page > $max_pages && $total_posts > 0) {
-			return new \WP_Error('rest_post_invalid_page_number', esc_html__('The page number requested is larger than the number of pages available.', 'kali-forms'), ['status' => 400]);
+		$max_pages = ceil( $total_posts / (int) $posts_query->query_vars['posts_per_page'] );
+		if ( $page > $max_pages && $total_posts > 0 ) {
+			return new \WP_Error( 'rest_post_invalid_page_number', esc_html__( 'The page number requested is larger than the number of pages available.', 'kali-forms' ), array( 'status' => 400 ) );
 		}
 
-		$response = rest_ensure_response($posts);
-		$response->header('X-WP-Total', (int) $total_posts);
-		$response->header('X-WP-TotalPages', (int) $max_pages);
+		$response = rest_ensure_response( $posts );
+		$response->header( 'X-WP-Total', (int) $total_posts );
+		$response->header( 'X-WP-TotalPages', (int) $max_pages );
 		$request_params = $request->get_query_params();
-		$base = add_query_arg(urlencode_deep($request_params), rest_url(sprintf('%s/%s', $this->namespace, $this->rest_base)));
+		$base           = add_query_arg( urlencode_deep( $request_params ), rest_url( sprintf( '%s/%s', $this->namespace, $this->rest_base ) ) );
 
-		if ($page > 1) {
+		if ( $page > 1 ) {
 			$prev_page = $page - 1;
 
-			if ($prev_page > $max_pages) {
+			if ( $prev_page > $max_pages ) {
 				$prev_page = $max_pages;
 			}
 
-			$prev_link = add_query_arg('page', $prev_page, $base);
-			$response->link_header('prev', $prev_link);
+			$prev_link = add_query_arg( 'page', $prev_page, $base );
+			$response->link_header( 'prev', $prev_link );
 		}
-		if ($max_pages > $page) {
+		if ( $max_pages > $page ) {
 			$next_page = $page + 1;
-			$next_link = add_query_arg('page', $next_page, $base);
+			$next_link = add_query_arg( 'page', $next_page, $base );
 
-			$response->link_header('next', $next_link);
+			$response->link_header( 'next', $next_link );
 		}
 
 		return $response;
@@ -275,16 +300,15 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param WP_REST_Request $request Current request.
 	 * @return void
 	 */
-	public function get_item($request)
-	{
-		$id = (int) $request['id'];
-		$post = get_post($id);
+	public function get_item( $request ) {
+		$id   = (int) $request['id'];
+		$post = get_post( $id );
 
-		if (empty($post)) {
-			return rest_ensure_response([]);
+		if ( empty( $post ) ) {
+			return rest_ensure_response( array() );
 		}
 
-		$response = $this->prepare_item_for_response($post, $request);
+		$response = $this->prepare_item_for_response( $post, $request );
 
 		return $response;
 	}
@@ -295,12 +319,11 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $request
 	 * @return void
 	 */
-	public function get_notifications($request)
-	{
+	public function get_notifications( $request ) {
 		$builder = new Builder_Translator();
-		$builder->construct_these('notifications');
+		$builder->construct_these( 'notifications' );
 
-		return rest_ensure_response($builder->notifications);
+		return rest_ensure_response( $builder->notifications );
 	}
 
 	/**
@@ -309,39 +332,38 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $request
 	 * @return void
 	 */
-	public function get_builder($request)
-	{
-		$data = [];
+	public function get_builder( $request ) {
+		$data    = array();
 		$builder = new Builder_Translator();
-		switch ($request['retrieve']) {
+		switch ( $request['retrieve'] ) {
 			case 'all':
-				$builder->construct_these('all');
-				$data = [
-					'fields' => $builder->fields,
-					'styles' => $builder->styles,
+				$builder->construct_these( 'all' );
+				$data = array(
+					'fields'            => $builder->fields,
+					'styles'            => $builder->styles,
 					'predefinedOptions' => $builder->predefinedOptions,
-					'predefinedForms' => $builder->predefinedForms,
-				];
+					'predefinedForms'   => $builder->predefinedForms,
+				);
 				break;
 			case 'fields':
-				$builder->construct_these('fields');
+				$builder->construct_these( 'fields' );
 				$data['fields'] = $builder->fields;
 				break;
 			case 'styles':
-				$builder->construct_these('styles');
+				$builder->construct_these( 'styles' );
 				$data['styles'] = $builder->styles;
 				break;
 			case 'predefined-options':
-				$builder->construct_these('predefinedOptions');
+				$builder->construct_these( 'predefinedOptions' );
 				$data['predefinedOptions'] = $builder->predefinedOptions;
 				break;
 			case 'predefined-forms':
-				$builder->construct_these('predefinedForms');
+				$builder->construct_these( 'predefinedForms' );
 				$data['predefinedForms'] = $builder->predefinedForms;
 				break;
 		}
 
-		return rest_ensure_response($data);
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -349,29 +371,28 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 *
 	 * @param WP_Post $post The comment object whose response is being prepared.
 	 */
-	public function prepare_item_for_response($post, $request)
-	{
-		$post_data = [];
+	public function prepare_item_for_response( $post, $request ) {
+		$post_data = array();
 
-		$schema = $this->get_item_schema($request);
+		$schema = $this->get_item_schema( $request );
 
 		// We are also renaming the fields to more understandable names.
-		if (isset($schema['properties']['id'])) {
+		if ( isset( $schema['properties']['id'] ) ) {
 			$post_data['id'] = (int) $post->ID;
 		}
 
-		$post = new Post_Translator($post);
-		$post->construct_these(...array_keys($schema['properties']));
+		$post = new Post_Translator( $post );
+		$post->construct_these( ...array_keys( $schema['properties'] ) );
 
-		foreach ($schema['properties'] as $key => $property) {
-			if ($key === 'id') {
+		foreach ( $schema['properties'] as $key => $property ) {
+			if ( $key === 'id' ) {
 				continue;
 			}
 
-			$post_data[$key] = $post->{$key};
+			$post_data[ $key ] = $post->{$key};
 		}
 
-		return rest_ensure_response($post_data);
+		return rest_ensure_response( $post_data );
 	}
 
 	/**
@@ -379,22 +400,21 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param $data
 	 * @return array
 	 */
-	public function _get_installed_plugins($data)
-	{
-		return [
-			'pro' => class_exists('KaliForms\Inc\KaliForms_Pro'),
-			'user' => class_exists('KaliForms\Inc\KaliForms_User_Registration'),
-			'sms' => class_exists('KaliForms\Inc\KaliForms_Sms'),
-			'newsletter' => class_exists('KaliForms\Inc\KaliForms_Newsletter'),
-			'slack' => class_exists('KaliForms\Inc\KaliForms_Slack'),
-			'googleSheets' => class_exists('KaliForms\Inc\KaliForms_Google_Sheets'),
-			'hubspot' => class_exists('KaliForms\Inc\KaliForms_Hubspot'),
-			'webhooks' => class_exists('KaliForms\Inc\KaliForms_Webhooks'),
-			'payments' => class_exists('KaliForms\Inc\KaliForms_Payments'),
-			'submissions' => class_exists('KaliForms\Inc\KaliForms_Submissions'),
-			'analytics' => class_exists('KaliForms\Inc\KaliForms_Google_Analytics'),
-			'digitalSignature' => class_exists('KaliForms\Inc\KaliForms_Digital_Signature'),
-		];
+	public function _get_installed_plugins( $data ) {
+		return array(
+			'pro'              => class_exists( 'KaliForms\Inc\KaliForms_Pro' ),
+			'user'             => class_exists( 'KaliForms\Inc\KaliForms_User_Registration' ),
+			'sms'              => class_exists( 'KaliForms\Inc\KaliForms_Sms' ),
+			'newsletter'       => class_exists( 'KaliForms\Inc\KaliForms_Newsletter' ),
+			'slack'            => class_exists( 'KaliForms\Inc\KaliForms_Slack' ),
+			'googleSheets'     => class_exists( 'KaliForms\Inc\KaliForms_Google_Sheets' ),
+			'hubspot'          => class_exists( 'KaliForms\Inc\KaliForms_Hubspot' ),
+			'webhooks'         => class_exists( 'KaliForms\Inc\KaliForms_Webhooks' ),
+			'payments'         => class_exists( 'KaliForms\Inc\KaliForms_Payments' ),
+			'submissions'      => class_exists( 'KaliForms\Inc\KaliForms_Submissions' ),
+			'analytics'        => class_exists( 'KaliForms\Inc\KaliForms_Google_Analytics' ),
+			'digitalSignature' => class_exists( 'KaliForms\Inc\KaliForms_Digital_Signature' ),
+		);
 	}
 
 	/**
@@ -402,50 +422,49 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 *
 	 * @return array The sample schema for a post
 	 */
-	public function get_item_schema()
-	{
-		if ($this->schema) {
+	public function get_item_schema() {
+		if ( $this->schema ) {
 			// Since WordPress 5.3, the schema can be cached in the $schema property.
 			return $this->schema;
 		}
 
-		$this->schema = [
-			'$schema' => 'http://json-schema.org/draft-04/schema#',
-			'title' => 'form',
-			'type' => 'object',
-			'properties' => [
-				'id' => [
-					'description' => esc_html__('Unique identifier for the object.', 'kali-forms'),
-					'type' => 'integer',
-					'context' => ['view', 'edit', 'embed'],
-					'readonly' => true,
-				],
-				'formFields' => [
-					'description' => esc_html__('Fields.', 'kali-forms'),
-					'type' => 'object',
-				],
-				'formGrid' => [
-					'description' => esc_html__('Grid.', 'kali-forms'),
-					'type' => 'object',
-				],
-				'formOptions' => [
-					'description' => esc_html__('Form options.', 'kali-forms'),
-					'type' => 'object',
-				],
-				'formNotifications' => [
-					'description' => esc_html__('Form notifications, that include emails and sms.', 'kali-forms'),
-					'type' => 'array',
-				],
-				'immutableState' => [
-					'description' => esc_html__('Immutable data, that is needed for form building', 'kali-forms'),
-					'type' => 'object',
-				],
-				'plugins' => [
-					'description' => esc_html__('What plugins we have installed.', 'kali-forms'),
-					'type' => 'object',
-				],
-			],
-		];
+		$this->schema = array(
+			'$schema'    => 'http://json-schema.org/draft-04/schema#',
+			'title'      => 'form',
+			'type'       => 'object',
+			'properties' => array(
+				'id'                => array(
+					'description' => esc_html__( 'Unique identifier for the object.', 'kali-forms' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit', 'embed' ),
+					'readonly'    => true,
+				),
+				'formFields'        => array(
+					'description' => esc_html__( 'Fields.', 'kali-forms' ),
+					'type'        => 'object',
+				),
+				'formGrid'          => array(
+					'description' => esc_html__( 'Grid.', 'kali-forms' ),
+					'type'        => 'object',
+				),
+				'formOptions'       => array(
+					'description' => esc_html__( 'Form options.', 'kali-forms' ),
+					'type'        => 'object',
+				),
+				'formNotifications' => array(
+					'description' => esc_html__( 'Form notifications, that include emails and sms.', 'kali-forms' ),
+					'type'        => 'array',
+				),
+				'immutableState'    => array(
+					'description' => esc_html__( 'Immutable data, that is needed for form building', 'kali-forms' ),
+					'type'        => 'object',
+				),
+				'plugins'           => array(
+					'description' => esc_html__( 'What plugins we have installed.', 'kali-forms' ),
+					'type'        => 'object',
+				),
+			),
+		);
 
 		return $this->schema;
 	}
@@ -460,25 +479,24 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @since 4.7.0
 	 *
 	 */
-	protected function prepare_items_query($prepared_args = [], $request = null)
-	{
-		$query_args = [];
+	protected function prepare_items_query( $prepared_args = array(), $request = null ) {
+		$query_args = array();
 
-		foreach ($prepared_args as $key => $value) {
-			$query_args[$key] = apply_filters("rest_query_var-{$key}", $value);
+		foreach ( $prepared_args as $key => $value ) {
+			$query_args[ $key ] = apply_filters( "rest_query_var-{$key}", $value );
 		}
 		$query_args['ignore_sticky_posts'] = true;
 
-		if (isset($query_args['orderby']) && isset($request['orderby'])) {
-			$orderby_mappings = [
-				'id' => 'ID',
-				'include' => 'post__in',
-				'slug' => 'post_name',
+		if ( isset( $query_args['orderby'] ) && isset( $request['orderby'] ) ) {
+			$orderby_mappings = array(
+				'id'            => 'ID',
+				'include'       => 'post__in',
+				'slug'          => 'post_name',
 				'include_slugs' => 'post_name__in',
-			];
+			);
 
-			if (isset($orderby_mappings[$request['orderby']])) {
-				$query_args['orderby'] = $orderby_mappings[$request['orderby']];
+			if ( isset( $orderby_mappings[ $request['orderby'] ] ) ) {
+				$query_args['orderby'] = $orderby_mappings[ $request['orderby'] ];
 			}
 		}
 
@@ -490,10 +508,9 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 *
 	 * @return void
 	 */
-	public function authorization_status_code()
-	{
+	public function authorization_status_code() {
 		$status = 401;
-		if (is_user_logged_in()) {
+		if ( is_user_logged_in() ) {
 			$status = 403;
 		}
 
@@ -506,23 +523,22 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $request
 	 * @return void
 	 */
-	private function _get_options_to_update($request)
-	{
-		$options = [];
+	private function _get_options_to_update( $request ) {
+		$options      = array();
 		$content_type = $request->get_content_type();
-		if ($content_type['value'] === 'application/x-www-form-urlencoded') {
-			parse_str($request->get_body(), $params);
+		if ( $content_type['value'] === 'application/x-www-form-urlencoded' ) {
+			parse_str( $request->get_body(), $params );
 		}
 
-		if ($content_type['value'] === 'application/json') {
+		if ( $content_type['value'] === 'application/json' ) {
 			$params = $request->get_json_params();
 		}
 
-		foreach ($params as $key => $value) {
-			$options[$this->_convert_to_snake_case($key)] = $value;
+		foreach ( $params as $key => $value ) {
+			$options[ $this->_convert_to_snake_case( $key ) ] = $value;
 		}
 
-		$options = $this->_sanitize_values($options);
+		$options = $this->_sanitize_values( $options );
 
 		return $options;
 	}
@@ -533,9 +549,8 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $string
 	 * @return void
 	 */
-	private function _convert_to_camel_case($string)
-	{
-		return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $string))));
+	private function _convert_to_camel_case( $string ) {
+		return lcfirst( str_replace( ' ', '', ucwords( str_replace( '_', ' ', $string ) ) ) );
 	}
 
 	/**
@@ -544,9 +559,8 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $string
 	 * @return void
 	 */
-	private function _convert_to_snake_case($string)
-	{
-		return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
+	private function _convert_to_snake_case( $string ) {
+		return strtolower( preg_replace( '/(?<!^)[A-Z]/', '_$0', $string ) );
 	}
 
 	/**
@@ -555,8 +569,7 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $string
 	 * @return void
 	 */
-	private function _prefix_string($string)
-	{
+	private function _prefix_string( $string ) {
 		return $this->slug . '_' . $string;
 	}
 
@@ -566,17 +579,16 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $options
 	 * @return void
 	 */
-	private function _sanitize_values($options)
-	{
-		$sanitized = [];
-		$meta = Meta_Save::get_instance();
-		foreach ($options as $key => $value) {
-			$sanitizedOption = $meta->sanitize_option($key, $value);
-			if ($sanitizedOption === null) {
+	private function _sanitize_values( $options ) {
+		$sanitized = array();
+		$meta      = Meta_Save::get_instance();
+		foreach ( $options as $key => $value ) {
+			$sanitizedOption = $meta->sanitize_option( $key, $value );
+			if ( $sanitizedOption === null ) {
 				continue;
 			}
 
-			$sanitized[$this->_prefix_string($key)] = $sanitizedOption;
+			$sanitized[ $this->_prefix_string( $key ) ] = $sanitizedOption;
 		}
 
 		return $sanitized;
@@ -589,12 +601,11 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $options
 	 * @return void
 	 */
-	private function _get_options($id, $options)
-	{
-		$returner = [];
-		$options = explode(',', $options);
-		foreach ($options as $option) {
-			$returner[$option] = $this->_get_value($id, $option);
+	private function _get_options( $id, $options ) {
+		$returner = array();
+		$options  = explode( ',', $options );
+		foreach ( $options as $option ) {
+			$returner[ $option ] = $this->_get_value( $id, $option );
 		}
 
 		return $returner;
@@ -607,12 +618,11 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [array] $options
 	 * @return void
 	 */
-	private function _update_item_meta($id, $options)
-	{
-		$updated = [];
-		foreach ($options as $key => $value) {
-			$updated[$key] = update_post_meta($id, $key, $value);
-		};
+	private function _update_item_meta( $id, $options ) {
+		$updated = array();
+		foreach ( $options as $key => $value ) {
+			$updated[ $key ] = update_post_meta( $id, $key, $value );
+		}
 
 		return $updated;
 	}
@@ -624,11 +634,10 @@ class Forms_Rest_Controller extends \WP_REST_Controller
 	 * @param [type] $option
 	 * @return void
 	 */
-	private function _get_value($id, $option)
-	{
-		$option = array_key_exists($option, $this->options) ? $this->options[$option] : $option;
-		$value = get_post_meta($id, $this->_prefix_string($this->_convert_to_snake_case($option)), true);
+	private function _get_value( $id, $option ) {
+		$option = array_key_exists( $option, $this->options ) ? $this->options[ $option ] : $option;
+		$value  = get_post_meta( $id, $this->_prefix_string( $this->_convert_to_snake_case( $option ) ), true );
 
-		return $this->_middleware($option, $value);
+		return $this->_middleware( $option, $value );
 	}
 }

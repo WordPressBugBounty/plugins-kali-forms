@@ -9,9 +9,6 @@ if (!defined('ABSPATH')) {
 /**
  * Restores legacy form/site data from V3 migration snapshots after a downgrade to 2.x.
  *
- * Ship this file with the last 2.4.x release before Kali Forms 3.0 goes live.
- * V3 writes `_kf_legacy_snapshot` (per form) and `kaliforms_site_legacy_snapshot`
- * (site options) before migrating data; this class puts 2.x-readable meta back.
  */
 class Legacy_Snapshot_Downgrade_Guard
 {

@@ -4,7 +4,7 @@ namespace KaliForms\Inc\Backend;
 
 use KaliForms\Inc\Utils\MetaHelper;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -17,8 +17,8 @@ if (!defined('ABSPATH')) {
  *
  * @package Inc\Backend
  */
-class JS_Vars
-{
+class JS_Vars {
+
 	/**
 	 * Metahelper trait
 	 */
@@ -41,29 +41,27 @@ class JS_Vars
 	 *
 	 * @var array
 	 */
-	public $content = [];
+	public $content = array();
 
 	/**
 	 * Set post property
 	 */
-	public function set_post($post)
-	{
-		if ($post instanceof \WP_Post) {
+	public function set_post( $post ) {
+		if ( $post instanceof \WP_Post ) {
 			$this->post = $post;
 		}
 
-		if (is_numeric($post)) {
-			$this->post = get_post($post);
+		if ( is_numeric( $post ) ) {
+			$this->post = get_post( $post );
 		}
 	}
 
 	/**
 	 * Determine post
 	 */
-	public function determine_post()
-	{
+	public function determine_post() {
 		global $post;
-		if (isset($post) && $post instanceof \WP_Post) {
+		if ( isset( $post ) && $post instanceof \WP_Post ) {
 			$this->post = $post;
 		}
 	}
@@ -73,13 +71,12 @@ class JS_Vars
 	 *
 	 * JSVars constructor
 	 */
-	public function __construct($post = null)
-	{
-		if ($post !== null) {
-			$this->set_post($post);
+	public function __construct( $post = null ) {
+		if ( $post !== null ) {
+			$this->set_post( $post );
 		}
 
-		if ($this->post === null) {
+		if ( $this->post === null ) {
 			$this->determine_post();
 		}
 
@@ -87,84 +84,84 @@ class JS_Vars
 		/**
 		 * Constructor creates the ajax url
 		 */
-		$this->content['ajaxurl'] = esc_url(admin_url('admin-ajax.php'));
+		$this->content['ajaxurl'] = esc_url( admin_url( 'admin-ajax.php' ) );
 		/**
 		 * Assets url
 		 */
-		$this->content['assetsUrl']         = esc_url(KALIFORMS_URL . 'assets');
-		$this->content['assetsUrlBackend']  = esc_url(KALIFORMS_URL . 'assets/backend');
-		$this->content['assetsUrlFrontend'] = esc_url(KALIFORMS_URL . 'assets/frontend');
+		$this->content['assetsUrl']         = esc_url( KALIFORMS_URL . 'assets' );
+		$this->content['assetsUrlBackend']  = esc_url( KALIFORMS_URL . 'assets/backend' );
+		$this->content['assetsUrlFrontend'] = esc_url( KALIFORMS_URL . 'assets/frontend' );
 		/**
 		 * And the nonce
 		 */
-		$this->content['ajax_nonce'] = wp_create_nonce($this->slug . '_nonce');
+		$this->content['ajax_nonce'] = wp_create_nonce( $this->slug . '_nonce' );
 		/**
 		 * Exit url ( when button is pressed )
 		 */
-		$this->content['exit_url'] = esc_url(admin_url('edit.php?post_type=kaliforms_forms'));
+		$this->content['exit_url'] = esc_url( admin_url( 'edit.php?post_type=kaliforms_forms' ) );
 		/**
 		 * Build the form fields array
 		 */
-		$this->content['formFields'] = (new Form_Fields())->form_fields;
+		$this->content['formFields'] = ( new Form_Fields() )->form_fields;
 		/**
 		 * Grid content
 		 */
-		$this->content['grid'] = Sanitizers::decode_json_meta($this->get('grid', '[]'));
+		$this->content['grid'] = Sanitizers::decode_json_meta( $this->get( 'grid', '[]' ) ) ?: array();
 		/**
 		 * Field components saved in the database
 		 */
 		$this->content['fieldComponents'] = Sanitizers::decode_json_meta(
-			$this->get('field_components', '[]'),
+			$this->get( 'field_components', '[]' ),
 			false,
 			512,
 			JSON_HEX_QUOT
-		);
+		) ?: array();
 		/**
 		 * Form Info Fields
 		 */
-		$this->content['requiredFieldMark']           = wp_kses_post($this->get('required_field_mark', ''));
-		$this->content['globalErrorMessage']          = wp_kses_post($this->get('global_error_message', ''));
-		$this->content['multipleSelectionsSeparator'] = wp_kses_post($this->get('multiple_selections_separator', ','));
-		$this->content['removeCaptchaForLoggedUsers'] = esc_attr($this->get('remove_captcha_for_logged_users', '0'));
-		$this->content['hideFormName']                = esc_attr($this->get('hide_form_name', '0'));
-		$this->content['cssId']                       = esc_attr($this->get('css_id', ''));
-		$this->content['cssClass']                    = esc_attr($this->get('css_class', ''));
-		$this->content['disableBootstrapGrid']        = esc_attr($this->get('disable_bootstrap_grid', '0'));
+		$this->content['requiredFieldMark']           = wp_kses_post( $this->get( 'required_field_mark', '' ) );
+		$this->content['globalErrorMessage']          = wp_kses_post( $this->get( 'global_error_message', '' ) );
+		$this->content['multipleSelectionsSeparator'] = wp_kses_post( $this->get( 'multiple_selections_separator', ',' ) );
+		$this->content['removeCaptchaForLoggedUsers'] = esc_attr( $this->get( 'remove_captcha_for_logged_users', '0' ) );
+		$this->content['hideFormName']                = esc_attr( $this->get( 'hide_form_name', '0' ) );
+		$this->content['cssId']                       = esc_attr( $this->get( 'css_id', '' ) );
+		$this->content['cssClass']                    = esc_attr( $this->get( 'css_class', '' ) );
+		$this->content['disableBootstrapGrid']        = esc_attr( $this->get( 'disable_bootstrap_grid', '0' ) );
 
-		$this->content['saveIpAddress']               = esc_attr($this->get('save_ip_address', '0'));
+		$this->content['saveIpAddress'] = esc_attr( $this->get( 'save_ip_address', '0' ) );
 		/**
 		 * Actual form name
 		 */
-		$this->content['formName'] = esc_html(get_the_title($this->post));
+		$this->content['formName'] = esc_html( get_the_title( $this->post ) );
 		/**
 		 * Form settings
 		 */
-		$this->content['resetFormAfterSubmit'] = esc_attr($this->get('reset_form_after_submit', '0'));
-		$this->content['showThankYouMessage']  = esc_attr($this->get('show_thank_you_message', '0'));
-		$this->content['scrollToThankYou']     = esc_attr($this->get('scroll_to_thank_you', '0'));
-		$this->content['saveFormSubmissions']  = esc_attr($this->get('save_form_submissions', '0'));
-		$this->content['thankYouMessage']      = wp_kses_post($this->get('thank_you_message', ''));
-		$this->content['redirectUrl']          = esc_url($this->get('redirect_url', ''));
-		$this->content['redirectTimeout']      = absint($this->get('redirect_timeout', 5));
-		$this->content['formAction']           = esc_url($this->get('form_action', ''));
-		$this->content['formMethod']           = esc_attr($this->get('form_method', ''));
-		$this->content['submissionViewPage']   = absint($this->get('submission_view_page', '0'));
+		$this->content['resetFormAfterSubmit'] = esc_attr( $this->get( 'reset_form_after_submit', '0' ) );
+		$this->content['showThankYouMessage']  = esc_attr( $this->get( 'show_thank_you_message', '0' ) );
+		$this->content['scrollToThankYou']     = esc_attr( $this->get( 'scroll_to_thank_you', '0' ) );
+		$this->content['saveFormSubmissions']  = esc_attr( $this->get( 'save_form_submissions', '0' ) );
+		$this->content['thankYouMessage']      = wp_kses_post( $this->get( 'thank_you_message', '' ) );
+		$this->content['redirectUrl']          = esc_url( $this->get( 'redirect_url', '' ) );
+		$this->content['redirectTimeout']      = absint( $this->get( 'redirect_timeout', 5 ) );
+		$this->content['formAction']           = esc_url( $this->get( 'form_action', '' ) );
+		$this->content['formMethod']           = esc_attr( $this->get( 'form_method', '' ) );
+		$this->content['submissionViewPage']   = absint( $this->get( 'submission_view_page', '0' ) );
 		$this->content['websitePages']         = $this->_get_website_pages();
 
 		/**
 		 * Form spam
 		 */
-		$this->content['honeypot']        = esc_attr($this->get('honeypot', '0'));
-		$this->content['akismetKey']      = esc_attr(get_option('wordpress_api_key', '0'));
-		$this->content['akismet']         = esc_attr($this->get('akismet', '0'));
-		$this->content['akismetFields']   = json_decode($this->get('akismet_fields', '[]'), false, 512, JSON_HEX_QUOT);
-		$this->content['googleSiteKey']   = esc_attr($this->get('google_site_key', ''));
-		$this->content['googleSecretKey'] = esc_attr($this->get('google_secret_key', ''));
+		$this->content['honeypot']        = esc_attr( $this->get( 'honeypot', '0' ) );
+		$this->content['akismetKey']      = esc_attr( get_option( 'wordpress_api_key', '0' ) );
+		$this->content['akismet']         = esc_attr( $this->get( 'akismet', '0' ) );
+		$this->content['akismetFields']   = json_decode( $this->get( 'akismet_fields', '[]' ), false, 512, JSON_HEX_QUOT );
+		$this->content['googleSiteKey']   = esc_attr( $this->get( 'google_site_key', '' ) );
+		$this->content['googleSecretKey'] = esc_attr( $this->get( 'google_secret_key', '' ) );
 
 		/**
 		 * Form Emails
 		 */
-		$this->content['formEmails'] = Sanitizers::decode_json_meta($this->get('emails', '[]'), false);
+		$this->content['formEmails'] = Sanitizers::decode_json_meta( $this->get( 'emails', '[]' ), false );
 		/**
 		 * Predefined forms
 		 */
@@ -181,48 +178,48 @@ class JS_Vars
 		/**
 		 * Form id
 		 */
-		$this->content['formId']        = absint($this->post->ID);
-		$this->content['entries_url']   = esc_url(admin_url('edit.php?post_type=kaliforms_forms&page=kaliforms-form-entries#/form-entries/' . absint($this->post->ID)));
-		$this->content['entries_count'] = absint($this->get_entries_count());
-		$this->content['deleteEntriesAfter'] = absint($this->get('delete_entries_after', 0));
+		$this->content['formId']             = absint( $this->post->ID );
+		$this->content['entries_url']        = esc_url( admin_url( 'edit.php?post_type=kaliforms_forms&page=kaliforms-form-entries#/form-entries/' . absint( $this->post->ID ) ) );
+		$this->content['entries_count']      = absint( $this->get_entries_count() );
+		$this->content['deleteEntriesAfter'] = absint( $this->get( 'delete_entries_after', 0 ) );
 
 		/**
 		 * Payment fields
 		 */
-		$this->content['payPalClientId']        = esc_html($this->get('paypal_client_id', ''));
-		$this->content['payPalClientIdSandBox'] = esc_html($this->get('paypal_client_id_sandbox', ''));
-		$this->content['paymentsLive']          = esc_attr($this->get('payments_live', '0'));
-		$this->content['currency']              = esc_attr($this->get('currency', 'USD'));
+		$this->content['payPalClientId']        = esc_html( $this->get( 'paypal_client_id', '' ) );
+		$this->content['payPalClientIdSandBox'] = esc_html( $this->get( 'paypal_client_id_sandbox', '' ) );
+		$this->content['paymentsLive']          = esc_attr( $this->get( 'payments_live', '0' ) );
+		$this->content['currency']              = esc_attr( $this->get( 'currency', 'USD' ) );
 		/**
 		 * Form Styles
 		 */
-		$this->content['selectedFormStyle'] = esc_attr($this->get('selected_form_style', 'theme'));
+		$this->content['selectedFormStyle'] = esc_attr( $this->get( 'selected_form_style', 'theme' ) );
 		/**
 		 * Global notifications
 		 */
-		$this->content['globalNotifications'] = (new Global_Notifications())->notifications;
+		$this->content['globalNotifications'] = ( new Global_Notifications() )->notifications;
 		/**
 		 * Predefined options
 		 */
-		$this->content['predefinedOptions'] = (new Predefined_Options())->options;
+		$this->content['predefinedOptions'] = ( new Predefined_Options() )->options;
 
 		/**
 		 * Conversion bridge
 		 */
-		$this->content['enableConversionTracking']       = esc_attr($this->get('enable_conversion_tracking', '0'));
-		$this->content['conversionLabel']                = esc_attr($this->get('conversion_label', ''));
-		$this->content['conversionCustomValue']          = esc_attr($this->get('conversion_custom_value', ''));
+		$this->content['enableConversionTracking'] = esc_attr( $this->get( 'enable_conversion_tracking', '0' ) );
+		$this->content['conversionLabel']          = esc_attr( $this->get( 'conversion_label', '' ) );
+		$this->content['conversionCustomValue']    = esc_attr( $this->get( 'conversion_custom_value', '' ) );
 
 		/**
 		 * Turnstile
 		 */
-		$this->content['turnstileEnabled'] = esc_attr($this->get('turnstile_enabled', '0'));
-		$this->content['turnstileSiteKey'] = esc_attr($this->get('turnstile_site_key', ''));
-		$this->content['turnstileSecretKey'] = esc_attr($this->get('turnstile_secret_key', ''));
+		$this->content['turnstileEnabled']   = esc_attr( $this->get( 'turnstile_enabled', '0' ) );
+		$this->content['turnstileSiteKey']   = esc_attr( $this->get( 'turnstile_site_key', '' ) );
+		$this->content['turnstileSecretKey'] = esc_attr( $this->get( 'turnstile_secret_key', '' ) );
 		/**
 		 * Applies a filter, maybe someone wants to edit something
 		 */
-		$this->content = apply_filters($this->slug . '_jsvars_object', $this->content);
+		$this->content = apply_filters( $this->slug . '_jsvars_object', $this->content );
 	}
 
 	/**
@@ -230,23 +227,22 @@ class JS_Vars
 	 *
 	 * @return void
 	 */
-	public function get_entries_count()
-	{
-		$args    = [
+	public function get_entries_count() {
+		$args    = array(
 			'post_type'      => $this->slug . '_submitted',
 			'posts_per_page' => -1,
 			'meta_key'       => 'formId',
-			'meta_query'     => [
-				[
+			'meta_query'     => array(
+				array(
 					'key'     => 'formId',
 					'value'   => $this->post->ID,
 					'compare' => '=',
-				],
-			],
-		];
-		$query   = new \WP_Query($args);
+				),
+			),
+		);
+		$query   = new \WP_Query( $args );
 		$counter = 0;
-		if ($query->have_posts()) {
+		if ( $query->have_posts() ) {
 			$counter = $query->post_count;
 		}
 		wp_reset_postdata();
@@ -260,21 +256,20 @@ class JS_Vars
 	 *
 	 * @return void
 	 */
-	public function _get_website_pages()
-	{
-		$args  = [
+	public function _get_website_pages() {
+		$args  = array(
 			'post_type'      => 'page',
 			'posts_per_page' => -1,
-		];
-		$query = new \WP_Query($args);
-		$pages = [];
-		if ($query->have_posts()) {
-			foreach ($query->posts as $post) {
-				$pages[] = [
+		);
+		$query = new \WP_Query( $args );
+		$pages = array();
+		if ( $query->have_posts() ) {
+			foreach ( $query->posts as $post ) {
+				$pages[] = array(
 					'id'        => $post->ID,
 					'title'     => $post->post_title,
-					'permalink' => get_permalink($post->ID),
-				];
+					'permalink' => get_permalink( $post->ID ),
+				);
 			}
 		}
 		wp_reset_postdata();
