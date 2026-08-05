@@ -7,119 +7,126 @@ namespace KaliForms\Inc\Utils;
  *
  * @package Inc\Utils
  */
-trait Duplicate_Post
-{
+trait Duplicate_Post {
+
 	/**
 	 * Init the duplicate post functionality
 	 *
 	 * @return void
 	 */
-	public function init_duplicate_post()
-	{
+	public function init_duplicate_post() {
 		/**
 		 * Add the post row actions
 		 */
-		add_filter('post_row_actions', [$this, 'add_duplicate_link'], 10, 2);
+		add_filter( 'post_row_actions', array( $this, 'add_duplicate_link' ), 10, 2 );
 		/**
 		 * Register the AJAX action
 		 */
 		add_action(
 			'wp_ajax_kaliforms_duplicate_post',
-			[$this, 'duplicate_post']
+			array( $this, 'duplicate_post' )
 		);
 		/**
 		 * Register the "deny" action
 		 */
 		add_action(
 			'wp_ajax_nopriv_kaliforms_duplicate_post',
-			[$this, 'denied']
+			array( $this, 'denied' )
 		);
 	}
 	/**
 	 * If the user is not authorized, deny action
 	 */
-	public function denied()
-	{
-		wp_die(esc_html__('Denied', 'kali-forms'));
+	public function denied() {
+		wp_die( esc_html__( 'Denied', 'kali-forms' ) );
 	}
 	/**
 	 * Duplicate post function
 	 *
 	 * @return void
 	 */
-	public function duplicate_post()
-	{
-		if (!isset($_POST['args'], $_POST['args']['nonce'], $_POST['args']['id'])) {
-			wp_die('Denied');
+	public function duplicate_post() {
+		if ( ! isset( $_POST['args'], $_POST['args']['nonce'], $_POST['args']['id'] ) ) {
+			wp_die( 'Denied' );
 		}
-		if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['args']['nonce'])), 'kaliforms_nonce')) {
-			wp_die('Denied');
-		}
-
-		if (!current_user_can('edit_posts')) {
-			wp_die('Denied');
+		if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['args']['nonce'] ) ), 'kaliforms_nonce' ) ) {
+			wp_die( 'Denied' );
 		}
 
-		$source_id = absint(wp_unslash($_POST['args']['id']));
-		if (!$source_id) {
-			wp_die('Denied');
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_die( 'Denied' );
 		}
 
-		if (!current_user_can('edit_post', $source_id)) {
-			wp_die('Denied');
+		$source_id = absint( wp_unslash( $_POST['args']['id'] ) );
+		if ( ! $source_id ) {
+			wp_die( 'Denied' );
 		}
 
-		$oldpost = get_post($source_id);
-		if (!$oldpost || $oldpost->post_type !== 'kaliforms_forms') {
-			wp_die('Denied');
+		if ( ! current_user_can( 'edit_post', $source_id ) ) {
+			wp_die( 'Denied' );
 		}
 
-		$title = get_the_title($source_id);
-		$post  = [
-			'post_title'  => $title . ' ' . esc_html__('(duplicate)', 'kali-forms'),
-			'post_status' => current_user_can('publish_posts') ? 'publish' : 'draft',
+		$oldpost = get_post( $source_id );
+		if ( ! $oldpost || $oldpost->post_type !== 'kaliforms_forms' ) {
+			wp_die( 'Denied' );
+		}
+
+		$title = get_the_title( $source_id );
+		$post  = array(
+			'post_title'  => $title . ' ' . esc_html__( '(duplicate)', 'kali-forms' ),
+			'post_status' => current_user_can( 'publish_posts' ) ? 'publish' : 'draft',
 			'post_type'   => 'kaliforms_forms',
 			'post_author' => get_current_user_id(),
-		];
+		);
 
-		$new_post_id = wp_insert_post($post);
-		if (is_wp_error($new_post_id) || !$new_post_id) {
-			wp_die('Denied');
+		$new_post_id = wp_insert_post( $post );
+		if ( is_wp_error( $new_post_id ) || ! $new_post_id ) {
+			wp_die( 'Denied' );
 		}
 
-		$data = get_post_custom($source_id);
-		foreach ($data as $key => $values) {
-			foreach ($values as $value) {
-				if (in_array($key, ['kaliforms_field_components', 'kaliforms_grid', 'kaliforms_emails'], true)) {
-					$value = $this->_get_value($value);
+		$data = get_post_custom( $source_id );
+		foreach ( $data as $key => $values ) {
+			foreach ( $values as $value ) {
+				if ( in_array( $key, array( 'kaliforms_field_components', 'kaliforms_grid', 'kaliforms_emails' ), true ) ) {
+					$value = $this->_get_value( $value );
 				}
-				add_post_meta($new_post_id, $key, $value);
+				add_post_meta( $new_post_id, $key, $value );
 			}
 		}
 
-		wp_die(wp_json_encode([
-			'success' => true,
-			'newId'   => $new_post_id,
-		]));
+		wp_die(
+			wp_json_encode(
+				array(
+					'success' => true,
+					'newId'   => $new_post_id,
+				)
+			)
+		);
 	}
 	/**
-	 * Loops and hoops just to sanitize properly
+	 * Prepare JSON form meta for duplication: repair legacy corruption, then
+	 * encode for add_post_meta (wp_slash pairing).
 	 *
-	 * @param [type] $value
-	 * @return void
-	 */
-	public function _get_value($value)
-	{
-		return wp_json_encode(json_decode($this->preg_replace_add_slash_json($value)));
-	}
-	/**
-	 * Sanitize properly the stuff
-	 *
-	 * @param [type] $value
+	 * @param string $value Raw meta value.
 	 * @return string
 	 */
-	public function preg_replace_add_slash_json($value)
-	{
-		return preg_replace('/(u[0-9a-fA-F]{4})/i', '\\\$1', $value);
+	public function _get_value( $value ) {
+		$repair = \KaliForms\Inc\Backend\Sanitizers::repair_json_meta_string( $value );
+		if ( ! empty( $repair['valid'] ) && array_key_exists( 'decoded', $repair ) ) {
+			$encoded = \KaliForms\Inc\Backend\Sanitizers::encode_json_meta_for_storage( $repair['decoded'] );
+			if ( is_string( $encoded ) ) {
+				return $encoded;
+			}
+		}
+
+		$decoded = json_decode( $value );
+		if ( JSON_ERROR_NONE === json_last_error() && null !== $decoded ) {
+			$encoded = \KaliForms\Inc\Backend\Sanitizers::encode_json_meta_for_storage( $decoded );
+			if ( is_string( $encoded ) ) {
+				return $encoded;
+			}
+		}
+
+		return $value;
 	}
 }

@@ -4,7 +4,7 @@ Tags: contact form, forms, form builder, payment form, stripe payment
 Requires at least: 5.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.21
+Stable tag: 2.4.22
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -347,6 +347,11 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.22
+- Fixed: Non-Latin-1 Unicode characters (e.g. Polish ę, ł, ž) and quotation marks were corrupted after saving form fields, terms HTML, and email notifications (u0119 / u0022)
+- Fixed: JSON form meta is now properly slashed before update_post_meta so unicode escapes are not stripped
+- Improved: Legacy corrupted form/email values are repaired on load for Latin Extended characters and quotes
+
 2.4.21
 - Added: Automatic form-definition backups in the database (field layout, emails, settings, PRO meta) on save and plugin version change — no user action required; latest snapshot also stored as _kf_legacy_snapshot for support restore
 - Security: Fixed unauthenticated RCE via call_user_func() when a form field name collided with reserved placeholders ({thisPermalink}, {entryCounter}, {submission_link}) and admin_external_change re-applied attacker-controlled POST values

@@ -34,7 +34,7 @@ class Sanitizers {
 		$json = self::decode_json_meta( $props, false );
 
 		if ( ! is_object( $json ) && ! is_array( $json ) ) {
-			return wp_json_encode( $obj );
+			return self::encode_json_meta_for_storage( $obj );
 		}
 
 		foreach ( $json as $k => $v ) {
@@ -45,7 +45,28 @@ class Sanitizers {
 			$obj->{$safe_key} = $safe_value;
 		}
 
-		return wp_json_encode( $obj );
+		return self::encode_json_meta_for_storage( $obj );
+	}
+
+	/**
+	 * Encode JSON for update_post_meta / add_post_meta.
+	 *
+	 * WordPress unslashes meta values before writing, so unicode escapes like
+	 * \u0022 / \u0119 would lose their backslash unless we wp_slash first.
+	 * JSON_HEX_QUOT keeps quotes as \u0022 (safe under unslash once slashed);
+	 * JSON_UNESCAPED_UNICODE keeps non-ASCII as real UTF-8 in storage.
+	 *
+	 * @param mixed $data  Value to encode.
+	 * @param int   $flags Extra json_encode flags (merged with defaults).
+	 * @return string|false
+	 */
+	public static function encode_json_meta_for_storage( $data, $flags = 0 ) {
+		$encoded = wp_json_encode( $data, $flags | JSON_UNESCAPED_UNICODE | JSON_HEX_QUOT );
+		if ( ! is_string( $encoded ) ) {
+			return $encoded;
+		}
+
+		return wp_slash( $encoded );
 	}
 	/**
 	 * Sanitize webhooks
@@ -355,20 +376,21 @@ class Sanitizers {
 	/**
 	 * Repair strings where JSON unicode escapes lost their backslash (e.g. Lu00e4 -> Lä).
 	 *
-	 * Only accepts likely legacy escapes (Latin-1 / common punctuation). Broad matching
-	 * previously corrupted real words like "Quebec" (matched "uebec" as U+EBEC).
+	 * Only accepts likely legacy escapes (Latin-1 / Latin Extended-A / quotes /
+	 * common punctuation). Broad matching previously corrupted real words like
+	 * "Quebec" (matched "uebec" as U+EBEC).
 	 *
 	 * @param mixed $value Decoded JSON value.
 	 * @return mixed
 	 */
 	public static function repair_corrupted_unicode_escapes( $value ) {
 		if ( is_string( $value ) ) {
-			if ( ! preg_match( '/(?<!\\\\)u(?:00[0-9a-fA-F]{2}|201[0-9a-fA-F])/', $value ) ) {
+			if ( ! preg_match( '/(?<!\\\\)u(?:00[0-9a-fA-F]{2}|01[0-9a-fA-F]{2}|201[0-9a-fA-F])/', $value ) ) {
 				return $value;
 			}
 
 			$repaired = preg_replace_callback(
-				'/(?<!\\\\)u(00[0-9a-fA-F]{2}|201[0-9a-fA-F])/',
+				'/(?<!\\\\)u(00[0-9a-fA-F]{2}|01[0-9a-fA-F]{2}|201[0-9a-fA-F])/',
 				static function ( $matches ) {
 					$decoded = json_decode( '"\\u' . $matches[1] . '"' );
 					if ( ! is_string( $decoded ) || $decoded === '' ) {
@@ -444,8 +466,18 @@ class Sanitizers {
 	 * @return bool
 	 */
 	private static function is_plausible_repaired_codepoint( $codepoint ) {
+		// Straight double quote from JSON_HEX_QUOT corruption (u0022).
+		if ( 0x0022 === $codepoint ) {
+			return true;
+		}
+
 		// Latin-1 supplement (umlauts, ß, etc.)
 		if ( $codepoint >= 0x00A0 && $codepoint <= 0x00FF ) {
+			return true;
+		}
+
+		// Latin Extended-A (Polish, Czech, etc. — ę, ł, ž, …)
+		if ( $codepoint >= 0x0100 && $codepoint <= 0x017F ) {
 			return true;
 		}
 
@@ -606,7 +638,7 @@ class Sanitizers {
 		}
 
 		usort( $sanitized, array( 'KaliForms\Inc\Backend\Sanitizers', 'sort_by_row' ) );
-		return wp_json_encode( $sanitized );
+		return self::encode_json_meta_for_storage( $sanitized );
 	}
 	/**
 	 * Sort stuff by index
@@ -678,7 +710,7 @@ class Sanitizers {
 			return self::preserve_or_fallback( $original );
 		}
 
-		return wp_json_encode( $sanitized, JSON_HEX_QUOT );
+		return self::encode_json_meta_for_storage( $sanitized );
 	}
 
 	/**
@@ -918,7 +950,7 @@ class Sanitizers {
 			return self::preserve_or_fallback( $original );
 		}
 
-		return wp_json_encode( $sanitized, JSON_HEX_QUOT );
+		return self::encode_json_meta_for_storage( $sanitized );
 	}
 
 	/**
