@@ -7,8 +7,8 @@ namespace KaliForms\Inc\Utils;
  *
  * @package Inc\Utils
  */
-trait MetaHelper
-{
+trait MetaHelper {
+
 	/**
 	 * Shortcut for get_post_meta
 	 *
@@ -17,19 +17,18 @@ trait MetaHelper
 	 *
 	 * @return mixed
 	 */
-	public function get($key = '', $default = null)
-	{
-		if (null === $this->post) {
+	public function get( $key = '', $default = null ) {
+		if ( null === $this->post ) {
 			global $post;
 
-			if (null === $post) {
+			if ( null === $post ) {
 				return false;
 			}
 			$this->post = $post;
 		}
 
-		$value = get_post_meta($this->post->ID, $this->slug . '_' . $key, true);
-		if ($value === null || $value === '' && $default !== null) {
+		$value = get_post_meta( $this->post->ID, $this->slug . '_' . $key, true );
+		if ( ( $value === null || $value === false || $value === '' ) && $default !== null ) {
 			return $default;
 		}
 
@@ -44,14 +43,13 @@ trait MetaHelper
 	 *
 	 * @return mixed
 	 */
-	public function set($key = '', $value = '')
-	{
-		if (null === $this->post) {
+	public function set( $key = '', $value = '' ) {
+		if ( null === $this->post ) {
 			global $post;
 			$this->post = $post;
 		}
 
-		update_post_meta($this->post->ID, $this->slug . '_' . $key, $value);
+		update_post_meta( $this->post->ID, $this->slug . '_' . $key, $value );
 
 		return $value;
 	}

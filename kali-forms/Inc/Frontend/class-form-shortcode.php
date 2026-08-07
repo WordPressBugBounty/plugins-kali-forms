@@ -2,16 +2,17 @@
 
 namespace KaliForms\Inc\Frontend;
 
+use KaliForms\Inc\Backend\Sanitizers;
 use KaliForms\Inc\Backend\Translations;
 use KaliForms\Inc\Utils;
 use KaliForms\Inc\Utils\General_Placeholders_Helper;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Form_Shortcode
-{
+class Form_Shortcode {
+
 	/**
 	 * Metahelper trait
 	 */
@@ -50,13 +51,13 @@ class Form_Shortcode
 	 *
 	 * @var array
 	 */
-	public $fields = [];
+	public $fields = array();
 	/**
 	 * Rows
 	 *
 	 * @var array
 	 */
-	protected $rows = [];
+	protected $rows = array();
 	/**
 	 * Actual HTML being outputted
 	 *
@@ -92,74 +93,83 @@ class Form_Shortcode
 	 *
 	 * @var [type]
 	 */
-	public $payment_method = [];
+	public $payment_method = array();
 	/**
 	 * $args sent from the shortcode
 	 *
 	 * @var array
 	 */
-	protected $args = [];
+	protected $args = array();
 
 	/**
 	 * Creates an instance of the form shortcode
 	 *
 	 * @param [Array] $args
 	 */
-	public function __construct($args)
-	{
-		if (!isset($args['id'])) {
-			return $this->display_error(esc_html__('The shortcode does not provide an id for the form', 'kali-forms'));
+	public function __construct( $args ) {
+		if ( ! isset( $args['id'] ) ) {
+			return $this->display_error( esc_html__( 'The shortcode does not provide an id for the form', 'kali-forms' ) );
 		}
 
-		$this->post = get_post($args['id']);
-		if ($this->post === null) {
-			return $this->display_error(esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
+		$this->post = get_post( $args['id'] );
+		if ( $this->post === null ) {
+			return $this->display_error( esc_html__( 'There is no form associated with this id. Make sure you copied it correctly', 'kali-forms' ) );
 		}
-		if ($this->post->post_status !== 'publish') {
-			return $this->display_error(esc_html__('This form is not published.', 'kali-forms'));
+		if ( $this->post->post_status !== 'publish' ) {
+			return $this->display_error( esc_html__( 'This form is not published.', 'kali-forms' ) );
 		}
 
-		$this->disable_bootstrap = $this->get('disable_bootstrap_grid', "0") === "1";
-		$fields                  = json_decode($this->get('field_components', '[]'));
+		$this->disable_bootstrap = $this->get( 'disable_bootstrap_grid', '0' ) === '1';
+		$raw_fields              = $this->get( 'field_components', '[]' );
+		$fields                  = Sanitizers::decode_json_meta( $raw_fields, false );
+		if ( ! is_array( $fields ) ) {
+			$fields = array();
+		}
+		if ( empty( $fields ) && Sanitizers::is_meaningful_json_meta( $raw_fields ) ) {
+			return $this->display_error( esc_html__( 'This form appears to be corrupted and cannot be displayed.', 'kali-forms' ) );
+		}
 
-		$this->payment_method = [
+		$this->payment_method = array(
 			'field'     => '',
-			'providers' => [],
-		];
+			'providers' => array(),
+		);
 
-		if ($this->get('turnstile_enabled', '0') === '1') {
+		if ( $this->get( 'turnstile_enabled', '0' ) === '1' ) {
 			$this->load_turnstile = true;
 		}
 
-		foreach ($fields as $field) {
-			if ($field->id === 'grecaptcha') {
+		foreach ( $fields as $field ) {
+			if ( ! is_object( $field ) || ! isset( $field->id, $field->internalId ) ) {
+				continue;
+			}
+			if ( $field->id === 'grecaptcha' ) {
 				$this->load_grecaptcha = true;
 			}
-			if ($field->id === 'fileUpload') {
+			if ( $field->id === 'fileUpload' ) {
 				$this->load_filepond = true;
 			}
 
-			if ($field->id === 'paymentMethod') {
+			if ( $field->id === 'paymentMethod' ) {
 				$this->payment_method['field'] = $field->internalId;
 			}
 
-			if (isset($field->properties->name) && isset($args[$field->properties->name])) {
-				$field->properties->default = $args[$field->properties->name];
+			if ( isset( $field->properties->name ) && isset( $args[ $field->properties->name ] ) ) {
+				$field->properties->default = $args[ $field->properties->name ];
 				$val                        = $field->properties->default;
-				if (substr($val, 0, 1) === '{' && substr($val, -1) === '}') {
-					$val                        = substr($val, 1, -1);
-					$field->properties->default = $this->shortcode_value($val);
+				if ( substr( $val, 0, 1 ) === '{' && substr( $val, -1 ) === '}' ) {
+					$val                        = substr( $val, 1, -1 );
+					$field->properties->default = $this->shortcode_value( $val );
 				}
 			}
 
-			if (in_array($field->id, ['paypal', 'stripe'])) {
-				$this->payment_method['providers'][] = [
+			if ( in_array( $field->id, array( 'paypal', 'stripe' ) ) ) {
+				$this->payment_method['providers'][] = array(
 					'internalId' => $field->internalId,
 					'label'      => $field->label,
-				];
+				);
 			}
 
-			$this->fields[$field->internalId] = $field;
+			$this->fields[ $field->internalId ] = $field;
 		}
 
 		$this->prepare_data();
@@ -167,8 +177,8 @@ class Form_Shortcode
 		$this->load_bootstrap_grid_if_needed();
 		$this->load_grecaptcha_if_needed();
 		$this->load_turnstile_if_needed();
-		apply_filters($this->slug . '_form_shortcode_init', $this);
-		$form       = new Form($args['id'], $this->rows, $this->get_form_info());
+		apply_filters( $this->slug . '_form_shortcode_init', $this );
+		$form       = new Form( $args['id'], $this->rows, $this->get_form_info() );
 		$this->html = $form->render_fields();
 	}
 
@@ -177,30 +187,32 @@ class Form_Shortcode
 	 *
 	 * @return void
 	 */
-	public function get_form_info()
-	{
-		return apply_filters($this->slug . '_shortcode_form_info', [
-			'form_id'                         => $this->post->ID,
-			'honeypot'                        => $this->get('honeypot', '0'),
-			'required_field_mark'             => $this->get('required_field_mark', ''),
-			'global_error_message'            => $this->get('global_error_message', ''),
-			'multiple_selections_separator'   => $this->get('multiple_selections_separator', ','),
-			'remove_captcha_for_logged_users' => $this->get('remove_captcha_for_logged_users', '0'),
-			'hide_form_name'                  => $this->get('hide_form_name', '0'),
-			'save_ip_address'                 => $this->get('save_ip_address', '0'),
-			'css_id'                          => $this->get('css_id', ''),
-			'css_class'                       => $this->get('css_class', ''),
-			'form_name'                       => get_the_title($this->post),
-			'google_site_key'                 => $this->get('google_site_key', ''),
-			'google_secret_key'               => $this->get('google_secret_key', ''),
-			'currency'                        => $this->get('currency', ''),
-			'form_style'                      => $this->get('selected_form_style', 'theme'),
-			'form_action'                     => $this->get('form_action', ''),
-			'form_method'                     => $this->get('form_method', ''),
-			'payment_method'                  => $this->payment_method,
-			'turnstile_enabled'               => $this->load_turnstile,
-			'turnstile_site_key'              => $this->get('turnstile_site_key', ''),
-		]);
+	public function get_form_info() {
+		return apply_filters(
+			$this->slug . '_shortcode_form_info',
+			array(
+				'form_id'                         => $this->post->ID,
+				'honeypot'                        => $this->get( 'honeypot', '0' ),
+				'required_field_mark'             => $this->get( 'required_field_mark', '' ),
+				'global_error_message'            => $this->get( 'global_error_message', '' ),
+				'multiple_selections_separator'   => $this->get( 'multiple_selections_separator', ',' ),
+				'remove_captcha_for_logged_users' => $this->get( 'remove_captcha_for_logged_users', '0' ),
+				'hide_form_name'                  => $this->get( 'hide_form_name', '0' ),
+				'save_ip_address'                 => $this->get( 'save_ip_address', '0' ),
+				'css_id'                          => $this->get( 'css_id', '' ),
+				'css_class'                       => $this->get( 'css_class', '' ),
+				'form_name'                       => get_the_title( $this->post ),
+				'google_site_key'                 => $this->get( 'google_site_key', '' ),
+				'google_secret_key'               => $this->get( 'google_secret_key', '' ),
+				'currency'                        => $this->get( 'currency', '' ),
+				'form_style'                      => $this->get( 'selected_form_style', 'theme' ),
+				'form_action'                     => $this->get( 'form_action', '' ),
+				'form_method'                     => $this->get( 'form_method', '' ),
+				'payment_method'                  => $this->payment_method,
+				'turnstile_enabled'               => $this->load_turnstile,
+				'turnstile_site_key'              => $this->get( 'turnstile_site_key', '' ),
+			)
+		);
 	}
 
 	/**
@@ -208,13 +220,12 @@ class Form_Shortcode
 	 *
 	 * @return void
 	 */
-	public function _check_if_elementor_preview()
-	{
-		if (empty($_GET)) {
+	public function _check_if_elementor_preview() {
+		if ( empty( $_GET ) ) {
 			return false;
 		}
 
-		if (isset($_GET['action']) && $_GET['action'] === 'elementor') {
+		if ( isset( $_GET['action'] ) && $_GET['action'] === 'elementor' ) {
 			return true;
 		}
 	}
@@ -224,22 +235,21 @@ class Form_Shortcode
 	 *
 	 * @return void
 	 */
-	public function load_scripts_and_styles()
-	{
+	public function load_scripts_and_styles() {
 		// phpcs:ignore PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent -- reCAPTCHA must load from Google.
 		wp_register_script(
 			'kali-grecaptcha',
 			'https://www.google.com/recaptcha/api.js',
-			[],
+			array(),
 			KALIFORMS_VERSION,
 			true
 		);
-		$args = array('onload' => 'onloadTurnstileCallback');
+		$args = array( 'onload' => 'onloadTurnstileCallback' );
 		// phpcs:disable PluginCheck.CodeAnalysis.EnqueuedResourceOffloading.OffloadedContent -- Turnstile must load from Cloudflare.
 		wp_register_script(
 			'kali-turnstile',
-			add_query_arg($args, 'https://challenges.cloudflare.com/turnstile/v0/api.js'),
-			[],
+			add_query_arg( $args, 'https://challenges.cloudflare.com/turnstile/v0/api.js' ),
+			array(),
 			KALIFORMS_VERSION,
 			true
 		);
@@ -247,21 +257,21 @@ class Form_Shortcode
 		wp_register_script(
 			'kaliforms-filepond',
 			KALIFORMS_URL . 'assets/frontend/js/filepond.js',
-			['wp-i18n'],
+			array( 'wp-i18n' ),
 			KALIFORMS_VERSION
 		);
 		wp_register_script(
 			'kaliforms-exports',
 			KALIFORMS_URL . 'assets/frontend/js/kaliExports.js',
-			[],
+			array(),
 			KALIFORMS_VERSION
 		);
-		$deps = ['wp-i18n', 'kaliforms-exports'];
-		if ($this->load_filepond) {
+		$deps = array( 'wp-i18n', 'kaliforms-exports' );
+		if ( $this->load_filepond ) {
 			$deps[] = 'kaliforms-filepond';
 		}
 
-		if (!isset($GLOBALS['wp_scripts']->registered['kaliforms-frontend'])) {
+		if ( ! isset( $GLOBALS['wp_scripts']->registered['kaliforms-frontend'] ) ) {
 			wp_enqueue_script(
 				'kaliforms-frontend',
 				KALIFORMS_URL . 'assets/frontend/js/frontend.js',
@@ -271,11 +281,11 @@ class Form_Shortcode
 			);
 		}
 
-		if (isset($GLOBALS['wp_scripts']->registered['kaliforms-frontend'])) {
+		if ( isset( $GLOBALS['wp_scripts']->registered['kaliforms-frontend'] ) ) {
 			$loadedDeps = $GLOBALS['wp_scripts']->registered['kaliforms-frontend']->deps;
 
-			if (!serialize($loadedDeps) !== serialize($deps)) {
-				wp_deregister_script('kaliforms-frontend');
+			if ( ! serialize( $loadedDeps ) !== serialize( $deps ) ) {
+				wp_deregister_script( 'kaliforms-frontend' );
 				wp_enqueue_script(
 					'kaliforms-frontend',
 					KALIFORMS_URL . 'assets/frontend/js/frontend.js',
@@ -296,32 +306,31 @@ class Form_Shortcode
 		wp_localize_script(
 			'kaliforms-frontend',
 			'KaliFormsObject',
-			[
-				'ajaxurl'        => esc_url(admin_url('admin-ajax.php')),
-				'frontendUrl'    => esc_url(get_bloginfo('url')),
-				'translations'   => (new Translations)->translations['frontend'],
-				'ajax_nonce'     => wp_create_nonce($this->slug . '_nonce'),
-				'restUrl'        => get_rest_url(null, 'kaliforms/v1/processor'),
-				'restNonce'      => wp_create_nonce('wp_rest'),
-				'akismetEnabled' => esc_js($this->get('akismet', '0')),
-			]
+			array(
+				'ajaxurl'        => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'frontendUrl'    => esc_url( get_bloginfo( 'url' ) ),
+				'translations'   => ( new Translations() )->translations['frontend'],
+				'ajax_nonce'     => wp_create_nonce( $this->slug . '_nonce' ),
+				'restUrl'        => get_rest_url( null, 'kaliforms/v1/processor' ),
+				'restNonce'      => wp_create_nonce( 'wp_rest' ),
+				'akismetEnabled' => esc_js( $this->get( 'akismet', '0' ) ),
+			)
 		);
 		wp_localize_script(
 			'kaliforms-filepond',
 			'KaliFormsFilePondObject',
-			[
-				'ajaxurl' => esc_url(admin_url('admin-ajax.php')),
-			]
+			array(
+				'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
+			)
 		);
 
-		wp_set_script_translations('kaliforms-frontend', 'kali-forms', KALIFORMS_BASE . 'languages');
+		wp_set_script_translations( 'kaliforms-frontend', 'kali-forms', KALIFORMS_BASE . 'languages' );
 
-		do_action($this->slug . '_after_load_script_function', $this);
+		do_action( $this->slug . '_after_load_script_function', $this );
 	}
 
-	public function load_bootstrap_grid_if_needed()
-	{
-		if (!$this->disable_bootstrap) {
+	public function load_bootstrap_grid_if_needed() {
+		if ( ! $this->disable_bootstrap ) {
 			wp_enqueue_style(
 				'bootstrap-v4-grid',
 				KALIFORMS_URL . 'assets/frontend/vendor/bootstrap-grid.min.css',
@@ -336,10 +345,9 @@ class Form_Shortcode
 	 *
 	 * @return void
 	 */
-	public function load_grecaptcha_if_needed()
-	{
-		if ($this->load_grecaptcha) {
-			wp_enqueue_script('kali-grecaptcha');
+	public function load_grecaptcha_if_needed() {
+		if ( $this->load_grecaptcha ) {
+			wp_enqueue_script( 'kali-grecaptcha' );
 		}
 	}
 
@@ -348,18 +356,16 @@ class Form_Shortcode
 	 *
 	 * @return void
 	 */
-	public function load_turnstile_if_needed()
-	{
-		if ($this->load_turnstile) {
-			wp_enqueue_script('kali-turnstile');
+	public function load_turnstile_if_needed() {
+		if ( $this->load_turnstile ) {
+			wp_enqueue_script( 'kali-turnstile' );
 		}
 	}
 	/**
 	 * Displays an error in the frontend
 	 *
 	 */
-	public function display_error($err)
-	{
+	public function display_error( $err ) {
 		$this->html = $err;
 	}
 
@@ -368,10 +374,12 @@ class Form_Shortcode
 	 *
 	 * @return void
 	 */
-	public function prepare_data()
-	{
-		$grid = json_decode($this->get('grid', '[]'));
-		$this->walk_array($grid);
+	public function prepare_data() {
+		$grid = Sanitizers::decode_json_meta( $this->get( 'grid', '[]' ), false );
+		if ( ! is_array( $grid ) ) {
+			$grid = array();
+		}
+		$this->walk_array( $grid );
 	}
 
 	/**
@@ -381,14 +389,13 @@ class Form_Shortcode
 	 *
 	 * @return void
 	 */
-	public function shortcode_value($val)
-	{
+	public function shortcode_value( $val ) {
 		$str = '';
 
 		if (
 			in_array(
 				$val,
-				[
+				array(
 					'user_email',
 					'first_name',
 					'last_name',
@@ -396,32 +403,32 @@ class Form_Shortcode
 					'user_nicename',
 					'user_url',
 					'display_name',
-				]
+				)
 			)
 			&& is_user_logged_in()
 		) {
 			$user = wp_get_current_user();
-			switch ($val) {
+			switch ( $val ) {
 				case 'user_email':
-					$str = $user->get('user_email');
+					$str = $user->get( 'user_email' );
 					break;
 				case 'first_name':
-					$str = $user->get('first_name');
+					$str = $user->get( 'first_name' );
 					break;
 				case 'last_name':
-					$str = $user->get('last_name');
+					$str = $user->get( 'last_name' );
 					break;
 				case 'user_login':
-					$str = $user->get('user_login');
+					$str = $user->get( 'user_login' );
 					break;
 				case 'user_nicename':
-					$str = $user->get('user_nicename');
+					$str = $user->get( 'user_nicename' );
 					break;
 				case 'user_url';
-					$str = $user->get('user_url');
+					$str = $user->get( 'user_url' );
 					break;
 				case 'display_name':
-					$str = $user->get('display_name');
+					$str = $user->get( 'display_name' );
 					break;
 				default:
 					$str = '';
@@ -432,24 +439,24 @@ class Form_Shortcode
 		if (
 			in_array(
 				$val,
-				[
+				array(
 					'entryCounter',
 					'formName',
 					'thisPermalink',
 					'ip_address',
 					'ipAddress',
-				]
+				)
 			)
 		) {
-			switch ($val) {
+			switch ( $val ) {
 				case 'entryCounter':
-					$str = General_Placeholders_Helper::count_form_entries($this->post->ID);
+					$str = General_Placeholders_Helper::count_form_entries( $this->post->ID );
 					break;
 				case 'formName':
-					$str = get_the_title($this->post);
+					$str = get_the_title( $this->post );
 					break;
 				case 'thisPermalink':
-					$str = esc_url(get_permalink());
+					$str = esc_url( get_permalink() );
 					break;
 				case 'ip_address':
 				case 'ipAddress':
@@ -469,21 +476,20 @@ class Form_Shortcode
 	 *
 	 * @return string
 	 */
-	public function get_user_ip_addr()
-	{
+	public function get_user_ip_addr() {
 		$ipaddress = '';
-		if (getenv('HTTP_CLIENT_IP')) {
-			$ipaddress = getenv('HTTP_CLIENT_IP');
-		} else if (getenv('HTTP_X_FORWARDED_FOR')) {
-			$ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-		} else if (getenv('HTTP_X_FORWARDED')) {
-			$ipaddress = getenv('HTTP_X_FORWARDED');
-		} else if (getenv('HTTP_FORWARDED_FOR')) {
-			$ipaddress = getenv('HTTP_FORWARDED_FOR');
-		} else if (getenv('HTTP_FORWARDED')) {
-			$ipaddress = getenv('HTTP_FORWARDED');
-		} else if (getenv('REMOTE_ADDR')) {
-			$ipaddress = getenv('REMOTE_ADDR');
+		if ( getenv( 'HTTP_CLIENT_IP' ) ) {
+			$ipaddress = getenv( 'HTTP_CLIENT_IP' );
+		} elseif ( getenv( 'HTTP_X_FORWARDED_FOR' ) ) {
+			$ipaddress = getenv( 'HTTP_X_FORWARDED_FOR' );
+		} elseif ( getenv( 'HTTP_X_FORWARDED' ) ) {
+			$ipaddress = getenv( 'HTTP_X_FORWARDED' );
+		} elseif ( getenv( 'HTTP_FORWARDED_FOR' ) ) {
+			$ipaddress = getenv( 'HTTP_FORWARDED_FOR' );
+		} elseif ( getenv( 'HTTP_FORWARDED' ) ) {
+			$ipaddress = getenv( 'HTTP_FORWARDED' );
+		} elseif ( getenv( 'REMOTE_ADDR' ) ) {
+			$ipaddress = getenv( 'REMOTE_ADDR' );
 		} else {
 			$ipaddress = 'UNKNOWN';
 		}

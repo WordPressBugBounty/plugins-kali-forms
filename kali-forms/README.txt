@@ -4,7 +4,7 @@ Tags: contact form, forms, form builder, payment form, stripe payment
 Requires at least: 5.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.22
+Stable tag: 2.4.23
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -347,6 +347,10 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.23
+- Fixed: Frontend form shortcode no longer fatals on PHP 8+ when field_components or grid meta is missing/invalid (foreach/usort on null)
+- Improved: Corrupt form definitions show a clear error message instead of crashing the page
+
 2.4.22
 - Fixed: Non-Latin-1 Unicode characters (e.g. Polish ę, ł, ž) and quotation marks were corrupted after saving form fields, terms HTML, and email notifications (u0119 / u0022)
 - Fixed: JSON form meta is now properly slashed before update_post_meta so unicode escapes are not stripped
