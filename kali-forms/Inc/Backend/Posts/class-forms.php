@@ -736,6 +736,14 @@ class Forms
 			[
 				'id'       => 'paypal_client_id_sandbox',
 				'sanitize' => 'sanitize_text_field',
+			],
+			[
+				'id'       => 'paypal_client_secret',
+				'sanitize' => 'sanitize_text_field',
+			],
+			[
+				'id'       => 'paypal_client_secret_sandbox',
+				'sanitize' => 'sanitize_text_field',
 			]
 		);
 

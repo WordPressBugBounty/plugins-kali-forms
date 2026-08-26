@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use KaliForms\Inc\Utils\Payments_Action_Helper;
+use KaliForms\Inc\Utils\Paypal_Order_Verifier;
 
 class Payments_Simple
 {
@@ -35,18 +36,59 @@ class Payments_Simple
 		add_action('wp_ajax_kaliforms_form_verify_products', [$this, 'verify_products']);
 		add_action('wp_ajax_nopriv_kaliforms_form_verify_products', [$this, 'verify_products']);
 
-		add_action('wp_ajax_kaliforms_form_paypal_confirm_log', [$this, 'nothing_to_see_here']);
-		add_action('wp_ajax_nopriv_kaliforms_form_paypal_confirm_log', [$this, 'nothing_to_see_here']);
+		add_action('wp_ajax_kaliforms_form_paypal_confirm_log', [$this, 'confirm_paypal_order']);
+		add_action('wp_ajax_nopriv_kaliforms_form_paypal_confirm_log', [$this, 'confirm_paypal_order']);
 	}
 
 	/**
-	 * Nothing to see here
+	 * Verify a captured PayPal order against the form catalog.
+	 *
+	 * The submission handler is the actual gate; this endpoint exists so
+	 * capture-time logging can fail closed instead of returning a stub.
 	 *
 	 * @return void
 	 */
-	public function nothing_to_see_here()
+	public function confirm_paypal_order()
 	{
-		wp_die(esc_html__('Upgrade to Pro version for a payment log', 'kali-forms'));
+		$args = $this->sanitize_post();
+		$this->verify($args);
+
+		$form_id = absint($args['formId']);
+		if (!Paypal_Order_Verifier::is_published_kali_form($form_id)) {
+			$this->denied();
+		}
+
+		$order_id = '';
+		if (!empty($args['payment_id'])) {
+			$order_id = $args['payment_id'];
+		} elseif (!empty($args['id'])) {
+			$order_id = $args['id'];
+		}
+
+		$form_data = [];
+		if (isset($args['formData']) && is_array($args['formData'])) {
+			$form_data = $args['formData'];
+		}
+
+		$result = Paypal_Order_Verifier::verify_captured_order($form_id, $order_id, $form_data, false);
+		if (is_wp_error($result)) {
+			wp_die(
+				wp_json_encode(
+					[
+						'error'   => true,
+						'message' => $result->get_error_message(),
+					]
+				)
+			);
+		}
+
+		wp_die(
+			wp_json_encode(
+				[
+					'success' => true,
+				]
+			)
+		);
 	}
 
 	/**
@@ -66,7 +108,13 @@ class Payments_Simple
 	{
 		$args = $this->sanitize_post();
 		$this->verify($args);
-		$actionHelper = new Payments_Action_Helper($args['formId']);
+
+		$form_id = absint($args['formId']);
+		if (!Paypal_Order_Verifier::is_published_kali_form($form_id)) {
+			$this->denied();
+		}
+
+		$actionHelper = new Payments_Action_Helper($form_id);
 		if (is_wp_error($actionHelper)) {
 			wp_die(esc_html__('Something went wrong', 'kali-forms'));
 		}
@@ -77,15 +125,32 @@ class Payments_Simple
 	/**
 	 * Run security check and return args
 	 *
-	 * @return void
+	 * @return array|false
 	 */
 	private function sanitize_post()
 	{
-		if (!isset($_POST['data'])) {
+		if (!isset($_POST['data']) || !is_array($_POST['data'])) {
 			return false;
 		}
 
-		return stripslashes_deep($_POST['data']);
+		$data = stripslashes_deep($_POST['data']);
+
+		$args = [
+			'formId' => isset($data['formId']) ? absint($data['formId']) : 0,
+			'nonce'  => isset($data['nonce']) ? sanitize_key($data['nonce']) : '',
+		];
+
+		if (isset($data['payment_id'])) {
+			$args['payment_id'] = sanitize_text_field($data['payment_id']);
+		}
+		if (isset($data['id'])) {
+			$args['id'] = sanitize_text_field($data['id']);
+		}
+		if (isset($data['formData']) && is_array($data['formData'])) {
+			$args['formData'] = $data['formData'];
+		}
+
+		return $args;
 	}
 
 	/**
@@ -165,7 +230,7 @@ class Payments_Simple
 			$this->denied();
 		}
 
-		if (!isset($args['formId'])) {
+		if (!isset($args['formId']) || absint($args['formId']) <= 0) {
 			$this->denied();
 		}
 

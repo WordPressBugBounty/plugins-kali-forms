@@ -4,7 +4,7 @@ Tags: contact form, forms, form builder, payment form, stripe payment
 Requires at least: 5.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.23
+Stable tag: 2.4.24
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -347,6 +347,14 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.24
+- Security: PayPal checkout amount is no longer trusted from the browser. After capture, PHP fetches the order from the PayPal Orders API and rejects the submission unless the captured amount, currency, and payee match the form product catalog
+- Security: PayPal-enabled forms now require a payment_id and server-side order verification before a submission is stored or notification emails are sent
+- Security: kaliforms_form_paypal_confirm_log now verifies the captured order instead of returning an upgrade stub
+- Security: kaliforms_form_verify_products only reads meta from published Kali Forms posts
+- Improved: Product catalog JSON is decoded with the same routine as the form renderer so server-side totals match the prices visitors see
+- Added: PayPal REST client secret fields (live and sandbox) for server-side order verification
+
 2.4.23
 - Fixed: Frontend form shortcode no longer fatals on PHP 8+ when field_components or grid meta is missing/invalid (foreach/usort on null)
 - Improved: Corrupt form definitions show a clear error message instead of crashing the page

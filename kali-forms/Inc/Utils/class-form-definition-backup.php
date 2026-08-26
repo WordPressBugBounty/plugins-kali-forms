@@ -43,10 +43,15 @@ class Form_Definition_Backup {
 	/**
 	 * Register automatic (non-optional) hooks.
 	 *
+	 * Baseline runs on `init` (after the forms CPT is registered). Calling it from
+	 * `plugins_loaded` would see zero forms because `register_post_type` has not run yet.
+	 * Do not re-schedule `plugins_loaded` from inside `plugins_loaded` either —
+	 * an earlier priority never fires in the same request.
+	 *
 	 * @return void
 	 */
 	public static function boot() {
-		add_action( 'plugins_loaded', array( __CLASS__, 'maybe_snapshot_on_upgrade' ), 5 );
+		add_action( 'init', array( __CLASS__, 'maybe_snapshot_on_upgrade' ), 20 );
 		add_action( 'upgrader_process_complete', array( __CLASS__, 'maybe_snapshot_after_plugin_upgrade' ), 10, 2 );
 	}
 

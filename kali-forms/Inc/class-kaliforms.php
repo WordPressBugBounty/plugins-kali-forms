@@ -73,7 +73,6 @@ class KaliForms {
 	 */
 	public function init_kaliforms() {
 		Legacy_Snapshot_Downgrade_Guard::boot();
-		Form_Definition_Backup::boot();
 
 		/**
 		 * Hook before the plugin is constructed
@@ -93,6 +92,10 @@ class KaliForms {
 		 */
 		new Forms();
 		new Submitted();
+
+		// Baseline / upgrade snapshots after CPT registration.
+		// Must run directly — do not reschedule plugins_loaded (prio already passed).
+		Form_Definition_Backup::boot();
 		/**
 		 * Initiate actions & filters
 		 */

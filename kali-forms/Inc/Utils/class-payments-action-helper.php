@@ -2,7 +2,12 @@
 
 namespace KaliForms\Inc\Utils;
 
+use KaliForms\Inc\Backend\Sanitizers;
 use KaliForms\Inc\Utils\MetaHelper;
+
+if (!defined('ABSPATH')) {
+	exit;
+}
 
 class Payments_Action_Helper
 {
@@ -37,6 +42,17 @@ class Payments_Action_Helper
 	}
 
 	/**
+	 * Whether the ID is a published Kali Forms form.
+	 *
+	 * @param int $form_id Form post ID.
+	 * @return bool
+	 */
+	public static function is_published_kali_form($form_id)
+	{
+		return Paypal_Order_Verifier::is_published_kali_form($form_id);
+	}
+
+	/**
 	 * Get payment data
 	 *
 	 * @return void
@@ -46,7 +62,8 @@ class Payments_Action_Helper
 		$this->post   = get_post($args['formId']);
 		$paymentsLive = $this->get('payments_live', false);
 		$currency     = $this->get('currency', 'USD');
-		$foreachRun   = $this->foreachFieldsToProducts();
+		$form_data    = isset($args['formData']) && is_array($args['formData']) ? $args['formData'] : [];
+		$foreachRun   = $this->foreachFieldsToProducts($form_data);
 		$email        = false;
 		$description  = [];
 
@@ -65,6 +82,31 @@ class Payments_Action_Helper
 			'amount'      => $foreachRun['total'],
 			'products'    => $foreachRun['products'],
 			'description' => $description,
+		];
+	}
+
+	/**
+	 * Catalog total, currency and merchant email for a submission.
+	 *
+	 * @param array $form_data Submitted field values.
+	 * @return array
+	 */
+	public function get_expected_charge($form_data = [])
+	{
+		if ($this->post === null && isset($this->form)) {
+			$this->post = get_post($this->form);
+		}
+
+		$foreachRun = $this->foreachFieldsToProducts(is_array($form_data) ? $form_data : []);
+		$currency   = $this->get('currency', 'USD');
+		if ($currency === null || $currency === '') {
+			$currency = 'USD';
+		}
+
+		return [
+			'amount'   => $foreachRun['total'],
+			'currency' => $currency,
+			'payee'    => $foreachRun['payee'],
 		];
 	}
 
@@ -92,7 +134,8 @@ class Payments_Action_Helper
 			};
 		}
 
-		$foreachRun = $this->foreachFieldsToProducts();
+		$form_data  = isset($args['formData']) && is_array($args['formData']) ? $args['formData'] : [];
+		$foreachRun = $this->foreachFieldsToProducts($form_data);
 		return [
 			'fields'   => $filtered,
 			'currency' => $currency,
@@ -108,11 +151,12 @@ class Payments_Action_Helper
 	 */
 	public function get_products($args)
 	{
-		$this->post = get_post($args['formId']);
-
-		if ($this->post === null) {
+		$form_id = isset($args['formId']) ? absint($args['formId']) : 0;
+		if (!self::is_published_kali_form($form_id)) {
 			return new \WP_Error(500, esc_html__('There is no form associated with this id. Make sure you copied it correctly', 'kali-forms'));
 		}
+
+		$this->post = get_post($form_id);
 
 		$foreachRun = $this->foreachFieldsToProducts();
 		if ($foreachRun['payee']) {
@@ -131,21 +175,31 @@ class Payments_Action_Helper
 	/**
 	 * Get products from fields
 	 *
-	 * @return void
+	 * @param array $form_data Optional submitted values so donations and selected variants are included in the total.
+	 * @return array
 	 */
-	public function foreachFieldsToProducts()
+	public function foreachFieldsToProducts($form_data = [])
 	{
-		$fields          = json_decode($this->get('field_components', '[]'), false, 512, JSON_HEX_QUOT);
+		$fields          = Sanitizers::decode_json_meta($this->get('field_components', '[]'), false);
 		$products        = [];
 		$payee           = false;
 		$total           = 0;
 		$emailFieldFound = false;
 		$currency        = $this->get('currency', 'USD');
+		if (!is_array($fields)) {
+			$fields = [];
+		}
+		if (!is_array($form_data)) {
+			$form_data = [];
+		}
 		foreach ($fields as $k => $v) {
-			if ($v->id === 'email') {
+			if (!is_object($v) || !isset($v->id)) {
+				continue;
+			}
+			if ($v->id === 'email' && isset($v->properties->name)) {
 				$emailFieldFound = $v->properties->name;
 			}
-			if ($v->id === 'paypal') {
+			if ($v->id === 'paypal' && !empty($v->properties->merchantEmail)) {
 				$payee = $v->properties->merchantEmail;
 			}
 			if ($v->id === 'donation') {
@@ -161,6 +215,7 @@ class Payments_Action_Helper
 					'choices'      => $v->properties->choices,
 					'currency'     => $currency,
 				];
+				$total += $this->donation_amount_from_submission($v, $form_data);
 			}
 			if ($v->id === 'product') {
 				$products[] = [
@@ -189,8 +244,91 @@ class Payments_Action_Helper
 						'currency'    => $currency,
 					];
 				}
+				$total += $this->selected_multiple_product_amount($v, $form_data);
 			}
 		}
 		return ['payee' => $payee, 'products' => $products, 'total' => $total, 'email' => $emailFieldFound];
+	}
+
+	/**
+	 * Donation amount from submitted field values (user-chosen by design).
+	 *
+	 * @param object $field     Donation field.
+	 * @param array  $form_data Submitted values.
+	 * @return float
+	 */
+	private function donation_amount_from_submission($field, array $form_data)
+	{
+		if (empty($form_data) || empty($field->properties->name)) {
+			return 0;
+		}
+
+		$name = $field->properties->name;
+		if (!isset($form_data[$name])) {
+			return 0;
+		}
+
+		$submitted = $form_data[$name];
+		if (is_array($submitted)) {
+			$submitted = reset($submitted);
+		}
+		if (!is_string($submitted) && !is_numeric($submitted)) {
+			return 0;
+		}
+
+		$amount = floatval($submitted);
+		if ($amount <= 0) {
+			return 0;
+		}
+
+		$donation_type = isset($field->properties->donationType) ? $field->properties->donationType : 'custom';
+		if ($donation_type === 'custom') {
+			return $amount;
+		}
+
+		if (empty($field->properties->choices)) {
+			return 0;
+		}
+
+		foreach ($field->properties->choices as $choice) {
+			$choice_value = is_object($choice) && isset($choice->value) ? $choice->value : $choice;
+			if ((string) $choice_value === (string) $submitted) {
+				return floatval($choice_value);
+			}
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Selected multiple-product variant price from the catalog (never from client-supplied prices).
+	 *
+	 * @param object $field     Multiple products field.
+	 * @param array  $form_data Submitted values.
+	 * @return float
+	 */
+	private function selected_multiple_product_amount($field, array $form_data)
+	{
+		if (empty($form_data) || empty($field->properties->name) || empty($field->properties->products)) {
+			return 0;
+		}
+
+		$name = $field->properties->name;
+		if (!isset($form_data[$name])) {
+			return 0;
+		}
+
+		$selected = $form_data[$name];
+		if (is_array($selected)) {
+			$selected = reset($selected);
+		}
+
+		foreach ($field->properties->products as $variant) {
+			if (isset($variant->id) && (string) $variant->id === (string) $selected) {
+				return floatval($variant->price);
+			}
+		}
+
+		return 0;
 	}
 }

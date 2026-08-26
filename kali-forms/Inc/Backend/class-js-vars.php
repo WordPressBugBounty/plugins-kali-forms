@@ -186,8 +186,10 @@ class JS_Vars {
 		/**
 		 * Payment fields
 		 */
-		$this->content['payPalClientId']        = esc_html( $this->get( 'paypal_client_id', '' ) );
-		$this->content['payPalClientIdSandBox'] = esc_html( $this->get( 'paypal_client_id_sandbox', '' ) );
+		$this->content['payPalClientId']               = esc_html( $this->get( 'paypal_client_id', '' ) );
+		$this->content['payPalClientIdSandBox']        = esc_html( $this->get( 'paypal_client_id_sandbox', '' ) );
+		$this->content['payPalClientSecret']           = esc_attr( $this->get( 'paypal_client_secret', '' ) );
+		$this->content['payPalClientSecretSandBox']    = esc_attr( $this->get( 'paypal_client_secret_sandbox', '' ) );
 		$this->content['paymentsLive']          = esc_attr( $this->get( 'payments_live', '0' ) );
 		$this->content['currency']              = esc_attr( $this->get( 'currency', 'USD' ) );
 		/**

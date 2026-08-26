@@ -167,6 +167,8 @@ class Post_Translator
 				'entriesUrl'                  => esc_url(admin_url('edit.php?post_type=kaliforms_submitted&formId=' . absint($this->post->ID))),
 				'payPalClientId'              => esc_html($this->get('paypal_client_id', '')),
 				'payPalClientIdSandBox'       => esc_html($this->get('paypal_client_id_sandbox', '')),
+				'payPalClientSecret'          => esc_attr($this->get('paypal_client_secret', '')),
+				'payPalClientSecretSandBox'   => esc_attr($this->get('paypal_client_secret_sandbox', '')),
 				'paymentsLive'                => esc_attr($this->get('payments_live', '0')),
 				'currency'                    => esc_attr($this->get('currency', 'USD')),
 				'selectedFormStyle'           => esc_attr($this->get('selected_form_style', 'theme')),

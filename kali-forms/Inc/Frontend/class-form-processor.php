@@ -8,6 +8,7 @@ use KaliForms\Inc\Utils\Digital_Signature_Helper;
 use KaliForms\Inc\Utils\Emailer;
 use KaliForms\Inc\Utils\FileManager;
 use KaliForms\Inc\Utils\GeneralPlaceholders;
+use KaliForms\Inc\Utils\Paypal_Order_Verifier;
 use KaliForms\Inc\Utils\UserPlaceholders;
 use KaliForms\Inc\Utils\MetaHelper;
 
@@ -193,6 +194,8 @@ class Form_Processor {
 			);
 		}
 
+		$this->verify_required_paypal_payment();
+
 		/**
 		 * Only if we have that particular addon
 		 */
@@ -323,7 +326,7 @@ class Form_Processor {
 			return $this->display_error( esc_html__( 'There is no form associated with this id. Make sure you copied it correctly', 'kali-forms' ) );
 		}
 
-		if ( $this->post->post_status !== 'publish' ) {
+		if ( $this->post->post_type !== 'kaliforms_forms' || $this->post->post_status !== 'publish' ) {
 			return $this->display_error( esc_html__( 'It seems that the form is no longer available', 'kali-forms' ) );
 		}
 
@@ -343,6 +346,136 @@ class Form_Processor {
 	 */
 	private function captcha_skipped_for_logged_user() {
 		return $this->get( 'remove_captcha_for_logged_users', '0' ) === '1' && is_user_logged_in();
+	}
+
+	/**
+	 * When the form contains a PayPal field, require a captured order and
+	 * re-check amount, currency and payee against the PayPal Orders API.
+	 *
+	 * @return void
+	 */
+	private function verify_required_paypal_payment() {
+		if ( apply_filters( $this->slug . '_skip_server_paypal_verification', false, $this->post ) ) {
+			return;
+		}
+
+		if ( ! $this->paypal_payment_required_for_submission() ) {
+			return;
+		}
+
+		$order_id = $this->get_posted_paypal_order_id();
+		if ( $order_id === '' ) {
+			return $this->display_error( esc_html__( 'A completed PayPal payment is required before this form can be submitted.', 'kali-forms' ) );
+		}
+
+		$result = Paypal_Order_Verifier::verify_captured_order( $this->post->ID, $order_id, $this->data, true );
+		if ( is_wp_error( $result ) ) {
+			return $this->display_error( $result->get_error_message() );
+		}
+	}
+
+	/**
+	 * Whether this submission must include a verified PayPal capture.
+	 *
+	 * @return bool
+	 */
+	private function paypal_payment_required_for_submission() {
+		if ( ! $this->form_has_field_type( 'paypal' ) ) {
+			return false;
+		}
+
+		$has_alternative = $this->form_has_field_type( 'stripe' ) || $this->form_has_field_type( 'wireTransfer' );
+		if ( ! $has_alternative ) {
+			return true;
+		}
+
+		$provider = '';
+		if ( isset( $this->data['payments'] ) && is_array( $this->data['payments'] ) && ! empty( $this->data['payments']['provider'] ) ) {
+			$provider = sanitize_text_field( (string) $this->data['payments']['provider'] );
+		}
+
+		if ( $provider === 'paypal' ) {
+			return true;
+		}
+
+		if ( in_array( strtolower( $provider ), array( 'stripe', 'stripeiban', 'wiretransfer' ), true ) ) {
+			return false;
+		}
+
+		$chosen = strtolower( $this->get_submitted_payment_method_choice() );
+		if ( in_array( $chosen, array( 'stripe', 'stripeiban', 'wiretransfer' ), true ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Payment-method chooser value from radio/dropdown fields.
+	 *
+	 * @return string
+	 */
+	private function get_submitted_payment_method_choice() {
+		$known = array( 'paypal', 'stripe', 'stripeiban', 'wireTransfer', 'wiretransfer' );
+		foreach ( $this->field_type_map as $name => $type ) {
+			if ( ! in_array( $type, array( 'radio', 'dropdown' ), true ) || ! isset( $this->data[ $name ] ) ) {
+				continue;
+			}
+
+			$value = $this->data[ $name ];
+			if ( is_array( $value ) ) {
+				$value = reset( $value );
+			}
+			if ( ! is_string( $value ) && ! is_numeric( $value ) ) {
+				continue;
+			}
+
+			if ( in_array( (string) $value, $known, true ) ) {
+				return (string) $value;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * PayPal order ID posted by the frontend after capture.
+	 *
+	 * @return string
+	 */
+	private function get_posted_paypal_order_id() {
+		if ( ! isset( $this->data['payments'] ) || ! is_array( $this->data['payments'] ) ) {
+			return '';
+		}
+
+		if ( empty( $this->data['payments']['payment_id'] ) ) {
+			return '';
+		}
+
+		return Paypal_Order_Verifier::sanitize_order_id( $this->data['payments']['payment_id'] );
+	}
+
+	/**
+	 * Form definition includes a field of the given builder type.
+	 *
+	 * @param string $field_id Builder field id (paypal, stripe, grecaptcha, ...).
+	 * @return bool
+	 */
+	private function form_has_field_type( $field_id ) {
+		$fields = Sanitizers::decode_json_meta(
+			$this->get( 'field_components', '[]' ),
+			false
+		);
+		if ( ! is_array( $fields ) ) {
+			return false;
+		}
+		foreach ( $fields as $field ) {
+			if ( isset( $field->id ) && $field->id === $field_id ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
