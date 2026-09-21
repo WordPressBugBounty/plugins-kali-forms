@@ -4,7 +4,7 @@ Tags: contact form, forms, form builder, payment form, stripe payment
 Requires at least: 5.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.24
+Stable tag: 2.4.25
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -347,6 +347,9 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.25
+- Fixed: File upload validation now unslashes field_components JSON before decoding, so uploads work after the 2.4.22 form-save encoding change
+
 2.4.24
 - Security: PayPal checkout amount is no longer trusted from the browser. After capture, PHP fetches the order from the PayPal Orders API and rejects the submission unless the captured amount, currency, and payee match the form product catalog
 - Security: PayPal-enabled forms now require a payment_id and server-side order verification before a submission is stored or notification emails are sent

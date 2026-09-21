@@ -271,7 +271,7 @@ trait FileManager
 		}
 
 		$fields_json = get_post_meta($form_id, $this->slug . '_field_components', true);
-		$fields      = json_decode($fields_json, false, 512, JSON_HEX_QUOT);
+		$fields      = json_decode(wp_unslash($fields_json), false);
 		if (!is_array($fields)) {
 			$this->display_error(esc_html__('Something went wrong!', 'kali-forms'));
 		}
