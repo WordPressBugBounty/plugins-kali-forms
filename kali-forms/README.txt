@@ -4,7 +4,7 @@ Tags: contact form, forms, form builder, payment form, stripe payment
 Requires at least: 5.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.4.25
+Stable tag: 2.4.26
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -347,6 +347,10 @@ Please report security bugs found in the source code of the Contact Form builder
 7. Options presets
 
 == Changelog ==
+2.4.26
+- Security: Button "Function to run on click" (clickAction) is no longer stored or emitted into onclick for users without the unfiltered_html capability. Reported by Hackmars via WordPress.org / Automattic.
+- Security: Existing clickAction values saved by users without unfiltered_html are stripped on upgrade; front-end shortcode and block renders only emit onclick when a privileged save has allowed it
+
 2.4.25
 - Fixed: File upload validation now unslashes field_components JSON before decoding, so uploads work after the 2.4.22 form-save encoding change
 

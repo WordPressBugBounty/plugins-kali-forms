@@ -26,6 +26,7 @@ use KaliForms\Inc\Frontend\Form_Processor;
 // use KaliForms\Inc\Frontend\Rest\Forms_Processor_Rest_Controller;
 use KaliForms\Inc\Handle_Payments;
 use KaliForms\Inc\Payments_Simple;
+use KaliForms\Inc\Utils\Click_Action_Guard;
 use KaliForms\Inc\Utils\First_Install;
 use KaliForms\Inc\Utils\Form_Definition_Backup;
 use KaliForms\Inc\Utils\Installation;
@@ -87,6 +88,7 @@ class KaliForms {
 		 */
 		Meta_Save::get_instance();
 		Sanitizers::register_hooks();
+		Click_Action_Guard::init();
 		/**
 		 * Register the new custom post types
 		 */

@@ -2,6 +2,8 @@
 
 namespace KaliForms\Inc\Backend;
 
+use KaliForms\Inc\Utils\Click_Action_Guard;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -754,6 +756,11 @@ class Sanitizers {
 		}
 
 		foreach ( $item as $k => $v ) {
+			if ( $k === 'clickAction' ) {
+				// Emitted into onclick (JS execution context). Escaping is not enough.
+				$props->{sanitize_text_field( $k )} = Click_Action_Guard::sanitize_for_storage( $v );
+				continue;
+			}
 			if ( $k === 'price' ) {
 				$props->{sanitize_text_field( $k )} = str_replace( ',', '', number_format( floatval( str_replace( ',', '.', $v ) ), 2 ) );
 				continue;

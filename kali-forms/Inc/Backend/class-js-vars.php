@@ -2,6 +2,7 @@
 
 namespace KaliForms\Inc\Backend;
 
+use KaliForms\Inc\Utils\Click_Action_Guard;
 use KaliForms\Inc\Utils\MetaHelper;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -110,12 +111,15 @@ class JS_Vars {
 		/**
 		 * Field components saved in the database
 		 */
-		$this->content['fieldComponents'] = Sanitizers::decode_json_meta(
-			$this->get( 'field_components', '[]' ),
-			false,
-			512,
-			JSON_HEX_QUOT
-		) ?: array();
+		$this->content['fieldComponents']   = Click_Action_Guard::strip_from_field_components(
+			Sanitizers::decode_json_meta(
+				$this->get( 'field_components', '[]' ),
+				false,
+				512,
+				JSON_HEX_QUOT
+			) ?: array()
+		);
+		$this->content['canUnfilteredHtml'] = Click_Action_Guard::current_user_can_use();
 		/**
 		 * Form Info Fields
 		 */
@@ -186,12 +190,12 @@ class JS_Vars {
 		/**
 		 * Payment fields
 		 */
-		$this->content['payPalClientId']               = esc_html( $this->get( 'paypal_client_id', '' ) );
-		$this->content['payPalClientIdSandBox']        = esc_html( $this->get( 'paypal_client_id_sandbox', '' ) );
-		$this->content['payPalClientSecret']           = esc_attr( $this->get( 'paypal_client_secret', '' ) );
-		$this->content['payPalClientSecretSandBox']    = esc_attr( $this->get( 'paypal_client_secret_sandbox', '' ) );
-		$this->content['paymentsLive']          = esc_attr( $this->get( 'payments_live', '0' ) );
-		$this->content['currency']              = esc_attr( $this->get( 'currency', 'USD' ) );
+		$this->content['payPalClientId']            = esc_html( $this->get( 'paypal_client_id', '' ) );
+		$this->content['payPalClientIdSandBox']     = esc_html( $this->get( 'paypal_client_id_sandbox', '' ) );
+		$this->content['payPalClientSecret']        = esc_attr( $this->get( 'paypal_client_secret', '' ) );
+		$this->content['payPalClientSecretSandBox'] = esc_attr( $this->get( 'paypal_client_secret_sandbox', '' ) );
+		$this->content['paymentsLive']              = esc_attr( $this->get( 'payments_live', '0' ) );
+		$this->content['currency']                  = esc_attr( $this->get( 'currency', 'USD' ) );
 		/**
 		 * Form Styles
 		 */
