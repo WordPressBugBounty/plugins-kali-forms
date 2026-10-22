@@ -2,6 +2,8 @@
 
 namespace KaliForms\Inc\Frontend;
 
+use KaliForms\Inc\Utils\Click_Action_Guard;
+
 if (!defined('ABSPATH')) {
 	exit;
 }
@@ -61,6 +63,8 @@ class Form
 	 */
 	public function render_fields()
 	{
+		Click_Action_Guard::begin_form_emit( $this->form_id );
+
 		$div             = '<form ' . $this->generate_form_attributes() . '>';
 		$beforeFormStart = apply_filters($this->slug . '_before_form_start', ['context' => $this, 'string' => '']);
 		$div .= $beforeFormStart['string'];
@@ -85,6 +89,8 @@ class Form
 		}
 
 		$div .= '</form>';
+
+		Click_Action_Guard::end_form_emit();
 
 		return $div;
 	}

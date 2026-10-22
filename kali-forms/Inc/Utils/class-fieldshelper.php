@@ -126,7 +126,12 @@ trait FieldsHelper
 					$string .= empty($value) ? '' : ' ' . esc_attr($attribute) . '="' . esc_attr($value) . '"';
 					break;
 				case 'onclick':
-					$string .= empty($value) ? '' : ' ' . esc_attr($attribute) . '="' . esc_attr($value) . '(event, this)"';
+					// Author-controlled JS execution context: only emit when a privileged
+					// save marked this form (unfiltered_html). Applies to every field type.
+					if ( empty( $value ) || ! Click_Action_Guard::current_emit_allowed() ) {
+						break;
+					}
+					$string .= ' ' . esc_attr( $attribute ) . '="' . esc_attr( $value ) . '(event, this)"';
 					break;
 				case 'grid_id';
 					$string .= empty($value) ? '' : ' data-internal-id="' . esc_attr($value) . '"';

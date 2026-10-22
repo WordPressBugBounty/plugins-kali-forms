@@ -756,9 +756,12 @@ class Sanitizers {
 		}
 
 		foreach ( $item as $k => $v ) {
-			if ( $k === 'clickAction' ) {
-				// Emitted into onclick (JS execution context). Escaping is not enough.
-				$props->{sanitize_text_field( $k )} = Click_Action_Guard::sanitize_for_storage( $v );
+			if ( Click_Action_Guard::is_js_execution_property( $k ) ) {
+				// onclick / on* / clickAction run as JavaScript. Escaping is not enough.
+				$sanitized = Click_Action_Guard::sanitize_for_storage( $v );
+				if ( 'clickAction' === $k || $sanitized !== '' ) {
+					$props->{sanitize_text_field( $k )} = $sanitized;
+				}
 				continue;
 			}
 			if ( $k === 'price' ) {
